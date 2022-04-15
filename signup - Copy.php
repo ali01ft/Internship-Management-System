@@ -24,10 +24,9 @@ if(isset($_POST["register_button"])){
   $pname = $_POST["pname"];
   $pwd = $_POST["pwd"];
   $cpwd = $_POST["cpwd"];
-  $Enrolled = ["0"];
-  $yof = ["yof"];
-  var_dump($yof);
-  $cv = ["cv"];
+  $Enrolled = null;
+  $yof = $_POST["yof"];
+  $cv = $_POST["cv"];
   //$date_started = date("Y/m/d");
 
   //  Check Student ID process
@@ -192,7 +191,20 @@ if(isset($_POST["register_button"])){
 				  	mysqli_stmt_store_result($stmt); //storing the result
             $row = mysqli_stmt_num_rows($stmt); //fetching rows number
 
-            if($row != 0){
+              mysqli_query($conn,"ALTER TABLE student AUTO_INCREMENT = 1");
+            $getID = "SELECT * from student where STUDENT_ID = ?";         //Validation if same email were used
+            $stmt = mysqli_stmt_init($conn); //initialize statement with connection
+            mysqli_stmt_prepare($stmt,$getID); //prepare statement
+            mysqli_stmt_bind_param($stmt, "s", $StudentID); //binding variable into string
+            mysqli_stmt_execute($stmt); //execute statement
+            mysqli_stmt_store_result($stmt); //storing the result
+            $idrow = mysqli_stmt_num_rows($stmt); //fetching rows number
+
+            if($idrow != 0){
+              $msgErr = "<p style='color:red;'> Registration failed!<br> An account with the same UserID already exist</p>";
+            }
+
+            elseif($row != 0){
               $msgErr = "<p style='color:red;'> Registration failed!<br> An account with the same email already exist</p>";
             }
 
@@ -204,6 +216,8 @@ if(isset($_POST["register_button"])){
                 mysqli_stmt_execute($stmt);
                 session_start();
                 $_SESSION["email"] = $email;
+
+               // header("Location:signup - Copy.php");       //direct to friendadd.php
               }
 
               mysqli_stmt_close($stmt);
@@ -263,18 +277,26 @@ if(isset($_POST["register_button"])){
           <br>
 			<span class="error"> <?php echo $CourseErr;?></span> </p>
 
-        <p>Year Of Study:
+       <!-- <p>Year Of Study:
         <br>
          <input type="radio" id="yof" name="yof" value="1"/>
          <label for="1">1</label>
          <input type="radio" id="yof" name="yof" value="2"/>
          <label for="2">2</label>
          <input type="radio" id="yof" name="yof" value="3"/>
-         <label for="3">3</label><br>
+         <label for="3">3</label><br>-->
     
+    <p> 
+          <label for="yof">Year of Study:</label>
+          <select name="yof" id="yof">
+            <option value="" selected="selected">---</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+          <br>
+      <span class="error"> <?php echo $yofErr;?></span> </p>
      
-      
-        <span class="error"> <?php echo $yofErr;?></span> </p>
 
 			<p>Gender:
         <br>
