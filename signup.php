@@ -61,7 +61,7 @@ if(isset($_POST["register_button"])){
         $success = 0;
       }
       else {
-        $pname = test_input($_POST["uname"]);
+        $uname = test_input($_POST["uname"]);
         if (!preg_match("/^[a-zA-Z]*$/",$uname)) {    // check if name only contains letters
           $unameErr = "<span style='color:red;'>Only letters are allowed with maximum 10 characters, no blanks.</span>";
           $success = 0;
