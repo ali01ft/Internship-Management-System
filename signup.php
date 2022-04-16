@@ -24,10 +24,9 @@ if(isset($_POST["register_button"])){
   $pname = $_POST["pname"];
   $pwd = $_POST["pwd"];
   $cpwd = $_POST["cpwd"];
-  $Enrolled = 0;
-  $Supervisor = ["as"];
-  $yof = ["yof"];
-  $cv = ["cv"];
+  $Enrolled = null;
+  $yof = $_POST["yof"];
+  $cv = $_POST["cv"];
   //$date_started = date("Y/m/d");
 
   //  Check Student ID process
@@ -62,7 +61,7 @@ if(isset($_POST["register_button"])){
         $success = 0;
       }
       else {
-        $pname = test_input($_POST["uname"]);
+        $uname = test_input($_POST["uname"]);
         if (!preg_match("/^[a-zA-Z]*$/",$uname)) {    // check if name only contains letters
           $unameErr = "<span style='color:red;'>Only letters are allowed with maximum 10 characters, no blanks.</span>";
           $success = 0;
@@ -84,10 +83,10 @@ if(isset($_POST["register_button"])){
           $pnameErr = "<span style='color:red;'>Only letters are allowed with maximum 25 characters.</span>";
           $success = 0;
         }
-		elseif(strlen($pname) >= 40){
-			$pnameErr = "<span style='color:red;'>Only 40 characters are allowed.</span>";
-			$success = 0;
-		}
+    elseif(strlen($pname) >= 40){
+      $pnameErr = "<span style='color:red;'>Only 40 characters are allowed.</span>";
+      $success = 0;
+    }
       }
 
 
@@ -128,41 +127,41 @@ if(isset($_POST["register_button"])){
           $success = 0;
         }
       
-	  }
+    }
 
   // Password validation process
-	  if(empty($_POST["pwd"])){   // check if both password does match
+    if(empty($_POST["pwd"])){   // check if both password does match
         $pwdErr = "<span style='color:red;'>Password is required.</span>";
         $success = 0;
       }
-	  //check if length is 8
-	  elseif (strlen($pwd) < 8){
-		  $pwdErr = "<span style='color:red;'>Your Password Must Contain At least 8 characters!.</span>";
-		  $success = 0;
-	  }
-	  // check if atleast has one letter
-	  elseif (!preg_match("/[A-Z]/",$pwd)){
-		  $pwdErr = "<span style='color:red;'>Your Password Must Contain At Least 1 Capital Letter!</span>";
-		  $success = 0;
-	  }
-	  // check if atleast has one number
-	  elseif (!preg_match("/[1-9]/",$pwd)){
-		  $pwdErr = "<span style='color:red;'>Your Password Must Contain At Least 1 Number!</span>";
-		  $success = 0;
-	  }
-	  //check if atleast has one small letter
-	   elseif (!preg_match("/[a-z]/",$pwd)){
-		  $pwdErr = "<span style='color:red;'>Your Password Must Contain At Least 1 lower case letter!</span>";
-		  $success = 0;
-	  } 
+    //check if length is 8
+    elseif (strlen($pwd) < 8){
+      $pwdErr = "<span style='color:red;'>Your Password Must Contain At least 8 characters!.</span>";
+      $success = 0;
+    }
+    // check if atleast has one letter
+    elseif (!preg_match("/[A-Z]/",$pwd)){
+      $pwdErr = "<span style='color:red;'>Your Password Must Contain At Least 1 Capital Letter!</span>";
+      $success = 0;
+    }
+    // check if atleast has one number
+    elseif (!preg_match("/[1-9]/",$pwd)){
+      $pwdErr = "<span style='color:red;'>Your Password Must Contain At Least 1 Number!</span>";
+      $success = 0;
+    }
+    //check if atleast has one small letter
+     elseif (!preg_match("/[a-z]/",$pwd)){
+      $pwdErr = "<span style='color:red;'>Your Password Must Contain At Least 1 lower case letter!</span>";
+      $success = 0;
+    } 
       elseif(empty($cpwd)){   // check if confirm password isnt empty
         $cpwdErr = "<span style='color:red;'>Password is required.</span>";
         $success = 0;
       }
-	  
+    
       else
-		  //check if both password is matching
-	  {
+      //check if both password is matching
+    {
         if($pwd != $cpwd) {
           $cpwdErr = "<span style='color:red;'>Both password does not match. Please try again.</span>";
           $success = 0;
@@ -183,29 +182,42 @@ if(isset($_POST["register_button"])){
         }
 
         else{
-			       mysqli_query($conn,"ALTER TABLE student AUTO_INCREMENT = 1");
+             mysqli_query($conn,"ALTER TABLE student AUTO_INCREMENT = 1");
             $getEmail = "SELECT * from student where STUDENT_EMAIL = ?";         //Validation if same email were used
             $stmt = mysqli_stmt_init($conn); //initialize statement with connection
-				  	mysqli_stmt_prepare($stmt,$getEmail); //prepare statement
-				  	mysqli_stmt_bind_param($stmt, "s", $email); //binding variable into string
-					  mysqli_stmt_execute($stmt); //execute statement
-				  	mysqli_stmt_store_result($stmt); //storing the result
+            mysqli_stmt_prepare($stmt,$getEmail); //prepare statement
+            mysqli_stmt_bind_param($stmt, "s", $email); //binding variable into string
+            mysqli_stmt_execute($stmt); //execute statement
+            mysqli_stmt_store_result($stmt); //storing the result
             $row = mysqli_stmt_num_rows($stmt); //fetching rows number
 
-            if($row != 0){
+              mysqli_query($conn,"ALTER TABLE student AUTO_INCREMENT = 1");
+            $getID = "SELECT * from student where STUDENT_ID = ?";         //Validation if same email were used
+            $stmt = mysqli_stmt_init($conn); //initialize statement with connection
+            mysqli_stmt_prepare($stmt,$getID); //prepare statement
+            mysqli_stmt_bind_param($stmt, "s", $StudentID); //binding variable into string
+            mysqli_stmt_execute($stmt); //execute statement
+            mysqli_stmt_store_result($stmt); //storing the result
+            $idrow = mysqli_stmt_num_rows($stmt); //fetching rows number
+
+            if($idrow != 0){
+              $msgErr = "<p style='color:red;'> Registration failed!<br> An account with the same UserID already exist</p>";
+            }
+
+            elseif($row != 0){
               $msgErr = "<p style='color:red;'> Registration failed!<br> An account with the same email already exist</p>";
             }
 
             else{           //else create query with all the correct validation and write into tables
-              $create ="INSERT INTO student (STUDENT_ID, NAME, STUDENT_EMAIL, COURSE, ENROLL, SUPERVISOR, GENDER, CURRENT_RESIDENCE, CONTACT_NO, YEAR_OF_STUDY, PASSWORD, CV, USERNAME) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);";
+              $create ="INSERT INTO student (STUDENT_ID, NAME, STUDENT_EMAIL, COURSE, ENROLL, GENDER, CURRENT_RESIDENCE, CONTACT_NO, YEAR_OF_STUDY, PASSWORD, CV, USERNAME) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
 
                 mysqli_stmt_prepare($stmt,$create);
-                mysqli_stmt_bind_param($stmt, "sssssssssssss",$StudentID, $pname, $email, $Course, $Enrolled, $Supervisor, $Gender, $Cresidence, $ContactNo, $yof, $pwd, $cv, $uname);
+                mysqli_stmt_bind_param($stmt, "ssssssssssss",$StudentID, $pname, $email, $Course, $Enrolled, $Gender, $Cresidence, $ContactNo, $yof, $pwd, $cv, $uname);
                 mysqli_stmt_execute($stmt);
                 session_start();
                 $_SESSION["email"] = $email;
 
-                header("Location:friendadd.php");       //direct to friendadd.php
+               // header("Location:signup.php");       //direct to friendadd.php
               }
 
               mysqli_stmt_close($stmt);
@@ -234,26 +246,26 @@ if(isset($_POST["register_button"])){
     <h2>Registration Page</h2>
 
 <!-- Forms -->
-	<form action = "signup.php" method = "POST" >
-			<p>Student ID: <input type="text" name="Student_ID" value = "<?php if(isset($_POST["Student_ID"])) echo $_POST["Student_ID"]; ?>">
+  <form action = "signup.php" method = "POST" >
+      <p>Student ID: <input type="text" name="Student_ID" value = "<?php if(isset($_POST["Student_ID"])) echo $_POST["Student_ID"]; ?>">
       <span class="error"> <?php echo $StudentErr;?></span></p>
 
-			<p>Email address: <input type="text" name="email" value = "<?php if(isset($_POST["email"])) echo $_POST["email"]; ?>">
+      <p>Email address: <input type="text" name="email" value = "<?php if(isset($_POST["email"])) echo $_POST["email"]; ?>">
       <span class="error"> <?php echo $emailErr;?></span></p>
 
-			<p>Password: <input type="password" name="pwd">
-			<span class="error"> <?php echo $pwdErr;?></span> </p>
+      <p>Password: <input type="password" name="pwd">
+      <span class="error"> <?php echo $pwdErr;?></span> </p>
 
-			<p>Confirm password: <input type="password" name="cpwd">
-			<span class="error"> <?php echo $cpwdErr;?></span> </p>
+      <p>Confirm password: <input type="password" name="cpwd">
+      <span class="error"> <?php echo $cpwdErr;?></span> </p>
 
       <p>Username: <input type="text" name="uname" value = "<?php if(isset($_POST["uname"])) echo $_POST["uname"]; ?>">
       <span class="error"> <?php echo $unameErr;?></span> </p>
 
-			<p>Name: <input type="text" name="pname" value = "<?php if(isset($_POST["pname"])) echo $_POST["pname"]; ?>">
-			<span class="error"> <?php echo $pnameErr;?></span> </p>
+      <p>Name: <input type="text" name="pname" value = "<?php if(isset($_POST["pname"])) echo $_POST["pname"]; ?>">
+      <span class="error"> <?php echo $pnameErr;?></span> </p>
 
-			<p> 
+      <p> 
           <label for="Course">Choose a course:</label>
           <select name="Course" id="Course">
             <option value="" selected="selected">---</option>
@@ -263,22 +275,30 @@ if(isset($_POST["register_button"])){
             <option value="Bachelors of Marketing">Bachelors of Marketing</option>
           </select>
           <br>
-			<span class="error"> <?php echo $CourseErr;?></span> </p>
+      <span class="error"> <?php echo $CourseErr;?></span> </p>
 
-        <p>Year Of Study:
+       <!-- <p>Year Of Study:
         <br>
-         <input type="radio" id="yof" name="yof" value="1">
+         <input type="radio" id="yof" name="yof" value="1"/>
          <label for="1">1</label>
-         <input type="radio" id="yof" name="yof" value="2">
-         <label for="2">2</label><br>
-         <input type="radio" id="yof" name="yof" value="3">
-         <label for="3">3</label><br>
+         <input type="radio" id="yof" name="yof" value="2"/>
+         <label for="2">2</label>
+         <input type="radio" id="yof" name="yof" value="3"/>
+         <label for="3">3</label><br>-->
+    
+    <p> 
+          <label for="yof">Year of Study:</label>
+          <select name="yof" id="yof">
+            <option value="" selected="selected">---</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+          <br>
+      <span class="error"> <?php echo $yofErr;?></span> </p>
      
-     
-      
-        <span class="error"> <?php echo $yofErr;?></span> </p>
 
-			<p>Gender:
+      <p>Gender:
         <br>
          <input type="radio" id="Gender" name="Gender" value="Male">
          <label for="Male">Male</label>
@@ -286,26 +306,26 @@ if(isset($_POST["register_button"])){
          <label for="Female">Female</label><br>
      
       
-		    <span class="error"> <?php echo $GenderErr;?></span> </p>
+        <span class="error"> <?php echo $GenderErr;?></span> </p>
 
-			<p>Current Residence: <input type="text" name="Cresidence" value = "<?php if(isset($_POST["Cresidence"])) echo $_POST["Cresidence"]; ?>">
-			<span class="error"> <?php echo $CresErr;?></span> </p>
+      <p>Current Residence: <input type="text" name="Cresidence" value = "<?php if(isset($_POST["Cresidence"])) echo $_POST["Cresidence"]; ?>">
+      <span class="error"> <?php echo $CresErr;?></span> </p>
 
-			<p>Contact Number: <input type="text" name="Contact_no" value = "<?php if(isset($_POST["Contact_no"])) echo $_POST["Contact_no"]; ?>">
-			<span class="error"> <?php echo $Contact_noErr;?></span> </p>
+      <p>Contact Number: <input type="text" name="Contact_no" value = "<?php if(isset($_POST["Contact_no"])) echo $_POST["Contact_no"]; ?>">
+      <span class="error"> <?php echo $Contact_noErr;?></span> </p>
 
-			<p>Insert Your CV: <input type="text" name="cv" value = "<?php if(isset($_POST["cv"])) echo $_POST["cv"]; ?>">
-			<span class="error"> <?php echo $cvErr;?></span> </p>
-			
+      <p>Insert Your CV: <input type="text" name="cv" value = "<?php if(isset($_POST["cv"])) echo $_POST["cv"]; ?>">
+      <span class="error"> <?php echo $cvErr;?></span> </p>
+      
 
-			<input type="submit" value="Register" name="register_button">
-			<input type="reset" value="Clear" name="clear_button">
+      <input type="submit" value="Register" name="register_button">
+      <input type="reset" value="Clear" name="clear_button">
 
-			<span class="error"> <?php echo $msgErr;?></span>
-	
-			<p><a href="index.php">Back to Home</a> </p>
-		</form>
-	</div>
+      <span class="error"> <?php echo $msgErr;?></span>
+  
+      <p><a href="index.php">Back to Home</a> </p>
+    </form>
+  </div>
 
 <!-- Footer -->
 
