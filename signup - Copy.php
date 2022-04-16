@@ -314,7 +314,7 @@ if(isset($_POST["register_button"])){
     <h2>Registration Page</h2>
 
 <!-- Forms -->
-	<form action = "signup - Copy.php" method = "POST" enctype="multipart/form-data" >
+	<form action = "signup.php" method = "POST" enctype="multipart/form-data" >
 			<p>Student ID: <input type="text" name="Student_ID" value = "<?php if(isset($_POST["Student_ID"])) echo $_POST["Student_ID"]; ?>">
       <span class="error"> <?php echo $StudentErr;?></span></p>
 
