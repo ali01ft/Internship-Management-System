@@ -30,15 +30,13 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-address-book me-1"></i>Swinburne</div>
             <div class="list-group list-group-flush my-3">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="staff_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Internship listing</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-project-diagram me-2"></i>Student listing</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Company listing</a>        
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Student listing</a>    
+                <a href="staff_infographics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-chart-line me-2"></i>Analytics</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Feedback list</a>
                 <a href="logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
@@ -78,7 +76,7 @@
 
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Current Students participating</h3>
+                    <h3 class="fs-4 mb-3">Define your search</h3>
                     <div class="col">
                          <?php 
 
@@ -91,13 +89,21 @@
                                  $result = $conn->query($sql);
                                ?>
 
+
+
                                <form action="" method="GET"> 
                                  <div class="col-md-6">
                                     <input type="text" name="search" class='form-control' placeholder="Search By Name" value=<?php echo @$_GET['search']; ?> > 
                                  </div>
                                  <div class="col-md-6 text-left">
                                   <button class="btn btn-light">Search</button>
-                                  <button onClick="window.location.reload();">Refresh Page</button>
+                                  <button onclick="myFunction()" class="btn btn-light">Refresh </button>
+                                    <script>
+                                    function myFunction() {
+                                        location.reload();
+                                    }
+                                    </script>
+
                                  </div>
                                </form>
 
@@ -113,7 +119,6 @@
                                  <th>Student Email</th>
                                  <th>Course</th>
                                  <th>Assign Supervior</th>
-                                 <th>Gender</th>
                                  <th>Year of study</th>
                                  <th>Enrollment status </th>
                               </tr>
