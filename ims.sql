@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2022 at 09:32 AM
+-- Generation Time: Apr 16, 2022 at 09:37 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.11
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `Admin_ID` varchar(20) NOT NULL,
   `Name` varchar(30) NOT NULL,
-  `username` varchar(20) NOT NULL,
+  `email` varchar(70) NOT NULL,
   `Password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -38,7 +38,7 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`Admin_ID`, `Name`, `username`, `Password`) VALUES
+INSERT INTO `admin` (`Admin_ID`, `Name`, `email`, `Password`) VALUES
 ('10124566', 'bibiana', 'bibiana', '123456789'),
 ('1414552', 'ali', 'alion', '123456789');
 
