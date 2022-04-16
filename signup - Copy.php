@@ -26,7 +26,8 @@ if(isset($_POST["register_button"])){
   $cpwd = $_POST["cpwd"];
   $Enrolled = null;
   $yof = $_POST["yof"];
-  $cv = $_POST["cv"];
+  $cv = $_FILES["cv"];
+  print_r($cv);
   //$date_started = date("Y/m/d");
 
   //  Check Student ID process
@@ -246,7 +247,7 @@ if(isset($_POST["register_button"])){
     <h2>Registration Page</h2>
 
 <!-- Forms -->
-	<form action = "signup - Copy.php" method = "POST" >
+	<form action = "signup - Copy.php" method = "POST" enctype="multipart/form-data" >
 			<p>Student ID: <input type="text" name="Student_ID" value = "<?php if(isset($_POST["Student_ID"])) echo $_POST["Student_ID"]; ?>">
       <span class="error"> <?php echo $StudentErr;?></span></p>
 
@@ -277,14 +278,6 @@ if(isset($_POST["register_button"])){
           <br>
 			<span class="error"> <?php echo $CourseErr;?></span> </p>
 
-       <!-- <p>Year Of Study:
-        <br>
-         <input type="radio" id="yof" name="yof" value="1"/>
-         <label for="1">1</label>
-         <input type="radio" id="yof" name="yof" value="2"/>
-         <label for="2">2</label>
-         <input type="radio" id="yof" name="yof" value="3"/>
-         <label for="3">3</label><br>-->
     
     <p> 
           <label for="yof">Year of Study:</label>
@@ -314,7 +307,7 @@ if(isset($_POST["register_button"])){
 			<p>Contact Number: <input type="text" name="Contact_no" value = "<?php if(isset($_POST["Contact_no"])) echo $_POST["Contact_no"]; ?>">
 			<span class="error"> <?php echo $Contact_noErr;?></span> </p>
 
-			<p>Insert Your CV: <input type="text" name="cv" value = "<?php if(isset($_POST["cv"])) echo $_POST["cv"]; ?>">
+			<p>Insert Your CV: <input type="file" name="cv" value = "<?php if(isset($_POST["cv"])) echo $_POST["cv"]; ?>">
 			<span class="error"> <?php echo $cvErr;?></span> </p>
 			
 
