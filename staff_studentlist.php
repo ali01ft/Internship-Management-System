@@ -30,9 +30,9 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-address-book me-1"></i>Swinburne</div>
             <div class="list-group list-group-flush my-3">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-project-diagram me-2"></i>Internship listing</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Internship listing</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-project-diagram me-2"></i>Student listing</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Company listing</a>        
@@ -51,7 +51,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Internship listing</h2>
+                    <h2 class="fs-2 m-0">Student listings</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -78,16 +78,16 @@
 
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Current available listings</h3>
+                    <h3 class="fs-4 mb-3">Current Students participating</h3>
                     <div class="col">
                          <?php 
 
                                  $conn = new mysqli('localhost', 'root', '', 'ims');
                                  if(isset($_GET['search'])){
                                     $searchKey = $_GET['search'];
-                                    $sql = "SELECT * FROM friends WHERE name LIKE '%$searchKey%'";
+                                    $sql = "SELECT * FROM student WHERE name LIKE '%$searchKey%'";
                                  }else
-                                 $sql = "SELECT * FROM JOBS";
+                                 $sql = "SELECT * FROM student";
                                  $result = $conn->query($sql);
                                ?>
 
@@ -96,7 +96,8 @@
                                     <input type="text" name="search" class='form-control' placeholder="Search By Name" value=<?php echo @$_GET['search']; ?> > 
                                  </div>
                                  <div class="col-md-6 text-left">
-                                  <button class="btn">Search</button>
+                                  <button class="btn btn-light">Search</button>
+                                  <button onClick="window.location.reload();">Refresh Page</button>
                                  </div>
                                </form>
 
@@ -107,15 +108,25 @@
                         <table class="table bg-white rounded shadow-sm  table-hover">
                             <div class="row">
                               <tr>
+                                 <th>Student ID</th>
                                  <th>Name</th>
-                                 <th>Amount</th>
-                                 <th>City</th>
+                                 <th>Student Email</th>
+                                 <th>Course</th>
+                                 <th>Assign Supervior</th>
+                                 <th>Gender</th>
+                                 <th>Year of study</th>
+                                 <th>Enrollment status </th>
                               </tr>
                               <?php while( $row = $result->fetch_object() ): ?>
                               <tr>
-                                 <td><?php echo $row->name ?></td>
-                                 <td><?php echo $row->amount ?></td>
-                                 <td><?php echo $row->city ?></td>
+                                 <td><?php echo $row->STUDENT_ID ?></td>
+                                 <td><?php echo $row->NAME ?></td>
+                                 <td><?php echo $row->STUDENT_EMAIL ?></td>
+                                 <td><?php echo $row->COURSE ?></td>
+                                 <td><?php echo $row->SUPERVISOR ?></td>
+                                 <td><?php echo $row->GENDER ?></td>
+                                 <td><?php echo $row->YEAR_OF_STUDY ?></td>
+                                 <td><?php echo $row->ENROLL ?></td>
                               </tr>
                               <?php endwhile; ?>
                             </table>
