@@ -80,38 +80,46 @@
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">Current available listings</h3>
                     <div class="col">
-                        <table class="table bg-white rounded shadow-sm  table-hover">
-                            <thead>
-                                <tr>
-                                <th scope="col">No #</th>
-                                <th scope="col">Company name</th>
-                                <th scope="col">Field</th>
-                                <th scope="col">Date listed</th>
-                                <th scope="col">Apply</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                $conn = mysqli_connect("localhost", "root", "", "ims");
-                // Check connection
-                if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-                }
-                $sql = "SELECT * FROM internship_listing";
-                $result = $conn->query($sql);
-                if ($result !== false && $result->num_rows > 0) {
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row["no"]. "</td><td>" . $row["company_name"]. "</td><td>" . $row["field"] . "</td><td>" . $row["date listed"] . "</td><td>" . $row["applicants"]. "</td></tr>";
-                }
+                         <?php 
 
-                echo "</table>";
-                } else { echo "0 results"; }
-                $conn->close();
-                ?>
-                            
-                            </tbody>
-                        </table>
+                                 $conn = new mysqli('localhost', 'root', '', 'ims');
+                                 if(isset($_GET['search'])){
+                                    $searchKey = $_GET['search'];
+                                    $sql = "SELECT * FROM friends WHERE name LIKE '%$searchKey%'";
+                                 }else
+                                 $sql = "SELECT * FROM JOBS";
+                                 $result = $conn->query($sql);
+                               ?>
+
+                               <form action="" method="GET"> 
+                                 <div class="col-md-6">
+                                    <input type="text" name="search" class='form-control' placeholder="Search By Name" value=<?php echo @$_GET['search']; ?> > 
+                                 </div>
+                                 <div class="col-md-6 text-left">
+                                  <button class="btn">Search</button>
+                                 </div>
+                               </form>
+
+                               <br> 
+                               <br>
+                            </div>
+
+                        <table class="table bg-white rounded shadow-sm  table-hover">
+                            <div class="row">
+                              <tr>
+                                 <th>Name</th>
+                                 <th>Amount</th>
+                                 <th>City</th>
+                              </tr>
+                              <?php while( $row = $result->fetch_object() ): ?>
+                              <tr>
+                                 <td><?php echo $row->name ?></td>
+                                 <td><?php echo $row->amount ?></td>
+                                 <td><?php echo $row->city ?></td>
+                              </tr>
+                              <?php endwhile; ?>
+                            </table>
+
                     </div>
                 </div>
 

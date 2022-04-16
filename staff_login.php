@@ -1,7 +1,7 @@
 <?php 
   session_start();
 
-  if (!isset($_SESSION['user_id']) && !isset($_SESSION['user_email'])) { 
+  if (!isset($_SESSION['NAME']) && !isset($_SESSION['user_email'])) { 
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 <body>
 	  <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
 	  	<form class="p-5 rounded shadow" 
-	  	      action="auth.php"
+	  	      action="staff_auth.php"
 	  	      method="post" 
 	  	      style="width: 30rem">     
 	  		<h1 class="text-center pb-5 display-4">Swinburne IMS Staff Login</h1>
