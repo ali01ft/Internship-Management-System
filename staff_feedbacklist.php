@@ -69,7 +69,6 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -105,7 +104,7 @@
 
 <?php 
 }else {
-   header("Location:  login.php");
+   header("Location:staff_login.php");
 }
  ?>
 

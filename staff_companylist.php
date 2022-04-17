@@ -69,7 +69,6 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -80,6 +79,8 @@
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">Define your search</h3>
                     <div class="col">
+
+
     
                     </div>
                 </div>
@@ -105,7 +106,7 @@
 
 <?php 
 }else {
-   header("Location:  login.php");
+   header("Location:staff_login.php");
 }
  ?>
 
