@@ -8,24 +8,34 @@ function test_input($data) {
 }
 
 
-session_start();
 
-$id = $_SESSION['REGIS_NO'];
+  session_start();
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
 
-$StudentID = $uname = $Course = $ContactNo = $Cresidence = $email = $pname = $pwd = $Enrolled = $Supervisor = $yof = $cv = NULl;
+
+
+$id = $_SESSION['user_id'];
+
 
 // define variable and set to empty VALUES
-$msgErr = "";
+$msgErr = $cvErr = "";
 
 if(isset($_POST["submit"])){
   $success = 1;
   $JobTile = $_POST["JobTitle"];
+  print_r($JobTile);
   $Location = $_POST["Location"];
-  $Qualification = $_POST["Qualification"];
+  print_r($Location);
+  $Qualification = $_POST["Qualifications"];
+  print_r($Qualification);
   $Category = $_POST["Category"];
+  print_r($Category);
   $Position = $_POST["Position"];
+  print_r($Position);
   $Vacancy = $_POST["Vacancy"];
+  print_r($Vacancy);
   $file = $_FILES["file"];
+  print_r($file);
 
 
   //$date_started = date("Y/m/d");
@@ -34,33 +44,24 @@ if(isset($_POST["submit"])){
   //  Check Student ID process
 
 
-    if (empty($_POST["JobTitle"]) || empty($_POST["Location"]) || empty($_POST["Qualification"]) || empty($_POST["Category"]) || empty($_POST["Position"]) || empty($_POST["Vacancy"]) || empty($_POST["file"])) {
-        $msgErr = "<span style='color:red;'>Please fill this detail.</span>";
-        $success = 0;
-      }
-
-      if ($success == 1) {
-
-        $server = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "ims";
-
-        $conn = mysqli_connect($server, $username, $password, $database);
+   // if ($_POST["JobTitle"] = "" || $_POST["Location"]  || empty($_POST["Qualifications"]) || empty($_POST["Category"]) || empty($_POST["Position"]) || //empty($_POST["Vacancy"]) || empty($_POST["file"])) {
+    //    $msgErr = "<span style='color:red;'>Please fill this detail.</span>";
+     //   $success = 0;
+    //  }
+    //  else{
+    //    $success = 1;
+   //   }
 
 
-
-            //checking if empty or not
-
-        if (empty($_FILES["file"])) {
+      if (empty($_FILES["file"])) {
 
           $cvErr = "<span style='color:red;'>Must upload a CV!</span>";
+          $success = 0;
 
 
-       }else{
+       }elseif($success == 1){
         // uploading file function
         //seperating all the types in the array
-
         $fileName = $_FILES['file']['name'];
         $fileTmpName = $_FILES['file']['tmp_name'];
         $fileSize = $_FILES['file']['size'];
@@ -75,12 +76,10 @@ if(isset($_POST["submit"])){
 
         //creating folder to upload files if it does not exist
 
-        if (!file_exists('industry')) //create directory if not there
+        if (!file_exists('jobs')) //create directory if not there
         {
-          mkdir('industry', 0777, true);
+          mkdir('jobs', 0777, true);
     
-        }else{
-         echo "couldnt make folder";
         }
 
           if (in_array($fileActualExt, $allowed)) {
@@ -92,52 +91,69 @@ if(isset($_POST["submit"])){
                 $fileNameNew = "profile".$id.".".$fileActualExt;
 
 
-                $fileDestination = 'industry/'.$fileNameNew;
+                $fileDestination = 'jobs/'.$fileNameNew;
               
-                   move_uploaded_file($fileTmpName, $fileDestination); //store the file in this destination
+                   move_uploaded_file($fileTmpName, $fileDestination);
            
 
             // header("location: index.php?uploadsuccess");
 
-              $file = $fileNameNew;
+              $cv = $fileNameNew;
 
             }else{
-              echo "your file is too big";
+              $cvErr = "<span style='color:red;'>Your file is too big! max 20 mb</span>";
+               $success = 0;
             }
       
           }else{
-              echo "there was an error while uploading your file";
+              $cvErr = "<span style='color:red;'>There was an error uploading file</span>";
+              $success = 0;
           }
     
         } else{
-          echo "You cannot upload files of this type only pdf are allowed!";
+          $cvErr = "<span style='color:red;'>You cannot upload this file only PDF are allowed</span>";
+          $success = 0;
         }
 
+      }else{
+        $cvErr = "<span style='color:red;'>Please other form values</span>";
+          $success = 0;
       }
 
+      if ($success == 1) {
+
+        $server = "localhost";
+        $username = "root";
+        $password = "";
+        $database = "ims";
+
+        $conn = mysqli_connect($server, $username, $password, $database);
 
         if(!$conn){
           die("Connection failed: " . mysqli_connect_error());
         }
 
         else{           //else create query with all the correct validation and write into tables
+
+              $stmt = mysqli_stmt_init($conn);
               $create ="INSERT INTO jobs (Job_Title, Location, Qualification, Category, Position, Vacancy, REGIS_NO) VALUES(?,?,?,?,?,?,?);";
 
                 mysqli_stmt_prepare($stmt,$create);
-                mysqli_stmt_bind_param($stmt, "sssssss",$JobTile, $Location, $Qualification, $Category, $Position, $Vacancy, $regisNo);
+                mysqli_stmt_bind_param($stmt, "sssssss",$JobTile, $Location, $Qualification, $Category, $Position, $Vacancy, $id);
                 mysqli_stmt_execute($stmt);
-                session_start();
-                $_SESSION["email"] = $email;
 
                // header("Location:signup - Copy.php");       //direct to friendadd.php
               }
 
               mysqli_stmt_close($stmt);
+              mysqli_close($conn);
 
               }
 
-              mysqli_close($conn);
-            }
+              }
+
+      
+
           
 
 ?>
@@ -171,7 +187,7 @@ if(isset($_POST["submit"])){
 
 
       <label for="Qualifications">Qualifications<br><span class="error"> <?php echo $msgErr;?></span><br></label>
-        <input type="text" name="Qualifications" id="Qualifications" value="<?php if(isset($_POST["Qualification"])) echo $_POST["Qualification"]; ?>">
+        <input type="text" name="Qualifications" id="Qualifications" value="<?php if(isset($_POST["Qualifications"])) echo $_POST["Qualifications"]; ?>">
       <br>
 
 
@@ -208,6 +224,10 @@ if(isset($_POST["submit"])){
 
    
   </div>
-
+<?php
+  }else{
+     header("Location:  Industry_login.php");
+  }?>
+   
 </body>
 </html>
