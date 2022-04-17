@@ -40,10 +40,11 @@
                         class="fas fa-chart-line me-2"></i>Analytics</a>
                 <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Feedback list</a>
-                <a href="logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                <a href="staff_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
         </div>
+
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
