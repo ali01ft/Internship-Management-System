@@ -32,13 +32,13 @@
             <div class="list-group list-group-flush my-3">
                 <a href="staff_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Internship listing</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                <a href="staff_studentlist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Student listing</a>
                   <a href="staff_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Company listing</a>                   
                 <a href="staff_infographics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-chart-line me-2"></i>Analytics</a>
-                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-paperclip me-2"></i>Feedback list</a>
                 <a href="staff_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
@@ -51,7 +51,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Student listings</h2>
+                    <h2 class="fs-2 m-0">Feedback listings</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -75,73 +75,12 @@
                     </ul>
                 </div>
             </nav>
-
+                <!-- Content wrapper -->
             <div class="container-fluid px-4">
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">Define your search</h3>
                     <div class="col">
-                         <?php 
-
-                                 $conn = new mysqli('localhost', 'root', '', 'ims');
-                                 if(isset($_GET['search'])){
-                                    $searchKey = $_GET['search'];
-                                    $sql = "SELECT * FROM student WHERE name LIKE '%$searchKey%'";
-                                 }else
-                                 $sql = "SELECT * FROM student";
-                                 $result = $conn->query($sql);
-                               ?>
-
-
-
-                               <form action="" method="GET"> 
-                                 <div class="col-md-6">
-                                    <input type="text" name="search" class='form-control' placeholder="Search By Name" value=<?php echo @$_GET['search']; ?> > 
-                                 </div>
-                                 <div class="col-md-6 text-left">
-                                  <button class="btn btn-light">Search</button>
-                                  <button onclick="myFunction()" class="btn btn-light">Refresh </button>
-                                    <script>
-                                    function myFunction() {
-                                        location.reload();
-                                    }
-                                    </script>
-
-                                 </div>
-                               </form>
-
-                               <br> 
-                               <br>
-                            </div>
-
-                        <table class="table bg-white rounded shadow-sm  table-hover">
-                            <div class="row">
-                              <tr>
-                                 <th>Student ID</th>
-                                 <th>Name</th>
-                                 <th>Student Email</th>
-                                 <th>Course</th>
-                                 <th>Assign Supervior</th>
-                                 <th>Gender</th>
-                                 <th>Year of study</th>
-                                 <th>Enrollment status </th>
-                                 <th>CV</th>
-                              </tr>
-                              <?php while( $row = $result->fetch_object() ): ?>
-                              <tr>
-                                 <td><?php echo $row->STUDENT_ID ?></td>
-                                 <td><?php echo $row->NAME ?></td>
-                                 <td><?php echo $row->STUDENT_EMAIL ?></td>
-                                 <td><?php echo $row->COURSE ?></td>
-                                 <td><?php echo $row->SUPERVISOR ?></td>
-                                 <td><?php echo $row->GENDER ?></td>
-                                 <td><?php echo $row->YEAR_OF_STUDY ?></td>
-                                 <td><?php echo $row->ENROLL ?></td>
-                                 <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
-
-                              </tr>
-                              <?php endwhile; ?>
-                            </table>
-
+    
                     </div>
                 </div>
 

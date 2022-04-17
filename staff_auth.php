@@ -19,9 +19,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 	}else if (empty($password)){
 		header("Location: staff_login.php?error=Password is required&email=$email");
 	}else {
-		//$stmt = $conn->prepare("SELECT * FROM admin WHERE email=?");
-		//$stmt->execute([$email]);
-		//print_r($stmt);
+
+
 			$result = mysqli_query($conn, "SELECT * FROM admin WHERE email = '$email'");
 			$data = mysqli_fetch_assoc($result);
 
@@ -29,23 +28,12 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
 			if(!empty($data)){
 
-			//if($rows = 1){
 
 				$user_id = $data['Admin_ID'];
 				$user_full_name = $data['Name'];
 				$user_email = $data['email'];
 				$user_password = $data['Password'];
-				
-
-
-
-		//if ($stmt->rowCount() === 1) {
-		//	$user = $stmt->fetch();
-
-			//$user_id = $user['Admin_ID'];
-			//$user_email = $user['email'];
-			//$user_password = $user['Password'];
-			//$user_full_name = $user['Name'];
+			
 
 			if ($email === $user_email) {
 				if ($password == $user_password) {

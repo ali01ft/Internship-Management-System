@@ -44,21 +44,21 @@ body {
   
   <div class="row">
     <div class="column">
-      <form action="/student_page.php">
+      <form action="student_login.php">
 
         <input type="image" src="image\Student.png" name="submit" width="400" height="330" alt="Student Login"/>
         
       </form>
     </div>
     <div class="column">
-      <form action="/company_page.php">
+      <form action="industry_login.php">
 
         <input type="image" src="image\Company.png" name="submit" width="400" height="330" alt="Company Login"/>
       
       </form>
     </div>
     <div class="column">
-      <form action="/admin_page.php">
+      <form action="staff_login.php">
 
       
         <input type="image" src="image\Admin.png" name="submit" width="400" height="330" alt="Admin Login"/>
