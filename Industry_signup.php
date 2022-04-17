@@ -221,7 +221,7 @@ if(isset($_POST["register_button"])){
     <h2>Registration Page</h2>
 
 <!-- Forms -->
-	<form action = "csignup.php" method = "POST" >
+	<form action = "Industry_signup.php" method = "POST" >
 			<p>Company Registration Number: <input type="text" name="regis_no" value = "<?php if(isset($_POST["regis_no"])) echo $_POST["regis_no"]; ?>">
       <span class="error"> <?php echo $regis_noErr;?></span></p>
 
