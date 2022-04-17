@@ -1,9 +1,9 @@
 
 
 <?php 
-  session_start();
+ // session_start();
 
-  if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
+ // if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
 ?>
 
 
@@ -89,6 +89,8 @@
                                  }else
                                  $sql = "SELECT * FROM student";
                                  $result = $conn->query($sql);
+                                 $row = $result->fetch_object();
+                                
                                ?>
 
 
@@ -113,6 +115,8 @@
                                <br>
                             </div>
 
+                            
+
                         <table class="table bg-white rounded shadow-sm  table-hover">
                             <div class="row">
                               <tr>
@@ -121,13 +125,13 @@
                                  <th>Student Email</th>
                                  <th>Course</th>
                                  <th>Assign Supervior</th>
-                                 <th>Gender</th>
                                  <th>Year of study</th>
                                  <th>Enrollment status </th>
-                                 <th>CV</th>
+                                 
                               </tr>
-                              <?php while( $row = $result->fetch_object() ): ?>
+                              <?php while( $row = $result->fetch_object()): ?>
                               <tr>
+                                <?php $id = $row ->STUDENT_ID;?>
                                  <td><?php echo $row->STUDENT_ID ?></td>
                                  <td><?php echo $row->NAME ?></td>
                                  <td><?php echo $row->STUDENT_EMAIL ?></td>
@@ -136,8 +140,7 @@
                                  <td><?php echo $row->GENDER ?></td>
                                  <td><?php echo $row->YEAR_OF_STUDY ?></td>
                                  <td><?php echo $row->ENROLL ?></td>
-                                 <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
-
+                                 
                               </tr>
                               <?php endwhile; ?>
                             </table>
@@ -165,9 +168,9 @@
 </html>
 
 <?php 
-}else {
-   header("Location:  login.php");
-}
+//}else {
+ //  header("Location:  login.php");
+//}
  ?>
 
-
+//

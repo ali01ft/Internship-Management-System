@@ -27,7 +27,6 @@ if(isset($_POST["register_button"])){
   $Enrolled = null;
   $yof = $_POST["yof"];
   $cv = $_FILES["file"];
-  print_r(cv);
   //$date_started = date("Y/m/d");
   //  Check Student ID process
     if (empty($_POST["Student_ID"])) {
@@ -129,6 +128,78 @@ if(isset($_POST["register_button"])){
       
 	  }
 
+  //file upload system
+
+     //checking if empty or not
+
+        if (empty($_FILES["file"])) {
+
+          $cvErr = "<span style='color:red;'>Must upload a CV!</span>";
+          $success = 0;
+
+
+       }elseif($success == 1){
+        // uploading file function
+        //seperating all the types in the array
+        $fileName = $_FILES['file']['name'];
+        $fileTmpName = $_FILES['file']['tmp_name'];
+        $fileSize = $_FILES['file']['size'];
+        $fileError = $_FILES['file']['error'];
+        $fileType = $_FILES['file']['type'];
+
+        $fileExt = explode('.', $fileName);
+        $fileActualExt = strtolower(end($fileExt)); //just keeping the extension part of the name
+
+        //only allow pdfs
+        $allowed = array('pdf');
+
+        //creating folder to upload files if it does not exist
+
+        if (!file_exists('uploads')) //create directory if not there
+        {
+          mkdir('uploads', 0777, true);
+    
+        }
+
+          if (in_array($fileActualExt, $allowed)) {
+
+            if ($fileError === 0) {
+
+              if ($fileSize < 20000000) {
+        
+                $fileNameNew = "profile".$StudentID.".".$fileActualExt;
+
+
+                $fileDestination = 'uploads/'.$fileNameNew;
+              
+                   move_uploaded_file($fileTmpName, $fileDestination);
+           
+
+            // header("location: index.php?uploadsuccess");
+
+              $cv = $fileNameNew;
+
+            }else{
+              $cvErr = "<span style='color:red;'>Your file is too big! max 20 mb</span>";
+               $success = 0;
+            }
+      
+          }else{
+              $cvErr = "<span style='color:red;'>There was an error uploading file</span>";
+              $success = 0;
+          }
+    
+        } else{
+          $cvErr = "<span style='color:red;'>You cannot upload this file only PDF are allowed</span>";
+          $success = 0;
+        }
+
+      }else{
+        $cvErr = "<span style='color:red;'>Please other form values</span>";
+          $success = 0;
+      }
+
+
   // Password validation process
 	  if(empty($_POST["pwd"])){   // check if both password does match
         $pwdErr = "<span style='color:red;'>Password is required.</span>";
@@ -176,74 +247,6 @@ if(isset($_POST["register_button"])){
         $database = "ims";
 
         $conn = mysqli_connect($server, $username, $password, $database);
-
-
-
-            //checking if empty or not
-
-        if (empty($_FILES["file"])) {
-
-          $cvErr = "<span style='color:red;'>Must upload a CV!</span>";
-
-
-       }else{
-        // uploading file function
-        //seperating all the types in the array
-
-        $fileName = $_FILES['file']['name'];
-        $fileTmpName = $_FILES['file']['tmp_name'];
-        $fileSize = $_FILES['file']['size'];
-        $fileError = $_FILES['file']['error'];
-        $fileType = $_FILES['file']['type'];
-
-        $fileExt = explode('.', $fileName);
-        $fileActualExt = strtolower(end($fileExt)); //just keeping the extension part of the name
-
-        //only allow pdfs
-        $allowed = array('pdf');
-
-        //creating folder to upload files if it does not exist
-
-        if (!file_exists('uploads')) //create directory if not there
-        {
-          mkdir('uploads', 0777, true);
-    
-        }else{
-         echo "couldnt make folder";
-        }
-
-          if (in_array($fileActualExt, $allowed)) {
-
-            if ($fileError === 0) {
-
-              if ($fileSize < 20000000) {
-        
-                $fileNameNew = "profile".$StudentID.".".$fileActualExt;
-
-
-                $fileDestination = 'uploads/'.$fileNameNew;
-              
-                   move_uploaded_file($fileTmpName, $fileDestination);
-           
-
-            // header("location: index.php?uploadsuccess");
-
-              $cv = $fileNameNew;
-
-            }else{
-              echo "you file is too big";
-            }
-      
-          }else{
-              echo "there was an error while uploading your file";
-          }
-    
-        } else{
-          echo "You cannot upload files of this type only pdf are allowed!";
-        }
-
-      }
-
 
         if(!$conn){
           die("Connection failed: " . mysqli_connect_error());
@@ -314,7 +317,7 @@ if(isset($_POST["register_button"])){
     <h2>Registration Page</h2>
 
 <!-- Forms -->
-	<form action = "signup.php" method = "POST" enctype="multipart/form-data" >
+	<form action = "signup - Copy.php" method = "POST" enctype="multipart/form-data" >
 			<p>Student ID: <input type="text" name="Student_ID" value = "<?php if(isset($_POST["Student_ID"])) echo $_POST["Student_ID"]; ?>">
       <span class="error"> <?php echo $StudentErr;?></span></p>
 
