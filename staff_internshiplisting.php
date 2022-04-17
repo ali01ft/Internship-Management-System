@@ -144,8 +144,7 @@
 
 <?php 
 }else {
-   header("Location:  login.php");
+   header("Location:  staff_login.php");
 }
  ?>
-
 //

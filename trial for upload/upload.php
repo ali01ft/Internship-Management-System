@@ -1,5 +1,10 @@
 <?php
 
+session_start();
+include_once 'dbh.php';
+$id = $_SESSION['id'];
+
+
 if (isset($_POST['submit'])) {
 	$user = $_POST['user'];
 	$file = $_FILES['file'];
@@ -16,17 +21,29 @@ if (isset($_POST['submit'])) {
 
 	$allowed = array('jpg', 'jpeg', 'png', 'pdf');
 
+	if (!file_exists('uploads'))
+	 {
+  	 	 mkdir('uploads', 0777, true);
+		
+	}else{
+			echo "couldnt make folder";
+	}
+
 	if (in_array($fileActualExt, $allowed)) {
 
 		if ($fileError === 0) {
 
 			if ($fileSize < 500000) {
 				
-					$fileNameNew = uniqid('', true).".".$fileActualExt;
+					$fileNameNew = "profile".$id.".".$fileActualExt;
+
 
 					$fileDestination = 'uploads/'.$fileNameNew;
 
 					move_uploaded_file($fileTmpName, $fileDestination);
+
+					$sql = "UPDATE profileimg SET status = 0 WHERE userid = '$id';";
+					$result = mysqli_query($conn, $sql);
 
 					header("location: index.php?uploadsuccess");
 

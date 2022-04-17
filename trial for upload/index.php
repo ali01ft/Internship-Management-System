@@ -1,125 +1,83 @@
+<?php
+
+session_start();
+include_once 'dbh.php';
+
+?>
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<title>Ajax File Upload</title>
-	<meta charset="utf-8">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script>
-		$(document).ready(function(e){
-			$("#fupForm").on('submit', function(e){
-				e.preventDefault();
-				$.ajax({
-					type: 'POST',
-					url: 'submit.php',
-					data: new FormData(this),
-					contentType: false,
-					cache: false,
-					processData:false,
-					beforeSend: function(){
-						$('.submitBtn').attr("disabled","disabled");
-						$('#fupForm').css("opacity",".5");
-					},
-					success: function(msg){ console.log(msg);
-						$('.statusMsg').html('');
-						if(msg == 'ok'){
-							$('#fupForm')[0].reset();
-							$('.statusMsg').html('<span style="font-size:18px;color:#34A853">Form data submitted successfully.</span>');
-						}else{
-							$('.statusMsg').html('<span style="font-size:18px;color:#EA4335">Some problem occurred, please try again.</span>');
-						}
-						$('#fupForm').css("opacity","");
-						$(".submitBtn").removeAttr("disabled");
-					}
-				});
-			});
-		
-			//file type validation
-			$("#file").change(function() {
-				var file = this.files[0];
-				var imagefile = file.type;
-				var match= ["image/jpeg","image/png","image/jpg"];
-				if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))){
-					alert('Please select a valid image file (JPEG/JPG/PNG).');
-					$("#file").val('');
-					return false;
-				}
-			});
-		});
-	</script>
-
-	<?php 
-		//DB details
-$dbHost = "localhost";
-$dbUsername = "root";
-$dbPassword = "";
-$dbName = "semicolan";
-
-//Create connection and select DB
-$db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
-
-if($db->connect_error){
-    die("Unable to connect database: " . $db->connect_error);
-}
-
-
-		if (!file_exists('trial for upload/uploads')) {
-  	 	 mkdir('trial for upload/uploads', 0777, true);
-		}
-
-		if(!empty($_POST['name']) || !empty($_POST['email']) || !empty($_FILES['file']['name'])){
-    	$uploadedFile = '';
-    	if(!empty($_FILES["file"]["type"])){
-        $fileName = time().'_'.$_FILES['file']['name'];
-        $valid_extensions = array("jpeg", "jpg", "png");
-        $temporary = explode(".", $_FILES["file"]["name"]);
-        $file_extension = end($temporary);
-        if((($_FILES["file"]["type"] == "image/png") || ($_FILES["file"]["type"] == "image/jpg") || ($_FILES["file"]["type"] == "image/jpeg")) && in_array($file_extension, $valid_extensions)){
-            $sourcePath = $_FILES['file']['tmp_name'];
-            $targetPath = "uploads/".$fileName;
-            if(move_uploaded_file($sourcePath,$targetPath)){
-                $uploadedFile = $fileName;
-            }
-        }
-    }
-    
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    
-    //include database configuration file
-    include_once 'dbConfig.php';
-    
-    //insert form data in the database
-    $insert = $db->query("INSERT form_data (name,email,file_name) VALUES ('".$name."','".$email."','".$uploadedFile."')");
-    // echo $insert; die();
-    
-    echo $insert?'ok':'err';
-}
-	 ?>
+	<title></title>
 </head>
 <body>
 
-	<div class="container mt-3">
-		<h2>Ajax File Upload with Form Data</h2>
-		<p class="statusMsg"></p>
-		<form action="index.php" enctype="multipart/form-data" id="fupForm" >
-			<div class="form-group">
-				<label for="name">NAME</label>
-				<input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required />
-			</div>
-			<div class="form-group">
-			<label for="email">EMAIL</label>
-				<input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required />
-			</div>
-			<div class="form-group">
-				<label for="file">File</label>
-				<input type="file" class="form-control" id="file" name="file" required />
-			</div>
-			<br>
-			<input type="submit" name="submit" class="btn btn-danger submitBtn" value="SAVE"/>
-		</form>
-	</div>
+<?php
 
+	$sql = "SELECT * FROM user";
+	$result = mysqli_query($conn, $sql);
+	if (mysqli_num_rows($result)> 0) {
+		while($row = mysqli_fetch_assoc($result)){
+			$id = $row['id'];
+			$sqlImg = "SELECT * from profileimg where userid = '$id'";
+			$resultImg = mysqli_query($conn, $sqlImg);
+
+			while($rowImg = mysqli_fetch_assoc($resultImg) ){
+				echo("<div>");
+					if ($rowImg['status']==0) {
+						echo "<img src ='upload/profile".$id."jpg'";
+					} else {
+						echo "<img src ='upload/profiledefault.jpg'";
+					}
+					echo $row['username'];
+				echo("</div>");
+			}
+		}
+	}else{
+		echo "there are no users yet!";
+	}
+
+	if (isset($_SESSION['id'])) {
+		if ($_SESSION['id'] == 1) {
+			echo "you are logged in as user #1";
+		}
+
+		echo "
+		<form action='upload.php' method ='POST' enctype='multipart/form-data'>
+
+			<input type='text' name='user' id='user'>
+			<input type='file' name='file'>
+			<button type='submit' name='submit' id='submit'>upload</button>
+		</form>
+		";
+	}else{
+		echo "you are not logged in";
+		echo("<form action='signupt.php' method='POST'>
+
+			<input type='text' name = 'first' placeholder = 'First Name'>
+			<input type='text' name = 'last' placeholder = 'Last Name'>
+			<input type='text' name = 'uid' placeholder = 'User name'>
+			<input type='text' name = 'pwd' placeholder = 'Password'>
+			<button type='submit' name='submitSignup'>Singup</button>
+			</form>");
+	}
+
+?>
+
+	
+<p>
+	Login As User!
+</p>
+	<form action="login.php" method="POST">
+		<button type="submit" name="submitLogin">Login</button>
+	</form>
+
+	<p>
+	LogOut As User!
+</p>
+	<form action="logout.php" method="POST">
+		<button type="submit" name="submitLogout">LogOut</button>
+	</form>
 </body>
 </html>

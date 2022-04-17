@@ -27,7 +27,7 @@ if(isset($_POST["register_button"])){
   $Enrolled = null;
   $yof = $_POST["yof"];
   $cv = $_FILES["file"];
-  print_r($cv);
+  print_r(cv);
   //$date_started = date("Y/m/d");
   //  Check Student ID process
     if (empty($_POST["Student_ID"])) {
