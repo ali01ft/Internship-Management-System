@@ -1,7 +1,7 @@
 <?php 
   session_start();
 
-  if (!isset($_SESSION['NAME']) && !isset($_SESSION['user_email'])) { 
+  if (!isset($_SESSION['user_id']) && !isset($_SESSION['user_email'])) { 
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +53,6 @@
 
 <?php 
 }else {
-   header("Location: intenship.php");
+   header("Location: staff_login.php");
 }
  ?>
