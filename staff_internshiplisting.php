@@ -85,7 +85,7 @@
                                  $conn = new mysqli('localhost', 'root', '', 'ims');
                                  if(isset($_GET['search'])){
                                     $searchKey = $_GET['search'];
-                                    $sql = "SELECT * FROM friends WHERE name LIKE '%$searchKey%'";
+                                    $sql = "SELECT * FROM JOBS WHERE Location LIKE '%$searchKey%'";
                                  }else
                                  $sql = "SELECT * FROM JOBS";
                                  $result = $conn->query($sql);
@@ -93,10 +93,16 @@
 
                                <form action="" method="GET"> 
                                  <div class="col-md-6">
-                                    <input type="text" name="search" class='form-control' placeholder="Search By Name" value=<?php echo @$_GET['search']; ?> > 
+                                    <input type="text" name="search" class='form-control' placeholder="Search By Location" value=<?php echo @$_GET['search']; ?> > 
                                  </div>
                                  <div class="col-md-6 text-left">
-                                  <button class="btn">Search</button>
+                                  <button class="btn btn-light">Search</button>
+                                    <button onclick="myFunction()" class="btn btn-light">Refresh </button>
+                                    <script>
+                                    function myFunction() {
+                                        location.reload();
+                                    }
+                                    </script>
                                  </div>
                                </form>
 
@@ -104,21 +110,29 @@
                                <br>
                             </div>
 
-                        <table class="table bg-white rounded shadow-sm  table-hover">
+                          <table class="table bg-white rounded shadow-sm  table-hover">
                             <div class="row">
                               <tr>
-                                 <th>Name</th>
-                                 <th>Amount</th>
-                                 <th>City</th>
+                                 <th>Job ID</th>
+                                 <th>Job Title</th>
+                                 <th>Location</th>
+                                 <th>Qualification</th>
+                                 <th>Category</th>
+                                 <th>Position</th>
+                                 <th>Apply</th>
                               </tr>
                               <?php while( $row = $result->fetch_object() ): ?>
                               <tr>
-                                 <td><?php echo $row->name ?></td>
-                                 <td><?php echo $row->amount ?></td>
-                                 <td><?php echo $row->city ?></td>
+                                 <td><?php echo $row->Job_ID ?></td>
+                                 <td><?php echo $row->Job_Title ?></td>
+                                 <td><?php echo $row->Location ?></td>
+                                 <td><?php echo $row->Qualification ?></td>
+                                 <td><?php echo $row->Category ?></td>
+                                 <td><?php echo $row->Position ?></td>
                               </tr>
                               <?php endwhile; ?>
                             </table>
+
 
                     </div>
                 </div>
