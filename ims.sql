@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2022 at 11:32 PM
+-- Generation Time: Apr 18, 2022 at 03:46 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.1
+-- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,6 +40,7 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`Admin_ID`, `Name`, `email`, `Password`) VALUES
 ('10124566', 'bibiana', 'bibiana', '123456789'),
+('1254678', 'Ali Ashfaque', 'ali01ft@gmail.com', '123456789'),
 ('1414552', 'ali', 'alion', '123456789');
 
 -- --------------------------------------------------------
@@ -92,7 +93,9 @@ CREATE TABLE `jobs` (
 
 INSERT INTO `jobs` (`Job_ID`, `Job_Title`, `Location`, `Qualification`, `Category`, `Position`, `Vacancy`, `REGIS_NO`) VALUES
 (1, 'Marketing Supervisor Needed', 'kuching sarawak', '3 year student with atleast 3.00 cgpa ', 'tech company', 'Marketing Supervisor', '255', '1013245546'),
-(2, 'looking for an IT assistant ', 'Kuching', 'anything is fine', 'IT company ', 'Assistant ', '255', '147854782865');
+(2, 'looking for an IT assistant ', 'Kuching', 'anything is fine', 'IT company ', 'Assistant ', '255', '147854782865'),
+(3, 'Trial for Swinburne', '', 'IT graduate', 'IT', 'It superviosr', '20', 'a45471551'),
+(4, 'Trial for Swinburne', '', 'IT graduate', 'IT', 'It superviosr', '20', 'a45471551');
 
 -- --------------------------------------------------------
 
@@ -121,15 +124,9 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`STUDENT_ID`, `NAME`, `STUDENT_EMAIL`, `COURSE`, `ENROLL`, `SUPERVISOR`, `GENDER`, `CURRENT_RESIDENCE`, `CONTACT_NO`, `YEAR_OF_STUDY`, `PASSWORD`, `CV`, `USERNAME`) VALUES
-('101220111', 'Mutab Bin', '101220111@students.swinburne.edu.my', 'Bachelors of Engineering', NULL, NULL, 'Male', 'asdasdasda', '0172564897', '2', 'Zz123456789', '', 'alif'),
-('101220121', 'Mutab Bin', '101220121@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdasda', '0172564896', '2', 'Zz123456789', '', 'Argon'),
+('101220016', 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdasda', '0172564896', '3', 'Zz123456789', 'profile101220016.pdf', 'Eric'),
+('101220213', 'Andrew Michael', '101220213@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdasda', '0172564897', '3', 'Zz123456789', 'profile101220213.pdf', 'ErgoProxy'),
 ('101220516', 'AaL', '101220516@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdsadas', '0176395488', '2', 'Zz123456789', 'profile101220516.pdf', 'aas'),
-('101220518', 'AaL', '101220518@students.swinburne.edu.my', 'Bachelors of Engineering', NULL, NULL, 'Male', 'asdasdsadas', '0176395488', '2', 'Zz123456789', 'Array', 'aas'),
-('101220606', 'Mutab Bin', '101220606@students.swinburne.edu.my', 'Bachelors of Marketing', NULL, NULL, 'Female', 'asdasdasda', '0172564897', '2', 'Zz123456789', '', 'Argon'),
-('101220618', 'Ashfaque Ali shagor', '101220618@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', '0', NULL, 'Male ', '433, lorong kenny hill 3', '01774587524', '3', '123456789', NULL, 'ali01ft'),
-('101220717', 'Mutab Bin', '101220717@students.swinburne.edu.my', 'Bachelors of Commerce', 'A', NULL, 'Female', 'asdasdasda', '0172564897', '1', 'Zz123456789', 'Array', 'alif'),
-('101220818', 'Mutab Bin', '101220818@students.swinburne.edu.my', 'Bachelors of Commerce', 'A', NULL, 'Male', 'asdasdasda', '0172564897', '3', 'Zz123456789', 'Array', 'alif'),
-('101220919', 'Mutab Bin', '101220919@students.swinburne.edu.my', 'Bachelors of information technology', NULL, NULL, 'Male', 'asdasdasda', '0172564897', '1', 'Zz123456789', '', 'alif'),
 ('101223648', 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', '0', NULL, 'Male ', '432, lorong kenny hill 5, kuching, sarawak, malaysia', '01774587524', '3', '123456789', NULL, 'arasln');
 
 --
@@ -169,7 +166,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `Job_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Job_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
