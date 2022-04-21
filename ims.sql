@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2022 at 03:46 AM
+-- Generation Time: Apr 21, 2022 at 08:08 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.11
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `Admin_ID` varchar(20) NOT NULL,
+  `Admin_ID` int(20) NOT NULL,
   `Name` varchar(30) NOT NULL,
   `email` varchar(70) NOT NULL,
   `Password` varchar(20) NOT NULL
@@ -39,9 +39,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`Admin_ID`, `Name`, `email`, `Password`) VALUES
-('10124566', 'bibiana', 'bibiana', '123456789'),
-('1254678', 'Ali Ashfaque', 'ali01ft@gmail.com', '123456789'),
-('1414552', 'ali', 'alion', '123456789');
+(1254678, 'Ali Ashfaque', 'ali01ft@gmail.com', '123456789'),
+(1414552, 'ali', 'alion', '123456789'),
+(10124566, 'bibiana', 'bibiana', '123456789');
 
 -- --------------------------------------------------------
 
@@ -50,7 +50,7 @@ INSERT INTO `admin` (`Admin_ID`, `Name`, `email`, `Password`) VALUES
 --
 
 CREATE TABLE `industry` (
-  `REGIS_NO` varchar(20) NOT NULL,
+  `REGIS_NO` int(20) NOT NULL,
   `COMPANY_NAME` varchar(50) NOT NULL,
   `COMPANY_ADDRESS` varchar(50) NOT NULL,
   `CONTACT_NO` varchar(20) NOT NULL,
@@ -65,10 +65,7 @@ CREATE TABLE `industry` (
 --
 
 INSERT INTO `industry` (`REGIS_NO`, `COMPANY_NAME`, `COMPANY_ADDRESS`, `CONTACT_NO`, `WEBSITE`, `Password`, `USERNAME`, `Email`) VALUES
-('1013245546', 'total oil ', 'just a random address ', '017581369754', 'www.random.com', '123456789', 'rdom', NULL),
-('147854782865', 'percy inc', 'random address', '145269787', 'www.add.com', '123456789', 'adrom', NULL),
-('a45471551', 'ion', 'asdasdasfasdf', '0172564896', 'www.aa.com', 'Zz123456789', 'Argon', 'ali@g.com'),
-('a45471552', 'ion', 'asdasdasda', '0172564896', 'www.aa.com', 'Zz123456789', 'Argon', 'a@g.com');
+(101254685, 'total oil', '422 kenny hill 4', '0123548569', 'www.total.com', '123456789', 'gege', 'ali@g.com');
 
 -- --------------------------------------------------------
 
@@ -84,18 +81,8 @@ CREATE TABLE `jobs` (
   `Category` varchar(255) NOT NULL,
   `Position` varchar(255) NOT NULL,
   `Vacancy` varchar(255) NOT NULL,
-  `REGIS_NO` varchar(20) NOT NULL
+  `REGIS_NO` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `jobs`
---
-
-INSERT INTO `jobs` (`Job_ID`, `Job_Title`, `Location`, `Qualification`, `Category`, `Position`, `Vacancy`, `REGIS_NO`) VALUES
-(1, 'Marketing Supervisor Needed', 'kuching sarawak', '3 year student with atleast 3.00 cgpa ', 'tech company', 'Marketing Supervisor', '255', '1013245546'),
-(2, 'looking for an IT assistant ', 'Kuching', 'anything is fine', 'IT company ', 'Assistant ', '255', '147854782865'),
-(3, 'Trial for Swinburne', '', 'IT graduate', 'IT', 'It superviosr', '20', 'a45471551'),
-(4, 'Trial for Swinburne', '', 'IT graduate', 'IT', 'It superviosr', '20', 'a45471551');
 
 -- --------------------------------------------------------
 
@@ -104,7 +91,7 @@ INSERT INTO `jobs` (`Job_ID`, `Job_Title`, `Location`, `Qualification`, `Categor
 --
 
 CREATE TABLE `student` (
-  `STUDENT_ID` varchar(20) NOT NULL,
+  `STUDENT_ID` int(20) NOT NULL,
   `NAME` varchar(50) NOT NULL,
   `STUDENT_EMAIL` varchar(100) NOT NULL,
   `COURSE` varchar(50) NOT NULL,
@@ -124,10 +111,10 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`STUDENT_ID`, `NAME`, `STUDENT_EMAIL`, `COURSE`, `ENROLL`, `SUPERVISOR`, `GENDER`, `CURRENT_RESIDENCE`, `CONTACT_NO`, `YEAR_OF_STUDY`, `PASSWORD`, `CV`, `USERNAME`) VALUES
-('101220016', 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdasda', '0172564896', '3', 'Zz123456789', 'profile101220016.pdf', 'Eric'),
-('101220213', 'Andrew Michael', '101220213@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdasda', '0172564897', '3', 'Zz123456789', 'profile101220213.pdf', 'ErgoProxy'),
-('101220516', 'AaL', '101220516@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdsadas', '0176395488', '2', 'Zz123456789', 'profile101220516.pdf', 'aas'),
-('101223648', 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', '0', NULL, 'Male ', '432, lorong kenny hill 5, kuching, sarawak, malaysia', '01774587524', '3', '123456789', NULL, 'arasln');
+(101220016, 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdasda', '0172564896', '3', 'Zz123456789', 'profile101220016.pdf', 'Eric'),
+(101220213, 'Andrew Michael', '101220213@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdasda', '0172564897', '3', 'Zz123456789', 'profile101220213.pdf', 'ErgoProxy'),
+(101220516, 'AaL', '101220516@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdsadas', '0176395488', '2', 'Zz123456789', 'profile101220516.pdf', 'aas'),
+(101223648, 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', '0', NULL, 'Male ', '432, lorong kenny hill 5, kuching, sarawak, malaysia', '01774587524', '3', '123456789', NULL, 'arasln');
 
 --
 -- Indexes for dumped tables
@@ -138,45 +125,6 @@ INSERT INTO `student` (`STUDENT_ID`, `NAME`, `STUDENT_EMAIL`, `COURSE`, `ENROLL`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`Admin_ID`);
-
---
--- Indexes for table `industry`
---
-ALTER TABLE `industry`
-  ADD PRIMARY KEY (`REGIS_NO`);
-
---
--- Indexes for table `jobs`
---
-ALTER TABLE `jobs`
-  ADD PRIMARY KEY (`Job_ID`),
-  ADD KEY `REGIS_NO` (`REGIS_NO`);
-
---
--- Indexes for table `student`
---
-ALTER TABLE `student`
-  ADD PRIMARY KEY (`STUDENT_ID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `jobs`
---
-ALTER TABLE `jobs`
-  MODIFY `Job_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `jobs`
---
-ALTER TABLE `jobs`
-  ADD CONSTRAINT `jobs_ibfk_1` FOREIGN KEY (`REGIS_NO`) REFERENCES `industry` (`REGIS_NO`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
