@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2022 at 08:08 AM
--- Server version: 10.4.24-MariaDB
+-- Generation Time: Apr 21, 2022 at 08:28 AM
+-- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -40,8 +40,8 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`Admin_ID`, `Name`, `email`, `Password`) VALUES
 (1254678, 'Ali Ashfaque', 'ali01ft@gmail.com', '123456789'),
-(1414552, 'ali', 'alion', '123456789'),
-(10124566, 'bibiana', 'bibiana', '123456789');
+(1414552, 'ali', 'alion@g.com', '123456789'),
+(10124566, 'bibiana', 'bibiana@g.com', '123456789');
 
 -- --------------------------------------------------------
 
@@ -65,7 +65,12 @@ CREATE TABLE `industry` (
 --
 
 INSERT INTO `industry` (`REGIS_NO`, `COMPANY_NAME`, `COMPANY_ADDRESS`, `CONTACT_NO`, `WEBSITE`, `Password`, `USERNAME`, `Email`) VALUES
-(101254685, 'total oil', '422 kenny hill 4', '0123548569', 'www.total.com', '123456789', 'gege', 'ali@g.com');
+(1202202, 'Samsung', '123 Korea town Malaysia', '0134423556', 'www.samsung.com', '12345', 'Samsung', 'Samung@sm.com'),
+(1202232, 'LG', 'Zimbabwe', '123123123', 'www.LG.com', '1234', 'Lifes good', 'lg@lg.com'),
+(2010312, 'Mircosoft', '123 America town Malaysia', '013442123', 'www.mircosoft.com', '12345', 'MS', 'MS@outlook.com'),
+(120212312, 'Mcdonalds', 'Diabetes street, liver cancer town ', '0123312312321', 'www.food.com', '1234', 'Mcd', 'mcd@g.com'),
+(2010312123, 'ZombieCorp', '123 Korea town China', '123123123', 'www.brains.com', '1234', '', 'zombie@g.com'),
+(5564123, 'KFC', 'Diabetes street, Cholesterol', '01123123123', 'www.food2.com', '1234', 'kfc', 'kfc@kfc.com');
 
 -- --------------------------------------------------------
 
