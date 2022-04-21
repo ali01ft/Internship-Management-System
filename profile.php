@@ -24,7 +24,7 @@ function is_user_login()
 
 
 
-if($conn)
+if(!$conn)
 {
 	header('location:login_access.php');
 }else{
