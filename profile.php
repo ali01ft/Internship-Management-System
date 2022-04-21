@@ -1,5 +1,6 @@
 <?php
 
+
 //profile.php
 
 session_start();
@@ -12,9 +13,18 @@ $server = "localhost";
 
         $conn = mysqli_connect($server, $username, $password, $database);
 
+function is_user_login()
+{
+	if(isset($_SESSION['user_id']))
+	{
+		return true;
+	}
+	return false;
+}
 
 
-if(!$conn)
+
+if($conn)
 {
 	header('location:login_access.php');
 }else{
@@ -27,63 +37,80 @@ if(isset($_POST['save_button']))
 {
 	$formdata = array();
 
-	if(empty($_POST['user_email_address']))
+	if(empty($_POST['email']))
 	{
 		$message .= '<li>Email Address is required</li>';
 	}
 	else
 	{
-		if(!filter_var($_POST["user_email_address"], FILTER_VALIDATE_EMAIL))
+		if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL))
 		{
 			$message .= '<li>Invalid Email Address</li>';
 		}
 		else
 		{
-			$formdata['user_email_address'] = trim($_POST['user_email_address']);
+			$formdata['email'] = trim($_POST['email']);
 		}
 	}
 
-	if(empty($_POST['user_password']))
+
+	if(empty($_POST['pwd']))
 	{
 		$message .= '<li>Password is required</li>';
 	}
 	else
 	{
-		$formdata['user_password'] = trim($_POST['user_password']);
+		$formdata['pwd'] = trim($_POST['pwd']);
 	}
 
-	if(empty($_POST['user_name']))
+	if(empty($_POST['uname']))
 	{
 		$message .= '<li>User Name is required</li>';
 	}
 	else
 	{
-		$formdata['user_name'] = trim($_POST['user_name']);
+		$formdata['uname'] = trim($_POST['uname']);
 	}
 
-	if(empty($_POST['user_address']))
+	if(empty($_POST['Cresidence']))
 	{
 		$message .= '<li>User Address Detail is required</li>';
 	}
 	else
 	{
-		$formdata['user_address'] = trim($_POST['user_address']);
+		$formdata['Cresidence'] = trim($_POST['Cresidence']);
 	}
 
-	if(empty($_POST['user_contact_no']))
+	if(empty($_POST['Contact_no']))
 	{
 		$message .= '<li>User Address Detail is required</li>';
 	}
 	else
 	{
-		$formdata['user_contact_no'] = $_POST['user_contact_no'];
+		$formdata['Contact_no'] = $_POST['Contact_no'];
+	}
+	if(empty($_POST['Course']))
+	{
+		$message .= '<li>Password is required</li>';
+	}
+	else
+	{
+		$formdata['Course'] = trim($_POST['Course']);
+	}
+	if(empty($_POST['Gender']))
+	{
+		$message .= '<li>Password is required</li>';
+	}
+	else
+	{
+		$formdata['Gender'] = trim($_POST['Gender']);
 	}
 
 	$formdata['user_profile'] = $_POST['hidden_user_profile'];
 
-	if(!empty($_FILES['user_profile']['name']))
+	if(!empty($_FILES['user_profile']['uname']))
 	{
-		$img_name = $_FILES['user_profile']['name'];
+		$img_name = $_FILES['user_profile']['uname'];
 		$img_type = $_FILES['user_profile']['type'];
 		$tmp_name = $_FILES['user_profile']['tmp_name'];
 		$fileinfo = @getimagesize($tmp_name);
@@ -125,24 +152,28 @@ if(isset($_POST['save_button']))
 	if($message == '')
 	{
 		$data = array(
-			':user_name'			=>	$formdata['user_name'],
-			':user_address'			=>	$formdata['user_address'],
-			':user_contact_no'		=>	$formdata['user_contact_no'],
-			':user_profile'			=>	$formdata['user_profile'],
-			':user_email_address'	=>	$formdata['user_email_address'],
-			':user_password'		=>	$formdata['user_password'],
+			':uname'			=>	$formdata['uname'],
+			':Cresidence'			=>	$formdata['Cresidence'],
+			':Contact_no'		=>	$formdata['Contact_no'],
+			':uname'			=>	$formdata['uname'],
+			':email'	=>	$formdata['email'],
+			':pwd'		=>	$formdata['pwd'],
+			':Course'		=>	$formdata['Course'],
+			':Gender'		=>	$formdata['Gender'],
 			':user_updated_on'		=>	get_date_time($connect),
 			':user_unique_id'		=>	$_SESSION['user_id']
 		);
 
 		$query = "
 		UPDATE lms_user 
-            SET user_name = :user_name, 
-            user_address = :user_address, 
-            user_contact_no = :user_contact_no, 
+            SET uname = :uname, 
+            Cresidence = :Cresidence, 
+            Contact_no = :Contact_no, 
             user_profile = :user_profile, 
-            user_email_address = :user_email_address, 
-            user_password = :user_password, 
+            email = :email, 
+            pwd = :pwd,
+            Course = :Course,
+            Gender = :Gender, 
             user_updated_on = :user_updated_on 
             WHERE user_unique_id = :user_unique_id
 		";
@@ -163,7 +194,7 @@ $query = "
 
 $result = $conn->query($query);
 
-include 'header.php';
+
 }
 ?>
 
@@ -190,23 +221,31 @@ include 'header.php';
 				<form method="POST" enctype="multipart/form-data">
 					<div class="mb-3">
 						<label class="form-label">Email address</label>
-						<input type="text" name="user_email_address" id="user_email_address" class="form-control" value="<?php echo $row['user_email_address']; ?>" />
+						<input type="text" name="email" id="email" class="form-control" value="<?php echo $row['email']; ?>" />
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Password</label>
-						<input type="password" name="user_password" id="user_password" class="form-control" value="<?php echo $row['user_password']; ?>" />
+						<input type="password" name="pwd" id="pwd" class="form-control" value="<?php echo $row['pwd']; ?>" />
 					</div>
 					<div class="mb-3">
-						<label class="form-label">User Name</label>
-						<input type="text" name="user_name" id="user_name" class="form-control" value="<?php echo $row['user_name']; ?>" />
+						<label class="form-label">NAME</label>
+						<input type="text" name="uname" id="uname" class="form-control" value="<?php echo $row['uname']; ?>" />
 					</div>
 					<div class="mb-3">
-						<label class="form-label">User Contact No.</label>
-						<input type="text" name="user_contact_no" id="user_contact_no" class="form-control" value="<?php echo $row['user_contact_no']; ?>" />
+						<label class="form-label">Contact No.</label>
+						<input type="text" name="Contact_no" id="Contact_no" class="form-control" value="<?php echo $row['Contact_no']; ?>" />
 					</div>
 					<div class="mb-3">
 						<label class="form-label">User Address</label>
-						<textarea name="user_address" id="user_address" class="form-control"><?php echo $row['user_address']; ?></textarea>
+						<textarea name="Cresidence" id="Cresidence" class="form-control"><?php echo $row['Cresidence']; ?></textarea>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Course</label>
+						<textarea name="Course" id="Course" class="form-control"><?php echo $row['Course']; ?></textarea>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Gender</label>
+						<textarea name="Gender" id="Gender" class="form-control"><?php echo $row['Gender']; ?></textarea>
 					</div>
 					<div class="mb-3">
 						<label class="form-label">User Photo</label><br />
@@ -230,8 +269,3 @@ include 'header.php';
 	</div>
 </div>
 
-<?php 
-
-include 'footer.php';
-
-?>
