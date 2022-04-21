@@ -2,22 +2,14 @@
 
 //profile.php
 
-session_start();
-print_r($_SESSION);
+include 'database_connection.php';
 
-$server = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "ims";
+include 'function.php';
 
-        $conn = mysqli_connect($server, $username, $password, $database);
-
-
-
-if(!$conn)
+if(!is_user_login())
 {
-	header('location:login_access.php');
-}else{
+	header('location:user_login.php');
+}
 
 $message = '';
 
@@ -157,14 +149,14 @@ if(isset($_POST['save_button']))
 
 
 $query = "
-	SELECT * FROM student 
-	WHERE STUDENT_ID = '".$_SESSION['user_id']."'
+	SELECT * FROM lms_user 
+	WHERE user_unique_id = '".$_SESSION['user_id']."'
 ";
 
-$result = $conn->query($query);
+$result = $connect->query($query);
 
 include 'header.php';
-}
+
 ?>
 
 <div class="d-flex align-items-center justify-content-center mt-5 mb-5" style="min-height:700px;">
