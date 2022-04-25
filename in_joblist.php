@@ -1,14 +1,10 @@
-
-
 <?php 
   session_start();
   print_r($_SESSION);
+if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) { 
 
-  $id = $_SESSION['user_id'];
+    $id = $_SESSION['company_id'];
 
-  if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
-
-   
 ?>
 
 
@@ -37,27 +33,27 @@
                                  $conn = new mysqli('localhost', 'root', '', 'ims');
                                  if(isset($_GET['search'])){
                                     $searchKey = $_GET['search'];
-                                    $sql = "SELECT insdustry.COMPANY_NAME, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO WHERE Location LIKE '%$searchKey%'";
+                                    $sql = "SELECT * from jobs LIKE '%$searchKey%'";
                                  }else
-                                 $sql = "SELECT industry.COMPANY_NAME,jobs.Job_ID, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position, jobs.REGIS_NO FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO where Job_ID NOT IN (select Job_ID from applicants WHERE STUDENT_ID = $id);";
-                                     $result = $conn->query($sql);
-
-
-
-                                  
+                                 $sql = "SELECT * FROM `jobs` WHERE REGIS_NO = $id";
+                                $result = $conn->query($sql);
+                               // $row = mysqli_fetch_assoc($result);
+                              //  print_r($row);
+                      
                                 if(isset($_POST['Apply'])) {
 
-                                     $f_ID = $_POST['Apply'];  // Job ID
+                                    $f_ID = $_POST['Apply'];  // approve
                                      print_r($f_ID);
-                                     $id = $_SESSION['user_id'];   //Student ID
 
-                                     $apply = "INSERT INTO applicants (STUDENT_ID, Job_ID) VALUES ('$id', '$f_ID');";       // add friend from user's side
-    
+                                     $apply = " UPDATE applicants
+                                                SET confirmation='YES'
+                                                WHERE Job_iD=1 AND STUDENT_ID = $f_ID;";       // updating confirmation status
+   
                                      mysqli_query($conn, $apply);    //Excecute query
 
-                                     header("Location: student_internshiplisting.php");
+                                    header("Location: in_applicants.php");
     
-                                   }
+                                  }
 
                         ?>
 
@@ -117,7 +113,7 @@
 
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Current available listings</h3>
+                    <h3 class="fs-4 mb-3">List Of Jobs posted</h3>
                     <div class="col">
 
 
@@ -138,29 +134,30 @@
                         <table class="table bg-white rounded shadow-sm  table-hover">
                             <div class="row">
                               <tr>
-                                 <th>Comapny Name</th>
                                  <th>Job Title</th>
                                  <th>Location</th>
-                                 <th>Qualification</th>
                                  <th>Category</th>
                                  <th>Position</th>
-                                 <th>More Details</th>
-                                 <th>Apply</th>
+                                 <th>Vacancy</th>
+                                 <th>Requirements</th>
                               </tr>
                               <?php while( $row = $result->fetch_object() ): ?>
                               <tr>
-                                 <td><?php echo $row->COMPANY_NAME?></td>
-                                 <td><?php echo $row->Job_Title ?></td>
-                                 <td><?php echo $row->Location ?></td>
-                                 <td><?php echo $row->Qualification ?></td>
-                                 <td><?php echo $row->Category ?></td>
-                                 <td><?php echo $row->Position ?></td>
-                                 <td><?php echo "<a href='jobs/profile".$row ->REGIS_NO.".pdf' download>Download</a>"?></td>
-                                 <td><button type="submit" name = "Apply" value = '<?php echo $job = $row->Job_ID?>'>Apply</button></td>
+                                <?php $Jid = $row->Job_ID;
+                                    print_r($Jid);?>
+                                 <td><a href ="in_applicants.php?data=$Jid"><?php echo $row->Job_Title?></td>
+                                 <td><?php echo $row->Location?></td>
+                                 
+                                 <td><?php echo $row->Category?></td>
+                                 <td><?php echo $row->Position?></td>
+                                 <td><?php echo $row->Vacancy?></td>
+                                 <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
                               </tr>
                               <?php endwhile; ?>
                             </table>
+
                         </form>
+                       
 
                     </div>
                 </div>
@@ -186,7 +183,6 @@
 
 <?php 
 }else {
-  header("Location:  student_login.php");
+   header("Location:  industry_login.php");
 }
  ?>
-
