@@ -4,7 +4,9 @@
 //profile.php
 
 session_start();
-print_r($_SESSION);
+//print_r($_SESSION);
+
+$userID = $_SESSION['user_id'];
 
 $server = "localhost";
         $username = "root";
@@ -21,6 +23,12 @@ function is_user_login()
 	}
 	return false;
 }
+
+
+$q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
+ 				
+ 				$row=mysqli_fetch_assoc($q);
+ 				var_dump($row);
 
 
 ?>
@@ -45,10 +53,6 @@ function is_user_login()
  		</form>
  		<div class="wrapper">
  			<?php
- 				$q=mysqli_query($conn,"SELECT * FROM student where username='$_SESSION[user_id]' ;");
- 				$row=mysqli_fetch_assoc($q);
- 				print_r($row);
-
 
  				if(isset($_POST['submit1']))
  				{
@@ -58,13 +62,13 @@ function is_user_login()
  						</script>
  					<?php
  				}
- 				$q=mysqli_query($conn,"SELECT * FROM student where username='$_SESSION[user_id]' ;");
+ 				//$q=mysqli_query($conn,"SELECT * FROM student where username='$_SESSION[user_id]' ;");
  			?>
  			<h2 style="text-align: center;">My Profile</h2>
 
  			<?php
- 				$row=mysqli_fetch_assoc($q);
- 				print_r($row);
+ 				//$row=mysqli_fetch_assoc($q);
+ 				//print_r($row);
 
  				echo "<div style='text-align: center'>
  					<img class='img-circle profile-img' height=110 width=120 src='images/".$_SESSION['user_id']."'>
