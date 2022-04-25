@@ -1,12 +1,10 @@
-
-
 <?php 
   session_start();
-  print_r($_SESSION());
+  print_r($_SESSION);
+if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) { 
 
-  if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
+    $id = $_SESSION['company_id'];
 
-    $id = $_SESSION['user_id'];
 ?>
 
 
@@ -35,25 +33,40 @@
                                  $conn = new mysqli('localhost', 'root', '', 'ims');
                                  if(isset($_GET['search'])){
                                     $searchKey = $_GET['search'];
-                                    $sql = "SELECT insdustry.COMPANY_NAME, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO WHERE Location LIKE '%$searchKey%'";
+                                    $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
+                                    from student
+                                    INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
+                                    student.COURSE LIKE '%$searchKey%'";
                                  }else
-                                 $sql = "SELECT industry.COMPANY_NAME,jobs.Job_ID, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO where Job_ID NOT IN (select Job_ID from applicants) AND Job_ID NOT IN (select STUDENT_ID from applicants WHERE STUDENT_ID != $id)";
-                                     $result = $conn->query($sql);
+                                 $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
+                                        from student
+                                        INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
+                                        WHERE applicants.Job_ID = 1 and applicants.confirmation is null";
+                                $result = $conn->query($sql);
+
+                                $sql2 = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
+                                        from student
+                                        INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
+                                        WHERE applicants.Job_ID = 1 and applicants.confirmation is not null";
+                                $listing = $conn ->query($sql2);
+
+
 
                                   
                                 if(isset($_POST['Apply'])) {
 
-                                     $f_ID = $_POST['Apply'];  // Job ID
+                                    $f_ID = $_POST['Apply'];  // approve
                                      print_r($f_ID);
-                                     $id = $_SESSION['user_id'];   //Student ID
 
-                                     $apply = "INSERT INTO applicants (STUDENT_ID, Job_ID) VALUES ('$id', '$f_ID');";       // add friend from user's side
-    
+                                     $apply = " UPDATE applicants
+                                                SET confirmation='YES'
+                                                WHERE Job_iD=1 AND STUDENT_ID = $f_ID;";       // updating confirmation status
+   
                                      mysqli_query($conn, $apply);    //Excecute query
 
-                                     header("Location: student_internshiplisting.php");
+                                    header("Location: in_applicants.php");
     
-                                   }
+                                  }
 
                         ?>
 
@@ -113,7 +126,7 @@
 
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Current available listings</h3>
+                    <h3 class="fs-4 mb-3">List Of Students</h3>
                     <div class="col">
 
 
@@ -134,29 +147,57 @@
                         <table class="table bg-white rounded shadow-sm  table-hover">
                             <div class="row">
                               <tr>
-                                 <th>Comapny Name</th>
-                                 <th>Job Title</th>
-                                 <th>Location</th>
-                                 <th>Qualification</th>
-                                 <th>Category</th>
-                                 <th>Position</th>
-                                 <th>More Details</th>
-                                 <th>Apply</th>
+                                 <th>Student ID</th>
+                                 <th>Name</th>
+                                 <th>Student Email</th>
+                                 <th>Course</th>
+                                 <th>Gender</th>
+                                 <th>Year of Study</th>
+                                 <th>CV</th>
+                                 <th>Approval</th>
                               </tr>
                               <?php while( $row = $result->fetch_object() ): ?>
                               <tr>
-                                 <td><?php echo $row->COMPANY_NAME?></td>
-                                 <td><?php echo $row->Job_Title ?></td>
-                                 <td><?php echo $row->Location ?></td>
-                                 <td><?php echo $row->Qualification ?></td>
-                                 <td><?php echo $row->Category ?></td>
-                                 <td><?php echo $row->Position ?></td>
-                                 <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
-                                 <td><button type="submit" name = "Apply" value = '<?php echo $job = $row->Job_ID?>'>Apply</button></td>
+                                 <td><?php echo $row->STUDENT_ID?></td>
+                                 <td><?php echo $row->NAME?></td>
+                                 <td><?php echo $row->STUDENT_EMAIL?></td>
+                                 <td><?php echo $row->COURSE?></td>
+                                 <td><?php echo $row->GENDER?></td>
+                                 <td><?php echo $row->YEAR_OF_STUDY?></td>
+                                 <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
+                                 <td><button type="submit" name = "Apply" value ='<?php echo $job = $row->STUDENT_ID?>'>Approve</button></td>
                               </tr>
                               <?php endwhile; ?>
                             </table>
+
                         </form>
+                        <h3 class="fs-4 mb-3">Waiting for Interview list</h3>
+
+                        <table class="table bg-white rounded shadow-sm  table-hover">
+                            <div class="row">
+                              <tr>
+                                 <th>Student ID</th>
+                                 <th>Name</th>
+                                 <th>Student Email</th>
+                                 <th>Course</th>
+                                 <th>Gender</th>
+                                 <th>Year of Study</th>
+                                 <th>CV</th>
+                                 
+                              </tr>
+                              <?php while( $row = $listing->fetch_object() ): ?>
+                              <tr>
+                                 <td><?php echo $row->STUDENT_ID?></td>
+                                 <td><?php echo $row->NAME?></td>
+                                 <td><?php echo $row->STUDENT_EMAIL?></td>
+                                 <td><?php echo $row->COURSE?></td>
+                                 <td><?php echo $row->GENDER?></td>
+                                 <td><?php echo $row->YEAR_OF_STUDY?></td>
+                                 <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
+                                 
+                              </tr>
+                              <?php endwhile; ?>
+                            </table>
 
                     </div>
                 </div>
@@ -182,7 +223,6 @@
 
 <?php 
 }else {
-   header("Location:  student_login.php");
+   header("Location:  industry_login.php");
 }
  ?>
-//

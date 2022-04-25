@@ -35,7 +35,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
 			if ($email === $user_email) {
 				if ($password == $user_password) {
-					$_SESSION['user_id'] = $user_id;
+					$_SESSION['company_id'] = $user_id;
 					$_SESSION['user_email'] = $user_email;
 					$_SESSION['user_full_name'] = $user_full_name;
 					header("Location: Jobs.php");

@@ -10,11 +10,12 @@ function test_input($data) {
 
 
   session_start();
-if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
+  print_r($_SESSION);
+if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) { 
 
 
 
-$id = $_SESSION['user_id'];
+$id = $_SESSION['company_id'];
 
 
 // define variable and set to empty VALUES
@@ -135,7 +136,10 @@ if(isset($_POST["submit"])){
 
         else{           //else create query with all the correct validation and write into tables
 
+              mysqli_query($conn,"ALTER TABLE jobs AUTO_INCREMENT = 1");
+
               $stmt = mysqli_stmt_init($conn);
+
               $create ="INSERT INTO jobs (Job_Title, Location, Qualification, Category, Position, Vacancy, REGIS_NO) VALUES(?,?,?,?,?,?,?);";
 
                 mysqli_stmt_prepare($stmt,$create);
@@ -149,6 +153,7 @@ if(isset($_POST["submit"])){
               mysqli_close($conn);
 
               }
+                header("Location: in_applicants.php");
 
               }
 
@@ -216,6 +221,7 @@ if(isset($_POST["submit"])){
 
 	
 			<p><a href="index.php">Back to Home</a> </p>
+      <p><a href="student_logout.php">Log Out</a> </p>
 		</form>
 	</div>
 
@@ -226,7 +232,7 @@ if(isset($_POST["submit"])){
   </div>
 <?php
   }else{
-     header("Location:  Industry_login.php");
+     header("Location: industry_login.php");
   }?>
    
 </body>
