@@ -1,12 +1,9 @@
 <?php
 
-
-
-
 session_start();
 
 
-$userID = $_SESSION['user_id'];
+
 
 $server = "localhost";
         $username = "root";
@@ -15,19 +12,9 @@ $server = "localhost";
 
         $conn = mysqli_connect($server, $username, $password, $database);
 
-function is_user_login()
-{
-	if(isset($_SESSION['user_id']))
-	{
-		return true;
-	}
-	return false;
-}
 
 
-$q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
- 				
- 				$row=mysqli_fetch_assoc($q);
+$userID = $_SESSION['user_id'];
  				
 
 ?>
@@ -47,14 +34,15 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
 		}
 		label
 		{
-			color: white;
+			color: black;
 		}
+
 
 	</style>
 </head>
 <body style="background-color: #004528;">
 
-	<h2 style="text-align: center;color: #fff;">Edit Information</h2>
+	<h2 style="text-align: center;color: #black;">Edit Information</h2>
 	<?php
 		
 		$sql = "SELECT * FROM student WHERE STUDENT_ID='$_SESSION[user_id]'";
@@ -62,44 +50,63 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
 
 		while ($row = mysqli_fetch_assoc($result)) 
 		{
-			$first=$row['first'];
-			$last=$row['last'];
-			$username=$row['username'];
-			$password=$row['password'];
-			$email=$row['email'];
-			$contact=$row['contact'];
+			$NAME=$row['NAME'];
+			$STUDENT_EMAIL=$row['STUDENT_EMAIL'];
+			$COURSE=$row['COURSE'];
+			$ENROLL=$row['ENROLL'];
+			$GENDER=$row['GENDER'];
+			$CURRENT_RESIDENCE=$row['CURRENT_RESIDENCE'];
+			$CONTACT_NO=$row['CONTACT_NO'];
+			$YEAR_OF_STUDY=$row['YEAR_OF_STUDY'];
+			$PASSWORD=$row['PASSWORD'];
+			$CV=$row['CV'];
+			$USERNAME=$row['USERNAME'];
 		}
 
 	?>
 
 	<div class="profile_info" style="text-align: center;">
 		<span style="color: white;">Welcome,</span>	
-		<h4 style="color: white;"><?php echo $_SESSION['login_user']; ?></h4>
+		<h4 style="color: white;"><?php echo $_SESSION['user_id']; ?></h4>
 	</div><br><br>
 	
 	<div class="form1">
 		<form action="" method="post" enctype="multipart/form-data">
 
-		<input class="form-control" type="file" name="file">
 
-		<label><h4><b>First Name: </b></h4></label>
-		<input class="form-control" type="text" name="first" value="<?php echo $first; ?>">
+		<label><h4><b>NAME Name: </b></h4></label>
+		<input class="form-control" type="text" name="NAME" value="<?php echo $NAME; ?>">
 
-		<label><h4><b>Last Name</b></h4></label>
-		<input class="form-control" type="text" name="last" value="<?php echo $last; ?>">
+		<label><h4><b>STUDENT_EMAIL Name</b></h4></label>
+		<input class="form-control" type="text" name="STUDENT_EMAIL" value="<?php echo $STUDENT_EMAIL; ?>">
 
-		<label><h4><b>Username</b></h4></label>
-		<input class="form-control" type="text" name="username" value="<?php echo $username; ?>">
+		<label><h4><b>COURSE</b></h4></label>
+		<input class="form-control" type="text" name="COURSE" value="<?php echo $COURSE; ?>">
 
-		<label><h4><b>Password</b></h4></label>
-		<input class="form-control" type="text" name="password" value="<?php echo $password; ?>">
+		<label><h4><b>ENROLL</b></h4></label>
+		<input class="form-control" type="text" name="ENROLL" value="<?php echo $ENROLL; ?>">
 
-		<label><h4><b>Email</b></h4></label>
-		<input class="form-control" type="text" name="email" value="<?php echo $email; ?>">
+		<label><h4><b>GENDER</b></h4></label>
+		<input class="form-control" type="text" name="GENDER" value="<?php echo $GENDER; ?>">
 
-		<label><h4><b>Contact No</b></h4></label>
-		<input class="form-control" type="text" name="contact" value="<?php echo $contact; ?>">
+		<label><h4><b>CURRENT_RESIDENCE No</b></h4></label>
+		<input class="form-control" type="text" name="CURRENT_RESIDENCE" value="<?php echo $CURRENT_RESIDENCE; ?>">
+		<label><h4><b>CONTACT_NO</b></h4></label>
+		<input class="form-control" type="text" name="CONTACT_NO" value="<?php echo $CONTACT_NO; ?>">
 
+		<label><h4><b>YEAR_OF_STUDY</b></h4></label>
+		<input class="form-control" type="text" name="YEAR_OF_STUDY" value="<?php echo $YEAR_OF_STUDY; ?>">
+
+		<label><h4><b>PASSWORD</b></h4></label>
+		<input class="form-control" type="text" name="PASSWORD" value="<?php echo $PASSWORD; ?>">
+		
+		<label><h4><b>CV</b></h4></label>
+		<input class="form-control" type="text" name="CV" value="<?php echo $CV; ?>">
+		
+		<label><h4><b>USERNAME</b></h4></label>
+		<input class="form-control" type="text" name="USERNAME" value="<?php echo $USERNAME; ?>">
+
+		
 		<br>
 		<div style="padding-left: 100px;">
 			<button class="btn btn-default" type="submit" name="submit">save</button></div>
@@ -109,19 +116,23 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
 
 		if(isset($_POST['submit']))
 		{
-			move_uploaded_file($_FILES['file']['tmp_name'],"images/".$_FILES['file']['name']);
+			
 
-			$first=$_POST['first'];
-			$last=$_POST['last'];
-			$username=$_POST['username'];
-			$password=$_POST['password'];
-			$email=$_POST['email'];
-			$contact=$_POST['contact'];
-			$pic=$_FILES['file']['name'];
+			$NAME=$_POST['NAME'];
+			$STUDENT_EMAIL=$_POST['STUDENT_EMAIL'];
+			$COURSE=$_POST['COURSE'];
+			$ENROLL=$_POST['ENROLL'];
+			$GENDER=$_POST['GENDER'];
+			$CURRENT_RESIDENCE=$_POST['CURRENT_RESIDENCE'];
+			$CONTACT_NO=$_POST['CONTACT_NO'];
+			$YEAR_OF_STUDY=$_POST['YEAR_OF_STUDY'];
+			$PASSWORD=$_POST['PASSWORD'];
+			$CV=$_POST['CV'];
+			$USERNAME=$_POST['USERNAME'];
 
-			$sql1= "UPDATE student SET pic='$pic', first='$first', last='$last', username='$username', password='$password', email='$email', contact='$contact' WHERE username='".$_SESSION['login_user']."';";
+			$sql1= "UPDATE student SET NAME='$NAME', STUDENT_EMAIL='$STUDENT_EMAIL', COURSE='$COURSE', ENROLL='$ENROLL', GENDER='$GENDER', CURRENT_RESIDENCE='$CURRENT_RESIDENCE',CONTACT_NO='$CONTACT_NO',YEAR_OF_STUDY='$YEAR_OF_STUDY',PASSWORD='$PASSWORD',CV='$CV',USERNAME='$USERNAME' WHERE STUDENT_ID = $userID";
 
-			if(mysqli_query($db,$sql1))
+			if(mysqli_query($conn,$sql1))
 			{
 				?>
 					<script type="text/javascript">

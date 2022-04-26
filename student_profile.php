@@ -60,7 +60,7 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
  				{
  					?>
  						<script type="text/javascript">
- 							window.location="edit.php"
+ 							window.location="student_edit.php"
  						</script>
  					<?php
  				}
@@ -124,7 +124,24 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
 	 					echo "</td>";
 	 				echo "</tr>";
 
-	 				
+	 				echo "<tr>";
+	 					echo "<td>";
+	 						echo "<b> Enroll: </b>";
+	 					echo "</td>";
+	 					echo "<td>";
+	 						echo $row['ENROLL'];
+	 					echo "</td>";
+	 				echo "</tr>";
+
+	 				echo "<tr>";
+	 					echo "<td>";
+	 						echo "<b> Supervisor: </b>";
+	 					echo "</td>";
+	 					echo "<td>";
+	 						echo $row['SUPERVISOR'];
+	 					echo "</td>";
+	 				echo "</tr>";
+
 
 	 				echo "<tr>";
 	 					echo "<td>";

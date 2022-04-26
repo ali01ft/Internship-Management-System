@@ -12,12 +12,10 @@ $server = "localhost";
 
         $conn = mysqli_connect($server, $username, $password, $database);
 
-if(isset($_SESSION['company_id']))
-	{
 
-		$id = $_SESSION['company_id'];
-		print_r($id);
 
+$idustryID = $_SESSION['company_id'];
+ 				
 
 ?>
 <!DOCTYPE html>
@@ -104,26 +102,23 @@ if(isset($_SESSION['company_id']))
 		{
 
 			$COMPANY_NAME=$_POST['COMPANY_NAME'];
-			print_r($COMPANY_NAME);
+			
 			$COMPANY_ADDRESS=$_POST['COMPANY_ADDRESS'];
-			print_r($COMPANY_ADDRESS);
+			
 			$CONTACT_NO=$_POST['CONTACT_NO'];
-			print_r($CONTACT_NO);
+		
 			$WEBSITE=$_POST['WEBSITE'];
-			print_r($WEBSITE);
-
+			
 			$Password=$_POST['Password'];
-			print_r($Password);
 
 			$USERNAME=$_POST['USERNAME'];
-			print_r($USERNAME);
-
+			
 			$Email=$_POST['Email'];
-			print_r($Email);
+			
 
 		
 
-			$sql1= "UPDATE industry SET COMPANY_NAME='$COMPANY_NAME', COMPANY_ADDRESS='$COMPANY_ADDRESS', CONTACT_NO='$CONTACT_NO', WEBSITE='$WEBSITE', Password='$Password', USERNAME='$USERNAME',Email='$Email' WHERE REGIS_NO =$id";
+			$sql1= "UPDATE industry SET COMPANY_NAME='$COMPANY_NAME', COMPANY_ADDRESS='$COMPANY_ADDRESS', CONTACT_NO='$CONTACT_NO', WEBSITE='$WEBSITE', Password='$Password', USERNAME='$USERNAME',Email='$Email' WHERE REGIS_NO = $idustryID";
 			
 
 			if(mysqli_query($conn,$sql1))
@@ -131,7 +126,7 @@ if(isset($_SESSION['company_id']))
 				?>
 					<script type="text/javascript">
 						alert("Saved Successfully.");
-						//window.location="industry_profile.php";
+						window.location="industry_profile.php";
 					</script>
 				<?php
 			}
@@ -139,9 +134,4 @@ if(isset($_SESSION['company_id']))
  	?>
 </body>
 </html>
-<?php 
-}else {
-   header("Location:login_access.php");
-}
- ?>
 
