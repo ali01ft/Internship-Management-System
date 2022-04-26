@@ -2,18 +2,15 @@
 
 session_start();
 
-if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { //if there is no session then the page ont load
+
+//taking session variables
 
  $id = $_SESSION['user_id'];
- print_r($id);
- print_r($_SESSION);
 
  $apID = $_SESSION['appID'];
 
- //$apID = $_SESSION['appID'];
- print_r($apID);
-
-
+        //establishing connection
  	    $server = "localhost";
         $username = "root";
         $password = "";
@@ -23,18 +20,17 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 
         $cvErr = "";
 
-
+                //query to get application id and student info based on those id
 
           			$sql = "SELECT * from applicants where appID =$apID";
           			$result = $conn->query($sql);
           			$row = mysqli_fetch_assoc($result);
-          			print_r($row);
 
           			$date = date('Y-m-d');
           			$StudentID = $row['STUDENT_ID'];
           			$docID = $row['appID'];
 
-
+        //submitting documents
         if (isset($_POST['submit'])) {
     
        	 	if (isset($_FILES["file"])) {
@@ -78,10 +74,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
             	
 
               			$cv = $fileNameNew;
-              			print_r($cv);
 
 
-              						 $apply = " UPDATE applicants
+              		
+                                		$apply = " UPDATE applicants
                                                 SET Status ='pending'
                                                 WHERE appID='$apID'";       // updating confirmation status
    
@@ -91,7 +87,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 
               						 $apply = " UPDATE applicants
                                                 SET Proof ='$cv'
-                                                WHERE appID='$docID'";       // updating confirmation status
+                                                WHERE appID='$docID'";       // updating the file name in database
    
                                      	mysqli_query($conn, $apply);    //Excecute query	
 

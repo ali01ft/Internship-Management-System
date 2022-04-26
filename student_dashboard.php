@@ -20,8 +20,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <title>IMS</title>
 </head>
+
 
 
 
@@ -30,7 +32,17 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 
        <?php 
 
-                                 $conn = new mysqli('localhost', 'root', '', 'ims');
+
+                             $conn = new mysqli('localhost', 'root', '', 'ims');
+
+
+                             $check = "SELECT * from applicants WHERE STUDENT_ID =$id";
+                             $checklist = $conn ->query($check);
+                             $checkdata = mysqli_fetch_assoc($checklist);
+                             var_dump($checkdata);
+                             $status = $checkdata['Status'];
+                             if($status == "NULL"){
+
 
                                  if(isset($_GET['search'])){
                                     $searchKey = $_GET['search'];
@@ -80,17 +92,16 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-address-book me-1"></i>Swinburne</div>
             <div class="list-group list-group-flush my-3">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                <a href="student_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Internship listing</a>
-                <a href="student_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Company listing</a>        
-                <a href="student_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-chart-line me-2"></i>User Dashboard</a>
+                  <a href="staff_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-project-diagram me-2"></i>Company listing</a>                   
+                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-paperclip me-2"></i>Feedback list</a>
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
         </div>
-
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
@@ -98,7 +109,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Internship listing</h2>
+                    <h2 class="fs-2 m-0">Student Dashboard</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -122,69 +133,72 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                 </div>
             </nav>
 
-            <div class="container-fluid px-4">
+           <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">List Of Applied Jobs</h3>
+                    <h3 class="fs-4 mb-3">list of Applied jobs</h3>
                     <div class="col">
 
+                    <!--fething data module-->
+                    <div class="card">
+                        <div class="card-body">
 
-                               <form action="" method="GET"> 
-                                 <div class="col-md-6">
-                                    <input type="text" name="search" class='form-control' placeholder="Search By Location" value=<?php echo @$_GET['search']; ?> > 
-                                 </div>
-                                 <div class="col-md-6 text-left">
-                                  <button class="btn">Search</button>
-                                 </div>
-                               </form>
-
-                               <br> 
-                               <br>
-                            </div>
-
-                    <form method="POST">
-                        <table class="table bg-white rounded shadow-sm  table-hover">
-                            <div class="row">
-                              <tr>
-                                 <th>Company Name</th>
-                                 <th>Job Title</th>
-                                 <th>Location</th>
-                                 <th>Qualification</th>
-                                 <th>Category</th>
-                                 <th>Position</th>
-                                 <th>More Details</th>
-                              </tr>
-                         <?php while( $row = $result->fetch_object() ): ?>
+                        <form method="POST">
+                            <table id="datatableid" class="table table-bordered">
+                             <thead>
+                                <tr>
+                                    <th scope="col">Company Name</th>
+                                    <th scope="col">Job Title</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Qualification</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Position</th>
+                                    <th scope="col">More Details</th>
+                               </tr>
+                             </thead>
+                             
+                             <tbody> 
+                            <?php while( $row = $result->fetch_object() ): ?>
                             <?php print_r($row);?>
-                              <tr>
-                                 <td><?php echo $row->COMPANY_NAME?></td>
-                                 <td><?php echo $row->Job_Title?></td>
-                                 <td><?php echo $row->Location?></td>
-                                 <td><?php echo $row->Qualification?></td>
-                                 <td><?php echo $row->Category?></td>
-                                 <td><?php echo $row->Position?></td>
-                                 <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
-                              </tr>
-                              <?php endwhile; ?>
+                                <tr>
+                                    <td><?php echo $row->COMPANY_NAME?></td>
+                                    <td><?php echo $row->Job_Title?></td>
+                                    <td><?php echo $row->Location?></td>
+                                    <td><?php echo $row->Qualification?></td>
+                                    <td><?php echo $row->Category?></td>
+                                    <td><?php echo $row->Position?></td>
+                                    <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
+                                </tr>
+                                <?php endwhile; ?>
+                            </tbody>
                             </table>
 
                         </form>
+                    </div>
+                    </div>
+
                         <h3 class="fs-4 mb-3">Waiting for Interview list</h3>
                         <p>Please only press enroll button after you have contacted the companies and taken interviews from them. You will have to provide a proof of being selected such as a offer letter pdf</p>
 
 
-                    <form method="POST">
+                <!--fething data module-->
+                    <div class="card">
+                        <div class="card-body">
 
-                        <table class="table bg-white rounded shadow-sm  table-hover">
-                            <div class="row">
-                              <tr>
-                                 <th>Company Name</th>
-                                 <th>Job Title</th>
-                                 <th>Website</th>
-                                 <th>Email</th>
-                                 <th>More Details</th>
-                                 <th>Select</th>
+                        <form method="POST">
+                            <table id="datatableid" class="table table-bordered">
+                             <thead>
+                                <tr>
+                                 <th scope="col">Company Name</th>
+                                 <th scope="col">Job Title</th>
+                                 <th scope="col">Website</th>
+                                 <th scope="col">Email</th>
+                                 <th scope="col">More Details</th>
+                                 <th scope="col">Select</th>
                                  
                               </tr>
+                            </thead>
+
+                            <tbody>
                               <?php while( $row = $listing->fetch_object() ): ?>
                                 <?php print_r($row);?>
                               <tr>
@@ -193,14 +207,17 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                                  <td><?php echo $row->WEBSITE?></td>
                                  <td><?php echo $row->email?></td>
                                  <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
-                                 <td><button type="submit" name = "Enroll" value ='<?php echo $job = $row->appID?>'>Enroll</button></td>
+                                 <td><button type="submit" class="btn btn-success editbtn" name = "Enroll" value ='<?php echo $job = $row->appID?>'>Enroll</button></td>
                                  
                               </tr>
+                          </tbody>
                               <?php endwhile; ?>
                             </table>
                     </form>
+                   </div>
+                   </div>
 
-                             <a href="in_joblist.php"> Back </a>
+                            
 
                     </div>
                 </div>
@@ -208,7 +225,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
             </div>
         </div>
     </div>
-    <!-- /#page-content-wrapper -->
+ <!-- /#page-content-wrapper -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
@@ -221,10 +238,99 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
         };
     </script>
 </body>
+                             <!-- Script links for functions and datatable -->
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+                            <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+                            <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
+                            <script>
+                                $(document).ready(function () {
+
+                                    $('.viewbtn').on('click', function () {
+                                        $('#viewmodal').modal('show');
+                                        $.ajax({ //create an ajax request to display.php
+                                            type: "GET",
+                                            url: "display.php",
+                                            dataType: "html", //expect html to be returned                
+                                            success: function (response) {
+                                                $("#responsecontainer").html(response);
+                                                //alert(response);
+                                            }
+                                        });
+                                    });
+
+                                });
+                            </script>
+
+                             <!-- Table controller  -->
+                            <script>
+                                $(document).ready(function () {
+
+                                    $('#datatableid').DataTable({
+                                        "pagingType": "full_numbers",
+                                        "lengthMenu": [
+                                            [10, 25, 50, -1],
+                                            [10, 25, 50, "All"]
+                                        ],
+                                        responsive: true,
+                                        language: {
+                                            search: "_INPUT_",
+                                            searchPlaceholder: "Search Your Data",
+                                        }
+                                    });
+
+                                });
+                            </script>
+
+                            <!-- Function to display delete popup -->
+                              <script>
+                                $(document).ready(function () {
+
+                                    $('.deletebtn').on('click', function () {
+
+                                        $('#deletemodal').modal('show');
+
+                                        $tr = $(this).closest('tr');
+
+                                        var data = $tr.children("td").map(function () {
+                                            return $(this).text();
+                                        }).get();
+
+                                        console.log(data);
+
+                                        $('#delete_id').val(data[0]);
+
+                                    });
+                                });
+                            </script>
+
+
+
+
 
 </html>
 
 <?php 
+    }
+    elseif{
+         if($checkdata['Status'] == "Pending"){
+
+            include 'student_status1.php';
+
+         }
+    }
+    else{
+
+            if($checkdata['Status'] == "Confirmed"){
+
+            include 'student_status2.php';
+
+         }
+
+    }
 }else {
    header("Location:  industry_login.php");
 }

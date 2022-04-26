@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  print_r($_SESSION);
+
 if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) { 
 
     $id = $_SESSION['company_id'];
@@ -20,8 +20,10 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <title>IMS</title>
 </head>
+
 
 
 
@@ -29,7 +31,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
 
        <?php 
-
+                                //A query which summons all the list
                                  $conn = new mysqli('localhost', 'root', '', 'ims');
                                  if(isset($_GET['search'])){
                                     $searchKey = $_GET['search'];
@@ -37,15 +39,18 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  }else
                                  $sql = "SELECT * FROM `jobs` WHERE REGIS_NO = $id";
                                 $result = $conn->query($sql);
-                      
+                                
+
+                                //dont want to mess up code so i am just keeping it here
                                 if(isset($_POST['Apply'])) {
 
                                     $f_ID = $_POST['Apply'];  // approve
-                                     print_r($f_ID);
+                                   
+
 
                                      $apply = " UPDATE applicants
                                                 SET confirmation='YES'
-                                                WHERE Job_iD=1 AND STUDENT_ID = $f_ID;";       // updating confirmation status
+                                                WHERE Job_iD=1 AND STUDENT_ID = $f_ID;";      
    
                                      mysqli_query($conn, $apply);    //Excecute query
 
@@ -67,16 +72,16 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-address-book me-1"></i>Swinburne</div>
             <div class="list-group list-group-flush my-3">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-project-diagram me-2"></i>Internship listing</a>
-                <a href="student_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Company listing</a>        
-                <a href="student_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-chart-line me-2"></i>User Dashboard</a>
+            
+                  <a href="in_joblist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-project-diagram me-2"></i>Posted Job listing</a>                   
+                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-paperclip me-2"></i>Feedback list</a>
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
         </div>
+
 
         <!-- /#sidebar-wrapper -->
 
@@ -85,7 +90,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Internship listing</h2>
+                    <h2 class="fs-2 m-0">All Jobs Posted</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -115,33 +120,26 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                     <div class="col">
 
 
-                               <form action="" method="GET"> 
-                                 <div class="col-md-6">
-                                    <input type="text" name="search" class='form-control' placeholder="Search By Location" value=<?php echo @$_GET['search']; ?> > 
-                                 </div>
-                                 <div class="col-md-6 text-left">
-                                  <button class="btn">Search</button>
-                                 </div>
-                               </form>
+        <!--fething data module-->
+                    <div class="card">
+                        <div class="card-body">
 
-                               <br> 
-                               <br>
-                            </div>
-
-                    <form method="POST">
-                        <table class="table bg-white rounded shadow-sm  table-hover">
-                            <div class="row">
-                              <tr>
-                                 <th>Job Title</th>
-                                 <th>Location</th>
-                                 <th>Category</th>
-                                 <th>Position</th>
-                                 <th>Vacancy</th>
-                                 <th>Requirements</th>
+                        <form method="POST">
+                            <table id="datatableid" class="table table-bordered">
+                             <thead>
+                                <tr>
+                                 <th scope="col">Job Title</th>
+                                 <th scope="col">Location</th>
+                                 <th scope="col">Category</th>
+                                 <th scope="col">Position</th>
+                                 <th scope="col">Vacancy</th>
+                                 <th scope="col">Requirements</th>
                               </tr>
+                            </thead>
+                            <tbody>
                               <?php while( $row = $result->fetch_object() ): ?>
                               <tr>
-                                <?php print_r($row);?>
+                               
                                 <?php $Jid = $row->Job_ID;?>
                                     
                                  <td> <?php echo "<a href ='in_applicants.php?data=$Jid'>$row->Job_Title</a>"?></td>
@@ -153,7 +151,8 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
                               </tr>
                               <?php endwhile; ?>
-                            </table>
+                          </tbody>
+                        </table>
                                
                         </form>
 
@@ -167,7 +166,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
             </div>
         </div>
     </div>
-    <!-- /#page-content-wrapper -->
+ <!-- /#page-content-wrapper -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
@@ -180,6 +179,78 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
         };
     </script>
 </body>
+                             <!-- Script links for functions and datatable -->
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+                            <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+                            <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
+                            <script>
+                                $(document).ready(function () {
+
+                                    $('.viewbtn').on('click', function () {
+                                        $('#viewmodal').modal('show');
+                                        $.ajax({ //create an ajax request to display.php
+                                            type: "GET",
+                                            url: "display.php",
+                                            dataType: "html", //expect html to be returned                
+                                            success: function (response) {
+                                                $("#responsecontainer").html(response);
+                                                //alert(response);
+                                            }
+                                        });
+                                    });
+
+                                });
+                            </script>
+
+                             <!-- Table controller  -->
+                            <script>
+                                $(document).ready(function () {
+
+                                    $('#datatableid').DataTable({
+                                        "pagingType": "full_numbers",
+                                        "lengthMenu": [
+                                            [10, 25, 50, -1],
+                                            [10, 25, 50, "All"]
+                                        ],
+                                        responsive: true,
+                                        language: {
+                                            search: "_INPUT_",
+                                            searchPlaceholder: "Search Your Data",
+                                        }
+                                    });
+
+                                });
+                            </script>
+
+                            <!-- Function to display delete popup -->
+                              <script>
+                                $(document).ready(function () {
+
+                                    $('.deletebtn').on('click', function () {
+
+                                        $('#deletemodal').modal('show');
+
+                                        $tr = $(this).closest('tr');
+
+                                        var data = $tr.children("td").map(function () {
+                                            return $(this).text();
+                                        }).get();
+
+                                        console.log(data);
+
+                                        $('#delete_id').val(data[0]);
+
+                                    });
+                                });
+                            </script>
+
+
+
+
 
 </html>
 
