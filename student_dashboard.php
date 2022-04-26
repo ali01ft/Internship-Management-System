@@ -329,12 +329,21 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 
 <?php 
     }
-    else{
-         if($checkdata['Status']="Pending"){
+    elseif{
+         if($checkdata['Status'] == "Pending"){
 
             include 'student_status1.php';
 
          }
+    }
+    else{
+
+            if($checkdata['Status'] == "Confirmed"){
+
+            include 'student_status2.php';
+
+         }
+
     }
 }else {
    header("Location:  industry_login.php");
