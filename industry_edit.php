@@ -12,17 +12,12 @@ $server = "localhost";
 
         $conn = mysqli_connect($server, $username, $password, $database);
 
-function is_user_login()
-{
-	if(isset($_SESSION['company_id']))
+if(isset($_SESSION['company_id']))
 	{
-		return true;
-	}
-	return false;
-}
 
+		$id = $_SESSION['company_id'];
+		print_r($id);
 
- 				
 
 ?>
 <!DOCTYPE html>
@@ -128,7 +123,7 @@ function is_user_login()
 
 		
 
-			$sql1= "UPDATE industry SET COMPANY_NAME='$COMPANY_NAME', COMPANY_ADDRESS='$COMPANY_ADDRESS', CONTACT_NO='$CONTACT_NO', WEBSITE='$WEBSITE', Password='$Password', USERNAME='$USERNAME',Email='$Email' WHERE username='".$_SESSION['company_id']."';";
+			$sql1= "UPDATE industry SET COMPANY_NAME='$COMPANY_NAME', COMPANY_ADDRESS='$COMPANY_ADDRESS', CONTACT_NO='$CONTACT_NO', WEBSITE='$WEBSITE', Password='$Password', USERNAME='$USERNAME',Email='$Email' WHERE REGIS_NO =$id";
 			
 
 			if(mysqli_query($conn,$sql1))
@@ -144,4 +139,9 @@ function is_user_login()
  	?>
 </body>
 </html>
+<?php 
+}else {
+   header("Location:login_access.php");
+}
+ ?>
 

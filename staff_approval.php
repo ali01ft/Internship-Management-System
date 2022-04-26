@@ -40,7 +40,7 @@
                                            $f_ID = $_POST['Apply'];  // approve
 
                                             $apply = " UPDATE applicants
-                                                SET Status='Confirmed'
+                                                SET Status=null;
                                                 WHERE appID ='$f_ID'";       // updating confirmation status
    
                                                  mysqli_query($connection, $apply);    //Excecute query
@@ -49,7 +49,7 @@
                                                   
                                                 }
                                              
-                                    }                 
+                     }                 
 ?>
 <!DOCTYPE html>
 <html lang="en">

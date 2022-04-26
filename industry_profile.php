@@ -8,6 +8,7 @@ session_start();
 
 $idustryID = $_SESSION['company_id'];
 
+
 $server = "localhost";
         $username = "root";
         $password = "";
@@ -15,23 +16,12 @@ $server = "localhost";
 
         $conn = mysqli_connect($server, $username, $password, $database);
 
-function is_user_login()
-{
-	if(isset($_SESSION['company_id']))
+if(isset($_SESSION['company_id']))
 	{
-		return true;
-	}
-	return false;
-}
 
-
-$r=mysqli_query($conn,"SELECT * FROM industry where REGIS_NO = $idustryID ");
- 				
- 				$row=mysqli_fetch_assoc($r);
- 				
 
 ?>
-
+<!D
 <!DOCTYPE html>
  <html>
  <head>
@@ -160,3 +150,8 @@ $r=mysqli_query($conn,"SELECT * FROM industry where REGIS_NO = $idustryID ");
  	</div>
  </body>
  </html>
+<?php
+ }else {
+   header("Location:login_access.php");
+}
+ ?>

@@ -41,7 +41,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                              $checkdata = mysqli_fetch_assoc($checklist);
                              var_dump($checkdata);
                              $status = $checkdata['Status'];
-                             if($status == "NULL"){
+                             if($status == NULL){
 
 
                                  if(isset($_GET['search'])){
@@ -315,16 +315,14 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 
 <?php 
     }
-    elseif{
-         if($checkdata['Status'] == "Pending"){
+    elseif($status == "pending"){
 
             include 'student_status1.php';
 
          }
-    }
     else{
 
-            if($checkdata['Status'] == "Confirmed"){
+            if($status == "Confirmed"){
 
             include 'student_status2.php';
 
