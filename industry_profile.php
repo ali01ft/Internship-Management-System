@@ -19,6 +19,10 @@ $server = "localhost";
 if(isset($_SESSION['company_id']))
 	{
 
+		$r=mysqli_query($conn,"SELECT * FROM industry where REGIS_NO = $idustryID ");
+
+                 $row=mysqli_fetch_assoc($r);
+
 
 ?>
 <!D
