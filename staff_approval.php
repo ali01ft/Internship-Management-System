@@ -4,10 +4,53 @@
   session_start();
 
   if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
+
+    $connection = mysqli_connect("localhost","root","");
+    $db = mysqli_select_db($connection, 'ims');
+
 ?>
 
+<?php
+
+                                    $query = "SELECT applicants.appID, student.STUDENT_ID, student.NAME, student.COURSE, jobs.Job_Title, industry.COMPANY_NAME, jobs.Category, jobs.Vacancy, applicants.Proof, industry.CONTACT_NO
+                                        from applicants
+                                        inner join student on student.STUDENT_ID = applicants.STUDENT_ID
+                                        inner join jobs on jobs.Job_ID = applicants.Job_ID
+                                        inner join industry on industry.REGIS_NO=jobs.REGIS_NO
+                                        where applicants.Status = 'pending'";
+                                    $query_run = mysqli_query($connection, $query);
+                                   
 
 
+
+
+                                     if(isset($_POST['Apply'])) {
+                                         $f_ID = $_POST['Apply'];  // approve
+
+                                        $apply = " UPDATE applicants
+                                                SET Status='Confirmed'
+                                                WHERE appID ='$f_ID'";       // updating confirmation status
+   
+                                                 mysqli_query($connection, $apply);    //Excecute query
+                                                 header("Location:staff_approval.php");
+                                              
+                                     }else{
+
+                                         if(isset($_POST['Cancel'])) {
+                                           $f_ID = $_POST['Apply'];  // approve
+
+                                            $apply = " UPDATE applicants
+                                                SET Status='Confirmed'
+                                                WHERE appID ='$f_ID'";       // updating confirmation status
+   
+                                                 mysqli_query($connection, $apply);    //Excecute query
+                                                 header("Location:staff_approval.php");
+                                                
+                                                  
+                                                }
+                                             
+                                    }                 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,8 +109,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i><?=$_SESSION['user_full_name']?>
-                            </a>
+                                <i class="fas fa-user me-2"></i><?=$_SESSION['user_full_name']?></a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
                             </ul>
@@ -79,9 +121,9 @@
             <div class="container-fluid px-4">
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">Define your search</h3>
-                    <div class="col">
+                    <!--<div class="col">
                                     <!-- Hidden delete module that will pop up  -->
-                                    <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                   <!-- <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                         aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -108,7 +150,7 @@
 
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
 
 
 
@@ -119,26 +161,23 @@
                                  <!-- Fetching data module  -->
                                 <div class="card">
                                     <div class="card-body">
-
-                                        <?php
-                                    $connection = mysqli_connect("localhost","root","");
-                                    $db = mysqli_select_db($connection, 'ims');
-
-                                    $query = "SELECT * FROM industry";
-                                    $query_run = mysqli_query($connection, $query);
-                                    ?>
+                                      <form method="POST">
                                         <table id="datatableid" class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Register ID</th>
-                                                    <th scope="col">Companay Name</th>
-                                                    <th scope="col">Company Address</th>
-                                                    <th scope="col">Website</th>
-                                                    <th scope="col"> Contact </th>
-                                                    <th scope="col"> Email </th>
+                                                    <th scope="col">Application ID</th>
+                                                    <th scope="col">Student ID</th>
+                                                    <th scope="col">Student Name</th>
+                                                    <th scope="col">Course</th>
+                                                    <th scope="col">Job Title</th>
+                                                    <th scope="col">Company Name </th>
+                                                    <th scope="col">Category </th>
+                                                    <th scope="col">Vacancy </th>
+                                                    <th scope="col">Offer Document</th>
+                                                    <th scope="col">Company Contact No</th>
                                                    
-                                                    <th scope="col"> EDIT </th>
-                                                    <th scope="col"> DELETE </th>
+                                                    <th scope="col"> ACCEPT </th>
+                                                    <th scope="col"> REJECT </th>
                                                 </tr>
                                             </thead>
                                   
@@ -148,19 +187,25 @@
                                                     {
                                                         foreach($query_run as $row)
                                                         {
+                                                           $r = $row['appID'];
                                                     ?>
                                                 <tr>
-                                                    <td> <?php echo $row['REGIS_NO']; ?> </td>
-                                                    <td> <?php echo $row['COMPANY_NAME']; ?> </td>
-                                                    <td> <?php echo $row['COMPANY_ADDRESS']; ?> </td>
-                                                    <td> <?php echo $row['WEBSITE']; ?> </td>
-                                                    <td> <?php echo $row['CONTACT_NO']; ?> </td>
-                                                    <td> <?php echo $row['Email']; ?> </td>
+                                                    <td> <?php echo $row['appID']; ?></td>
+                                                    <td> <?php echo $row['STUDENT_ID']; ?></td>
+                                                    <td> <?php echo $row['NAME']; ?></td>
+                                                    <td> <?php echo $row['COURSE']; ?></td>
+                                                    <td> <?php echo $row['Job_Title']; ?></td>
+                                                    <td> <?php echo $row['COMPANY_NAME'];?> </td>
+                                                    <td> <?php echo $row['Category'];?></td>
+                                                    <td> <?php echo $row['Vacancy'];?></td>
+                                                    <td><?php echo "<a href='uploads/profile".$row['Proof'].".pdf' download>See Letter</a>"?></td>
+                                                    <td> <?php echo $row['CONTACT_NO'];?> </td>
                                                     <td>
-                                                        <button type="button" class="btn btn-success editbtn"> EDIT </button>
+                                                        <button type="submit" class="btn btn-success editbtn" name = "Apply" value ='<?php echo $r?>'>APPROVE</button>
                                                     </td>
+
                                                     <td>
-                                                        <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
+                                                        <button type="submit" class="btn btn-danger deletebtn" name = "Cancel" value ='<?php echo $r?>'>CANCEL</button>
                                                     </td>
                                                 </tr>
                                                  <?php           
@@ -174,6 +219,7 @@
                                             </tbody>
                                    
                                         </table>
+                                    </form>
                                     </div>
                                 </div>
 
@@ -280,7 +326,7 @@
 
 <?php 
 }else {
-   header("Location:staff_login.php");
+   header("Location:login_access.php");
 }
  ?>
 
