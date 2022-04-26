@@ -31,6 +31,18 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
        <?php 
 
                                  $conn = new mysqli('localhost', 'root', '', 'ims');
+
+
+                                   if(isset($_GET['data'])){
+
+                                        $Jid =  $_GET['data'];
+                
+                                    }
+                                    else{
+                                        $Jid = "";
+                                    }   
+
+
                                  if(isset($_GET['search'])){
                                     $searchKey = $_GET['search'];
                                     $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
@@ -41,13 +53,13 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
                                         from student
                                         INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
-                                        WHERE applicants.Job_ID = 1 and applicants.confirmation is null";
+                                        WHERE applicants.Job_ID =$Jid and applicants.confirmation is null";
                                 $result = $conn->query($sql);
 
                                 $sql2 = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
                                         from student
                                         INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
-                                        WHERE applicants.Job_ID = 1 and applicants.confirmation is not null";
+                                        WHERE applicants.Job_ID =$Jid and applicants.confirmation is not null";
                                 $listing = $conn ->query($sql2);
 
 
@@ -60,13 +72,15 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
                                      $apply = " UPDATE applicants
                                                 SET confirmation='YES'
-                                                WHERE Job_iD=1 AND STUDENT_ID = $f_ID;";       // updating confirmation status
+                                                WHERE Job_iD=$Jid AND STUDENT_ID = $f_ID;";       // updating confirmation status
    
                                      mysqli_query($conn, $apply);    //Excecute query
 
-                                    header("Location: in_applicants.php");
+                                    header("Location: in_applicants.php?data=$Jid");
     
                                   }
+
+
 
                         ?>
 
@@ -156,7 +170,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <th>CV</th>
                                  <th>Approval</th>
                               </tr>
-                              <?php while( $row = $result->fetch_object() ): ?>
+                         <?php while( $row = $result->fetch_object() ): ?>
                               <tr>
                                  <td><?php echo $row->STUDENT_ID?></td>
                                  <td><?php echo $row->NAME?></td>
@@ -186,6 +200,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  
                               </tr>
                               <?php while( $row = $listing->fetch_object() ): ?>
+                                <?php print_r($row);?>
                               <tr>
                                  <td><?php echo $row->STUDENT_ID?></td>
                                  <td><?php echo $row->NAME?></td>
@@ -198,6 +213,8 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                               </tr>
                               <?php endwhile; ?>
                             </table>
+
+                             <a href="in_joblist.php"> Back </a>
 
                     </div>
                 </div>

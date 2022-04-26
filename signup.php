@@ -283,7 +283,6 @@ if(isset($_POST["register_button"])){
                 mysqli_stmt_bind_param($stmt, "ssssssssssss",$StudentID, $pname, $email, $Course, $Enrolled, $Gender, $Cresidence, $ContactNo, $yof, $pwd, $cv, $uname);
                 mysqli_stmt_execute($stmt);
                 session_start();
-                $_SESSION["email"] = $email;
 
                // header("Location:signup - Copy.php");       //direct to friendadd.php
               }
