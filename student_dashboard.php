@@ -138,20 +138,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                     <h3 class="fs-4 mb-3">list of Applied jobs</h3>
                     <div class="col">
 
-
-                               <!--<form action="" method="GET"> 
-                                 <div class="col-md-6">
-                                    <input type="text" name="search" class='form-control' placeholder="Search By Location" value=<?php echo @$_GET['search']; ?> > 
-                                 </div>
-                                 <div class="col-md-6 text-left">
-                                  <button class="btn">Search</button>
-                                 </div>
-                               </form>
-
-                               <br> 
-                               <br>
-                            </div>-->
-
                     <!--fething data module-->
                     <div class="card">
                         <div class="card-body">
@@ -231,7 +217,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                    </div>
                    </div>
 
-                             <a href="in_joblist.php"> Back </a>
+                            
 
                     </div>
                 </div>

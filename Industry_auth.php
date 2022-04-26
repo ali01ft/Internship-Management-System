@@ -38,7 +38,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 					$_SESSION['company_id'] = $user_id;
 					$_SESSION['user_email'] = $user_email;
 					$_SESSION['user_full_name'] = $user_full_name;
-					header("Location: Jobs.php");
+					header("Location: in_joblist.php");
 
 				}else {
 					header("Location: Industry_login.php?error=Incorect User name or password&email=$email");
