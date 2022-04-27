@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  print_r($_SESSION);
+
 if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
 
     $id = $_SESSION['user_id'];
@@ -36,11 +36,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                              $conn = new mysqli('localhost', 'root', '', 'ims');
 
 
-                             $check = "SELECT * from applicants WHERE STUDENT_ID =$id";
+                             $check = "SELECT * from student WHERE STUDENT_ID =$id";
                              $checklist = $conn ->query($check);
                              $checkdata = mysqli_fetch_assoc($checklist);
-                             var_dump($checkdata);
-                             $status = $checkdata['Status'];
+                             $status = $checkdata['ENROLL'];
                              if($status == NULL){
 
 
@@ -68,7 +67,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                                 if(isset($_POST['Enroll'])) {
 
                                     $f_ID = $_POST['Enroll'];  // approve
-                                     print_r($f_ID);
 
                                      $_SESSION['appID'] = $f_ID;
 
@@ -158,7 +156,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                              
                              <tbody> 
                             <?php while( $row = $result->fetch_object() ): ?>
-                            <?php print_r($row);?>
                                 <tr>
                                     <td><?php echo $row->COMPANY_NAME?></td>
                                     <td><?php echo $row->Job_Title?></td>
@@ -176,11 +173,66 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                     </div>
                     </div>
 
+
+                 </div>
+                </div>
+            </div>
+
+
+<!--table for industry approved list-->
+           <div class="container-fluid px-4">
+                <div class="row my-5">
+                    <h3 class="fs-4 mb-3">list of Jobs accepted</h3>
+                    <div class="col">
+
                         <h3 class="fs-4 mb-3">Waiting for Interview list</h3>
                         <p>Please only press enroll button after you have contacted the companies and taken interviews from them. You will have to provide a proof of being selected such as a offer letter pdf</p>
 
+                    <!--fething data module-->
+                    <div class="card">
+                        <div class="card-body">
 
-                <!--fething data module-->
+                        <form method="POST">
+                            <table id="datatableid1" class="table table-bordered">
+                             <thead>
+                                <tr>
+                                 <th scope="col">Company Name</th>
+                                 <th scope="col">Job Title</th>
+                                 <th scope="col">Website</th>
+                                 <th scope="col">Email</th>
+                                 <th scope="col">More Details</th>
+                                 <th scope="col">Select</th>
+                               </tr>
+                             </thead>
+                             
+                             <tbody> 
+                            <?php while( $row = $listing->fetch_object() ): ?>
+                                <tr>
+                                 <td><?php echo $row->COMPANY_NAME?></td>
+                                 <td><?php echo $row->Job_Title?></td>
+                                 <td><?php echo $row->WEBSITE?></td>
+                                 <td><?php echo $row->email?></td>
+                                 <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
+                                 <td><button type="submit" class="btn btn-success editbtn" name = "Enroll" value ='<?php echo $job = $row->appID?>'>Enroll</button></td>
+                                </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                            </table>
+
+                        </form>
+                    </div>
+                    </div>
+
+
+                 </div>
+                </div>
+            </div>
+
+
+
+
+
+                <!--fething data module
                     <div class="card">
                         <div class="card-body">
 
@@ -200,7 +252,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 
                             <tbody>
                               <?php while( $row = $listing->fetch_object() ): ?>
-                                <?php print_r($row);?>
+                               
                               <tr>
                                  <td><?php echo $row->COMPANY_NAME?></td>
                                  <td><?php echo $row->Job_Title?></td>
@@ -220,9 +272,9 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                             
 
                     </div>
-                </div>
+                </div>-->
 
-            </div>
+            
         </div>
     </div>
  <!-- /#page-content-wrapper -->
@@ -281,6 +333,21 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                                             searchPlaceholder: "Search Your Data",
                                         }
                                     });
+
+                                    $('#datatableid1').DataTable(
+                                         {
+                                        "pagingType": "full_numbers",
+                                        "lengthMenu": [
+                                            [10, 25, 50, -1],
+                                            [10, 25, 50, "All"]
+                                        ],
+                                        responsive: true,
+                                        language: {
+                                            search: "_INPUT_",
+                                            searchPlaceholder: "Search Your Data",
+                                        }
+                                        }      
+                                    );
 
                                 });
                             </script>

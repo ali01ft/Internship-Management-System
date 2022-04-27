@@ -54,7 +54,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { //if there 
           			mkdir('documents', 0777, true);
     
         		}else{
-         			echo "couldnt make folder";
+         			echo "folder exists";
         		}
 
           		if (in_array($fileActualExt, $allowed)) {
@@ -73,25 +73,36 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { //if there 
 
             	
 
-              			$cv = $fileNameNew;
+              			           $cv = $fileNameNew;
 
 
-              		
-                                		$apply = " UPDATE applicants
+              		                //updating application table
+                                		$apply = "UPDATE applicants
                                                 SET Status ='pending'
-                                                WHERE appID='$apID'";       // updating confirmation status
+                                                WHERE appID='$apID'";
+
+                                                   // updating confirmation status
    
                                      	mysqli_query($conn, $apply);    //Excecute query
 
 
-
+                                    //updating the document name
               						 $apply = " UPDATE applicants
                                                 SET Proof ='$cv'
                                                 WHERE appID='$docID'";       // updating the file name in database
    
-                                     	mysqli_query($conn, $apply);    //Excecute query	
+                                     	mysqli_query($conn, $apply);    //Excecute query
 
-                                   	header("Location: student_dashboard.php");
+                                    //updating enrolling status in student table 
+                                      $apply = " UPDATE student
+                                                SET ENROLL ='pending'
+                                                WHERE STUDENT_ID='$id'";       // updating the file name in database
+   
+                                        $trial = mysqli_query($conn, $apply);    //Excecute query   
+
+               	
+
+                                 	header("Location: student_dashboard.php");
 
             			}else{
               				echo "you file is too big";

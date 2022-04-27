@@ -33,6 +33,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 				$user_full_name = $data['NAME'];
 				$user_email = $data['STUDENT_EMAIL'];
 				$user_password = $data['PASSWORD'];
+				$user_status = $data['ENROLL'];
 			
 
 			if ($email === $user_email) {
@@ -40,7 +41,9 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 					$_SESSION['user_id'] = $user_id;
 					$_SESSION['user_email'] = $user_email;
 					$_SESSION['user_full_name'] = $user_full_name;
-					header("Location: student_dashboard.php");
+					$_SESSION['status'] = $user_status;
+
+					header("Location: student_internshiplisting.php");
 
 				}else {
 					header("Location: student_login.php?error=Incorect User name or password&email=$email");

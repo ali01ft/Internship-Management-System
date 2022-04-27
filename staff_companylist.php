@@ -131,29 +131,29 @@
                                                         <input type="hidden" name="update_id" id="update_id">
 
                                                         <div class="form-group">
-                                                            <label> Company name</label>
+                                                            <label>Company name</label>
                                                             <input type="text" name="cname" id="cname" class="form-control"
                                                                 placeholder="Enter Last Name">
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label> Company Address</label>
+                                                            <label>Company Address</label>
                                                             <input type="text" name="address" id="address" class="form-control"
                                                                 placeholder="Enter company name">
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label> Website </label>
+                                                            <label>Website</label>
                                                             <input type="text" name="website" id="website" class="form-control"
                                                                 placeholder="Enter website link">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label> Contact No </label>
+                                                            <label>Contact No</label>
                                                             <input type="text" name="contact" id="contact" class="form-control"
                                                                 placeholder="Enter Phone Number">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label> Email </label>
+                                                            <label>Email</label>
                                                             <input type="text" name="email" id="email" class="form-control"
                                                                 placeholder="Enter Email">
                                                         </div>
@@ -339,7 +339,7 @@
 
                                         $tr = $(this).closest('tr');
 
-                                        var data = $tr.children("td").map(function () {
+                                        var data =$tr.children("td").map(function () {
                                             return $(this).text();
                                         }).get();
 

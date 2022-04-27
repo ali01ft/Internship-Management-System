@@ -192,7 +192,7 @@ if(isset($_POST["register_button"])){
                 session_start();
                 $_SESSION["regis_no"] = $regisNo;
 
-               header("Location:csignup.php");       //direct to friendadd.php
+               header("Location:industry_login.php");       
               }
 
               mysqli_stmt_close($stmt);

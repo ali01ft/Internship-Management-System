@@ -27,7 +27,7 @@ if(isset($_POST["register_button"])){
   $Enrolled = null;
   $yof = $_POST["yof"];
   $cv = $_FILES["file"];
-  print_r(cv);
+ 
   //$date_started = date("Y/m/d");
   //  Check Student ID process
     if (empty($_POST["Student_ID"])) {
@@ -135,25 +135,25 @@ if(isset($_POST["register_button"])){
         $success = 0;
       }
     //check if length is 8
-    elseif (strlen($pwd) < 8){
-      $pwdErr = "<span style='color:red;'>Your Password Must Contain At least 8 characters!.</span>";
-      $success = 0;
-    }
+    //elseif (strlen($pwd) < 8){
+    //  $pwdErr = "<span style='color:red;'>Your Password Must Contain At least 8 characters!.</span>";
+    //  $success = 0;
+    //}
     // check if atleast has one letter
-    elseif (!preg_match("/[A-Z]/",$pwd)){
-      $pwdErr = "<span style='color:red;'>Your Password Must Contain At Least 1 Capital Letter!</span>";
-      $success = 0;
-    }
+   // elseif (!preg_match("/[A-Z]/",$pwd)){
+   //   $pwdErr = "<span style='color:red;'>Your Password Must Contain At Least 1 Capital Letter!</span>";
+   //   $success = 0;
+   // }
     // check if atleast has one number
-    elseif (!preg_match("/[1-9]/",$pwd)){
-      $pwdErr = "<span style='color:red;'>Your Password Must Contain At Least 1 Number!</span>";
-      $success = 0;
-    }
+   // elseif (!preg_match("/[1-9]/",$pwd)){
+   //   $pwdErr = "<span style='color:red;'>Your Password Must Contain At Least 1 Number!</span>";
+   //   $success = 0;
+  //  }
     //check if atleast has one small letter
-     elseif (!preg_match("/[a-z]/",$pwd)){
-      $pwdErr = "<span style='color:red;'>Your Password Must Contain At Least 1 lower case letter!</span>";
-      $success = 0;
-    } 
+   ///  elseif (!preg_match("/[a-z]/",$pwd)){
+   //   $pwdErr = "<span style='color:red;'>Your Password Must Contain At Least 1 lower case letter!</span>";
+    //  $success = 0;
+  //  } 
       elseif(empty($cpwd)){   // check if confirm password isnt empty
         $cpwdErr = "<span style='color:red;'>Password is required.</span>";
         $success = 0;
@@ -284,7 +284,7 @@ if(isset($_POST["register_button"])){
                 mysqli_stmt_execute($stmt);
                 session_start();
 
-               // header("Location:signup - Copy.php");       //direct to friendadd.php
+               header("Location:student_login.php");       //direct to friendadd.php
               }
 
               mysqli_stmt_close($stmt);

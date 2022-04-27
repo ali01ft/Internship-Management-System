@@ -1,6 +1,5 @@
 <?php 
   session_start();
-  print_r($_SESSION);
 if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) { 
 
     $id = $_SESSION['company_id'];
@@ -70,7 +69,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                 if(isset($_POST['Apply'])) {
 
                                     $f_ID = $_POST['Apply'];  // approve
-                                     print_r($f_ID);
+                            
 
                                      $apply = " UPDATE applicants
                                                 SET confirmation='YES'
@@ -186,34 +185,36 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                     </div>
                 </div>
             </div>
-                        
+
+
 
             <div class="container-fluid px-4">
                 <div class="row my-5">
+                    <h3 class="fs-4 mb-3">List Of Students</h3>
                     <div class="col">
 
-                    <h3 class="fs-4 mb-3">Waiting for Interview list</h3>
+
 
                      <!--fething data module-->
                         <div class="card">
                             <div class="card-body">
 
-                                <table id="#datatable2" class="table table-bordered">
+                            <form method="POST">
+                                <table id="datatableid1" class="table table-bordered">
                                 <thead>
                                 <tr>
-                                 <th scope="col">Student ID</th>
+                                <th scope="col">Student ID</th>
                                  <th scope="col">Name</th>
                                  <th scope="col">Student Email</th>
                                  <th scope="col">Course</th>
                                  <th scope="col">Gender</th>
                                  <th scope="col">Year of Study</th>
                                  <th scope="col">CV</th>
-                                 
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <?php while( $row = $listing->fetch_object() ): ?>
-                              <tr>
+                                </tr>
+                                </thead>
+                                <tbody>
+                             <?php while( $row = $listing->fetch_object() ): ?>
+                                <tr>
                                  <td><?php echo $row->STUDENT_ID?></td>
                                  <td><?php echo $row->NAME?></td>
                                  <td><?php echo $row->STUDENT_EMAIL?></td>
@@ -221,16 +222,17 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <td><?php echo $row->GENDER?></td>
                                  <td><?php echo $row->YEAR_OF_STUDY?></td>
                                  <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
-                                 
                               </tr>
                               <?php endwhile; ?>
                           </tbody>
-                            </table>
-
+                        </table>
+                        </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
+                        
 
         </div>
         <a href="in_joblist.php"> Back </a>
@@ -238,6 +240,8 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
 <!-- /#page-content-wrapper -->
     </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -293,12 +297,8 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                         }
                                     });
 
-                                });
-                            </script>
-                                                        <script>
-                                $(document).ready(function () {
-
-                                    $('#datatable2').DataTable({
+                                    $('#datatableid1').DataTable(
+                                         {
                                         "pagingType": "full_numbers",
                                         "lengthMenu": [
                                             [10, 25, 50, -1],
@@ -309,11 +309,11 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                             search: "_INPUT_",
                                             searchPlaceholder: "Search Your Data",
                                         }
-                                    });
+                                        }      
+                                    );
 
                                 });
                             </script>
-
 
 
 

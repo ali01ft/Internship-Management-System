@@ -5,8 +5,11 @@
 
   if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
 
+    $id = $_SESSION['user_id'];
+
     $connection = mysqli_connect("localhost","root","");
     $db = mysqli_select_db($connection, 'ims');
+
 
 ?>
 
@@ -30,26 +33,57 @@
                                         $apply = " UPDATE applicants
                                                 SET Status='Confirmed'
                                                 WHERE appID ='$f_ID'";       // updating confirmation status
+
+                                                mysqli_query($connection, $apply);    //Excecute query
+
+                                        //updating the status in student table
+
+                                        $que = "SELECT * from applicants where appID='$f_ID'";
+                                        $que_run = mysqli_query($connection, $que);
+                                        $info = mysqli_fetch_assoc($que_run);
+                                        $stu_info = $info['STUDENT_ID'];
+
+                                         $enroll = " UPDATE student
+                                                SET ENROLL='Confirmed'
+                                                WHERE STUDENT_ID ='$stu_info'"; 
    
-                                                 mysqli_query($connection, $apply);    //Excecute query
+                                                $trial =  mysqli_query($connection, $enroll);    //Excecute query
+
+
                                                  header("Location:staff_approval.php");
                                               
                                      }else{
 
                                          if(isset($_POST['Cancel'])) {
-                                           $f_ID = $_POST['Apply'];  // approve
+                                           $f_ID = $_POST['Cancel'];  // approve
 
+                                            //update application table
                                             $apply = " UPDATE applicants
                                                 SET Status=null;
                                                 WHERE appID ='$f_ID'";       // updating confirmation status
    
                                                  mysqli_query($connection, $apply);    //Excecute query
-                                                 header("Location:staff_approval.php");
+
+                                            //update student table
+
+                                         $que = "SELECT * from applicants where appID='$f_ID'";
+                                        $que_run = mysqli_query($connection, $que);
+                                        $info = mysqli_fetch_assoc($que_run);
+                                        $stu_info = $info['STUDENT_ID'];
+
+                                                $apply = " UPDATE student
+                                                            SET ENROLL=null
+                                                             WHERE STUDENT_ID ='$stu_info'";       // updating confirmation status
+   
+                                                 mysqli_query($connection, $apply);    //Excecute query
+
+                                        
+                                               header("Location:staff_approval.php");
                                                 
                                                   
                                                 }
                                              
-                     }                 
+                                    }                 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,44 +155,8 @@
             <div class="container-fluid px-4">
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">Define your search</h3>
-                    <!--<div class="col">
-                                    <!-- Hidden delete module that will pop up  -->
-                                   <!-- <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel"> Delete Company data </h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
 
-                                                <form action="staff_delete_company.php" method="POST">
-
-                                                    <div class="modal-body">
-
-                                                        <input type="hidden" name="delete_id" id="delete_id">
-
-                                                        <h4> Do you want to Delete this Data ??</h4>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> NO </button>
-                                                        <button type="submit" name="deletedata" class="btn btn-primary"> YES </button>
-                                                    </div>
-                                                </form>
-
-                                            </div>
-                                        </div>
-                                    </div>-->
-
-
-
-
-                       
-                          
-                        
-                                 <!-- Fetching data module  -->
+                       <!-- Fetching data module  -->
                                 <div class="card">
                                     <div class="card-body">
                                       <form method="POST">
@@ -188,6 +186,8 @@
                                                         foreach($query_run as $row)
                                                         {
                                                            $r = $row['appID'];
+                                                           $t = $row['Proof'];
+                                                          
                                                     ?>
                                                 <tr>
                                                     <td> <?php echo $row['appID']; ?></td>
@@ -198,7 +198,7 @@
                                                     <td> <?php echo $row['COMPANY_NAME'];?> </td>
                                                     <td> <?php echo $row['Category'];?></td>
                                                     <td> <?php echo $row['Vacancy'];?></td>
-                                                    <td><?php echo "<a href='uploads/profile".$row['Proof'].".pdf' download>See Letter</a>"?></td>
+                                                    <td><?php echo "<a href='documents/".$row['Proof']."' download>See Letter</a>"?></td>
                                                     <td> <?php echo $row['CONTACT_NO'];?> </td>
                                                     <td>
                                                         <button type="submit" class="btn btn-success editbtn" name = "Apply" value ='<?php echo $r?>'>APPROVE</button>
