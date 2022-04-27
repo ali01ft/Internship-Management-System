@@ -208,20 +208,16 @@ if(isset($_POST["register_button"])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up</title>
+  <title>IMS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
-
-    <a href="index.php">log in</a>
-      <h1>Internship Management System</h1>
-    </a>
-    
-    <h2>Registration Page</h2>
-
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
 <!-- Forms -->
-	<form action = "Industry_signup.php" method = "POST" >
+	<form class="p-5 rounded shadow" action = "Industry_signup.php" method = "POST" >
+      <h1 class="text-center pb-5 display-4">Swinburne IMS Industry Sign up</h1>
 			<p>Company Registration Number: <input type="text" name="regis_no" value = "<?php if(isset($_POST["regis_no"])) echo $_POST["regis_no"]; ?>">
       <span class="error"> <?php echo $regis_noErr;?></span></p>
 
@@ -255,7 +251,7 @@ if(isset($_POST["register_button"])){
 
 			<span class="error"> <?php echo $msgErr;?></span>
 	
-			<p><a href="index.php">Back to Home</a> </p>
+			<p><a href="industry_login.php">Login</a> </p>
 		</form>
 	</div>
 
@@ -263,7 +259,7 @@ if(isset($_POST["register_button"])){
 
 
    
-  </div>
+
 
 </body>
 </html>

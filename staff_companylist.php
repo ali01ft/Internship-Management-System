@@ -80,6 +80,7 @@
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">Define your search</h3>
                     <div class="col">
+                                    
                                     <!-- Hidden delete module that will pop up  -->
                                     <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                         aria-hidden="true">
@@ -111,6 +112,62 @@
                                     </div>
 
 
+                                    <!-- Hidden edit module that will pop up -->
+                                    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel"> Edit Company Data </h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <form action="staff_edit_company.php" method="POST">
+
+                                                    <div class="modal-body">
+
+                                                        <input type="hidden" name="update_id" id="update_id">
+
+                                                        <div class="form-group">
+                                                            <label> Company name</label>
+                                                            <input type="text" name="cname" id="cname" class="form-control"
+                                                                placeholder="Enter Last Name">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label> Company Address</label>
+                                                            <input type="text" name="address" id="address" class="form-control"
+                                                                placeholder="Enter company name">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label> Website </label>
+                                                            <input type="text" name="website" id="website" class="form-control"
+                                                                placeholder="Enter website link">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label> Contact No </label>
+                                                            <input type="text" name="contact" id="contact" class="form-control"
+                                                                placeholder="Enter Phone Number">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label> Email </label>
+                                                            <input type="text" name="email" id="email" class="form-control"
+                                                                placeholder="Enter Email">
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
 
 
                        
@@ -268,6 +325,32 @@
 
                                         $('#delete_id').val(data[0]);
 
+                                    });
+                                });
+                            </script>
+
+                            <!-- Function to display edit popup -->
+                            <script>
+                                $(document).ready(function () {
+
+                                    $('.editbtn').on('click', function () {
+
+                                        $('#editmodal').modal('show');
+
+                                        $tr = $(this).closest('tr');
+
+                                        var data = $tr.children("td").map(function () {
+                                            return $(this).text();
+                                        }).get();
+
+                                        console.log(data);
+                                    
+                                        $('#update_id').val(data[0]);
+                                        $('#cname').val(data[1]);
+                                        $('#address').val(data[2]);
+                                        $('#website').val(data[3]);
+                                        $('#contact').val(data[4]);
+                                        $('#email').val(data[5]);
                                     });
                                 });
                             </script>
