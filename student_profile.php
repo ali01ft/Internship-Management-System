@@ -28,7 +28,66 @@ function is_user_login()
 $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
  				
  				$row=mysqli_fetch_assoc($q);
- 				
+ 		
+
+				if(isset($_GET['data'])){
+
+                                        $Jid =  $_GET['data'];
+                
+                                    }
+                                    else{
+                                        $Jid = "";
+                                    }   
+
+
+                              
+                                   if(isset($_GET['data'])){
+
+                                        $Jid =  $_GET['data'];
+                
+                                    }
+                                    else{
+                                        $Jid = "";
+                                    }   
+
+
+                                 if(isset($_GET['search'])){
+                                    $searchKey = $_GET['search'];
+                                    $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
+                                    from student
+                                    INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
+                                    student.COURSE LIKE '%$searchKey%'";
+                                 }else
+                                 $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
+                                        from student
+                                        INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
+                                        WHERE applicants.Job_ID =$Jid and applicants.confirmation is null";
+                                $result = $conn->query($sql);
+
+                                $sql2 = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
+                                        from student
+                                        INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
+                                        WHERE applicants.Job_ID =$Jid and applicants.confirmation is not null";
+                                $listing = $conn ->query($sql2);
+
+
+
+                                  
+                                if(isset($_POST['Apply'])) {
+
+                                    $f_ID = $_POST['Apply'];  // approve
+                                     print_r($f_ID);
+
+                                     $apply = " UPDATE applicants
+                                                SET confirmation='YES'
+                                                WHERE Job_iD=$Jid AND STUDENT_ID = $f_ID;";       // updating confirmation status
+   
+                                     mysqli_query($conn, $apply);    //Excecute query
+
+                                    header("Location: in_applicants.php?data=$Jid");
+    
+                                  }
+
 
 ?>
 
@@ -176,6 +235,30 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
 	 					echo "</td>";
 	 					echo "<td>";
 	 						echo $row['YEAR_OF_STUDY'];
+	 					echo "</td>";
+	 				echo "</tr>";
+	 				echo "<tr>";
+	 					echo "<td>";
+	 						echo "<b> Password: </b>";	
+	 					echo "</td>";
+	 					echo "<td>";
+	 						echo $row['PASSWORD'];
+	 					echo "</td>";
+	 				echo "</tr>";
+	 				echo "<tr>";
+	 					echo "<td>";
+	 						echo "<b> Username: </b>";	
+	 					echo "</td>";
+	 					echo "<td>";
+	 						echo $row['USERNAME'];
+	 					echo "</td>";
+	 				echo "</tr>";
+	 				echo "<tr>";
+	 					echo "<td>";
+	 						echo "<b> CV: </b>";	
+	 					echo "</td>";
+	 					echo "<td>";
+	 						echo "<a href='uploads/profile".$row ->STUDENT_ID.".pdf' download>Download</a>";
 	 					echo "</td>";
 	 				echo "</tr>";
 	 				
