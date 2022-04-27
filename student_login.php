@@ -46,6 +46,9 @@
 		  <button type="submit" 
 		          class="btn btn-primary">LOGIN
 		  </button>
+		  <br>
+		  <br>
+		  <p>Don't have an account ?<a href="signup.php">Sign up</a> </p>
 		</form>
 	  </div>
 </body>

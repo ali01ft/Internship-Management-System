@@ -300,20 +300,19 @@ if(isset($_POST["register_button"])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up</title>
+  <title>IMS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
 
-    <a href="index.php">log in</a>
-      <h1>Internship Management System</h1>
-    </a>
-    
-    <h2>Registration Page</h2>
+  
 
 <!-- Forms -->
-  <form action = "signup.php" method = "POST" enctype="multipart/form-data" >
+  <form class="p-5 rounded shadow" action = "signup.php" method = "POST" enctype="multipart/form-data" >
+    <h1 class="text-center pb-5 display-4">Swinburne IMS Student Sign up</h1>
       <p>Student ID: <input type="text" name="Student_ID" value = "<?php if(isset($_POST["Student_ID"])) echo $_POST["Student_ID"]; ?>">
       <span class="error"> <?php echo $StudentErr;?></span></p>
 
@@ -381,8 +380,9 @@ if(isset($_POST["register_button"])){
       <input type="reset" value="Clear" name="clear_button">
 
       <span class="error"> <?php echo $msgErr;?></span>
-  
-      <p><a href="index.php">Back to Home</a> </p>
+      <br>
+      <br>
+      <p><a href="student_login.php">Login</a> </p>
     </form>
   </div>
 
@@ -390,7 +390,7 @@ if(isset($_POST["register_button"])){
 
 
    
-  </div>
+
 
 </body>
 </html>

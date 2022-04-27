@@ -250,7 +250,9 @@ if(isset($_POST["register_button"])){
 			<input type="reset" value="Clear" name="clear_button">
 
 			<span class="error"> <?php echo $msgErr;?></span>
-	
+	     
+       <br>
+       <br>
 			<p><a href="industry_login.php">Login</a> </p>
 		</form>
 	</div>
