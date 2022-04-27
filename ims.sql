@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2022 at 04:27 AM
+-- Generation Time: Apr 28, 2022 at 01:36 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.11
 
@@ -63,24 +63,18 @@ CREATE TABLE `applicants` (
 --
 
 INSERT INTO `applicants` (`appID`, `STUDENT_ID`, `Job_ID`, `confirmation`, `Proof`, `Status`) VALUES
-(61, 101220213, 1, 'YES', '61_101220213_2022-04-26.pdf', 'pending'),
-(62, 101220016, 1, 'YES', NULL, NULL),
-(63, 101223648, 1, 'YES', NULL, NULL),
-(64, 101220516, 1, 'YES', '64_101220516_2022-04-26.pdf', 'pending'),
-(65, 101220516, 2, 'YES', NULL, NULL),
-(66, 101220516, 3, 'YES', NULL, NULL),
-(67, 101220516, 5, NULL, NULL, NULL),
-(68, 101220516, 7, 'YES', NULL, NULL),
-(69, 101220516, 8, NULL, NULL, NULL),
-(70, 101220516, 9, NULL, NULL, NULL),
-(71, 101220516, 10, NULL, NULL, NULL),
-(72, 101220213, 2, 'YES', NULL, NULL),
-(73, 101220213, 3, 'YES', NULL, NULL),
-(74, 101220213, 5, NULL, NULL, NULL),
-(75, 101220213, 7, 'YES', NULL, NULL),
-(76, 101220213, 8, NULL, NULL, NULL),
-(77, 101220213, 9, NULL, NULL, NULL),
-(78, 101220213, 10, NULL, NULL, NULL);
+(111, 101223648, 1, 'YES', '111_101223648_2022-04-27.pdf', NULL),
+(115, 101223648, 3, NULL, NULL, NULL),
+(116, 101223648, 5, NULL, NULL, NULL),
+(117, 101223648, 7, 'YES', '117_101223648_2022-04-28.pdf', 'Confirmed'),
+(118, 101223648, 10, NULL, NULL, NULL),
+(119, 101223648, 11, NULL, NULL, NULL),
+(120, 101223648, 12, NULL, NULL, NULL),
+(121, 101223648, 13, NULL, NULL, NULL),
+(122, 101223648, 14, NULL, NULL, NULL),
+(123, 101220012, 8, NULL, NULL, NULL),
+(124, 101220012, 9, NULL, NULL, NULL),
+(126, 101220012, 1, 'YES', '126_101220012_2022-04-28.pdf', 'Confirmed');
 
 -- --------------------------------------------------------
 
@@ -96,7 +90,7 @@ CREATE TABLE `industry` (
   `WEBSITE` varchar(50) NOT NULL,
   `Password` varchar(20) NOT NULL,
   `USERNAME` varchar(20) NOT NULL,
-  `Email` varchar(255) DEFAULT NULL
+  `Email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -104,10 +98,9 @@ CREATE TABLE `industry` (
 --
 
 INSERT INTO `industry` (`REGIS_NO`, `COMPANY_NAME`, `COMPANY_ADDRESS`, `CONTACT_NO`, `WEBSITE`, `Password`, `USERNAME`, `Email`) VALUES
-(1202202, 'Samsung', '123 Korea town Malaysia', '0134423556', 'www.samsung.com', '12345', 'Samsung', 'Samung@sm.com'),
-(1202232, 'LG', 'Zimbabwe', '123123123', 'www.LG.com', '1234', 'Lifes good', 'lg@lg.com'),
-(2010312, 'Mircosoft', '123 America town Malaysia', '013442123', 'www.mircosoft.com', '12345', 'MS', 'MS@outlook.com'),
-(120212312, 'Mcdonalds', 'Diabetes street, liver cancer town ', '0123312312321', 'www.food.com', '1234', 'Mcd', 'mcd@g.com'),
+(1202202, 'Samsung1234', '123 Korea town Malaysi', ' 0134423556', 'www.samsung.com', '123456', 'Samsung', 'Samsung2@sm.com'),
+(78945612, 'Steam Org', 'asdasd', '1231564987', 'www.steam.com', 'Zz123456789', 'esteem', 'steam@s.com'),
+(120212312, 'Mcdonalds768 ', 'Diabetes street, liver cancer town  ', ' 0123312312321 ', 'www.food.com ', '1234', 'Mcd', 'mcd@g.com '),
 (2010312123, 'ZombieCorp', '123 Korea town China', '123123123', 'www.brains.com', '1234', '', 'zombie@g.com');
 
 -- --------------------------------------------------------
@@ -139,7 +132,11 @@ INSERT INTO `jobs` (`Job_ID`, `Job_Title`, `Location`, `Qualification`, `Categor
 (7, 'sdasd', 'asdas', 'adsdas', 'asdasd', 'asdasd', 'asdasd', 1202202),
 (8, 'This will is good enough', 'kuching ', 'i dont know', 'enough now', 'please confirm', 'lets finish this', 120212312),
 (9, 'asdasd', 'asdasd', 'dasdas', 'asdasdas', 'sadasd', 'sadasd', 120212312),
-(10, 'asdasda', 'dasdasdasd', 'asdasdasd', 'asdasdasda', 'asdasdasd', 'asdasdas', 1202202);
+(10, 'asdasda', 'dasdasdasd', 'asdasdasd', 'asdasdasda', 'asdasdasd', 'asdasdas', 1202202),
+(11, 'asdasdasdas', 'asdsadas', 'asdasdas', 'asdasdasdsad', 'asdasdasd', 'asdasdasd', 1202202),
+(12, 'sadasdasd', 'asdasdsad', 'aasdasdas', 'asdasdas', 'asdsad', 'asdasdas', 1202202),
+(13, 'asdasdas', 'asdasdas', 'asdsada', 'asdasd', 'asdasd', 'asdasd', 1202202),
+(14, 'asdasdasdasd', 'asdasdasdasd', 'asdasdsadsad', 'asdasdsadas', 'asdasdasdasd', 'asdasdasdasdas', 1202202);
 
 -- --------------------------------------------------------
 
@@ -152,7 +149,7 @@ CREATE TABLE `student` (
   `NAME` varchar(50) NOT NULL,
   `STUDENT_EMAIL` varchar(100) NOT NULL,
   `COURSE` varchar(50) NOT NULL,
-  `ENROLL` varchar(1) DEFAULT NULL,
+  `ENROLL` varchar(10) DEFAULT NULL,
   `SUPERVISOR` varchar(50) DEFAULT NULL,
   `GENDER` varchar(7) NOT NULL,
   `CURRENT_RESIDENCE` varchar(100) NOT NULL,
@@ -168,10 +165,13 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`STUDENT_ID`, `NAME`, `STUDENT_EMAIL`, `COURSE`, `ENROLL`, `SUPERVISOR`, `GENDER`, `CURRENT_RESIDENCE`, `CONTACT_NO`, `YEAR_OF_STUDY`, `PASSWORD`, `CV`, `USERNAME`) VALUES
+(101220011, 'Geralt', '101220011@student.swinburne.edu.my', 'Bachelors of information technology', NULL, NULL, 'Male', 'dasdasdasd', '1665456547', '3', '1234', 'profile101220011.pdf', 'chou'),
+(101220012, 'Geraltdina', '101220012@student.swinburne.edu.my', 'Bachelors of Engineering', 'Confirmed', NULL, 'Female', 'dasdasdasd', '1665456547', '2', '1234', 'profile101220012.pdf', 'chouis'),
 (101220016, 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdasda', '0172564896', '3', '1234', 'profile101220016.pdf', 'Eric'),
 (101220213, 'Andrew Michael', '101220213@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdasda', '0172564897', '3', '12345', 'profile101220213.pdf', 'ErgoProxy'),
 (101220516, 'AaL', '101220516@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdsadas', '0176395488', '2', '12345', 'profile101220516.pdf', 'aas'),
-(101223648, 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', '0', NULL, 'Male ', '432, lorong kenny hill 5, kuching, sarawak, malaysia', '01774587524', '3', '123456789', NULL, 'arasln');
+(101223648, 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', 'Confirmed', NULL, 'Male ', '432, lorong kenny hill 5, kuching, sarawak, malaysia', '01774587524', '3', '123456789', NULL, 'arasln'),
+(101320618, 'haider', '101320618@students.swinburne.edu.my', 'Bachelors of Marketing', NULL, NULL, 'Male', 'ta 145 sadasdas', '0122231577', '3', '1234', 'profile101320618.pdf', 'hayze');
 
 -- --------------------------------------------------------
 
@@ -186,6 +186,18 @@ CREATE TABLE `students_nonappliedjobs` (
 ,`Job_ID` int(11)
 ,`Job_Title` varchar(255)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `weak_entity`
+--
+
+CREATE TABLE `weak_entity` (
+  `appID` int(11) NOT NULL,
+  `Proof` varchar(255) DEFAULT NULL,
+  `Status` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -234,6 +246,12 @@ ALTER TABLE `student`
   ADD PRIMARY KEY (`STUDENT_ID`);
 
 --
+-- Indexes for table `weak_entity`
+--
+ALTER TABLE `weak_entity`
+  ADD PRIMARY KEY (`appID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -241,13 +259,13 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `applicants`
 --
 ALTER TABLE `applicants`
-  MODIFY `appID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `appID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
