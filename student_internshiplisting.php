@@ -75,12 +75,12 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-address-book me-1"></i>Swinburne</div>
             <div class="list-group list-group-flush my-3">
-                <a href="student_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="student_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-project-diagram me-2"></i>Internship listing</a>
-                  <a href="staff_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                  <a href="student_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Company listing</a>                   
-                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Feedback list</a>
+                <a href="student_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-paperclip me-2"></i>Student Dashboard</a>
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
@@ -119,7 +119,7 @@
             <!--Sector for the list table-->
            <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">list of jobs</h3>
+                    <h3 class="fs-4 mb-3">List of jobs</h3>
                     <div class="col">
 
                     <!--fething data module-->
@@ -130,7 +130,7 @@
                             <table id="datatableid" class="table table-bordered">
                              <thead>
                                 <tr>
-                                 <th scope="col">Comapny Name</th>
+                                 <th scope="col">Company Name</th>
                                  <th scope="col">Job Title</th>
                                  <th scope="col">Location</th>
                                  <th scope="col">Qualification</th>

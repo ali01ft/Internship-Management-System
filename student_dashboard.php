@@ -94,10 +94,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
             <div class="list-group list-group-flush my-3">
                 <a href="student_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Internship listing</a>
-                  <a href="staff_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-project-diagram me-2"></i>Company listing</a>                   
-                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Feedback list</a>
+                  <a href="student_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Company list</a>                   
+                <a href="student_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-paperclip me-2"></i>Student Dashboard</a>        
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
