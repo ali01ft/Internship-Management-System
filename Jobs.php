@@ -10,7 +10,7 @@ function test_input($data) {
 
 
   session_start();
-  print_r($_SESSION);
+ 
 if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) { 
 
 
@@ -24,19 +24,19 @@ $msgErr = $cvErr = "";
 if(isset($_POST["submit"])){
   $success = 1;
   $JobTile = $_POST["JobTitle"];
-  print_r($JobTile);
+
   $Location = $_POST["Location"];
-  print_r($Location);
+
   $Qualification = $_POST["Qualifications"];
-  print_r($Qualification);
+
   $Category = $_POST["Category"];
-  print_r($Category);
+
   $Position = $_POST["Position"];
-  print_r($Position);
+
   $Vacancy = $_POST["Vacancy"];
-  print_r($Vacancy);
+
   $file = $_FILES["file"];
-  print_r($file);
+ 
 
 
   //$date_started = date("Y/m/d");
@@ -153,7 +153,7 @@ if(isset($_POST["submit"])){
               mysqli_close($conn);
 
               }
-                header("Location: in_applicants.php");
+                header("Location: Jobs.php");
 
               }
 
@@ -278,8 +278,7 @@ if(isset($_POST["submit"])){
                   			<input type="reset" value="Clear" name="clear_button">
 
                   	
-                  			<p><a href="index.php">Back to Home</a> </p>
-                        <p><a href="student_logout.php">Log Out</a> </p>
+                  		
                   		</form>
                      </div>
                 </div>
