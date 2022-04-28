@@ -101,29 +101,29 @@
 
                                                         <div class="form-group">
                                                             <label>Name</label>
-                                                            <input type="text" name="cname" id="sname" class="form-control"
+                                                            <input type="text" name="sname" id="sname" class="form-control"
                                                                 placeholder="Enter Last Name">
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Student Email</label>
-                                                            <input type="text" name="address" id="email" class="form-control"
+                                                            <input type="text" name="email" id="email" class="form-control"
                                                                 placeholder="Enter company name">
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Course</label>
-                                                            <input type="text" name="website" id="course" class="form-control"
+                                                            <input type="text" name="course" id="course" class="form-control"
                                                                 placeholder="Enter website link">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Gender</label>
-                                                            <input type="text" name="contact" id="gender" class="form-control"
+                                                            <input type="text" name="gender" id="gender" class="form-control"
                                                                 placeholder="Enter Phone Number">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Year of study</label>
-                                                            <input type="text" name="email" id="ystdy" class="form-control"
+                                                            <input type="text" name="ystdy" id="ystdy" class="form-control"
                                                                 placeholder="Enter Email">
                                                         </div>
 

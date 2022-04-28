@@ -16,17 +16,24 @@ function test_input($data) {
         $id = $_POST['update_id'];
         
         $sname = test_input($_POST['sname']);
-        $email = test_input($_POST['email']);
+         $email = test_input($_POST['email']);
+
         $course = test_input($_POST['course']);
+
         $gender = test_input($_POST['gender']);
+
         $ystdy = test_input($_POST['ystdy']);
+ 
 
         $query = "UPDATE student SET NAME='$sname', STUDENT_EMAIL='$email', COURSE='$course', GENDER=' $gender', YEAR_OF_STUDY='$ystdy' WHERE STUDENT_ID='$id'";
+
+      
         $query_run = mysqli_query($connection, $query);
 
         if($query_run)
         {
             echo '<script> alert("Data Updated"); </script>';
+
             header("Location:staff_studentlist.php");
         }
         else
