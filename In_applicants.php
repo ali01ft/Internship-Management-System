@@ -141,7 +141,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">List Of Students</h3>
+                    <h3 class="fs-4 mb-3">List of Applied Students</h3>
                     <div class="col">
 
 
@@ -190,7 +190,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">List Of Students</h3>
+                    <h3 class="fs-4 mb-3">List of Accepted Students</h3>
                     <div class="col">
 
 
