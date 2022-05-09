@@ -1,10 +1,13 @@
 <?php
-$sName = "localhost";
-$uName = "root";
-$pass = "";
-$db_name = "ims";
+session_start();
+$userID = $_SESSION['user_id'];
+$server = "localhost";
+$username = "root";
+$password = "";
+$database = "ims";
 
-$conn=mysqli_connect($servername,$username,$password,"$dbname");
+
+$conn = mysqli_connect($server, $username, $password, $database);
 if(!$conn){
 	die('Could not Connect My Sql:' .mysql_error());
 }

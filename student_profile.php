@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 
 $userID = $_SESSION['user_id'];
 
-$server = "localhost";
+	$server = "localhost";
         $username = "root";
         $password = "";
         $database = "ims";
