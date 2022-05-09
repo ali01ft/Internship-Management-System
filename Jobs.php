@@ -39,7 +39,12 @@ if(isset($_POST["submit"])){
  
 
 
-  //$date_started = date("Y/m/d");
+  $date = date("Y/m/d");
+  $duration = $_POST["Duration"];
+
+
+    $newDate = date('Y/m/d', strtotime($date. ' + '. $duration. 'months'));
+  
 
 
   //  Check Student ID process
@@ -140,20 +145,19 @@ if(isset($_POST["submit"])){
 
               $stmt = mysqli_stmt_init($conn);
 
-              $create ="INSERT INTO jobs (Job_Title, Location, Qualification, Category, Position, Vacancy, REGIS_NO) VALUES(?,?,?,?,?,?,?);";
+              $create ="INSERT INTO jobs (Job_Title, Location, Qualification, Category, Position, Vacancy, REGIS_NO, Date_Posted, Date_End) VALUES(?,?,?,?,?,?,?,?,?);";
 
                 mysqli_stmt_prepare($stmt,$create);
-                mysqli_stmt_bind_param($stmt, "sssssss",$JobTile, $Location, $Qualification, $Category, $Position, $Vacancy, $id);
+                mysqli_stmt_bind_param($stmt, "sssssssss",$JobTile, $Location, $Qualification, $Category, $Position, $Vacancy, $id, $date, $newDate);
                 mysqli_stmt_execute($stmt);
 
-               // header("Location:signup - Copy.php");       //direct to friendadd.php
               }
 
               mysqli_stmt_close($stmt);
               mysqli_close($conn);
 
               }
-                header("Location: Jobs.php");
+               // header("Location: Jobs.php");
 
               }
 
@@ -268,9 +272,28 @@ if(isset($_POST["submit"])){
                         <label for="Category">Category<br><span class="error"> <?php echo $msgErr;?></span><br></label>
                           <input type="text" name="Category" id="Category" value="<?php if(isset($_POST["Category"])) echo $_POST["Category"]; ?>">
                         <br>
+                        <br>
+
+                        <label for="Duration">Duration For this offer</label>
+                        <select class="1-11" name="Duration" id="Duration">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                        </select>
+                        <br>
+                        <br>
 
 
-                  			<label for ="file">Insert Your Criteria:<br><span class="error"> <?php echo $msgErr;?></span><br></label>
+                  		<label for ="file">Insert Your Criteria:<br><span class="error"> <?php echo $msgErr;?></span></label>
+                        <br>
                         <input type="file" name="file" value = "<?php if(isset($_POST["file"])) echo $_POST["file"]; ?>">
                         <br>
                         <br>

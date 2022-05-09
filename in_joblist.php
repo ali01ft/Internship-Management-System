@@ -33,10 +33,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
        <?php 
                                 //A query which summons all the list
                                  $conn = new mysqli('localhost', 'root', '', 'ims');
-                                 if(isset($_GET['search'])){
-                                    $searchKey = $_GET['search'];
-                                    $sql = "SELECT * from jobs LIKE '%$searchKey%'";
-                                 }else
+                           
                                  $sql = "SELECT * FROM `jobs` WHERE REGIS_NO = $id";
                                 $result = $conn->query($sql);
                                 
@@ -121,6 +118,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
 
         <!--fething data module-->
+        <p>Please Click on the Job Titles to check the Interns list</p>
                     <div class="card">
                         <div class="card-body">
 
@@ -132,7 +130,8 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <th scope="col">Location</th>
                                  <th scope="col">Category</th>
                                  <th scope="col">Position</th>
-                                 <th scope="col">Vacancy</th>
+                                 <th scope="col">Date Posted</th>
+                                 <th scope="col">Offer End Date</th>
                                  <th scope="col">Requirements</th>
                               </tr>
                             </thead>
@@ -140,14 +139,20 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                               <?php while( $row = $result->fetch_object() ): ?>
                               <tr>
                                
-                                <?php $Jid = $row->Job_ID;?>
+                                <?php $Jid = $row->Job_ID;
+
+                                $sdate = date("d-m-Y", strtotime($row -> Date_Posted)); //starting date changing format
+                                $edate = date("d-m-Y", strtotime($row -> Date_End));  //end date changing format
+
+                                ?>
                                     
                                  <td> <?php echo "<a href ='in_applicants.php?data=$Jid'>$row->Job_Title</a>"?></td>
                                  <td><?php echo $row->Location?></td>
                                  
                                  <td><?php echo $row->Category?></td>
                                  <td><?php echo $row->Position?></td>
-                                 <td><?php echo $row->Vacancy?></td>
+                                 <td><?php echo $sdate?></td>
+                                 <td><?php echo $edate?></td>
                                  <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
                               </tr>
                               <?php endwhile; ?>
