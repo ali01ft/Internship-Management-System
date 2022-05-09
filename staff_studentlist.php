@@ -158,7 +158,7 @@
 
                                                         <div class="form-group">
                                                             <label>Supervisor name</label>
-                                                            <input type="text" name="svname" id="svisor" class="form-control"
+                                                            <input type="text" name="svisor" id="svisor" class="form-control"
                                                                 placeholder="Enter Supervisor">
                                                         </div>
 
@@ -394,7 +394,7 @@
                             </script>
 
 
-                            <!-- Function to display edit popup -->
+                            <!-- Function to display assign supervisor popup -->
                             <script>
                                 $(document).ready(function () {
 
