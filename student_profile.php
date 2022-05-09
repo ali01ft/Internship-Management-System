@@ -15,14 +15,7 @@ $server = "localhost";
 
         $conn = mysqli_connect($server, $username, $password, $database);
 
-function is_user_login()
-{
-	if(isset($_SESSION['user_id']))
-	{
-		return true;
-	}
-	return false;
-}
+
 
 
 $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
@@ -30,64 +23,7 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
  				$row=mysqli_fetch_assoc($q);
  		
 
-				if(isset($_GET['data'])){
-
-                                        $Jid =  $_GET['data'];
-                
-                                    }
-                                    else{
-                                        $Jid = "";
-                                    }   
-
-
-                              
-                                   if(isset($_GET['data'])){
-
-                                        $Jid =  $_GET['data'];
-                
-                                    }
-                                    else{
-                                        $Jid = "";
-                                    }   
-
-
-                                 if(isset($_GET['search'])){
-                                    $searchKey = $_GET['search'];
-                                    $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
-                                    from student
-                                    INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
-                                    student.COURSE LIKE '%$searchKey%'";
-                                 }else
-                                 $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
-                                        from student
-                                        INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
-                                        WHERE applicants.Job_ID =$Jid and applicants.confirmation is null";
-                                $result = $conn->query($sql);
-
-                                $sql2 = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
-                                        from student
-                                        INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
-                                        WHERE applicants.Job_ID =$Jid and applicants.confirmation is not null";
-                                $listing = $conn ->query($sql2);
-
-
-
-                                  
-                                if(isset($_POST['Apply'])) {
-
-                                    $f_ID = $_POST['Apply'];  // approve
-                                     print_r($f_ID);
-
-                                     $apply = " UPDATE applicants
-                                                SET confirmation='YES'
-                                                WHERE Job_iD=$Jid AND STUDENT_ID = $f_ID;";       // updating confirmation status
-   
-                                     mysqli_query($conn, $apply);    //Excecute query
-
-                                    header("Location: in_applicants.php?data=$Jid");
-    
-                                  }
-
+				
 
 ?>
 
@@ -95,6 +31,12 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
  <html>
  <head>
  	<title>Profile</title>
+ 	<meta charset="UTF-8" />
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    	<link rel="stylesheet" href="styles.css" />
  	<style type="text/css">
  		.wrapper
  		{
@@ -258,7 +200,7 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
 	 						echo "<b> CV: </b>";	
 	 					echo "</td>";
 	 					echo "<td>";
-	 						echo "<a href='uploads/profile".$row ->STUDENT_ID.".pdf' download>Download</a>";
+	 						echo  "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>";
 	 					echo "</td>";
 	 				echo "</tr>";
 	 				
