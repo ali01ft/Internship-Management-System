@@ -209,45 +209,25 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
           <br><br>
             <div class="scroll">
               
-              <?php
-                if(isset($_POST['submit']))
-                {
-                  $sql="INSERT INTO `comments` VALUES('', '$_SESSION[user_id]', '$_POST[comment]');";
-                  if(mysqli_query($conn,$sql))
-                  {
-                    $q="SELECT * FROM `comments` ORDER BY `comments`.`id` DESC";
-                    $res=mysqli_query($conn,$q);
-
-                  echo "<table class='table table-bordered'>";
-                    while ($row=mysqli_fetch_assoc($res)) 
-                    {
-
-                      echo "<tr>";
-                        echo "<td>"; echo $row['STUDENT_ID']; echo "</td>";
-                        echo "<td>"; echo $row['comment']; echo "</td>";
-                      echo "</tr>";
-                    }
-                  echo "</table>";
-                  }
-
-                }
-
-                else
-                {
-                  $q="SELECT * FROM `comments` ORDER BY `comments`.`id` DESC"; 
-                    $res=mysqli_query($conn,$q);
-
-                  echo "<table class='table table-bordered'>";
-                    while ($row=mysqli_fetch_assoc($res)) 
-                    {
-                      echo "<tr>";
-                        echo "<td>"; echo $row['STUDENT_ID']; echo "</td>";
-                        echo "<td>"; echo $row['comment']; echo "</td>";
-                      echo "</tr>";
-                    }
-                  echo "</table>";
-                }
-              ?>
+              <div id="rating_div">
+										<div class="star-rating">
+											<span class="fa divya fa-star-o" data-rating="1" style="font-size:20px;"></span>
+											<span class="fa fa-star-o" data-rating="2" style="font-size:20px;"></span>
+											<span class="fa fa-star-o" data-rating="3" style="font-size:20px;"></span>
+											<span class="fa fa-star-o" data-rating="4" style="font-size:20px;"></span>
+											<span class="fa fa-star-o" data-rating="5" style="font-size:20px;"></span>
+											<input type="hidden" name="whatever3" class="rating-value" value="1">
+										</div>
+							</div>
+							</div>
+							</div><br>
+							<input type="hidden" name="demo_id" id="demo_id" value="1">
+							<div class="col-md-4">
+							<textarea class="form-control" rows="5" placeholder="Write your review here..." name="remark" id="remark" required></textarea><br>
+							<p><button  class="btn btn-default btn-sm btn-info" id="srr_rating">Submit</button></p>
+							</div>
+							<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+							<script src="js/index.js"></script>
             </div>
             </div>
 
