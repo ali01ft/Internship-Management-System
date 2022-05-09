@@ -8,7 +8,7 @@ session_start();
 
 $userID = $_SESSION['user_id'];
 
-$server = "localhost";
+	$server = "localhost";
         $username = "root";
         $password = "";
         $database = "ims";
