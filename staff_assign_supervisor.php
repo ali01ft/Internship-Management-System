@@ -13,7 +13,7 @@ function test_input($data) {
 
     if(isset($_POST['updatedata']))
     {   
-        $id = $_POST['update_id'];     
+        $id = $_POST['assign_id'];     
         $svisor= test_input($_POST['svisor']);
         print_r($id);
         $query = "UPDATE student SET SUPERVISOR ='$svisor' WHERE STUDENT_ID = '$id'";

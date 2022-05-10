@@ -154,7 +154,7 @@
 
                                                     <div class="modal-body">
 
-                                                        <input type="hidden" name="update_id" id="update_id">
+                                                        <input type="hidden" name="assign_id" id="assign_id">
 
                                                         <div class="form-group">
                                                             <label>Supervisor name</label>
@@ -410,7 +410,7 @@
 
                                         console.log(data);
                                     
-                                        $('#update_id').val(data[0]);
+                                        $('#assign_id').val(data[0]);
                                         $('#svisor').val(data[4]);
                                     });
                                 });
