@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+$userID = $_SESSION['user_id'];
 include'process.php';
 $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
  				
