@@ -232,14 +232,15 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                     </div>
                 </div>
             </div>
-                        
+  <a href="in_joblist.php"> Back </a>                      
 
-        </div>
-        <a href="in_joblist.php"> Back </a>
+        </div>   
     </div>
 
 <!-- /#page-content-wrapper -->
     </div>
+
+    
 
 
 
