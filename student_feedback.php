@@ -1,5 +1,18 @@
-<!DOCTYPE HTML>
-<html>
+
+<?php
+
+session_start();
+$userID = $_SESSION['user_id'];
+include'process.php';
+$q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
+ 				
+ 				$row=mysqli_fetch_assoc($q);
+
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+>>>>>>> 965829b38e8ecc01a2ea3a43b001c52a52edcea3
 <head>
     <meta charset="utf-8" />
     <title>Feedback Page</title>

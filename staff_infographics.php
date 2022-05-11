@@ -18,6 +18,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
+
+ <?php  
+ $connect = mysqli_connect("localhost", "root", "", "ims");  
+ $query = "SELECT COURSE, count(*) as number FROM student GROUP BY COURSE";  
+ $result = mysqli_query($connect, $query);  
+ ?>  
+
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+    <script type="text/javascript">  
+           google.charts.load('current', {'packages':['corechart']});  
+           google.charts.setOnLoadCallback(drawChart);  
+           function drawChart()  
+           {  
+                var data = google.visualization.arrayToDataTable([  
+                          ['Gender', 'Number'],  
+                          <?php  
+                          while($row = mysqli_fetch_array($result))  
+                          {  
+                               echo "['".$row["COURSE"]."', ".$row["number"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title: 'Percentage of student courses',  
+                      //is3D:true,  
+                      pieHole: 0.4,
+                      backgroundColor: { fill:'transparent' }
+                     };  
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
+                chart.draw(data, options);  
+           }  
+    </script>  
     <title>IMS</title>
 </head>
 
@@ -79,11 +113,171 @@
                 <!-- Content wrapper -->
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Define your search</h3>
-                    <div class="col">
-    
-                    </div>
+                    <h3 class="fs-4 mb-3">User count data</h3>
+                    
+                        <div class="col-lg-2 col-md-2">
+                            <div class="card bg-danger text-white mb-4">
+                                <div class="card-body">
+                                    Total Number of Students 
+                                    <?php 
+                                    $connection = mysqli_connect("localhost","root","");
+                                    $db = mysqli_select_db($connection, 'ims');
+                                    $query = "SELECT * FROM student";
+                                    $query_run = mysqli_query($connection, $query);
+
+                                    if($student_total = mysqli_num_rows($query_run))
+                                    {
+                                        echo '<h4 class="mb=0"> '.$student_total.' </h4>';
+                                    }
+                                    else 
+                                    {
+                                        echo '<h4 class="mb=0"> No data </h4>';
+                                    }
+
+
+                                    ?>
+                                </div> 
+                            </div>
+                        </div>
+                    
+                       <div class="col-lg-2 col-md-2">
+                          <div class="card bg-light text-black mb-4">
+                                <div class="card-body">
+                                    Total Number of Industry
+                                    <?php 
+                                    $connection = mysqli_connect("localhost","root","");
+                                    $db = mysqli_select_db($connection, 'ims');
+                                    $query = "SELECT * FROM industry";
+                                    $query_run = mysqli_query($connection, $query);
+
+                                    if($industry_total = mysqli_num_rows($query_run))
+                                    {
+                                        echo '<h4 class="mb=0"> '.$industry_total.' </h4>';
+                                    }
+                                    else 
+                                    {
+                                        echo '<h4 class="mb=0"> No data </h4>';
+                                    }
+
+
+                                    ?>
+                                </div> 
+                            </div>
+                        </div>
+
+                         <div class="col-lg-2 col-md-2">
+                          <div class="card bg-danger text-white mb-4">
+                                <div class="card-body">
+                                    Total Number of Staff
+                                    <?php 
+                                    $connection = mysqli_connect("localhost","root","");
+                                    $db = mysqli_select_db($connection, 'ims');
+                                    $query = "SELECT * FROM admin";
+                                    $query_run = mysqli_query($connection, $query);
+
+                                    if($staff_total = mysqli_num_rows($query_run))
+                                    {
+                                        echo '<h4 class="mb=0"> '.$staff_total.' </h4>';
+                                    }
+                                    else 
+                                    {
+                                        echo '<h4 class="mb=0"> No data </h4>';
+                                    }
+
+
+                                    ?>
+                                </div> 
+                            </div>
+                        </div>
+
                 </div>
+
+                <div class="row my-5">
+                    <h3 class="fs-4 mb-3">Student data</h3>
+
+                    <div class="col-lg-2 col-md-2">
+                          <div class="card bg-danger text-white mb-4">
+                                <div class="card-body">
+                                    Number of students accepted by company
+                                    <?php 
+                                    $connection = mysqli_connect("localhost","root","");
+                                    $db = mysqli_select_db($connection, 'ims');
+                                    $query = "SELECT * FROM applicants where confirmation = 'YES' ";
+                                    $query_run = mysqli_query($connection, $query);
+
+                                    if($stud_total = mysqli_num_rows($query_run))
+                                    {
+                                        echo '<h4 class="mb=0"> '.$stud_total.' </h4>';
+                                    }
+                                    else 
+                                    {
+                                        echo '<h4 class="mb=0"> No data </h4>';
+                                    }
+
+
+                                    ?>
+                                </div> 
+                            </div>
+                        </div>
+
+                         <div class="col-lg-2 col-md-2">
+                          <div class="card bg-light text-black mb-4">
+                                <div class="card-body">
+                                    Number of students approved by staff
+                                    <?php 
+                                    $connection = mysqli_connect("localhost","root","");
+                                    $db = mysqli_select_db($connection, 'ims');
+                                    $query = "SELECT * FROM applicants where Status = 'Confirmed' ";
+                                    $query_run = mysqli_query($connection, $query);
+
+                                    if($confirm_total = mysqli_num_rows($query_run))
+                                    {
+                                        echo '<h4 class="mb=0"> '.$confirm_total.' </h4>';
+                                    }
+                                    else 
+                                    {
+                                        echo '<h4 class="mb=0"> No data </h4>';
+                                    }
+
+
+                                    ?>
+                                </div> 
+                            </div>
+                        </div>
+
+                          <div class="col-lg-2 col-md-2">
+                          <div class="card bg-danger text-white mb-4">
+                                <div class="card-body">
+                                    Number of students assigned with supervisor 
+                                    <?php 
+                                    $connection = mysqli_connect("localhost","root","");
+                                    $db = mysqli_select_db($connection, 'ims');
+                                    $query = "SELECT * FROM student where SUPERVISOR != 'NULL' ";
+                                    $query_run = mysqli_query($connection, $query);
+
+                                    if($stude_total = mysqli_num_rows($query_run))
+                                    {
+                                        echo '<h4 class="mb=0"> '.$stude_total.' </h4>';
+                                    }
+                                    else 
+                                    {
+                                        echo '<h4 class="mb=0"> No data </h4>';
+                                    }
+
+
+                                    ?>
+                                </div> 
+                            </div>
+                        </div>
+
+                </div>
+
+                 <div class="row my-5">
+                    <h3 class="fs-4 mb-3">Student Demographics</h3>
+                      <div class="col-lg-2 col-md-2">
+                        <div id="piechart" style="width: 800px; height: 500px;"></div>  
+                    </div> 
+                 </div>   
 
             </div>
         </div>

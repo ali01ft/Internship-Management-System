@@ -36,12 +36,9 @@
        <?php 
                                 //
                                  $conn = new mysqli('localhost', 'root', '', 'ims');
-                                 if(isset($_GET['search'])){
-                                    $searchKey = $_GET['search'];
-                                    $sql = "SELECT insdustry.COMPANY_NAME, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO WHERE Location LIKE '%$searchKey%'";
-                                 }else
+
                                  //find all the job available which the student didnt apply 
-                                 $sql = "SELECT industry.COMPANY_NAME,jobs.Job_ID, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position, jobs.REGIS_NO FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO where Job_ID NOT IN (select Job_ID from applicants WHERE STUDENT_ID = $id);";
+                                 $sql = "SELECT industry.COMPANY_NAME,jobs.Job_ID, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position, jobs.REGIS_NO, jobs.Date_Posted, jobs.Date_End FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO where Job_ID NOT IN (select Job_ID from applicants WHERE STUDENT_ID = $id);";
                                      $result = $conn->query($sql);
 
 
@@ -136,12 +133,21 @@
                                  <th scope="col">Qualification</th>
                                  <th scope="col">Category</th>
                                  <th scope="col">Position</th>
+                                 <th scope="col">Date Posted</th>
+                                 <th scope="col">Offer End Date</th>
                                  <th scope="col">More Details</th>
                                  <th scope="col">Apply</th>
                               </tr>
                           </thead>
                           <tbody>
-                              <?php while( $row = $result->fetch_object() ): ?>
+                              <?php while( $row = $result->fetch_object() ): 
+                            
+
+                                $sdate = date("d-m-Y", strtotime($row -> Date_Posted)); //starting date changing format
+                                $edate = date("d-m-Y", strtotime($row -> Date_End));  //end date changing format
+
+                                
+                                ?>
                               <tr>
                                  <td><?php echo $row->COMPANY_NAME?></td>
                                  <td><?php echo $row->Job_Title ?></td>
@@ -149,6 +155,8 @@
                                  <td><?php echo $row->Qualification ?></td>
                                  <td><?php echo $row->Category ?></td>
                                  <td><?php echo $row->Position ?></td>
+                                 <td><?php echo $sdate?></td>
+                                 <td><?php echo $edate?></td>
                                  <td><?php echo "<a href='jobs/profile".$row ->REGIS_NO.".pdf' download>Download</a>"?></td> <!--company document-->
                                  <td><button type="submit" class="btn btn-success editbtn" name = "Apply" value = '<?php echo $job = $row->Job_ID?>'>Apply</button></td>
                               </tr>

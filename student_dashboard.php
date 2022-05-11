@@ -4,6 +4,7 @@
 if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
 
     $id = $_SESSION['user_id'];
+    //test
 
 ?>
 
@@ -397,6 +398,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 
     }
 }else {
-   header("Location:  industry_login.php");
+   header("Location:  login_access.php");
 }
  ?>

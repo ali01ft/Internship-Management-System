@@ -120,14 +120,14 @@ if(isset($_POST["register_button"])){
         $Contact_noErr = "<span style='color:red;'>Contact Number is required.</span>";
         $success = 0;
       } 
-      else {
-        $ContactNo = test_input($_POST["Contact_no"]);
-        if (!preg_match("/^(\+\d{1,3}[- ]?)?\d{10}$/",$ContactNo)) {    // check if it matches pattern
-          $Contact_noErr = "<span style='color:red;'>Please Use Valid number.</span>";
-          $success = 0;
-        }
+    //  else {
+    //    $ContactNo = test_input($_POST["Contact_no"]);
+    //    if (!preg_match("/^(\+\d{1,3}[- ]?)?\d{10}$/",$ContactNo)) {    // check if it matches pattern
+    //      $Contact_noErr = "<span style='color:red;'>Please Use Valid number.</span>";
+   //       $success = 0;
+    //    }
       
-    }
+   // }
 
   // Password validation process
     if(empty($_POST["pwd"])){   // check if both password does match

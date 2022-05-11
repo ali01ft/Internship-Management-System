@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2022 at 01:36 AM
+-- Generation Time: May 10, 2022 at 03:42 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.11
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -63,18 +63,13 @@ CREATE TABLE `applicants` (
 --
 
 INSERT INTO `applicants` (`appID`, `STUDENT_ID`, `Job_ID`, `confirmation`, `Proof`, `Status`) VALUES
-(111, 101223648, 1, 'YES', '111_101223648_2022-04-27.pdf', NULL),
-(115, 101223648, 3, NULL, NULL, NULL),
-(116, 101223648, 5, NULL, NULL, NULL),
-(117, 101223648, 7, 'YES', '117_101223648_2022-04-28.pdf', 'Confirmed'),
-(118, 101223648, 10, NULL, NULL, NULL),
-(119, 101223648, 11, NULL, NULL, NULL),
-(120, 101223648, 12, NULL, NULL, NULL),
-(121, 101223648, 13, NULL, NULL, NULL),
-(122, 101223648, 14, NULL, NULL, NULL),
-(123, 101220012, 8, NULL, NULL, NULL),
-(124, 101220012, 9, NULL, NULL, NULL),
-(126, 101220012, 1, 'YES', '126_101220012_2022-04-28.pdf', 'Confirmed');
+(88, 101220516, 20, 'YES', NULL, 'pending'),
+(89, 101220213, 20, 'YES', NULL, NULL),
+(90, 101223648, 21, NULL, NULL, NULL),
+(91, 101220611, 19, NULL, NULL, NULL),
+(92, 101220668, 21, NULL, NULL, NULL),
+(93, 101220668, 20, 'YES', '93_101220668_2022-05-10.pdf', 'Confirmed'),
+(94, 101220668, 19, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -90,7 +85,7 @@ CREATE TABLE `industry` (
   `WEBSITE` varchar(50) NOT NULL,
   `Password` varchar(20) NOT NULL,
   `USERNAME` varchar(20) NOT NULL,
-  `Email` varchar(255) NOT NULL
+  `Email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -98,9 +93,10 @@ CREATE TABLE `industry` (
 --
 
 INSERT INTO `industry` (`REGIS_NO`, `COMPANY_NAME`, `COMPANY_ADDRESS`, `CONTACT_NO`, `WEBSITE`, `Password`, `USERNAME`, `Email`) VALUES
-(1202202, 'Samsung1234', '123 Korea town Malaysi', ' 0134423556', 'www.samsung.com', '123456', 'Samsung', 'Samsung2@sm.com'),
-(78945612, 'Steam Org', 'asdasd', '1231564987', 'www.steam.com', 'Zz123456789', 'esteem', 'steam@s.com'),
-(120212312, 'Mcdonalds768 ', 'Diabetes street, liver cancer town  ', ' 0123312312321 ', 'www.food.com ', '1234', 'Mcd', 'mcd@g.com '),
+(1202202, 'Samsung', '123 Korea town Malaysia', '0134423556', 'www.samsung.com', '12345', 'Samsung', 'Samsung@sm.com'),
+(1202232, 'LG', 'Zimbabwe', '123123123', 'www.LG.com', '1234', 'Lifes good', 'lg@lg.com'),
+(2010312, 'Mircosoft', '123 America town Malaysia', '013442123', 'www.mircosoft.com', '12345', 'MS', 'MS@outlook.com'),
+(120212312, 'Mcdonalds', 'Diabetes street, liver cancer town ', '0123312312321', 'www.food.com', '1234', 'Mcd', 'mcd@g.com'),
 (2010312123, 'ZombieCorp', '123 Korea town China', '123123123', 'www.brains.com', '1234', '', 'zombie@g.com');
 
 -- --------------------------------------------------------
@@ -117,26 +113,19 @@ CREATE TABLE `jobs` (
   `Category` varchar(255) NOT NULL,
   `Position` varchar(255) NOT NULL,
   `Vacancy` varchar(255) NOT NULL,
-  `REGIS_NO` int(20) NOT NULL
+  `REGIS_NO` int(20) NOT NULL,
+  `Date_Posted` date DEFAULT NULL,
+  `Date_End` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `jobs`
 --
 
-INSERT INTO `jobs` (`Job_ID`, `Job_Title`, `Location`, `Qualification`, `Category`, `Position`, `Vacancy`, `REGIS_NO`) VALUES
-(1, 'trying something out', 'please work', 'anything', 'anything', 'anything', 'anything', 1202202),
-(2, 'asdasd', 'asdasdsa', 'aasdasd', 'asdasda', 'asdasd', 'asdasd', 1202202),
-(3, 'asdasd', 'asdasdasd', 'aasdasd', 'asdasda', 'asdasd', 'asdasd', 1202202),
-(5, 'sdasd', 'asdasd', 'asdasd', 'asdasdsa', 'asdasd', 'asdasd', 1202202),
-(7, 'sdasd', 'asdas', 'adsdas', 'asdasd', 'asdasd', 'asdasd', 1202202),
-(8, 'This will is good enough', 'kuching ', 'i dont know', 'enough now', 'please confirm', 'lets finish this', 120212312),
-(9, 'asdasd', 'asdasd', 'dasdas', 'asdasdas', 'sadasd', 'sadasd', 120212312),
-(10, 'asdasda', 'dasdasdasd', 'asdasdasd', 'asdasdasda', 'asdasdasd', 'asdasdas', 1202202),
-(11, 'asdasdasdas', 'asdsadas', 'asdasdas', 'asdasdasdsad', 'asdasdasd', 'asdasdasd', 1202202),
-(12, 'sadasdasd', 'asdasdsad', 'aasdasdas', 'asdasdas', 'asdsad', 'asdasdas', 1202202),
-(13, 'asdasdas', 'asdasdas', 'asdsada', 'asdasd', 'asdasd', 'asdasd', 1202202),
-(14, 'asdasdasdasd', 'asdasdasdasd', 'asdasdsadsad', 'asdasdsadas', 'asdasdasdasd', 'asdasdasdasdas', 1202202);
+INSERT INTO `jobs` (`Job_ID`, `Job_Title`, `Location`, `Qualification`, `Category`, `Position`, `Vacancy`, `REGIS_NO`, `Date_Posted`, `Date_End`) VALUES
+(19, 'Seating man near the table', 'kuching', 'O levels', 'Industry ', 'entry level', '222', 2010312123, '2022-05-10', '2022-05-24'),
+(20, 'Web developement intern needed ', 'kuching', 'first year completed', 'Mechanical Engineering', 'youtube', '111', 1202202, '2022-05-10', '2023-05-02'),
+(21, 'Intern for observer', 'kualalampur', 'second year student', ' car industry ', 'anything', '121', 2010312, '2022-05-11', '2022-05-12');
 
 -- --------------------------------------------------------
 
@@ -149,7 +138,7 @@ CREATE TABLE `student` (
   `NAME` varchar(50) NOT NULL,
   `STUDENT_EMAIL` varchar(100) NOT NULL,
   `COURSE` varchar(50) NOT NULL,
-  `ENROLL` varchar(10) DEFAULT NULL,
+  `ENROLL` varchar(255) DEFAULT NULL,
   `SUPERVISOR` varchar(50) DEFAULT NULL,
   `GENDER` varchar(7) NOT NULL,
   `CURRENT_RESIDENCE` varchar(100) NOT NULL,
@@ -165,13 +154,12 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`STUDENT_ID`, `NAME`, `STUDENT_EMAIL`, `COURSE`, `ENROLL`, `SUPERVISOR`, `GENDER`, `CURRENT_RESIDENCE`, `CONTACT_NO`, `YEAR_OF_STUDY`, `PASSWORD`, `CV`, `USERNAME`) VALUES
-(101220011, 'Geralt', '101220011@student.swinburne.edu.my', 'Bachelors of information technology', NULL, NULL, 'Male', 'dasdasdasd', '1665456547', '3', '1234', 'profile101220011.pdf', 'chou'),
-(101220012, 'Geraltdina', '101220012@student.swinburne.edu.my', 'Bachelors of Engineering', 'Confirmed', NULL, 'Female', 'dasdasdasd', '1665456547', '2', '1234', 'profile101220012.pdf', 'chouis'),
-(101220016, 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdasda', '0172564896', '3', '1234', 'profile101220016.pdf', 'Eric'),
-(101220213, 'Andrew Michael', '101220213@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdasda', '0172564897', '3', '12345', 'profile101220213.pdf', 'ErgoProxy'),
-(101220516, 'AaL', '101220516@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'asdasdsadas', '0176395488', '2', '12345', 'profile101220516.pdf', 'aas'),
-(101223648, 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', 'Confirmed', NULL, 'Male ', '432, lorong kenny hill 5, kuching, sarawak, malaysia', '01774587524', '3', '123456789', NULL, 'arasln'),
-(101320618, 'haider', '101320618@students.swinburne.edu.my', 'Bachelors of Marketing', NULL, NULL, 'Male', 'ta 145 sadasdas', '0122231577', '3', '1234', 'profile101320618.pdf', 'hayze');
+(101220016, 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, 'jim', 'Male', '567 kuchching road', '0172564896', '3', '1234', 'profile101220016.pdf', 'Eric'),
+(101220213, 'Andrew Michael', '101220213@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'TA165, genting highlands', '0172564897', '3', '12345', 'profile101220213.pdf', 'ErgoProxy'),
+(101220516, 'AaL', '101220516@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', '43 street, london', '0176395488', '2', '12345', 'profile101220516.pdf', 'aas'),
+(101220611, 'Ashfaque Ali', '101220611@students.swinburne.edu.my', 'Bachelors of information technology', NULL, NULL, 'Male', 'dhaka bangladesh', '123456789', '3', '1234', 'profile101220611.pdf', 'shag'),
+(101220668, 'Asfaque Ali', '101220668@students.swinburne.edu.my', 'Bachelors of Commerce', 'Confirmed', 'arsalan', 'Male', 'dhaka bangladesh', '01752658745', '3', '1234', 'profile101220668.pdf', 'shag'),
+(101223648, 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', '0', NULL, 'Male ', '432, lorong kenny hill 5, kuching, sarawak, malaysia', '01774587524', '3', '123456789', NULL, 'arasln');
 
 -- --------------------------------------------------------
 
@@ -190,23 +178,11 @@ CREATE TABLE `students_nonappliedjobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `weak_entity`
---
-
-CREATE TABLE `weak_entity` (
-  `appID` int(11) NOT NULL,
-  `Proof` varchar(255) DEFAULT NULL,
-  `Status` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Structure for view `students_nonappliedjobs`
 --
 DROP TABLE IF EXISTS `students_nonappliedjobs`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`trial for more options`@`%` SQL SECURITY DEFINER VIEW `students_nonappliedjobs`  AS SELECT `a`.`NAME` AS `NAME`, `a`.`STUDENT_ID` AS `STUDENT_ID`, `j`.`REGIS_NO` AS `REGIS_NO`, `j`.`Job_ID` AS `Job_ID`, `j`.`Job_Title` AS `Job_Title` FROM ((`student` `a` join `applicants` `o` on(`a`.`STUDENT_ID` = `o`.`STUDENT_ID`)) join `jobs` `j` on(`o`.`Job_ID` = `j`.`Job_ID`)) WHERE `a`.`STUDENT_ID` <> 101223648101223648  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`trial for more options`@`%` SQL SECURITY DEFINER VIEW `students_nonappliedjobs`  AS SELECT `a`.`NAME` AS `NAME`, `a`.`STUDENT_ID` AS `STUDENT_ID`, `j`.`REGIS_NO` AS `REGIS_NO`, `j`.`Job_ID` AS `Job_ID`, `j`.`Job_Title` AS `Job_Title` FROM ((`student` `a` join `applicants` `o` on(`a`.`STUDENT_ID` = `o`.`STUDENT_ID`)) join `jobs` `j` on(`o`.`Job_ID` = `j`.`Job_ID`)) WHERE `a`.`STUDENT_ID` <> 101223648101223648101223648101223648  ;
 
 --
 -- Indexes for dumped tables
@@ -246,12 +222,6 @@ ALTER TABLE `student`
   ADD PRIMARY KEY (`STUDENT_ID`);
 
 --
--- Indexes for table `weak_entity`
---
-ALTER TABLE `weak_entity`
-  ADD PRIMARY KEY (`appID`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -259,13 +229,13 @@ ALTER TABLE `weak_entity`
 -- AUTO_INCREMENT for table `applicants`
 --
 ALTER TABLE `applicants`
-  MODIFY `appID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `appID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
