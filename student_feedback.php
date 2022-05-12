@@ -13,8 +13,10 @@ include'submit_rating.php';
     <meta charset="utf-8" />
     <title>Feedback Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -22,6 +24,24 @@ include'submit_rating.php';
 
 
 <body>
+        <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
+                    class="fas fa-address-book me-1"></i>Swinburne</div>
+            <div class="list-group list-group-flush my-3">
+                <a href="student_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-project-diagram me-2"></i>Internship listing</a>
+                  <a href="student_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Company listing</a>                   
+                <a href="student_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-paperclip me-2"></i>Student Dashboard</a>
+                <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                        class="fas fa-power-off me-2"></i>Logout</a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
     <div class="container">
     	<h1 class="mt-5 mb-5">Feedback Page</h1>
     	<div class="card">
@@ -32,28 +52,8 @@ include'submit_rating.php';
     			
                     <div class="modal-header">
                         <h5 class="modal-title">Feedback</h5>
-                            
-                        </button>
                     </div>
-                            <div>
-                                <p>Did You enjoy your internship experience?</p>
-                                <div class="rating_question1">
-                                    <input type="radio" name="rating_question1" id="radio1" value="Yes">
-                                    <label for="radio1">Yes</label>
-                                    <input type="radio" name="rating_question1" id="radio2" value="No">
-                                    <label for="radio2">No</label>
-                                </div>
-                                <p>Would you recommend this company for other interns?</p>
-                               
-                                    <div class="rating_question2" >
-                                        <input type="radio" name="rating_question2" id="radio3" value="Yes">
-                                        <label for="radio3">Yes</label>
-                                        <input type="radio" name="rating_question2" id="radio4" value="No">
-                                        <label for="radio4">No</label>      
-                                    </div>      
-                                            
-                            </div>
-                           
+                         
                             
                         
 
@@ -69,6 +69,27 @@ include'submit_rating.php';
                             <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
                         </div>
                         <div class="form-group">
+
+                               <div>
+                                <p>Did You enjoy your internship experience?</p>
+                                <div class="rating_question1">
+                                    <input type="radio" name="rating_question1" id="radio1" value="Yes">
+                                    <label for="radio1">Yes</label>
+                                    <input type="radio" name="rating_question1" id="radio2" value="No">
+                                    <label for="radio2">No</label>
+                                </div>
+                                
+                                <p>Would you recommend this company for other interns?</p>
+                               
+                                    <div class="rating_question2" >
+                                        <input type="radio" name="rating_question2" id="radio3" value="Yes">
+                                        <label for="radio3">Yes</label>
+                                        <input type="radio" name="rating_question2" id="radio4" value="No">
+                                        <label for="radio4">No</label>      
+                                    </div>      
+                                            
+                                </div>
+                           
                             <textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
                         </div>
                         <div class="form-group text-center mt-4">
