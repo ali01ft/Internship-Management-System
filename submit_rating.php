@@ -1,27 +1,56 @@
+
 <?php
-$connect = new PDO("mysql:host=localhost;dbname=testing", "root", "");
+$conn = mysqli_connect('localhost', 'root', '', 'test');
+if(!$conn){
+	echo "connection failed";
+}
+else{
 
-if(isset($_POST["rating_data"]))
-{
 
-	$data = array(
-		':user_name'		=>	$_POST["user_name"],
-		':user_rating'		=>	$_POST["rating_data"],
-		':user_review'		=>	$_POST["user_review"],
-		':datetime'			=>	time()
-	);
+	$rating1 = $_POST['star1'];
+	print_r($rating1);
 
-	$query = "
-	INSERT INTO review_table 
-	(user_name, user_rating, user_review, datetime) 
-	VALUES (:user_name, :user_rating, :user_review, :datetime)
-	";
+if (isset($_POST['submit'])){
 
-	$statement = $connect->prepare($query);
 
-	$statement->execute($data);
+		$user_name		=	$_POST["user_name"];
+		print_r($user_name);
+		$user_review		=	$_POST["user_review"];
+		print_r($user_review);
+	
+		$que1 = $_POST['question1'];
+		print_r($que1);
+		$que2 = $_POST['question2'];
+		print_r($que2);
+		$date = date("Y/m/d");
 
-	echo "Your Review & Rating Successfully Submitted";
+
+	$stmt = mysqli_stmt_init($conn); //initialize connection to statement
+
+	$query = "INSERT INTO review_table (user_name, rating_question1, rating_question2, user_rating, user_review, datetime) 
+	VALUES (?, ?, ?, ?, ?,?)";
+
+	mysqli_stmt_prepare($stmt, $query);
+	mysqli_stmt_bind_param($stmt, 'ssssss', $user_name, $que1, $que2, $rating1, $user_review, $date);
+	$insert = mysqli_stmt_execute($stmt);
+
+
+
+	if(!$insert){
+		echo "couldnt insert";
+	}else{
+		echo "works fine";
+	}
+
+	mysqli_stmt_close($stmt);
+	mysqli_close($conn);
+		
 
 }
+
+
+}
+
+
+
 ?>

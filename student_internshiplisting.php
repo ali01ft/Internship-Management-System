@@ -47,7 +47,6 @@
                                 if(isset($_POST['Apply'])) {
 
                                      $f_ID = $_POST['Apply'];  // Job ID
-                                     print_r($f_ID);
                                      $id = $_SESSION['user_id'];   //Student ID
 
                                      $apply = "INSERT INTO applicants (STUDENT_ID, Job_ID) VALUES ('$id', '$f_ID');";       // add friend from user's side

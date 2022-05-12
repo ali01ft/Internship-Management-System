@@ -1,7 +1,51 @@
 
 <?php
+$connect = new PDO("mysql:host=localhost;dbname=test", "root", "");
 
-include'submit_rating.php';
+if(isset($_POST["rating_data"]))
+{
+
+	$data = array(
+		'user_name'		=>	$_POST["user_name"],
+		'user_rating'		=>	$_POST["rating_data"],
+		'user_review'		=>	$_POST["user_review"],
+		'datetime'			=>	time()
+	);
+
+
+	$rating = $data['user_rating'];
+	print_r($rating);
+
+
+	//$query = "
+	//INSERT INTO review_table 
+	//(user_name, user_rating, user_review, datetime) 
+	//VALUES (:user_name, :user_rating, :user_review, :datetime)
+	//";
+
+	//$statement = $connect->prepare($query);
+
+	//$statement->execute($data);
+
+	//echo "Your Review & Rating Successfully Submitted";
+
+	// header("Location:submit_rating.php"); 
+
+}
+
+
+if (isset($_POST['Submit'])){
+
+		$user_name		=	$_POST["user_name"];
+		$user_review		=	$_POST["user_review"];
+		$que1 = $_POST['question1'];
+		print_r($que1);
+		$que2 = $_POST['question2'];
+		print_r($que2);
+		print_r($rating); 
+
+}
+
 
 
 
@@ -54,10 +98,11 @@ include'submit_rating.php';
                         <h5 class="modal-title">Feedback</h5>
                     </div>
                          
-                            
                         
 
+                    <form action = "submit_rating.php" method = "POST">
                     <div class="modal-body">
+
                         <h4 class="text-center mt-2 mb-4">
                             <i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
                             <i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
@@ -65,26 +110,28 @@ include'submit_rating.php';
                             <i class="fas fa-star star-light submit_star mr-1" id="submit_star_4" data-rating="4"></i>
                             <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
                         </h4>
+                        	<input type="hidden" id="star1" name="star1" value="asdas">
                         <div class="form-group">
                             <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
                         </div>
-                        <div class="form-group">
 
-                               <div>
+                         
+                        <div class="form-group">
+                 								<div>
                                 <p>Did You enjoy your internship experience?</p>
                                 <div class="rating_question1">
-                                    <input type="radio" name="rating_question1" id="radio1" value="Yes">
+                                    <input type="radio" name="question1" id="radio1" value="Yes">
                                     <label for="radio1">Yes</label>
-                                    <input type="radio" name="rating_question1" id="radio2" value="No">
+                                    <input type="radio" name="question1" id="radio2" value="No">
                                     <label for="radio2">No</label>
                                 </div>
                                 
                                 <p>Would you recommend this company for other interns?</p>
                                
                                     <div class="rating_question2" >
-                                        <input type="radio" name="rating_question2" id="radio3" value="Yes">
+                                        <input type="radio" name="question2" id="radio3" value="Yes">
                                         <label for="radio3">Yes</label>
-                                        <input type="radio" name="rating_question2" id="radio4" value="No">
+                                        <input type="radio" name="question2" id="radio4" value="No">
                                         <label for="radio4">No</label>      
                                     </div>      
                                             
@@ -93,9 +140,12 @@ include'submit_rating.php';
                             <textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
                         </div>
                         <div class="form-group text-center mt-4">
-                            <button type="button" class="btn btn-primary" id="save_review">Submit</button>
+                        
+                            <input type="submit" class="btn btn-primary" value="submit" name="submit" id="save_review">
                         </div>
+                      
                     </div>
+                  </form>
     			</div>
     		</div>
     	</div>
@@ -162,25 +212,35 @@ include'submit_rating.php';
 
         rating_data = $(this).data('rating');
 
+
+        document.getElementById("star1").value = rating_data;
+
+
+
     });
 
-    $('#save_review').click(function(){
+  $('#save_review').click(function(){
 
-        var user_name = $('#user_name').val();
+      var user_name = $('#user_name').val();
+       
 
         var user_review = $('#user_review').val();
+       
 
-        if(user_name == '' || user_review == '')
+     
+       var user_rating2 = document.getElementsByName('question2');
+
+        if(user_name == '' || user_review == '' || rating_data =='')
         {
-            alert("Please Fill Both Field");
+            alert("Please Fill all Field");
             return false;
         }
         else
         {
             $.ajax({
-                url:"submit_rating.php",
-                method:"POST",
-                data:{rating_data:rating_data, user_name:user_name, user_review:user_review},
+               url:"submit_rating.php",
+                type:"POST",
+                data:{rating_data:rating_data},
                 success:function(data)
                 {
                     $('#review_modal').modal('hide');
@@ -189,10 +249,10 @@ include'submit_rating.php';
 
                     alert(data);
                 }
-            })
+            });
         }
 
-	});
+ });
 	const setStep = step => {
     document.querySelectorAll(".step-content").forEach(element => element.style.display = "none");
     document.querySelector("[data-step='" + step + "']").style.display = "block";
