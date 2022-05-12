@@ -1,18 +1,14 @@
 
 <?php
 
-session_start();
-$userID = $_SESSION['user_id'];
-include'process.php';
-$q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
- 				
- 				$row=mysqli_fetch_assoc($q);
+include'submit_rating.php';
+
 
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
->>>>>>> 965829b38e8ecc01a2ea3a43b001c52a52edcea3
+
 <head>
     <meta charset="utf-8" />
     <title>Feedback Page</title>
@@ -23,6 +19,8 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
+
+
 <body>
     <div class="container">
     	<h1 class="mt-5 mb-5">Feedback Page</h1>
@@ -30,65 +28,53 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
     		<div class="card-header">Comapany Name</div>
     		<div class="card-body">
     			<div class="row">
-    				<div class="col-sm-4 text-center">
-    					<h1 class="text-warning mt-4 mb-4">
-    						<b><span id="average_rating">0.0</span> / 5</b>
-    					</h1>
-    					<div class="mb-3">
-    						<i class="fas fa-star star-light mr-1 main_star"></i>
-                            <i class="fas fa-star star-light mr-1 main_star"></i>
-                            <i class="fas fa-star star-light mr-1 main_star"></i>
-                            <i class="fas fa-star star-light mr-1 main_star"></i>
-                            <i class="fas fa-star star-light mr-1 main_star"></i>
-	    				</div>
-    					<h3><span id="total_review">0</span> Review</h3>
-    				</div>
-    				<div class="col-sm-4">
-    					<p>
-                            <div class="progress-label-left"><b>5</b> <i class="fas fa-star text-warning"></i></div>
-
-                            <div class="progress-label-right">(<span id="total_five_star_review">0</span>)</div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
+    				
+    			
+                    <div class="modal-header">
+                        <h5 class="modal-title">Feedback</h5>
+                            
+                        </button>
+                    </div>
+                            <div>
+                                <p>Did You enjoy your internship experience?</p>
+                                <div class="rating_question1">
+                                    <input type="radio" name="rating_question1" id="radio1" value="Yes">
+                                    <label for="radio1">Yes</label>
+                                    <input type="radio" name="rating_question1" id="radio2" value="No">
+                                    <label for="radio2">No</label>
+                                </div>
+                                <p>Would you recommend this company for other interns?</p>
+                               
+                                    <div class="rating_question2" >
+                                        <input type="radio" name="rating_question2" id="radio3" value="Yes">
+                                        <label for="radio3">Yes</label>
+                                        <input type="radio" name="rating_question2" id="radio4" value="No">
+                                        <label for="radio4">No</label>      
+                                    </div>      
+                                            
                             </div>
-                        </p>
-    					<p>
-                            <div class="progress-label-left"><b>4</b> <i class="fas fa-star text-warning"></i></div>
+                           
                             
-                            <div class="progress-label-right">(<span id="total_four_star_review">0</span>)</div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="four_star_progress"></div>
-                            </div>               
-                        </p>
-    					<p>
-                            <div class="progress-label-left"><b>3</b> <i class="fas fa-star text-warning"></i></div>
-                            
-                            <div class="progress-label-right">(<span id="total_three_star_review">0</span>)</div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="three_star_progress"></div>
-                            </div>               
-                        </p>
-    					<p>
-                            <div class="progress-label-left"><b>2</b> <i class="fas fa-star text-warning"></i></div>
-                            
-                            <div class="progress-label-right">(<span id="total_two_star_review">0</span>)</div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="two_star_progress"></div>
-                            </div>               
-                        </p>
-    					<p>
-                            <div class="progress-label-left"><b>1</b> <i class="fas fa-star text-warning"></i></div>
-                            
-                            <div class="progress-label-right">(<span id="total_one_star_review">0</span>)</div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="one_star_progress"></div>
-                            </div>               
-                        </p>
-    				</div>
-    				<div class="col-sm-4 text-center">
-    					<h3 class="mt-4 mb-3">Write Review Here</h3>
-    					<button type="button" name="add_review" id="add_review" class="btn btn-primary">Review</button>
-    				</div>
+                        
+
+                    <div class="modal-body">
+                        <h4 class="text-center mt-2 mb-4">
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_3" data-rating="3"></i>
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_4" data-rating="4"></i>
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
+                        </h4>
+                        <div class="form-group">
+                            <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
+                        </div>
+                        <div class="form-group">
+                            <textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
+                        </div>
+                        <div class="form-group text-center mt-4">
+                            <button type="button" class="btn btn-primary" id="save_review">Submit</button>
+                        </div>
+                    </div>
     			</div>
     		</div>
     	</div>
@@ -97,36 +83,9 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
 </body>
 </html>
 
-<div id="review_modal" class="modal" tabindex="-1" role="dialog">
-  	<div class="modal-dialog" role="document">
-    	<div class="modal-content">
-	      	<div class="modal-header">
-	        	<h5 class="modal-title">Submit Review</h5>
-	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          		<span aria-hidden="true">&times;</span>
-	        	</button>
-	      	</div>
-	      	<div class="modal-body">
-	      		<h4 class="text-center mt-2 mb-4">
-	        		<i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
-                    <i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
-                    <i class="fas fa-star star-light submit_star mr-1" id="submit_star_3" data-rating="3"></i>
-                    <i class="fas fa-star star-light submit_star mr-1" id="submit_star_4" data-rating="4"></i>
-                    <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
-	        	</h4>
-	        	<div class="form-group">
-	        		<input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
-	        	</div>
-	        	<div class="form-group">
-	        		<textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
-	        	</div>
-	        	<div class="form-group text-center mt-4">
-	        		<button type="button" class="btn btn-primary" id="save_review">Submit</button>
-	        	</div>
-	      	</div>
-    	</div>
-  	</div>
-</div>
+
+	      	
+    
 <script>
 	
 		var rating_data = 0;
@@ -213,7 +172,23 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
         }
 
 	});
-	
+	const setStep = step => {
+    document.querySelectorAll(".step-content").forEach(element => element.style.display = "none");
+    document.querySelector("[data-step='" + step + "']").style.display = "block";
+    document.querySelectorAll(".steps .step").forEach((element, index) => {
+        index < step-1 ? element.classList.add("complete") : element.classList.remove("complete");
+        index == step-1 ? element.classList.add("current") : element.classList.remove("current");
+    });
+};
+document.querySelectorAll("[data-set-step]").forEach(element => {
+    element.onclick = event => {
+        event.preventDefault();
+        setStep(parseInt(element.dataset.setStep));
+    };
+});
+<?php if (!empty($_POST)): ?>
+setStep(4);
+<?php endif; ?>
 
    
 
