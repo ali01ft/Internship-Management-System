@@ -8,20 +8,19 @@ else{
 
 
 	$rating1 = $_POST['star1'];
-	print_r($rating1);
 
 if (isset($_POST['submit'])){
 
 
 		$user_name		=	$_POST["user_name"];
-		print_r($user_name);
+	
 		$user_review		=	$_POST["user_review"];
-		print_r($user_review);
+	
 	
 		$que1 = $_POST['question1'];
-		print_r($que1);
+	
 		$que2 = $_POST['question2'];
-		print_r($que2);
+
 		$date = date("Y/m/d");
 
 

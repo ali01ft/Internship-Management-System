@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2022 at 03:42 AM
+-- Generation Time: May 12, 2022 at 06:19 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.1
 
@@ -69,7 +69,10 @@ INSERT INTO `applicants` (`appID`, `STUDENT_ID`, `Job_ID`, `confirmation`, `Proo
 (91, 101220611, 19, NULL, NULL, NULL),
 (92, 101220668, 21, NULL, NULL, NULL),
 (93, 101220668, 20, 'YES', '93_101220668_2022-05-10.pdf', 'Confirmed'),
-(94, 101220668, 19, NULL, NULL, NULL);
+(94, 101220668, 19, NULL, NULL, NULL),
+(95, 101220699, 21, NULL, NULL, NULL),
+(96, 101220699, 20, 'YES', '96_101220699_2022-05-10.pdf', 'Confirmed'),
+(97, 101220699, 19, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -125,7 +128,8 @@ CREATE TABLE `jobs` (
 INSERT INTO `jobs` (`Job_ID`, `Job_Title`, `Location`, `Qualification`, `Category`, `Position`, `Vacancy`, `REGIS_NO`, `Date_Posted`, `Date_End`) VALUES
 (19, 'Seating man near the table', 'kuching', 'O levels', 'Industry ', 'entry level', '222', 2010312123, '2022-05-10', '2022-05-24'),
 (20, 'Web developement intern needed ', 'kuching', 'first year completed', 'Mechanical Engineering', 'youtube', '111', 1202202, '2022-05-10', '2023-05-02'),
-(21, 'Intern for observer', 'kualalampur', 'second year student', ' car industry ', 'anything', '121', 2010312, '2022-05-11', '2022-05-12');
+(21, 'Intern for observer', 'kualalampur', 'second year student', ' car industry ', 'anything', '121', 2010312, '2022-05-11', '2022-05-12'),
+(22, 'yadayad', 'dasdsad', 'dasd', 'asdasdas', 'asdas', '123', 1202202, '2022-05-10', '2022-08-10');
 
 -- --------------------------------------------------------
 
@@ -155,10 +159,11 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`STUDENT_ID`, `NAME`, `STUDENT_EMAIL`, `COURSE`, `ENROLL`, `SUPERVISOR`, `GENDER`, `CURRENT_RESIDENCE`, `CONTACT_NO`, `YEAR_OF_STUDY`, `PASSWORD`, `CV`, `USERNAME`) VALUES
 (101220016, 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, 'jim', 'Male', '567 kuchching road', '0172564896', '3', '1234', 'profile101220016.pdf', 'Eric'),
-(101220213, 'Andrew Michael', '101220213@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', 'TA165, genting highlands', '0172564897', '3', '12345', 'profile101220213.pdf', 'ErgoProxy'),
+(101220213, 'Andrew Michael', '101220213@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, 'ali', 'Male', 'TA165, genting highlands', '0172564897', '3', '12345', 'profile101220213.pdf', 'ErgoProxy'),
 (101220516, 'AaL', '101220516@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, NULL, 'Male', '43 street, london', '0176395488', '2', '12345', 'profile101220516.pdf', 'aas'),
 (101220611, 'Ashfaque Ali', '101220611@students.swinburne.edu.my', 'Bachelors of information technology', NULL, NULL, 'Male', 'dhaka bangladesh', '123456789', '3', '1234', 'profile101220611.pdf', 'shag'),
 (101220668, 'Asfaque Ali', '101220668@students.swinburne.edu.my', 'Bachelors of Commerce', 'Confirmed', 'arsalan', 'Male', 'dhaka bangladesh', '01752658745', '3', '1234', 'profile101220668.pdf', 'shag'),
+(101220699, 'Eric Mohammad', '101220699@students.swinburne.edu.my', 'Bachelors of Commerce', 'Confirmed', NULL, 'Male', '433 kenny hill kuching ', '1454175', '3', '1234', 'profile101220699.pdf', 'shag'),
 (101223648, 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', '0', NULL, 'Male ', '432, lorong kenny hill 5, kuching, sarawak, malaysia', '01774587524', '3', '123456789', NULL, 'arasln');
 
 -- --------------------------------------------------------
@@ -178,11 +183,34 @@ CREATE TABLE `students_nonappliedjobs` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `student_job_details`
+-- (See below for the actual view)
+--
+CREATE TABLE `student_job_details` (
+`STUDENT_ID` int(255)
+,`REGIS_NO` int(20)
+,`COMPANY_NAME` varchar(50)
+,`Job_ID` int(11)
+,`Job_Title` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `students_nonappliedjobs`
 --
 DROP TABLE IF EXISTS `students_nonappliedjobs`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`trial for more options`@`%` SQL SECURITY DEFINER VIEW `students_nonappliedjobs`  AS SELECT `a`.`NAME` AS `NAME`, `a`.`STUDENT_ID` AS `STUDENT_ID`, `j`.`REGIS_NO` AS `REGIS_NO`, `j`.`Job_ID` AS `Job_ID`, `j`.`Job_Title` AS `Job_Title` FROM ((`student` `a` join `applicants` `o` on(`a`.`STUDENT_ID` = `o`.`STUDENT_ID`)) join `jobs` `j` on(`o`.`Job_ID` = `j`.`Job_ID`)) WHERE `a`.`STUDENT_ID` <> 101223648101223648101223648101223648  ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `student_job_details`
+--
+DROP TABLE IF EXISTS `student_job_details`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_job_details`  AS SELECT `s`.`STUDENT_ID` AS `STUDENT_ID`, `j`.`REGIS_NO` AS `REGIS_NO`, `i`.`COMPANY_NAME` AS `COMPANY_NAME`, `j`.`Job_ID` AS `Job_ID`, `j`.`Job_Title` AS `Job_Title` FROM (((`student` `s` join `applicants` `a` on(`s`.`STUDENT_ID` = `a`.`STUDENT_ID`)) join `jobs` `j` on(`a`.`Job_ID` = `j`.`Job_ID`)) join `industry` `i` on(`j`.`REGIS_NO` = `i`.`REGIS_NO`))  ;
 
 --
 -- Indexes for dumped tables
@@ -229,13 +257,13 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `applicants`
 --
 ALTER TABLE `applicants`
-  MODIFY `appID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `appID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables
