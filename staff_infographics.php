@@ -34,7 +34,7 @@
            function drawChart()  
            {  
                 var data = google.visualization.arrayToDataTable([  
-                          ['Gender', 'Number'],  
+                          ['Course', 'Number'],  
                           <?php  
                           while($row = mysqli_fetch_array($result))  
                           {  
@@ -46,12 +46,51 @@
                       title: 'Percentage of student courses',  
                       //is3D:true,  
                       pieHole: 0.4,
-                      backgroundColor: { fill:'transparent' }
+                      backgroundColor: { fill:'transparent' },
+                      height:600,
+                      width:600
                      };  
                 var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
                 chart.draw(data, options);  
            }  
-    </script>  
+    </script> 
+<?php  
+ $connect = mysqli_connect("localhost", "root", "", "ims");  
+ $query1 = "SELECT GENDER, count(*) as number FROM student GROUP BY GENDER";  
+ $result1 = mysqli_query($connect, $query1);  
+ ?>  
+
+
+  <script type="text/javascript">  
+           google.charts.load('current', {'packages':['corechart']});  
+           google.charts.setOnLoadCallback(drawChart);  
+           function drawChart()  
+           {  
+                var data = google.visualization.arrayToDataTable([  
+                          ['Gender', 'Number'],  
+                          <?php  
+                          while($row = mysqli_fetch_array($result1))  
+                          {  
+                               echo "['".$row["GENDER"]."', ".$row["number"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title: 'Percentage of student gender',  
+                      //is3D:true,  
+                      pieHole: 0.4,
+                      backgroundColor: { fill:'transparent' },
+                      height:600,
+                      width:600
+
+                     };  
+                var chart = new google.visualization.PieChart(document.getElementById('piechart2'));  
+                chart.draw(data, options);  
+           }  
+    </script>
+
+
+
     <title>IMS</title>
 </head>
 
@@ -223,7 +262,7 @@
                          <div class="col-lg-2 col-md-2">
                           <div class="card bg-light text-black mb-4">
                                 <div class="card-body">
-                                    Number of students approved by staff
+                                    Number of students fully enrolled
                                     <?php 
                                     $connection = mysqli_connect("localhost","root","");
                                     $db = mysqli_select_db($connection, 'ims');
@@ -274,9 +313,12 @@
 
                  <div class="row my-5">
                     <h3 class="fs-4 mb-3">Student Demographics</h3>
-                      <div class="col-lg-2 col-md-2">
-                        <div id="piechart" style="width: 800px; height: 500px;"></div>  
+                      <div class="col-xl-3 col-md-6">
+                        <div id="piechart"></div> 
                     </div> 
+                    <div class="col-xl-3 col-md-6">
+                        <div id="piechart2"></div>
+                    </div>      
                  </div>   
 
             </div>
