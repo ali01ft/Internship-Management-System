@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2022 at 06:19 PM
+-- Generation Time: May 13, 2022 at 03:55 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.1
+-- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -118,18 +118,21 @@ CREATE TABLE `jobs` (
   `Vacancy` varchar(255) NOT NULL,
   `REGIS_NO` int(20) NOT NULL,
   `Date_Posted` date DEFAULT NULL,
-  `Date_End` date DEFAULT NULL
+  `Date_End` date DEFAULT NULL,
+  `Extra_Details` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `jobs`
 --
 
-INSERT INTO `jobs` (`Job_ID`, `Job_Title`, `Location`, `Qualification`, `Category`, `Position`, `Vacancy`, `REGIS_NO`, `Date_Posted`, `Date_End`) VALUES
-(19, 'Seating man near the table', 'kuching', 'O levels', 'Industry ', 'entry level', '222', 2010312123, '2022-05-10', '2022-05-24'),
-(20, 'Web developement intern needed ', 'kuching', 'first year completed', 'Mechanical Engineering', 'youtube', '111', 1202202, '2022-05-10', '2023-05-02'),
-(21, 'Intern for observer', 'kualalampur', 'second year student', ' car industry ', 'anything', '121', 2010312, '2022-05-11', '2022-05-12'),
-(22, 'yadayad', 'dasdsad', 'dasd', 'asdasdas', 'asdas', '123', 1202202, '2022-05-10', '2022-08-10');
+INSERT INTO `jobs` (`Job_ID`, `Job_Title`, `Location`, `Qualification`, `Category`, `Position`, `Vacancy`, `REGIS_NO`, `Date_Posted`, `Date_End`, `Extra_Details`) VALUES
+(19, 'Seating man near the table', 'kuching', 'O levels', 'Industry ', 'entry level', '222', 2010312123, '2022-05-10', '2022-05-24', NULL),
+(20, 'Web developement intern needed ', 'kuching', 'first year completed', 'Mechanical Engineering', 'youtube', '111', 1202202, '2022-05-10', '2023-05-02', NULL),
+(21, 'Intern for observer', 'kualalampur', 'second year student', ' car industry ', 'anything', '121', 2010312, '2022-05-11', '2022-05-12', NULL),
+(22, 'yadayad', 'dasdsad', 'dasd', 'asdasdas', 'asdas', '123', 1202202, '2022-05-10', '2022-08-10', NULL),
+(23, 'New trial', 'kuching', 'you are unqualified', 'Car Industry', 'janiter', 'none', 1202202, '2022-05-13', '2022-08-13', NULL),
+(24, 'The last trial', 'This is over', 'I am done', 'Telecom Industry', 'i dont care', 'Please work', 1202202, '2022-05-13', '2022-11-13', 'Thanks for playing');
 
 -- --------------------------------------------------------
 
@@ -201,7 +204,7 @@ CREATE TABLE `student_job_details` (
 --
 DROP TABLE IF EXISTS `students_nonappliedjobs`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`trial for more options`@`%` SQL SECURITY DEFINER VIEW `students_nonappliedjobs`  AS SELECT `a`.`NAME` AS `NAME`, `a`.`STUDENT_ID` AS `STUDENT_ID`, `j`.`REGIS_NO` AS `REGIS_NO`, `j`.`Job_ID` AS `Job_ID`, `j`.`Job_Title` AS `Job_Title` FROM ((`student` `a` join `applicants` `o` on(`a`.`STUDENT_ID` = `o`.`STUDENT_ID`)) join `jobs` `j` on(`o`.`Job_ID` = `j`.`Job_ID`)) WHERE `a`.`STUDENT_ID` <> 101223648101223648101223648101223648  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`trial for more options`@`%` SQL SECURITY DEFINER VIEW `students_nonappliedjobs`  AS SELECT `a`.`NAME` AS `NAME`, `a`.`STUDENT_ID` AS `STUDENT_ID`, `j`.`REGIS_NO` AS `REGIS_NO`, `j`.`Job_ID` AS `Job_ID`, `j`.`Job_Title` AS `Job_Title` FROM ((`student` `a` join `applicants` `o` on(`a`.`STUDENT_ID` = `o`.`STUDENT_ID`)) join `jobs` `j` on(`o`.`Job_ID` = `j`.`Job_ID`)) WHERE `a`.`STUDENT_ID` <> 101223648101223648101223648101223648101223648101223648101223648101223648  ;
 
 -- --------------------------------------------------------
 
@@ -263,7 +266,7 @@ ALTER TABLE `applicants`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
