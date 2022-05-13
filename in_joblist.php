@@ -129,6 +129,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <th scope="col">Job Title</th>
                                  <th scope="col">Location</th>
                                  <th scope="col">Category</th>
+                                 <th scope="col">More Category Details</th>
                                  <th scope="col">Position</th>
                                  <th scope="col">Date Posted</th>
                                  <th scope="col">Offer End Date</th>
@@ -150,9 +151,11 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <td><?php echo $row->Location?></td>
                                  
                                  <td><?php echo $row->Category?></td>
+                                 <td><?php echo $row->Extra_Details?></td>
                                  <td><?php echo $row->Position?></td>
                                  <td><?php echo $sdate?></td>
                                  <td><?php echo $edate?></td>
+                                 
                                  <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
                               </tr>
                               <?php endwhile; ?>

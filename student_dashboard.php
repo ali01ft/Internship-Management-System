@@ -380,4 +380,23 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 
 
 </html>
+<?php 
+    }
+    elseif($status == "pending"){
 
+            include 'student_status1.php';
+
+         }
+    else{
+
+            if($status == "Confirmed"){
+
+            include 'student_status2.php';
+
+         }
+
+    }
+}else {
+   header("Location:  login_access.php");
+}
+ ?>

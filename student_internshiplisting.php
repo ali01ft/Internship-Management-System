@@ -38,7 +38,7 @@
                                  $conn = new mysqli('localhost', 'root', '', 'ims');
 
                                  //find all the job available which the student didnt apply 
-                                 $sql = "SELECT industry.COMPANY_NAME,jobs.Job_ID, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position, jobs.REGIS_NO, jobs.Date_Posted, jobs.Date_End FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO where Job_ID NOT IN (select Job_ID from applicants WHERE STUDENT_ID = $id);";
+                                 $sql = "SELECT industry.COMPANY_NAME,jobs.Job_ID, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position, jobs.REGIS_NO, jobs.Date_Posted, jobs.Date_End, jobs.Extra_Details FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO where Job_ID NOT IN (select Job_ID from applicants WHERE STUDENT_ID = $id);";
                                      $result = $conn->query($sql);
 
 
@@ -131,6 +131,7 @@
                                  <th scope="col">Location</th>
                                  <th scope="col">Qualification</th>
                                  <th scope="col">Category</th>
+                                 <th scope="col">More Details</th>
                                  <th scope="col">Position</th>
                                  <th scope="col">Date Posted</th>
                                  <th scope="col">Offer End Date</th>
@@ -153,6 +154,7 @@
                                  <td><?php echo $row->Location ?></td>
                                  <td><?php echo $row->Qualification ?></td>
                                  <td><?php echo $row->Category ?></td>
+                                 <td><?php echo $row->Extra_Details ?></td>
                                  <td><?php echo $row->Position ?></td>
                                  <td><?php echo $sdate?></td>
                                  <td><?php echo $edate?></td>

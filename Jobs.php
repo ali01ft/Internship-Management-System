@@ -35,6 +35,8 @@ if(isset($_POST["submit"])){
 
   $Vacancy = $_POST["Vacancy"];
 
+  $Extra = $_POST['Extra'];
+
   $file = $_FILES["file"];
  
 
@@ -145,10 +147,10 @@ if(isset($_POST["submit"])){
 
               $stmt = mysqli_stmt_init($conn);
 
-              $create ="INSERT INTO jobs (Job_Title, Location, Qualification, Category, Position, Vacancy, REGIS_NO, Date_Posted, Date_End) VALUES(?,?,?,?,?,?,?,?,?);";
+              $create ="INSERT INTO jobs (Job_Title, Location, Qualification, Category, Position, Vacancy, REGIS_NO, Date_Posted, Date_End, Extra_Details) VALUES(?,?,?,?,?,?,?,?,?,?);";
 
                 mysqli_stmt_prepare($stmt,$create);
-                mysqli_stmt_bind_param($stmt, "sssssssss",$JobTile, $Location, $Qualification, $Category, $Position, $Vacancy, $id, $date, $newDate);
+                mysqli_stmt_bind_param($stmt, "ssssssssss",$JobTile, $Location, $Qualification, $Category, $Position, $Vacancy, $id, $date, $newDate, $Extra);
                 mysqli_stmt_execute($stmt);
 
               }
@@ -264,13 +266,24 @@ if(isset($_POST["submit"])){
                         <br>
 
 
-                        <label for="Vacancy">Vacancy<br><span class="error"> <?php echo $msgErr;?></span><br></label>
+                        <label for="Vacancy">Vacancy<br><span class="error"> <?php echo $msgErr;?></span></label>
                           <input type="text" name="Vacancy" id="Vacancy" value="<?php if(isset($_POST["Vacancy"])) echo $_POST["Vacancy"]; ?>">
+                        <br>
                         <br>
 
 
-                        <label for="Category">Category<br><span class="error"> <?php echo $msgErr;?></span><br></label>
-                          <input type="text" name="Category" id="Category" value="<?php if(isset($_POST["Category"])) echo $_POST["Category"]; ?>">
+                        <label for="Category">Category<br><span class="error"> <?php echo $msgErr;?></span></label>
+
+                        <select name="Category" id="Category">
+                            <option value="" selected>---</option>
+                            <option value="Car Industry" onclick="addFields()">Car Industry</option>
+                            <option value="Telecom Industry" onclick="addFields()">Telecom Industry</option>
+                            <option value="ICT Industry" onclick="addFields()">ICT Industry</option>
+                            <option value="Food Industry" onclick="addFields()">Food Industry</option>
+                            <option value="Oil Industry" onclick="addFields()">Oil Industry</option>
+                        </select>
+                        <div id="container3"></div>
+                         <!-- <input type="text" name="Category" id="Category" value="<?php// if(isset($_POST["Category"])) echo $_POST["Category"]; ?>">-->
                         <br>
                         <br>
 
@@ -287,7 +300,7 @@ if(isset($_POST["submit"])){
                             <option>9</option>
                             <option>10</option>
                             <option>11</option>
-                        </select>
+                        </select><span> months</span>
                         <br>
                         <br>
 
@@ -324,6 +337,33 @@ if(isset($_POST["submit"])){
             el.classList.toggle("toggled");
         };
     </script>
+
+
+        <script>
+        function addFields(){
+            // Generate a dynamic number of inputs
+            var number = document.getElementById("Category").value;
+            // Get the element where the inputs will be added to
+            var container = document.getElementById("container3");
+            // Remove every children it had before
+            while (container.hasChildNodes()) {
+                container.removeChild(container.lastChild);
+            }
+                //create gap
+                container.appendChild(document.createElement("br"));
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Extra Description: "));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "Extra";
+                input.id ="Extra";
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+            
+        }
+        </script>
    
   
 <?php
