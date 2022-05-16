@@ -3,18 +3,16 @@
 
 
 
-    $userID = $_SESSION['user_id'];
-    //establishing connection
-        $server = "localhost";
+ $server = "localhost";
         $username = "root";
         $password = "";
         $database = "ims";
 
         $conn = mysqli_connect($server, $username, $password, $database);
-        
-        $sql = "SELECT * FROM student WHERE STUDENT_ID='$_SESSION[user_id]'";
-        $result = mysqli_query($conn,$sql) or die (mysql_error());
 
+
+
+$idustryID = $_SESSION['company_id'];
        
 
     ?>
@@ -65,12 +63,12 @@
     			
                     <div class="modal-header">
                         <h5 class="modal-title">Feedback</h5>
-                        <h4 style="color: black;"><?php echo $_SESSION['user_id']; ?></h4>
+                        <h4 style="color: black;"><?php echo $_SESSION['company_id']; ?></h4>
                     </div>
                          
                         
 
-                    <form action = "student_submit_rating.php" method = "POST">
+                    <form action = "industry_submit_rating.php" method = "POST">
                     <div class="modal-body">
 
                         <h4 class="text-center mt-2 mb-4">
@@ -88,7 +86,7 @@
                          
                         <div class="form-group">
                  								<div>
-                                <p>Did You enjoy your internship experience?</p>
+                                <p>Were you satisfied with the performance of the intern?</p>
                                 <div class="rating_question1">
                                     <input type="radio" name="question1" id="radio1" value="Yes">
                                     <label for="radio1">Yes</label>
@@ -96,7 +94,7 @@
                                     <label for="radio2">No</label>
                                 </div>
                                 
-                                <p>Would you recommend this company for other interns?</p>
+                                <p>Is the intern up to industry standard?</p>
                                
                                     <div class="rating_question2" >
                                         <input type="radio" name="question2" id="radio3" value="Yes">

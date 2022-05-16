@@ -1,6 +1,15 @@
 
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'test');
+		$server = "localhost";
+        $username = "root";
+        $password = "";
+        $database = "ims";
+
+        $conn = mysqli_connect($server, $username, $password, $database);
+        
+
+        
+
 if(!$conn){
 	echo "connection failed";
 }
@@ -26,7 +35,7 @@ if (isset($_POST['submit'])){
 
 	$stmt = mysqli_stmt_init($conn); //initialize connection to statement
 
-	$query = "INSERT INTO review_table (user_name, rating_question1, rating_question2, user_rating, user_review, datetime) 
+	$query = "INSERT INTO industry_review_table (user_name, rating_question1, rating_question2, user_rating, user_review, datetime) 
 	VALUES (?, ?, ?, ?, ?,?)";
 
 	mysqli_stmt_prepare($stmt, $query);
