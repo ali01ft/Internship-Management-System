@@ -74,6 +74,8 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                         class="fas fa-project-diagram me-2"></i>Posted Job listing</a>                   
                 <a href="Jobs.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Post a Job</a>
+                <a href="industry_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Dashboard</a>
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>

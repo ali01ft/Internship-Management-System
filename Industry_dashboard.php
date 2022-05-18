@@ -1,5 +1,6 @@
 <?php 
   session_start();
+
 if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) { 
 
     $id = $_SESSION['company_id'];
@@ -30,58 +31,29 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
 
        <?php 
-
+                                //A query which summons all the list
                                  $conn = new mysqli('localhost', 'root', '', 'ims');
-
-
-                                   if(isset($_GET['data'])){
-
-                                        $Jid =  $_GET['data'];
-                
-                                    }
-                                    else{
-                                        $Jid = "";
-                                    }   
-
-
-                                 if(isset($_GET['search'])){
-                                    $searchKey = $_GET['search'];
-                                    $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
-                                    from student
-                                    INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
-                                    student.COURSE LIKE '%$searchKey%'";
-                                 }else
-                                 $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
-                                        from student
-                                        INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
-                                        WHERE applicants.Job_ID =$Jid and applicants.confirmation is null";
+                           
+                                 $sql = "SELECT * FROM `jobs` WHERE REGIS_NO = $id";
                                 $result = $conn->query($sql);
+                                
 
-                                $sql2 = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
-                                        from student
-                                        INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
-                                        WHERE applicants.Job_ID =$Jid and applicants.confirmation is not null";
-                                $listing = $conn ->query($sql2);
-
-
-
-                                  
+                                //dont want to mess up code so i am just keeping it here
                                 if(isset($_POST['Apply'])) {
 
                                     $f_ID = $_POST['Apply'];  // approve
-                            
+                                   
+
 
                                      $apply = " UPDATE applicants
                                                 SET confirmation='YES'
-                                                WHERE Job_iD=$Jid AND STUDENT_ID = $f_ID;";       // updating confirmation status
+                                                WHERE Job_iD=1 AND STUDENT_ID = $f_ID;";      
    
                                      mysqli_query($conn, $apply);    //Excecute query
 
-                                    header("Location: in_applicants.php?data=$Jid");
+                                    header("Location: in_applicants.php");
     
                                   }
-
-
 
                         ?>
 
@@ -91,19 +63,22 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
 
 
-<div class="d-flex" id="wrapper">
+    <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-address-book me-1"></i>Swinburne</div>
             <div class="list-group list-group-flush my-3">
             
-                  <a href="in_joblist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                  <a href="in_joblist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Posted Job listing</a>                   
                 <a href="Jobs.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Post a Job</a>
-                 <a href="industry_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Dashboard</a>        
+
+        <a href="industry_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-project-diagram me-2"></i>Dashboard</a>
+
+
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
@@ -117,7 +92,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Students That Applied for the Jobs</h2>
+                    <h2 class="fs-2 m-0">All Jobs Posted</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -134,7 +109,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                 <i class="fas fa-user me-2"></i><?=$_SESSION['user_full_name']?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="industry_profile.php">Profile</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -143,108 +118,69 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">List of Applied Students</h3>
+                    <h3 class="fs-4 mb-3">List of Jobs</h3>
                     <div class="col">
 
 
+        <!--fething data module-->
+        <p>Please Click on the Job Titles to check the list of interns already working</p>
+                    <div class="card">
+                        <div class="card-body">
 
-                     <!--fething data module-->
-                        <div class="card">
-                            <div class="card-body">
+                        <form method="POST">
+                            <table id="datatableid" class="table table-bordered">
+                             <thead>
+                                <tr>
+                                 <th scope="col">Job Title</th>
+                                 <th scope="col">Location</th>
+                                 <th scope="col">Category</th>
+                                 <th scope="col">More Category Details</th>
+                                 <th scope="col">Position</th>
+                                 <th scope="col">Date Posted</th>
+                                 <th scope="col">Offer End Date</th>
+                                 <th scope="col">Requirements</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php while( $row = $result->fetch_object() ): ?>
+                              <tr>
+                               
+                                <?php $Jid = $row->Job_ID;
 
-                            <form method="POST">
-                                <table id="datatableid" class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Student ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Student Email</th>
-                                    <th scope="col">Course</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Year of Study</th>
-                                    <th scope="col">CV</th>
-                                    <th scope="col">Approval</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                             <?php while( $row = $result->fetch_object() ): ?>
-                                <tr>
-                                    <td><?php echo $row->STUDENT_ID?></td>
-                                    <td><?php echo $row->NAME?></td>
-                                    <td><?php echo $row->STUDENT_EMAIL?></td>
-                                    <td><?php echo $row->COURSE?></td>
-                                    <td><?php echo $row->GENDER?></td>
-                                    <td><?php echo $row->YEAR_OF_STUDY?></td>
-                                    <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
-                                    <td><button type="submit" name = "Apply" class="btn btn-success editbtn" value ='<?php echo $job = $row->STUDENT_ID?>'>Approve</button></td>
+                                $sdate = date("d-m-Y", strtotime($row -> Date_Posted)); //starting date changing format
+                                $edate = date("d-m-Y", strtotime($row -> Date_End));  //end date changing format
+
+                                ?>
+                                    
+                                 <td> <?php echo "<a href ='industry_confirmed.php?data=$Jid'>$row->Job_Title</a>"?></td>
+                                 <td><?php echo $row->Location?></td>
+                                 
+                                 <td><?php echo $row->Category?></td>
+                                 <td><?php echo $row->Extra_Details?></td>
+                                 <td><?php echo $row->Position?></td>
+                                 <td><?php echo $sdate?></td>
+                                 <td><?php echo $edate?></td>
+                                 
+                                 <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
                               </tr>
                               <?php endwhile; ?>
                           </tbody>
                         </table>
+                               
                         </form>
-                            </div>
-                        </div>
+
+
+                       
+
                     </div>
+
                 </div>
+
             </div>
-
-
-
-            <div class="container-fluid px-4">
-                <div class="row my-5">
-                    <h3 class="fs-4 mb-3">List of Accepted Students</h3>
-                    <div class="col">
-
-
-
-                     <!--fething data module-->
-                        <div class="card">
-                            <div class="card-body">
-
-                            <form method="POST">
-                                <table id="datatableid1" class="table table-bordered">
-                                <thead>
-                                <tr>
-                                <th scope="col">Student ID</th>
-                                 <th scope="col">Name</th>
-                                 <th scope="col">Student Email</th>
-                                 <th scope="col">Course</th>
-                                 <th scope="col">Gender</th>
-                                 <th scope="col">Year of Study</th>
-                                 <th scope="col">CV</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                             <?php while( $row = $listing->fetch_object() ): ?>
-                                <tr>
-                                 <td><?php echo $row->STUDENT_ID?></td>
-                                 <td><?php echo $row->NAME?></td>
-                                 <td><?php echo $row->STUDENT_EMAIL?></td>
-                                 <td><?php echo $row->COURSE?></td>
-                                 <td><?php echo $row->GENDER?></td>
-                                 <td><?php echo $row->YEAR_OF_STUDY?></td>
-                                 <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
-                              </tr>
-                              <?php endwhile; ?>
-                          </tbody>
-                        </table>
-                        </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-  <a href="in_joblist.php"> Back </a>                      
-
-        </div>   
+        </div>
     </div>
-
-<!-- /#page-content-wrapper -->
+ <!-- /#page-content-wrapper -->
     </div>
-
-    
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -300,25 +236,8 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                         }
                                     });
 
-                                    $('#datatableid1').DataTable(
-                                         {
-                                        "pagingType": "full_numbers",
-                                        "lengthMenu": [
-                                            [10, 25, 50, -1],
-                                            [10, 25, 50, "All"]
-                                        ],
-                                        responsive: true,
-                                        language: {
-                                            search: "_INPUT_",
-                                            searchPlaceholder: "Search Your Data",
-                                        }
-                                        }      
-                                    );
-
                                 });
                             </script>
-
-
 
                             <!-- Function to display delete popup -->
                               <script>

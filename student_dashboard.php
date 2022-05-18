@@ -44,13 +44,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                              if($status == NULL){
 
 
-                                 if(isset($_GET['search'])){
-                                    $searchKey = $_GET['search'];
-                                    $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
-                                    from student
-                                    INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
-                                    student.COURSE LIKE '%$searchKey%'";
-                                 }else
+                        
                                  $sql = "SELECT industry.COMPANY_NAME,jobs.Job_ID, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position, jobs.REGIS_NO FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO where Job_ID IN (select Job_ID from applicants WHERE STUDENT_ID = $id and confirmation is null)";
                                 $result = $conn->query($sql);
 
@@ -228,52 +222,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                  </div>
                 </div>
             </div>
-
-
-
-
-
-                <!--fething data module
-                    <div class="card">
-                        <div class="card-body">
-
-                        <form method="POST">
-                            <table id="datatableid" class="table table-bordered">
-                             <thead>
-                                <tr>
-                                 <th scope="col">Company Name</th>
-                                 <th scope="col">Job Title</th>
-                                 <th scope="col">Website</th>
-                                 <th scope="col">Email</th>
-                                 <th scope="col">More Details</th>
-                                 <th scope="col">Select</th>
-                                 
-                              </tr>
-                            </thead>
-
-                            <tbody>
-                              <?php while( $row = $listing->fetch_object() ): ?>
-                               
-                              <tr>
-                                 <td><?php echo $row->COMPANY_NAME?></td>
-                                 <td><?php echo $row->Job_Title?></td>
-                                 <td><?php echo $row->WEBSITE?></td>
-                                 <td><?php echo $row->email?></td>
-                                 <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
-                                 <td><button type="submit" class="btn btn-success editbtn" name = "Enroll" value ='<?php echo $job = $row->appID?>'>Enroll</button></td>
-                                 
-                              </tr>
-                          </tbody>
-                              <?php endwhile; ?>
-                            </table>
-                    </form>
-                   </div>
-                   </div>
-
-                            
-
-                    </div>
-                </div>-->
 
             
         </div>
