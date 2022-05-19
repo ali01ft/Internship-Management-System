@@ -3,7 +3,8 @@
 
 
 
-    $userID = $_SESSION['user_id'];
+    $stuName = $_SESSION['user_full_name'];
+ 
     //establishing connection
         $server = "localhost";
         $username = "root";
@@ -82,7 +83,7 @@
                         </h4>
                         	<input type="hidden" id="star1" name="star1" value="asdas">
                         <div class="form-group">
-                            <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
+                            <!--<input type="text" name="user_name" id="user_name" class="form-control" value= "" />-->
                         </div>
 
                          

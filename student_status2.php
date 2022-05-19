@@ -1,6 +1,32 @@
-<?php 
+<?php
+
+$_SESSION['user_id'] = $id;
 
 $ufn = $_SESSION['user_full_name'];
+
+$_SESSION['entry'] = 1;
+
+
+                                 $conn = new mysqli('localhost', 'root', '', 'ims');
+                           
+                                 $sql = "SELECT j.Job_ID, i.COMPANY_NAME, i.CONTACT_NO, i.WEBSITE, i.Email from applicants a
+                                        inner join jobs j on a.Job_ID = j.Job_ID
+                                        inner join industry i on j.REGIS_NO = i.REGIS_NO
+                                    where a.Status = 'pending' and a.STUDENT_ID = '$id'";
+                                    $query_run = mysqli_query($conn, $sql);
+
+
+
+                                 if(isset($_POST['Email'])) {
+
+                                     $f_ID = $_POST['Email'];  // approve
+
+                                     $_SESSION['job_email'] = $f_ID;
+
+                                    header("Location: student_email.php");
+    
+                                  }
+
 
 echo "<body>";
 
@@ -56,17 +82,153 @@ echo "<body>";
                 echo "<p>Status: Internship started</p>";
                 echo "<p>form placeholder</p>";    
                 echo "</div>";
+                ?>
+
+                                <!-- Content wrapper -->
+            <div class="container-fluid px-4">
+                <div class="row my-5">
+                    <h3 class="fs-4 mb-3">list of Company waiting for Email</h3>
+
+                       <!-- Fetching data module  -->
+                                <div class="card">
+                                    <div class="card-body">
+                                      <form method="POST">
+                                        <table id="datatableid" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Company Name</th>
+                                                    <th scope="col">Contact number</th>
+                                                    <th scope="col">Website</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Send Email</th>
+
+                                                </tr>
+                                            </thead>
+                                  
+                                            <tbody>
+                                                    <?php
+                                                    if($query_run)
+                                                    {
+                                                        var_dump($query_run);
+                                                        foreach($query_run as $row)
+                                                        {
+
+                                                            $r = $row['Job_ID'];
+                                                          
+                                                    ?>
+                                                <tr>
+                                                    <td> <?php echo $row['COMPANY_NAME']; ?></td>
+                                                    <td> <?php echo $row['CONTACT_NO']; ?></td>
+                                                    <td> <?php echo $row['WEBSITE']; ?></td>
+                                                    <td> <?php echo $row['Email']; ?></td>
+                                                    <td>
+                                                        <button type="submit" class="btn btn-success editbtn" name = "Email" value ='<?php echo $r?>'>SEND</button>
+                                                    </td>
+
+                                                </tr>
+                                                 <?php           
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    echo "No Record Found";
+                                                }
+                                                 ?>
+                                            </tbody>
+                                   
+                                        </table>
+                                    </form>
+                                    </div>
+                                </div>
+
+
+                       
+                       
+
+
+
+    
+                    </div>
+                </div>
+
+
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+                            <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+                            <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
+                            <script>
+                                $(document).ready(function () {
+
+                                    $('.viewbtn').on('click', function () {
+                                        $('#viewmodal').modal('show');
+                                        $.ajax({ //create an ajax request to display.php
+                                            type: "GET",
+                                            url: "display.php",
+                                            dataType: "html", //expect html to be returned                
+                                            success: function (response) {
+                                                $("#responsecontainer").html(response);
+                                                //alert(response);
+                                            }
+                                        });
+                                    });
+
+                                });
+                            </script>
+
+                             <!-- Table controller  -->
+                            <script>
+                                $(document).ready(function () {
+
+                                    $('#datatableid').DataTable({
+                                        "pagingType": "full_numbers",
+                                        "lengthMenu": [
+                                            [10, 25, 50, -1],
+                                            [10, 25, 50, "All"]
+                                        ],
+                                        responsive: true,
+                                        language: {
+                                            search: "_INPUT_",
+                                            searchPlaceholder: "Search Your Data",
+                                        }
+                                    });
+
+                                });
+                            </script>
+
+                            <!-- Function to display delete popup -->
+                              <script>
+                                $(document).ready(function () {
+
+                                    $('.deletebtn').on('click', function () {
+
+                                        $('#deletemodal').modal('show');
+
+                                        $tr = $(this).closest('tr');
+
+                                        var data = $tr.children("td").map(function () {
+                                            return $(this).text();
+                                        }).get();
+
+                                        console.log(data);
+
+                                        $('#delete_id').val(data[0]);
+
+                                    });
+                                });
+                            </script>
 
 
 
 
-
-
+<?php
                 echo     "<a href='in_joblist.php'> Back </a>";
 
                    
               
-            echo "</div>";
+        echo "</div>";
         echo "</div>";
   
  //#page-content-wrapper -->
