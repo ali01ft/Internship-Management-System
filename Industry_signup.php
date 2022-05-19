@@ -201,7 +201,7 @@ if(isset($_POST["register_button"])){
 
               mysqli_close($conn);
             }
-          }
+          
 
 ?>
 
