@@ -94,6 +94,7 @@
   }
 }
 
+<<<<<<< Updated upstream
 .email-app {
     display: flex;
     flex-direction: row;
@@ -302,4 +303,13 @@
     .email-app .message .header .date {
         flex: 0 0 100%;
     }
+=======
+
+.swinlogocenter{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+>>>>>>> Stashed changes
 }
+

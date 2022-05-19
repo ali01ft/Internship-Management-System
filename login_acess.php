@@ -2,93 +2,63 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-* {box-sizing: border-box;}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="styles.css" />
 
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-}
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 25%;
-}
-
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 50px;
-}
-
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-}
-</style>
 </head>
 <body>
+<div id="backgroundshell">
+  <img src="image\swinburne.png" alt="swin_logo" class="swinlogocenter">
+  <br>  
+<br> 
+<br> 
+<br> 
+<br> 
 
-  <img src="image\swinburne.png" alt="swin_logo" class="center">
+  <h2 style="text-align:center">Internship Management System Access Panel</h2>
+<br>  
+<br> 
+<br> 
+<br> 
+<br> 
 
-  <h2 style="text-align:center">Login Page</h2>
-  
-<div >
-  
-  <div class="row">
-    <div class="column">
-      <form action="student_login.php">
+<div class="card-deck">
 
-        <input type="image" src="image\Student.png" name="submit" width="400" height="330" alt="Student Login"/>
-        
-      </form>
-    </div>
-    <div class="column">
-      <form action="industry_login.php">
-
-        <input type="image" src="image\Company.png" name="submit" width="400" height="330" alt="Company Login"/>
-      
-      </form>
-    </div>
-    <div class="column">
-      <form action="staff_login.php">
-
-      
-        <input type="image" src="image\Admin.png" name="submit" width="400" height="330" alt="Admin Login"/>
-    
-      
-    </form>
-    </div>
-
-    
-  
-    
-
-    
-   
-
-    
+<div class="card text-center" >
+  <div class="card-body">
+    <h5 class="card-title">Student Access </h5>
+    <p class="card-text">This links to the Student IMS  Module, for Swinburne students only </p>
+    <a href="student_login.php" class="btn btn-primary"> Access </a>
   </div>
+</div>
 
-  <div style="padding-left:16px">
-  
-  <p style="text-align:center">Welcome please select your class.</p>
-  
+<div class="card text-center">
+  <div class="card-body">
+    <h5 class="card-title">Industry Access</h5>
+    <p class="card-text">This links to the Industry IMS  Module, for Swinburne Industry Partners only </p>
+    <a href="industry_login.php" class="btn btn-primary"> Access </a>
+  </div>
+</div>
+<div class="card text-center">
+  <div class="card-body">
+    <h5 class="card-title">Staff Access </h5>
+    <p class="card-text">This links to the Staff IMS  Module, for Swinburne staff only </p>
+    <a href="staff_login.php" class="btn btn-primary"> Access </a>
+  </div>
 </div>
 
 
+</div>
 
+</div>    
+  
+    
+
+    
    
 
     
-</div>
+
 
 
 </body>
