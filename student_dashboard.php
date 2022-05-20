@@ -131,8 +131,8 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                 <div class="row my-5">
                     <div class="col">
                     <h3 class="fs-4 mb-3">Internship Status </h3>
-                      <div class="progress" style="height:40px">
-                          <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated " role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" >20% Complete!</div>
+                      <div class="progress" style="height:50px; font-size:1em;">
+                          <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated " role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" >20% | Enrolling phase</div>
                         </div>
                         <br>
                     </div> 
