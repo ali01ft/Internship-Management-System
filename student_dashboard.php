@@ -21,6 +21,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <title>IMS</title>
 </head>
@@ -128,9 +129,17 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 
            <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">list of Applied jobs</h3>
-                    <div class="col">
+                    <h3 class="fs-4 mb-3">Internship Status </h3>
+                      <div class="progress" style="height:40px">
+                          <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated " role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" >20% Complete!</div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                    <h3 class="fs-4 mb-3">List of Applied jobs</h3>
 
+                    <div class="col">
+                       
                     <!--fething data module-->
                     <div class="card">
                         <div class="card-body">
@@ -177,7 +186,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 <!--table for industry approved list-->
            <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">list of Jobs accepted</h3>
+                    <h3 class="fs-4 mb-3">List of Jobs accepted</h3>
                     <div class="col">
 
                         <h3 class="fs-4 mb-3">Waiting for Interview list</h3>
