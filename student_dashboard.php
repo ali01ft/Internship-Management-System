@@ -190,8 +190,9 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                     <div class="col">
 
                         <h3 class="fs-4 mb-3">Waiting for Interview list</h3>
-                        <p>Please only press enroll button after you have contacted the companies and taken interviews from them. You will have to provide a proof of being selected such as a offer letter pdf</p>
-
+                        <div class="alert alert-danger" role="alert">
+                        Please only press enroll button after you have contacted the companies and taken interviews from them. You will have to provide a proof of being selected such as a offer letter pdf
+                          </div>
                     <!--fething data module-->
                     <div class="card">
                         <div class="card-body">
