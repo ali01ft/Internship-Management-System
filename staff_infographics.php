@@ -18,6 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 
  <?php  
  $connect = mysqli_connect("localhost", "root", "", "ims");  
@@ -89,6 +90,71 @@
            }  
     </script>
 
+<?php  
+ $connect = mysqli_connect("localhost", "root", "", "ims");  
+ $query2 = "SELECT COMPANY_NAME, count(*) as number FROM student_job_details GROUP BY COMPANY_NAME";  
+ $result2 = mysqli_query($connect, $query2);  
+ ?> 
+
+
+
+             <script type="text/javascript">  
+           google.charts.load('current', {'packages':['corechart']});  
+           google.charts.setOnLoadCallback(drawChart);  
+           function drawChart()  
+           {  
+                var data = google.visualization.arrayToDataTable([  
+                          ['Company Name', 'Student Count'],  
+                          <?php  
+                          while($row = mysqli_fetch_array($result2))  
+                          {  
+                               echo "['".$row["COMPANY_NAME"]."', ".$row["number"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title: 'Most popular comapnies',  
+                      //is3D:true,  
+                      pieHole: 0.4,
+                      backgroundColor: { fill:'transparent' },
+                      height:600,
+                      width:600
+
+                     };  
+                var chart = new google.visualization.BarChart(document.getElementById('barchart1'));  
+                chart.draw(data, options);  
+           }  
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    window.onload = function () {
+        document.getElementById("download")
+            .addEventListener("click", () => {
+                const invoice = this.document.getElementById("page-content-wrapper");
+                console.log(invoice);
+                console.log(window);
+                var opt = {
+                    filename: 'analytics.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    jsPDF: { unit: 'in', format: 'a3', orientation: 'landscape' }
+                };
+                html2pdf().from(invoice).set(opt).save();
+            })
+}
+</script>
+
 
 
     <title>IMS</title>
@@ -126,7 +192,8 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Analytics</h2>
+                    <h2 class="fs-2 m-0">Analytics of <?php $today = date("F , Y"); echo $today; ?></h2>
+
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -152,8 +219,10 @@
                 <!-- Content wrapper -->
             <div class="container-fluid px-4">
                 <div class="row my-5">
+                    <div class="col-md-12 text-right mb-3">
+                             <button class="btn btn-danger" id="download"> Download charts</button>
+                         </div>
                     <h3 class="fs-4 mb-3">User count data</h3>
-                    
                         <div class="col-lg-2 col-md-2">
                             <div class="card bg-danger text-white mb-4">
                                 <div class="card-body">
@@ -316,14 +385,31 @@
                       <div class="col-xl-3 col-md-6">
                         <div id="piechart"></div> 
                     </div> 
+
                     <div class="col-xl-3 col-md-6">
                         <div id="piechart2"></div>
                     </div>      
-                 </div>   
+                 </div>
+
+
+                 <div class="row my-5">
+                    <h3 class="fs-4 mb-3">Industry data</h3>
+                         <div class="col-xl-3 col-md-6 ">
+                            <div id="barchart1"></div>
+                        </div>    
+
+                
+                </div>  
+
+
+
+
 
             </div>
         </div>
     </div>
+
+
     <!-- /#page-content-wrapper -->
     </div>
 

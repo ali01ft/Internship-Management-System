@@ -243,8 +243,9 @@
                                     </div>
                                 </div>
 
-
-                       <button name="download-button" id="download-button">Download Table</button>
+                                <br>
+                                <br>
+                       <button class="btn btn-danger" name="download-button" id="download-button">Download Table</button>
                        
 
 
