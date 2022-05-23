@@ -17,6 +17,30 @@ $_SESSION['entry'] = 1;
 
 
 
+
+                                    $appid = "SELECT s.STUDENT_ID, a.appID, j.Job_ID, i.REGIS_NO, a.Status, s.ENROLL from student s
+                                            inner join applicants a on s.STUDENT_ID = a.STUDENT_ID
+                                            inner join jobs j on a.Job_ID = j.Job_ID
+                                            inner join industry i on j.REGIS_NO = i.REGIS_NO
+                                             where  a.Status = 'Ending' OR a.Status = 'Confirmed' AND s.STUDENT_ID = '$id'";
+
+                                    $app_run = mysqli_query($conn, $appid);
+
+                                    if($app_run){
+                                        foreach ($app_run as $x) {
+
+                                            $app = $x['appID'];
+                                            $stat = $x['ENROLL'];
+                                            $jobstate = $x['Status'];
+                                            print_r($jobstate);
+                                        }
+                                    }
+                                    else{
+                                        echo "query didnt run";
+                                    }
+
+
+
                                  if(isset($_POST['Email'])) {
 
                                      $f_ID = $_POST['Email'];  // approve
@@ -26,6 +50,26 @@ $_SESSION['entry'] = 1;
                                     header("Location: student_email.php");
     
                                   }
+
+
+                                if (isset($_POST['Ending'])) {
+                                   $e = $_POST["Ending"];
+                                   print_r($e);
+
+                                   $change = " UPDATE applicants
+                                               SET Status = 'Ending'
+                                                WHERE STUDENT_ID ='$id' and appID = '$app'";       // updating confirmation status
+
+   
+                                    $check = mysqli_query($conn, $change);    //Excecute query
+
+                                    if ($check) {
+                                        echo "done";
+                                    }
+                                    else{
+                                        echo "not done";
+                                    }
+                                }
 
 
 echo "<body>";
@@ -163,11 +207,18 @@ echo "<body>";
                                     </div>
                                 </div>
 
-
+                        <!--If the application status is confirmed then a button will appear, if the button is already pressed before a message will appear-->
                        
-                       
+                            <?php if ($jobstate = "Ending") {
+                                
 
-
+                                echo "<p>Please Press the button only if you are done with your internship</p>";
+                                    echo "<form method='POST'>";
+                                       echo  "<button type='submit' name='Ending' value='Ending'> Completed </button>";
+                                    echo "</form>";
+                             }else{
+                                echo "<p>Please Wait for admin confirmation</p>";
+                            }?>
 
     
                     </div>

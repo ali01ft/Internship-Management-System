@@ -24,7 +24,7 @@
              } 
 ?>
 
-<h1 style="color: green;">Content</h1>
+<h1 style="color: green;"> <?php echo "$cid" ?> </h1>
 <p style="text-align: center;">This is content</p>
 <p>this is working</p>	
 
