@@ -1,0 +1,76 @@
+<?php
+
+
+// This is the code which brings out pending list for approval
+                                    $query = "SELECT applicants.appID, student.STUDENT_ID, student.NAME, student.COURSE, jobs.Job_Title, industry.COMPANY_NAME, jobs.Category, jobs.Vacancy, applicants.Proof, industry.CONTACT_NO
+                                        from applicants
+                                        inner join student on student.STUDENT_ID = applicants.STUDENT_ID
+                                        inner join jobs on jobs.Job_ID = applicants.Job_ID
+                                        inner join industry on industry.REGIS_NO=jobs.REGIS_NO
+                                        where applicants.Status = 'pending'";
+                                    $query_run = mysqli_query($connection, $query);
+                                   
+
+
+
+
+                                     if(isset($_POST['Apply'])) {
+                                         $f_ID = $_POST['Apply'];  // approve
+
+                                        $apply = " UPDATE applicants
+                                                SET Status='Confirmed'
+                                                WHERE appID ='$f_ID'";       // updating confirmation status
+
+                                                mysqli_query($connection, $apply);    //Excecute query
+
+                                        //updating the status in student table
+
+                                        $que = "SELECT * from applicants where appID='$f_ID'";
+                                        $que_run = mysqli_query($connection, $que);
+                                        $info = mysqli_fetch_assoc($que_run);
+                                        $stu_info = $info['STUDENT_ID'];
+
+                                         $enroll = " UPDATE student
+                                                SET ENROLL='Confirmed'
+                                                WHERE STUDENT_ID ='$stu_info'"; 
+   
+                                                $trial =  mysqli_query($connection, $enroll);    //Excecute query
+
+
+                                                 header("Location:staff_approval.php");
+                                              
+                                             }else{
+
+                                                 if(isset($_POST['Cancel'])) {
+                                                   $f_ID = $_POST['Cancel'];  // approve
+
+                                                    //update application table
+                                                    $apply = " UPDATE applicants
+                                                        SET Status=null;
+                                                        WHERE appID ='$f_ID'";       // updating confirmation status
+           
+                                                         mysqli_query($connection, $apply);    //Excecute query
+
+                                                    //update student table
+
+                                                 $que = "SELECT * from applicants where appID='$f_ID'";
+                                                $que_run = mysqli_query($connection, $que);
+                                                $info = mysqli_fetch_assoc($que_run);
+                                                $stu_info = $info['STUDENT_ID'];
+
+                                                        $apply = " UPDATE student
+                                                                    SET ENROLL=null
+                                                                     WHERE STUDENT_ID ='$stu_info'";       // updating confirmation status
+           
+                                                         mysqli_query($connection, $apply);    //Excecute query
+
+                                                
+                                                       header("Location:staff_approval.php");
+                                                        
+                                                          
+                                                        }
+                                                     
+                                            }
+
+
+?>
