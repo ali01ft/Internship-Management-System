@@ -51,16 +51,54 @@ echo "<body>";
                 echo "</div>";
             echo "</nav>";
 
-                echo "<div>";
-                echo     "<p>Status: Waiting for Admin approval for internship</p>"; 
-                echo "</div>";
+                echo '
+             <div class="container-fluid px-4">   
+                    <div class="row my-5">
+
+                         <div class="col">
+                            <h3 class="fs-4 mb-3">Internship Status </h3>
+                              <div class="progress" style="height:50px; font-size:1em;">
+                                  <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated " role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" >40% | Awaiting staff approval </div>
+                                </div>
+                                <br>
+                            </div> 
+                        </div>
+                   
+
+
+                   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                     <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                      </symbol>
+                     </svg>
+
+
+                
+                        <div class="col">
+                                  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                             <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                              </symbol>
+                             </svg>
+
+                            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                              <div>
+                                Congratulations on applying to a company! Please sit tight while our staff go through your application. It should be sorted within 1-2 days. In the meantime, feel free to do further research on your chosen company and if you have any enquiries, do email them for further information .
+
+                              </div>
+                        </div>
+                    </div>
+
+            </div>
+
+
+                    ';
 
 
 
 
-
-
-                echo     "<a href='in_joblist.php'> Back </a>";
+                
 
                    
               

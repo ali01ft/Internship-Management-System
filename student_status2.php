@@ -77,17 +77,39 @@ echo "<body>";
                 echo "</div>";
             echo "</nav>";
 
-                echo "<div>";
-                echo     "<p>Status: Internship started</p>";
-                echo "<p>Status: Internship started</p>";
-                echo "<p>form placeholder</p>";    
-                echo "</div>";
+            
+
+          
+
+                  
+
+
+
+
+
+
+        
+
+
+
+
                 ?>
 
                                 <!-- Content wrapper -->
             <div class="container-fluid px-4">
+                  <div class="row my-5">
+
+                         <div class="col">
+                            <h3 class="fs-4 mb-3">Internship Status </h3>
+                              <div class="progress" style="height:50px; font-size:1em;">
+                                  <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated " role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" >60% | Internship started </div>
+                                </div>
+                                <br>
+                            </div> 
+                        </div>
+
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">list of Company waiting for Email</h3>
+                    <h3 class="fs-4 mb-3">List of Company waiting for Email</h3>
 
                        <!-- Fetching data module  -->
                                 <div class="card">
