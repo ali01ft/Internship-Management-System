@@ -270,7 +270,7 @@
                                                     <th scope="col"> Enrollment Status</th>
                                                     <th scope="col"> Download CV </th>
                                                     <th scope="col"> EDIT </th>
-                                                    <th scope="col"> Assign a Supervisor </th>
+                                                    <th scope="col"> Assign supervisor </th>
                                                     <th scope="col"> DELETE </th>
                                                 </tr>
                                             </thead>
