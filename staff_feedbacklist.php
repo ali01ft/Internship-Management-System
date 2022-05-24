@@ -17,70 +17,8 @@
 
 
                                 // This is the code which brings out pending list for approval
-                                    $query = "SELECT sr.STUDENT_ID, i.COMPANY_NAME, j.Job_Title, sr.rating_question1, sr.rating_question2, sr.user_rating, sr.user_review, sr.datetime from student_review_table sr inner join jobs j on sr.Job_ID = j.Job_ID inner join industry i on j.REGIS_NO = i.REGIS_NO";
+                                    $query = "SELECT sr.STUDENT_ID, i.COMPANY_NAME, j.Job_Title, sr.rating_question1, sr.rating_question2, sr.user_rating, sr.user_review, sr.datetime FROM `student_review_table` sr inner join jobs j on sr.Job_ID = j.Job_ID inner join industry i on j.REGIS_NO = i.REGIS_NO";
                                     $query_run = mysqli_query($connection, $query);
-                                   
-
-
-
-
-                                     if(isset($_POST['Apply'])) {
-                                         $f_ID = $_POST['Apply'];  // approve
-
-                                        $apply = " UPDATE applicants
-                                                SET Status='Confirmed'
-                                                WHERE appID ='$f_ID'";       // updating confirmation status
-
-                                                mysqli_query($connection, $apply);    //Excecute query
-
-                                        //updating the status in student table
-
-                                        $que = "SELECT * from applicants where appID='$f_ID'";
-                                        $que_run = mysqli_query($connection, $que);
-                                        $info = mysqli_fetch_assoc($que_run);
-                                        $stu_info = $info['STUDENT_ID'];
-
-                                         $enroll = " UPDATE student
-                                                SET ENROLL='Confirmed'
-                                                WHERE STUDENT_ID ='$stu_info'"; 
-   
-                                                $trial =  mysqli_query($connection, $enroll);    //Excecute query
-
-
-                                                 header("Location:staff_approval.php");
-                                              
-                                             }else{
-
-                                                 if(isset($_POST['Cancel'])) {
-                                                   $f_ID = $_POST['Cancel'];  // approve
-
-                                                    //update application table
-                                                    $apply = " UPDATE applicants
-                                                        SET Status=null;
-                                                        WHERE appID ='$f_ID'";       // updating confirmation status
-           
-                                                         mysqli_query($connection, $apply);    //Excecute query
-
-                                                    //update student table
-
-                                                 $que = "SELECT * from applicants where appID='$f_ID'";
-                                                $que_run = mysqli_query($connection, $que);
-                                                $info = mysqli_fetch_assoc($que_run);
-                                                $stu_info = $info['STUDENT_ID'];
-
-                                                        $apply = " UPDATE student
-                                                                    SET ENROLL=null
-                                                                     WHERE STUDENT_ID ='$stu_info'";       // updating confirmation status
-           
-                                                         mysqli_query($connection, $apply);    //Excecute query
-
-                                                
-                                                       header("Location:staff_approval.php");
-                                                        
-                                                          
-                                                        }
-                                                     
-                                            }
 
                                                                       
 ?>
@@ -113,12 +51,14 @@
                         class="fas fa-project-diagram me-2"></i>Student listing</a>
                 <a href="staff_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Company listing</a> 
-                <a href="staff_approval.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                <a href="staff_approval.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Student Approval</a> 
                 <a href="staff_infographics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-chart-line me-2"></i>Analytics</a>
-                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-paperclip me-2"></i>Feedback list</a>
+                <a href="staff_history.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Internship History</a> 
                 <a href="staff_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
@@ -155,28 +95,24 @@
                 <!-- Content wrapper -->
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Define your search</h3>
+                    <h3 class="fs-4 mb-3">Student Feedback</h3>
 
                        <!-- Fetching data module  -->
                                 <div class="card">
                                     <div class="card-body">
-                                      <form method="POST">
+            
                                         <table id="datatableid" class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Application ID</th>
-                                                    <th scope="col">Student ID</th>
-                                                    <th scope="col">Student Name</th>
-                                                    <th scope="col">Course</th>
+                                                    <th scope="col">STUDENT ID</th>
+                                                    <th scope="col">Company Name</th>
                                                     <th scope="col">Job Title</th>
-                                                    <th scope="col">Company Name </th>
-                                                    <th scope="col">Category </th>
-                                                    <th scope="col">Vacancy </th>
-                                                    <th scope="col">Offer Document</th>
-                                                    <th scope="col">Company Contact No</th>
-                                                   
-                                                    <th scope="col"> ACCEPT </th>
-                                                    <th scope="col"> REJECT </th>
+                                                    <th scope="col">Did they Enjoy?</th>
+                                                    <th scope="col">Will they Recommend</th>
+                                                    <th scope="col">Rating Of Job </th>
+                                                    <th scope="col">Review </th>
+
+                                                    <th scope="col">Completion Date </th>
                                                 </tr>
                                             </thead>
                                   
@@ -186,28 +122,18 @@
                                                     {
                                                         foreach($query_run as $row)
                                                         {
-                                                           $r = $row['appID'];
-                                                           $t = $row['Proof'];
                                                           
                                                     ?>
                                                 <tr>
-                                                    <td> <?php echo $row['appID']; ?></td>
+                                                    
                                                     <td> <?php echo $row['STUDENT_ID']; ?></td>
-                                                    <td> <?php echo $row['NAME']; ?></td>
-                                                    <td> <?php echo $row['COURSE']; ?></td>
+                                                    <td> <?php echo $row['COMPANY_NAME']; ?></td>
                                                     <td> <?php echo $row['Job_Title']; ?></td>
-                                                    <td> <?php echo $row['COMPANY_NAME'];?> </td>
-                                                    <td> <?php echo $row['Category'];?></td>
-                                                    <td> <?php echo $row['Vacancy'];?></td>
-                                                    <td><?php echo "<a href='documents/".$row['Proof']."' download>See Letter</a>"?></td>
-                                                    <td> <?php echo $row['CONTACT_NO'];?> </td>
-                                                    <td>
-                                                        <button type="submit" class="btn btn-success editbtn" name = "Apply" value ='<?php echo $r?>'>APPROVE</button>
-                                                    </td>
-
-                                                    <td>
-                                                        <button type="submit" class="btn btn-danger deletebtn" name = "Cancel" value ='<?php echo $r?>'>CANCEL</button>
-                                                    </td>
+                                                    <td> <?php echo $row['rating_question1']; ?></td>
+                                                    <td> <?php echo $row['rating_question2'];?> </td>
+                                                    <td> <?php echo $row['user_rating'];?></td>
+                                                    <td> <?php echo $row['user_review'];?></td>
+                                                     <td> <?php echo $row['datetime'];?></td>
                                                 </tr>
                                                  <?php           
                                                     }
@@ -220,105 +146,22 @@
                                             </tbody>
                                    
                                         </table>
-                                    </form>
+                                     
                                     </div>
+                                     
                                 </div>
 
-
-           <!--list of students that are completing internship-->                     
-            
-            <div class="container-fluid px-4">
-                <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Please Confirm Student Internship Completion</h3>
-
-                       <!-- Fetching data module  -->
-                                <div class="card">
-                                    <div class="card-body">
-                                      <form method="POST">
-                                        <table id="datatableid1" class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Application ID</th>
-                                                    <th scope="col">Student ID</th>
-                                                    <th scope="col">Student Name</th>
-                                                    <th scope="col">Course</th>
-                                                    <th scope="col">Job Title</th>
-                                                    <th scope="col">Company Name </th>
-                                                    <th scope="col">Category </th>
-
-                                                    <th scope="col">Company Contact No</th>
-                                                   
-                                                    <th scope="col"> ACCEPT </th>
-                                                    <th scope="col"> REJECT </th>
-                                                </tr>
-                                            </thead>
-                                  
-                                            <tbody>
-                                                    <?php
-                                                    if($query_run)
-                                                    {
-                                                        foreach($query_run2 as $x)
-                                                        {
-                                                        
-                                                           $r = $x['appID'];
-                                                           $t = $x['Proof'];
-                                                          
-                                                    ?>
-                                                <tr>
-                                                    <td> <?php echo $x['appID']; ?></td>
-                                                    <td> <?php echo $x['STUDENT_ID']; ?></td>
-                                                    <td> <?php echo $x['NAME']; ?></td>
-                                                    <td> <?php echo $x['COURSE']; ?></td>
-                                                    <td> <?php echo $x['Job_Title']; ?></td>
-                                                    <td> <?php echo $x['COMPANY_NAME'];?> </td>
-                                                    <td> <?php echo $x['Category'];?></td>
-
-                                                    <td> <?php echo $x['CONTACT_NO'];?> </td>
-                                                    <td>
-                                                        
-                                                        <button type="submit" class="btn btn-success editbtn" name = "Apply2" value ='<?php echo $r?>'>APPROVE</button>
-                                                    </td>
-
-                                                    <td>
-                                                        <button type="submit" class="btn btn-danger deletebtn" name = "Cancel2" value ='<?php echo $r?>'>CANCEL</button>
-                                                    </td>
-                                                </tr>
-                                                 <?php           
-                                                    }
-                                                }
-                                                else 
-                                                {
-                                                    echo "No Record Found";
-                                                }
-                                                 ?>
-                                            </tbody>
-                                   
-                                        </table>
-                                    </form>
-                                    </div>
-                                </div>
-
-
-                       
-                       
-
-
-
-    
+   
                     </div>
+
+                                <button class="btn btn-danger" name="download-button" id="download-button">Download Table</button> 
+                     
                 </div>
-                       
-                       
-
-
-
-    
-                    </div>
-                </div>
-
+ 
             </div>
         </div>
     </div>
+
     <!-- /#page-content-wrapper -->
     </div>
 
@@ -417,6 +260,51 @@
                                     });
                                 });
                             </script>
+
+                            <!--Function to download table-->
+                            <script>function htmlToCSV(html, filename) {
+                                    var data = [];
+                                    var rows = document.querySelectorAll("table tr");
+                                            
+                                    for (var i = 0; i < rows.length; i++) {
+                                        var row = [], cols = rows[i].querySelectorAll("td, th");
+                                                
+                                        for (var j = 0; j < cols.length; j++) {
+                                                row.push(cols[j].innerText);
+                                        }
+                                                
+                                        data.push(row.join(","));       
+                                    }
+
+                                    downloadCSVFile(data.join("\n"), filename);
+                                    }
+                            </script>
+                            <!--function for the excel file-->
+                            <script>
+                                    function downloadCSVFile(csv, filename) {
+                                    var csv_file, download_link;
+
+                                    csv_file = new Blob([csv], {type: "text/csv"});
+
+                                    download_link = document.createElement("a");
+
+                                    download_link.download = filename;
+
+                                    download_link.href = window.URL.createObjectURL(csv_file);
+
+                                    download_link.style.display = "none";
+
+                                    document.body.appendChild(download_link);
+
+                                    download_link.click();
+                            }</script>
+                        <!--downmloadd for the cv-->
+                           <script>document.getElementById("download-button").addEventListener("click", function () {
+                                    var html = document.querySelector("table").outerHTML;
+                                    htmlToCSV(html, "Student_feedbak.csv");
+                                });
+                            </script>
+
 
 
 

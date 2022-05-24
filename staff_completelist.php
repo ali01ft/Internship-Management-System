@@ -76,12 +76,13 @@
 
                                 $stmt = mysqli_stmt_init($connection); //initialize connection to statement
 
-                                $run = "INSERT INTO history (Student_id, Student_NAME, STUDENT_EMAIL, COURSE, YEAR_OF_STUDY, COMPANY_NAME, WEBSITE, Email, Job_Title, Position, Date_End, Completion_date) 
+                                $run = "INSERT INTO history (Student_id, Student_NAME, STUDENT_EMAIL, COURSE, SUPERVISOR, YEAR_OF_STUDY, COMPANY_NAME, WEBSITE, Email, Job_Title, Position, Completion_date) 
                                 VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?,?)";
 
                                 mysqli_stmt_prepare($stmt, $run);
-                                mysqli_stmt_bind_param($stmt, 'ssssssssssss', $studentid, $studentname, $studentemail, $studentcourse, $studentvisor, $studentyos, $companyname, $companywebsite, $companyemail, $jobtitle, $jobposition, $completedate);
+                                mysqli_stmt_bind_param($stmt, 'ssssssssssss',  $studentid, $studentname, $studentemail, $studentcourse, $studentvisor, $studentyos, $companyname, $companywebsite, $companyemail, $jobtitle, $jobposition, $completedate);
                                 $insert = mysqli_stmt_execute($stmt);
+
 
 
 
@@ -102,7 +103,7 @@
 
 
 
-                              header("Location:staff_approval.php");
+                      //        header("Location:staff_approval.php");
                                               
                                     }else{
 
@@ -133,7 +134,7 @@
                                             $t =   mysqli_query($connection, $apply2);    //Excecute query
 
                                                 
-                                            header("Location:staff_approval.php");
+                                           // header("Location:staff_approval.php");
                                                         
                                                           
                                                     }
