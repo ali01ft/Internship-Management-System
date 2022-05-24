@@ -34,32 +34,35 @@ else{
 
                                             print_r($x);
                                             $app = $x['appID'];
+                                            print_r($app);
                                             $stat = $x['ENROLL'];
                                             $jobstate = $x['Status'];
                                             print_r($jobstate);
                                             $stu_info2 = $x['STUDENT_ID'];
+                                            print_r($stu_info2);
                                         }
-                                 }       
+                                 } 
+
                              else{
                              	echo "not working";
                              }
 
 
-if (isset($_POST['submit'])){
+					if (isset($_POST['submit'])){
 
 
 	
-		$user_review		=	$_POST["user_review"];
-		print_r($user_review);
-	
-	
-		$que1 = $_POST['question1'];
-		print_r($que1);
-	
-		$que2 = $_POST['question2'];
-		print_r($que1);
+									$user_review		=	$_POST["user_review"];
+									print_r($user_review);
+								
+								
+									$que1 = $_POST['question1'];
+									print_r($que1);
+								
+									$que2 = $_POST['question2'];
+									print_r($que1);
 
-		$date = date("Y/m/d");
+									$date = date("Y/m/d");
 
 
 
