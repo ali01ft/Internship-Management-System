@@ -198,7 +198,7 @@
                     <?php
                     $connection = mysqli_connect("localhost","root","");
                     $db = mysqli_select_db($connection, 'ims');
-                    $queryalert = "SELECT * FROM student where ENROLL = 'pending'";
+                    $queryalert = "SELECT * FROM student where ENROLL = 'pending' OR ENROLL = 'Ending'";
                     $queryalert_run = mysqli_query($connection, $queryalert);
 
                      
@@ -215,7 +215,7 @@
                                 <div class="alert alert-danger d-flex align-items-center" role="alert">
                                   <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                   <div>
-                                    You have '.$stud_alert.' students currently awaiting approval!
+                                    <a href = "staff_approval.php"> You have '.$stud_alert.' students currently awaiting approval! </a>
                                   </div>
                                 </div>
                              </div>   

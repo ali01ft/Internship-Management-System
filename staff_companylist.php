@@ -179,13 +179,13 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <?php
-                                    $connection = mysqli_connect("localhost","root","");
-                                    $db = mysqli_select_db($connection, 'ims');
+                                     <?php
+                                                $connection = mysqli_connect("localhost","root","");
+                                                $db = mysqli_select_db($connection, 'ims');
 
-                                    $query = "SELECT * FROM industry";
-                                    $query_run = mysqli_query($connection, $query);
-                                    ?>
+                                                $query = "SELECT * FROM industry";
+                                                $query_run = mysqli_query($connection, $query);
+                                      ?>
                                         <table id="datatableid" class="table table-bordered">
                                             <thead>
                                                 <tr>
@@ -198,6 +198,7 @@
                                                    
                                                     <th scope="col"> EDIT </th>
                                                     <th scope="col"> DELETE </th>
+                                                    <th scope="col"> REPORT </th>
                                                 </tr>
                                             </thead>
                                   
@@ -209,7 +210,7 @@
                                                         {
 
                                                             $rid = $row['REGIS_NO'];
-                                                            print_r($rid);
+                                                         
 
                                                     ?>
                                                 <tr>
@@ -226,8 +227,9 @@
                                                         <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
                                                     </td>
                                                     <td>
-                                                        <?php echo "<a href ='industry_report.php?data=$rid'> REPORT </a>"?>
+                                                        <?php echo "<a href ='industry_report.php?data=$rid' style='color: white;'><button type='button' class='btn btn-primary'> REPORT </button></a>"?>
                                                     </td> 
+                                                  
                                                 </tr>
                                                  <?php           
                                                     }
@@ -245,7 +247,7 @@
 
                                 <br>
                                 <br>
-                       <button class="btn btn-danger" name="download-button" id="download-button">Download Table</button>
+                             <button class="btn btn-danger" name="download-button" id="download-button">Download Table</button>
                        
 
 
@@ -298,7 +300,7 @@
                             </script>
 
                              <!-- Table controller  -->
-                            <script>
+                        <script>
                                 $(document).ready(function () {
 
                                     $('#datatableid').DataTable({
@@ -386,7 +388,8 @@
 
 
 
-                             <script>function downloadCSVFile(csv, filename) {
+                             <script>
+                                    function downloadCSVFile(csv, filename) {
                                     var csv_file, download_link;
 
                                     csv_file = new Blob([csv], {type: "text/csv"});

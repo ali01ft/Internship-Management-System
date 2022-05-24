@@ -38,6 +38,7 @@ else{
                                             $jobstate = $x['Status'];
                                             print_r($jobstate);
                                             $stu_info2 = $x['STUDENT_ID'];
+                                            $jobid = $x['job_ID'];
                                         }
                                  }       
                              else{
@@ -100,11 +101,11 @@ if (isset($_POST['submit'])){
 
 	$stmt = mysqli_stmt_init($conn); //initialize connection to statement
 
-	$query = "INSERT INTO student_review_table (STUDENT_ID, user_name, rating_question1, rating_question2, user_rating, user_review, datetime) 
-	VALUES (?, ?, ?, ?, ?,?,?)";
+	$query = "INSERT INTO student_review_table (STUDENT_ID, user_name, rating_question1, rating_question2, user_rating, user_review, datetime,$jobid) 
+	VALUES (?, ?, ?, ?, ?,?,?,?)";
 
 	mysqli_stmt_prepare($stmt, $query);
-	mysqli_stmt_bind_param($stmt, 'sssssss', $id, $user_name, $que1, $que2, $rating1, $user_review, $date);
+	mysqli_stmt_bind_param($stmt, 'ssssssss', $id, $user_name, $que1, $que2, $rating1, $user_review, $date, $jobid);
 	$insert = mysqli_stmt_execute($stmt);
 
 

@@ -216,7 +216,7 @@ echo "<body>";
                                     echo "<form method='POST'>";
                                        echo  "<button type='submit' name='Ending' value='Ending'> Completed </button>";
                                     echo "</form>";
-                             }elseif ($jobstate == "Ending"){
+                             }elseif ($jobstate == "Ending" ){
                                 echo "<p>Please Wait for admin confirmation</p>";
                             }?>
 

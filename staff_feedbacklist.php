@@ -4,10 +4,86 @@
   session_start();
 
   if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
+
+    $id = $_SESSION['user_id'];
+
+    $connection = mysqli_connect("localhost","root","");
+    $db = mysqli_select_db($connection, 'ims');
+
+
 ?>
 
+<?php
 
 
+                                // This is the code which brings out pending list for approval
+                                    $query = "SELECT sr.STUDENT_ID, i.COMPANY_NAME, j.Job_Title, sr.rating_question1, sr.rating_question2, sr.user_rating, sr.user_review, sr.datetime from student_review_table sr inner join jobs j on sr.Job_ID = j.Job_ID inner join industry i on j.REGIS_NO = i.REGIS_NO";
+                                    $query_run = mysqli_query($connection, $query);
+                                   
+
+
+
+
+                                     if(isset($_POST['Apply'])) {
+                                         $f_ID = $_POST['Apply'];  // approve
+
+                                        $apply = " UPDATE applicants
+                                                SET Status='Confirmed'
+                                                WHERE appID ='$f_ID'";       // updating confirmation status
+
+                                                mysqli_query($connection, $apply);    //Excecute query
+
+                                        //updating the status in student table
+
+                                        $que = "SELECT * from applicants where appID='$f_ID'";
+                                        $que_run = mysqli_query($connection, $que);
+                                        $info = mysqli_fetch_assoc($que_run);
+                                        $stu_info = $info['STUDENT_ID'];
+
+                                         $enroll = " UPDATE student
+                                                SET ENROLL='Confirmed'
+                                                WHERE STUDENT_ID ='$stu_info'"; 
+   
+                                                $trial =  mysqli_query($connection, $enroll);    //Excecute query
+
+
+                                                 header("Location:staff_approval.php");
+                                              
+                                             }else{
+
+                                                 if(isset($_POST['Cancel'])) {
+                                                   $f_ID = $_POST['Cancel'];  // approve
+
+                                                    //update application table
+                                                    $apply = " UPDATE applicants
+                                                        SET Status=null;
+                                                        WHERE appID ='$f_ID'";       // updating confirmation status
+           
+                                                         mysqli_query($connection, $apply);    //Excecute query
+
+                                                    //update student table
+
+                                                 $que = "SELECT * from applicants where appID='$f_ID'";
+                                                $que_run = mysqli_query($connection, $que);
+                                                $info = mysqli_fetch_assoc($que_run);
+                                                $stu_info = $info['STUDENT_ID'];
+
+                                                        $apply = " UPDATE student
+                                                                    SET ENROLL=null
+                                                                     WHERE STUDENT_ID ='$stu_info'";       // updating confirmation status
+           
+                                                         mysqli_query($connection, $apply);    //Excecute query
+
+                                                
+                                                       header("Location:staff_approval.php");
+                                                        
+                                                          
+                                                        }
+                                                     
+                                            }
+
+                                                                      
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +94,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <title>IMS</title>
 </head>
 
@@ -34,13 +111,13 @@
                         class="fas fa-project-diagram me-2"></i>Internship listing</a>
                 <a href="staff_studentlist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Student listing</a>
-                  <a href="staff_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Company listing</a>
-                        <a href="staff_approval.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Student Approval</a>                   
+                <a href="staff_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Company listing</a> 
+                <a href="staff_approval.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-project-diagram me-2"></i>Student Approval</a> 
                 <a href="staff_infographics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-chart-line me-2"></i>Analytics</a>
-                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Feedback list</a>
                 <a href="staff_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
@@ -53,7 +130,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Feedback listings</h2>
+                    <h2 class="fs-2 m-0">Student Waiting List</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -67,8 +144,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i><?=$_SESSION['user_full_name']?>
-                            </a>
+                                <i class="fas fa-user me-2"></i><?=$_SESSION['user_full_name']?></a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
                             </ul>
@@ -80,7 +156,162 @@
             <div class="container-fluid px-4">
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">Define your search</h3>
-                    <div class="col">
+
+                       <!-- Fetching data module  -->
+                                <div class="card">
+                                    <div class="card-body">
+                                      <form method="POST">
+                                        <table id="datatableid" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Application ID</th>
+                                                    <th scope="col">Student ID</th>
+                                                    <th scope="col">Student Name</th>
+                                                    <th scope="col">Course</th>
+                                                    <th scope="col">Job Title</th>
+                                                    <th scope="col">Company Name </th>
+                                                    <th scope="col">Category </th>
+                                                    <th scope="col">Vacancy </th>
+                                                    <th scope="col">Offer Document</th>
+                                                    <th scope="col">Company Contact No</th>
+                                                   
+                                                    <th scope="col"> ACCEPT </th>
+                                                    <th scope="col"> REJECT </th>
+                                                </tr>
+                                            </thead>
+                                  
+                                            <tbody>
+                                                    <?php
+                                                    if($query_run)
+                                                    {
+                                                        foreach($query_run as $row)
+                                                        {
+                                                           $r = $row['appID'];
+                                                           $t = $row['Proof'];
+                                                          
+                                                    ?>
+                                                <tr>
+                                                    <td> <?php echo $row['appID']; ?></td>
+                                                    <td> <?php echo $row['STUDENT_ID']; ?></td>
+                                                    <td> <?php echo $row['NAME']; ?></td>
+                                                    <td> <?php echo $row['COURSE']; ?></td>
+                                                    <td> <?php echo $row['Job_Title']; ?></td>
+                                                    <td> <?php echo $row['COMPANY_NAME'];?> </td>
+                                                    <td> <?php echo $row['Category'];?></td>
+                                                    <td> <?php echo $row['Vacancy'];?></td>
+                                                    <td><?php echo "<a href='documents/".$row['Proof']."' download>See Letter</a>"?></td>
+                                                    <td> <?php echo $row['CONTACT_NO'];?> </td>
+                                                    <td>
+                                                        <button type="submit" class="btn btn-success editbtn" name = "Apply" value ='<?php echo $r?>'>APPROVE</button>
+                                                    </td>
+
+                                                    <td>
+                                                        <button type="submit" class="btn btn-danger deletebtn" name = "Cancel" value ='<?php echo $r?>'>CANCEL</button>
+                                                    </td>
+                                                </tr>
+                                                 <?php           
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    echo "No Record Found";
+                                                }
+                                                 ?>
+                                            </tbody>
+                                   
+                                        </table>
+                                    </form>
+                                    </div>
+                                </div>
+
+
+           <!--list of students that are completing internship-->                     
+            
+            <div class="container-fluid px-4">
+                <div class="row my-5">
+                    <h3 class="fs-4 mb-3">Please Confirm Student Internship Completion</h3>
+
+                       <!-- Fetching data module  -->
+                                <div class="card">
+                                    <div class="card-body">
+                                      <form method="POST">
+                                        <table id="datatableid1" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Application ID</th>
+                                                    <th scope="col">Student ID</th>
+                                                    <th scope="col">Student Name</th>
+                                                    <th scope="col">Course</th>
+                                                    <th scope="col">Job Title</th>
+                                                    <th scope="col">Company Name </th>
+                                                    <th scope="col">Category </th>
+
+                                                    <th scope="col">Company Contact No</th>
+                                                   
+                                                    <th scope="col"> ACCEPT </th>
+                                                    <th scope="col"> REJECT </th>
+                                                </tr>
+                                            </thead>
+                                  
+                                            <tbody>
+                                                    <?php
+                                                    if($query_run)
+                                                    {
+                                                        foreach($query_run2 as $x)
+                                                        {
+                                                        
+                                                           $r = $x['appID'];
+                                                           $t = $x['Proof'];
+                                                          
+                                                    ?>
+                                                <tr>
+                                                    <td> <?php echo $x['appID']; ?></td>
+                                                    <td> <?php echo $x['STUDENT_ID']; ?></td>
+                                                    <td> <?php echo $x['NAME']; ?></td>
+                                                    <td> <?php echo $x['COURSE']; ?></td>
+                                                    <td> <?php echo $x['Job_Title']; ?></td>
+                                                    <td> <?php echo $x['COMPANY_NAME'];?> </td>
+                                                    <td> <?php echo $x['Category'];?></td>
+
+                                                    <td> <?php echo $x['CONTACT_NO'];?> </td>
+                                                    <td>
+                                                        
+                                                        <button type="submit" class="btn btn-success editbtn" name = "Apply2" value ='<?php echo $r?>'>APPROVE</button>
+                                                    </td>
+
+                                                    <td>
+                                                        <button type="submit" class="btn btn-danger deletebtn" name = "Cancel2" value ='<?php echo $r?>'>CANCEL</button>
+                                                    </td>
+                                                </tr>
+                                                 <?php           
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    echo "No Record Found";
+                                                }
+                                                 ?>
+                                            </tbody>
+                                   
+                                        </table>
+                                    </form>
+                                    </div>
+                                </div>
+
+
+                       
+                       
+
+
+
+    
+                    </div>
+                </div>
+                       
+                       
+
+
+
     
                     </div>
                 </div>
@@ -101,12 +332,101 @@
         };
     </script>
 </body>
+                             <!-- Script links for functions and datatable -->
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+                            <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+                            <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
+                            <script>
+                                $(document).ready(function () {
+
+                                    $('.viewbtn').on('click', function () {
+                                        $('#viewmodal').modal('show');
+                                        $.ajax({ //create an ajax request to display.php
+                                            type: "GET",
+                                            url: "display.php",
+                                            dataType: "html", //expect html to be returned                
+                                            success: function (response) {
+                                                $("#responsecontainer").html(response);
+                                                //alert(response);
+                                            }
+                                        });
+                                    });
+
+                                });
+                            </script>
+
+
+                             <!-- Table controller  -->
+                            <script>
+                                $(document).ready(function () {
+
+                                    $('#datatableid').DataTable({
+                                        "pagingType": "full_numbers",
+                                        "lengthMenu": [
+                                            [10, 25, 50, -1],
+                                            [10, 25, 50, "All"]
+                                        ],
+                                        responsive: true,
+                                        language: {
+                                            search: "_INPUT_",
+                                            searchPlaceholder: "Search Your Data",
+                                        }
+                                    });
+
+                                    $('#datatableid1').DataTable(
+                                         {
+                                        "pagingType": "full_numbers",
+                                        "lengthMenu": [
+                                            [10, 25, 50, -1],
+                                            [10, 25, 50, "All"]
+                                        ],
+                                        responsive: true,
+                                        language: {
+                                            search: "_INPUT_",
+                                            searchPlaceholder: "Search Your Data",
+                                        }
+                                        }      
+                                    );
+
+                                });
+                            </script>
+
+
+                            <!-- Function to display delete popup -->
+                              <script>
+                                $(document).ready(function () {
+
+                                    $('.deletebtn').on('click', function () {
+
+                                        $('#deletemodal').modal('show');
+
+                                        $tr = $(this).closest('tr');
+
+                                        var data = $tr.children("td").map(function () {
+                                            return $(this).text();
+                                        }).get();
+
+                                        console.log(data);
+
+                                        $('#delete_id').val(data[0]);
+
+                                    });
+                                });
+                            </script>
+
+
+
+
 
 </html>
 
 <?php 
 }else {
-   header("Location:staff_login.php");
+   header("Location:login_access.php");
 }
  ?>
 

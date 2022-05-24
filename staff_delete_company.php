@@ -6,6 +6,7 @@ if(isset($_POST['deletedata']))
 {
     $id = $_POST['delete_id'];
 
+
     $query = "DELETE FROM industry WHERE REGIS_NO ='$id'";
     $query_run = mysqli_query($connection, $query);
 
@@ -17,6 +18,7 @@ if(isset($_POST['deletedata']))
     else
     {
         echo '<script> alert("Data Not Deleted"); </script>';
+        header("Location:staff_companylist.php");
     }
 }
 

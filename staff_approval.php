@@ -267,7 +267,7 @@
                                                     {
                                                         foreach($query_run2 as $x)
                                                         {
-                                                            print_r($x);
+                                                        
                                                            $r = $x['appID'];
                                                            $t = $x['Proof'];
                                                           
