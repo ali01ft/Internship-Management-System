@@ -182,8 +182,8 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                 </div>
             </div>
 
-
-<!--table for industry approved list-->
+                <?php include 'staff_completelist.php'; ?>
+            <!--table for industry approved list-->
            <div class="container-fluid px-4">
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">List of Jobs accepted</h3>
@@ -345,16 +345,19 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
             include 'student_status1.php';
 
          }
-    else{
 
-            if($status == "Confirmed"){
+    elseif($status == "Confirmed"){
 
             include 'student_status2.php';
 
          }
 
+    else{
+        if ($status == "Ended") {
+            include 'student_feedback.php';
+        }
     }
 }else {
-   header("Location:  login_access.php");
+   header("Location: login_access.php");
 }
  ?>

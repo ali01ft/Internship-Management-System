@@ -15,6 +15,8 @@
 
 <?php
 
+
+                                // This is the code which brings out pending list for approval
                                     $query = "SELECT applicants.appID, student.STUDENT_ID, student.NAME, student.COURSE, jobs.Job_Title, industry.COMPANY_NAME, jobs.Category, jobs.Vacancy, applicants.Proof, industry.CONTACT_NO
                                         from applicants
                                         inner join student on student.STUDENT_ID = applicants.STUDENT_ID
@@ -52,38 +54,43 @@
 
                                                  header("Location:staff_approval.php");
                                               
-                                     }else{
+                                             }else{
 
-                                         if(isset($_POST['Cancel'])) {
-                                           $f_ID = $_POST['Cancel'];  // approve
+                                                 if(isset($_POST['Cancel'])) {
+                                                   $f_ID = $_POST['Cancel'];  // approve
 
-                                            //update application table
-                                            $apply = " UPDATE applicants
-                                                SET Status=null;
-                                                WHERE appID ='$f_ID'";       // updating confirmation status
-   
-                                                 mysqli_query($connection, $apply);    //Excecute query
+                                                    //update application table
+                                                    $apply = " UPDATE applicants
+                                                        SET Status=null;
+                                                        WHERE appID ='$f_ID'";       // updating confirmation status
+           
+                                                         mysqli_query($connection, $apply);    //Excecute query
 
-                                            //update student table
+                                                    //update student table
 
-                                         $que = "SELECT * from applicants where appID='$f_ID'";
-                                        $que_run = mysqli_query($connection, $que);
-                                        $info = mysqli_fetch_assoc($que_run);
-                                        $stu_info = $info['STUDENT_ID'];
+                                                 $que = "SELECT * from applicants where appID='$f_ID'";
+                                                $que_run = mysqli_query($connection, $que);
+                                                $info = mysqli_fetch_assoc($que_run);
+                                                $stu_info = $info['STUDENT_ID'];
 
-                                                $apply = " UPDATE student
-                                                            SET ENROLL=null
-                                                             WHERE STUDENT_ID ='$stu_info'";       // updating confirmation status
-   
-                                                 mysqli_query($connection, $apply);    //Excecute query
+                                                        $apply = " UPDATE student
+                                                                    SET ENROLL=null
+                                                                     WHERE STUDENT_ID ='$stu_info'";       // updating confirmation status
+           
+                                                         mysqli_query($connection, $apply);    //Excecute query
 
-                                        
-                                               header("Location:staff_approval.php");
                                                 
-                                                  
-                                                }
-                                             
-                                    }                 
+                                                       header("Location:staff_approval.php");
+                                                        
+                                                          
+                                                        }
+                                                     
+                                            }
+
+                                             include 'staff_completelist.php';
+
+
+                                                                      
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -226,6 +233,88 @@
                                 </div>
 
 
+           <!--list of students that are completing internship-->                     
+            
+            <div class="container-fluid px-4">
+                <div class="row my-5">
+                    <h3 class="fs-4 mb-3">Please Confirm Student Internship Completion</h3>
+
+                       <!-- Fetching data module  -->
+                                <div class="card">
+                                    <div class="card-body">
+                                      <form method="POST">
+                                        <table id="datatableid1" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Application ID</th>
+                                                    <th scope="col">Student ID</th>
+                                                    <th scope="col">Student Name</th>
+                                                    <th scope="col">Course</th>
+                                                    <th scope="col">Job Title</th>
+                                                    <th scope="col">Company Name </th>
+                                                    <th scope="col">Category </th>
+
+                                                    <th scope="col">Company Contact No</th>
+                                                   
+                                                    <th scope="col"> ACCEPT </th>
+                                                    <th scope="col"> REJECT </th>
+                                                </tr>
+                                            </thead>
+                                  
+                                            <tbody>
+                                                    <?php
+                                                    if($query_run)
+                                                    {
+                                                        foreach($query_run2 as $x)
+                                                        {
+                                                            print_r($x);
+                                                           $r = $x['appID'];
+                                                           $t = $x['Proof'];
+                                                          
+                                                    ?>
+                                                <tr>
+                                                    <td> <?php echo $x['appID']; ?></td>
+                                                    <td> <?php echo $x['STUDENT_ID']; ?></td>
+                                                    <td> <?php echo $x['NAME']; ?></td>
+                                                    <td> <?php echo $x['COURSE']; ?></td>
+                                                    <td> <?php echo $x['Job_Title']; ?></td>
+                                                    <td> <?php echo $x['COMPANY_NAME'];?> </td>
+                                                    <td> <?php echo $x['Category'];?></td>
+
+                                                    <td> <?php echo $x['CONTACT_NO'];?> </td>
+                                                    <td>
+                                                        
+                                                        <button type="submit" class="btn btn-success editbtn" name = "Apply2" value ='<?php echo $r?>'>APPROVE</button>
+                                                    </td>
+
+                                                    <td>
+                                                        <button type="submit" class="btn btn-danger deletebtn" name = "Cancel2" value ='<?php echo $r?>'>CANCEL</button>
+                                                    </td>
+                                                </tr>
+                                                 <?php           
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    echo "No Record Found";
+                                                }
+                                                 ?>
+                                            </tbody>
+                                   
+                                        </table>
+                                    </form>
+                                    </div>
+                                </div>
+
+
+                       
+                       
+
+
+
+    
+                    </div>
+                </div>
                        
                        
 
@@ -278,6 +367,7 @@
                                 });
                             </script>
 
+
                              <!-- Table controller  -->
                             <script>
                                 $(document).ready(function () {
@@ -295,8 +385,24 @@
                                         }
                                     });
 
+                                    $('#datatableid1').DataTable(
+                                         {
+                                        "pagingType": "full_numbers",
+                                        "lengthMenu": [
+                                            [10, 25, 50, -1],
+                                            [10, 25, 50, "All"]
+                                        ],
+                                        responsive: true,
+                                        language: {
+                                            search: "_INPUT_",
+                                            searchPlaceholder: "Search Your Data",
+                                        }
+                                        }      
+                                    );
+
                                 });
                             </script>
+
 
                             <!-- Function to display delete popup -->
                               <script>

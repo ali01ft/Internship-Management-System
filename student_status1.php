@@ -1,4 +1,18 @@
+
+ <?php
+    
+
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
+
+    $id = $_SESSION['user_id'];
+    //test
+?>
+
+
+
 <?php 
+
+
 
 $ufn = $_SESSION['user_full_name'];
 
@@ -124,3 +138,9 @@ echo "</body>";
 echo "</html>";
 
 ?>
+
+<?php
+}else {
+   header("Location: login_access.php");
+}
+ ?>

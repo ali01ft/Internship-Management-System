@@ -56,6 +56,6 @@
 
 <?php 
 }else {
-   header("Location: staff_login.php");
+   header("Location: industry_login.php");
 }
  ?>

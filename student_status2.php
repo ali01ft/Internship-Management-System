@@ -22,13 +22,14 @@ $_SESSION['entry'] = 1;
                                             inner join applicants a on s.STUDENT_ID = a.STUDENT_ID
                                             inner join jobs j on a.Job_ID = j.Job_ID
                                             inner join industry i on j.REGIS_NO = i.REGIS_NO
-                                             where  a.Status = 'Ending' OR a.Status = 'Confirmed' AND s.STUDENT_ID = '$id'";
+                                             where  (a.Status = 'Ending' OR a.Status = 'Confirmed') AND s.STUDENT_ID = '$id'";
 
                                     $app_run = mysqli_query($conn, $appid);
 
                                     if($app_run){
                                         foreach ($app_run as $x) {
 
+                                            print_r($x);
                                             $app = $x['appID'];
                                             $stat = $x['ENROLL'];
                                             $jobstate = $x['Status'];
@@ -36,7 +37,7 @@ $_SESSION['entry'] = 1;
                                         }
                                     }
                                     else{
-                                        echo "query didnt run";
+                                        print_r("Didnt work");
                                     }
 
 
@@ -54,7 +55,6 @@ $_SESSION['entry'] = 1;
 
                                 if (isset($_POST['Ending'])) {
                                    $e = $_POST["Ending"];
-                                   print_r($e);
 
                                    $change = " UPDATE applicants
                                                SET Status = 'Ending'
@@ -209,14 +209,14 @@ echo "<body>";
 
                         <!--If the application status is confirmed then a button will appear, if the button is already pressed before a message will appear-->
                        
-                            <?php if ($jobstate = "Ending") {
+                            <?php if ($jobstate == "Confirmed") {
                                 
 
                                 echo "<p>Please Press the button only if you are done with your internship</p>";
                                     echo "<form method='POST'>";
                                        echo  "<button type='submit' name='Ending' value='Ending'> Completed </button>";
                                     echo "</form>";
-                             }else{
+                             }elseif ($jobstate == "Ending"){
                                 echo "<p>Please Wait for admin confirmation</p>";
                             }?>
 

@@ -4,4 +4,4 @@ session_start();
 session_unset();
 session_destroy();
 
-header("Location: login_acess.php");
+header("Location: login_access.php");
