@@ -16,7 +16,9 @@
 
                          if(isset($_POST['Apply2'])) {
                                  $fID = $_POST['Apply2'];  // approve
-                                 print_r($fID);
+                            
+                                 $endDate = date("Y-m-d");
+                                
 
                                 $apply2 = " UPDATE applicants
                                   SET Status='Ended'
@@ -31,6 +33,7 @@
                                   $info2 = mysqli_fetch_assoc($que_run2);
                                  $stu_info2 = $info2['STUDENT_ID'];
 
+
                                  $enroll = " UPDATE student
                                                 SET ENROLL='Ended'
                                                 WHERE STUDENT_ID ='$stu_info2'"; 
@@ -39,8 +42,8 @@
 
 
 
-                                $fdetails = "SELECT * FROM `forhistory` f inner join applicants a on a.STUDENT_ID = f.STUDENT_ID
-                                            where a.STUDENT_ID = '$stu_info2'  and a.Status = 'Ended' and a.appID = '$fID'";
+                                $fdetails = "SELECT a.appID, a.Status, s.STUDENT_ID, s.NAME, s.STUDENT_EMAIL, s.COURSE, s.SUPERVISOR, s.YEAR_OF_STUDY, i.COMPANY_NAME, i.WEBSITE, i.Email, j.Job_Title, j.Position from student s inner join applicants a on s.STUDENT_ID = a.STUDENT_ID inner join jobs j on a.Job_ID = j.Job_ID inner join industry i on j.REGIS_NO = i.REGIS_NO 
+                                    where a.STUDENT_ID = '$stu_info2' and a.Status = 'Ended' and a.appID = '$fID'";
 
 
                                 $fdata = mysqli_query($connection, $fdetails);
@@ -49,12 +52,20 @@
 
                                         foreach ($fdata as $x) {
 
-                                            print_r($x);
-                                            $app = $x['appID'];
-                                            $stat = $x['ENROLL'];
-                                            $jobstate = $x['Status'];
-                                            print_r($jobstate);
-                                            $stu_info2 = $x['STUDENT_ID'];
+                                        
+
+                                            $studentid = $x['STUDENT_ID'];
+                                            $studentname = $x['NAME'];
+                                            $studentemail = $x['STUDENT_EMAIL'];
+                                            $studentcourse = $x['COURSE'];
+                                            $studentvisor = $x['SUPERVISOR'];
+                                            $studentyos = $x['YEAR_OF_STUDY'];
+                                            $companyname = $x['COMPANY_NAME'];
+                                            $companywebsite = $x['WEBSITE'];
+                                            $companyemail = $x['Email'];
+                                            $jobtitle = $x['Job_Title'];
+                                            $jobposition = $x['Position'];
+                                            $completedate = $endDate;
                                         }
                                     }
 
@@ -63,13 +74,13 @@
                                 }
 
 
-                                $stmt = mysqli_stmt_init($conn); //initialize connection to statement
+                                $stmt = mysqli_stmt_init($connection); //initialize connection to statement
 
-                                $run = "INSERT INTO student_review_table (STUDENT_ID, user_name, rating_question1, rating_question2, user_rating, user_review, datetime) 
-                                VALUES (?, ?, ?, ?, ?,?,?)";
+                                $run = "INSERT INTO history (Student_id, Student_NAME, STUDENT_EMAIL, COURSE, YEAR_OF_STUDY, COMPANY_NAME, WEBSITE, Email, Job_Title, Position, Date_End, Completion_date) 
+                                VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?,?)";
 
                                 mysqli_stmt_prepare($stmt, $run);
-                                mysqli_stmt_bind_param($stmt, 'sssssss', $id, $user_name, $que1, $que2, $rating1, $user_review, $date);
+                                mysqli_stmt_bind_param($stmt, 'ssssssssssss', $studentid, $studentname, $studentemail, $studentcourse, $studentvisor, $studentyos, $companyname, $companywebsite, $companyemail, $jobtitle, $jobposition, $completedate);
                                 $insert = mysqli_stmt_execute($stmt);
 
 
@@ -81,7 +92,7 @@
                                 }
 
                                 mysqli_stmt_close($stmt);
-                                mysqli_close($conn);
+                                mysqli_close($connection);
 
 
 
@@ -91,13 +102,13 @@
 
 
 
-                                               //  header("Location:staff_approval.php");
+                              header("Location:staff_approval.php");
                                               
                                     }else{
 
                                         if(isset($_POST['Cancel2'])) {
                                          $fID = $_POST['Cancel2'];  // approve
-                                           print_r($fID);
+                                
 
                                            //update application table
                                              $apply2 = " UPDATE applicants
@@ -122,7 +133,7 @@
                                             $t =   mysqli_query($connection, $apply2);    //Excecute query
 
                                                 
-                                           // header("Location:staff_approval.php");
+                                            header("Location:staff_approval.php");
                                                         
                                                           
                                                     }
@@ -132,34 +143,6 @@
 
 
 
-
-
-
-
-
-
-                            $stmt = mysqli_stmt_init($conn); //initialize connection to statement
-
-                            $query = "INSERT INTO student_review_table (STUDENT_ID, user_name, rating_question1, rating_question2, user_rating, user_review, datetime) 
-                            VALUES (?, ?, ?, ?, ?,?,?)";
-
-                            mysqli_stmt_prepare($stmt, $query);
-                            mysqli_stmt_bind_param($stmt, 'sssssss', $id, $user_name, $que1, $que2, $rating1, $user_review, $date);
-                            $insert = mysqli_stmt_execute($stmt);
-
-
-
-                            if(!$insert){
-                                echo "couldnt insert";
-                            }else{
-                                echo "works fine";
-                            }
-
-                            mysqli_stmt_close($stmt);
-                            mysqli_close($conn);
-                                
-
-}
 
 
 ?>
