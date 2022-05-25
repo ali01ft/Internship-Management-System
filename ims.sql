@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2022 at 09:29 PM
+-- Generation Time: May 25, 2022 at 03:45 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.11
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -66,12 +66,12 @@ CREATE TABLE `applicants` (
 INSERT INTO `applicants` (`appID`, `STUDENT_ID`, `Job_ID`, `confirmation`, `Proof`, `Status`, `Date_Applied`) VALUES
 (88, 101220516, 20, 'YES', NULL, 'Confirmed', NULL),
 (89, 101220213, 20, 'YES', NULL, 'Ended', NULL),
-(90, 101223648, 21, NULL, NULL, 'Ended', NULL),
+(90, 101223648, 21, 'YES', NULL, 'Ended', NULL),
 (91, 101220611, 19, 'YES', NULL, 'Completed', NULL),
-(92, 101220668, 21, NULL, NULL, NULL, NULL),
+(92, 101220668, 21, 'YES', NULL, NULL, NULL),
 (93, 101220668, 20, 'YES', '93_101220668_2022-05-10.pdf', 'Confirmed', NULL),
 (94, 101220668, 19, 'YES', NULL, NULL, NULL),
-(95, 101220699, 21, NULL, NULL, NULL, NULL),
+(95, 101220699, 21, 'YES', NULL, NULL, NULL),
 (96, 101220699, 20, 'YES', '96_101220699_2022-05-10.pdf', 'Confirmed', NULL),
 (97, 101220699, 19, 'YES', NULL, NULL, NULL),
 (98, 101220016, 21, 'YES', NULL, 'Completed', NULL),
@@ -79,7 +79,13 @@ INSERT INTO `applicants` (`appID`, `STUDENT_ID`, `Job_ID`, `confirmation`, `Proo
 (100, 101220016, 22, NULL, NULL, NULL, NULL),
 (101, 101220016, 23, 'YES', NULL, NULL, NULL),
 (102, 101220016, 24, 'YES', NULL, NULL, NULL),
-(103, 101220016, 19, 'YES', '103_101220016_2022-05-18.pdf', 'Completed', NULL);
+(103, 101220016, 19, 'YES', '103_101220016_2022-05-18.pdf', 'Completed', NULL),
+(104, 101220121, 21, 'YES', '104_101220121_2022-05-25.pdf', 'Ended', NULL),
+(105, 101220121, 20, NULL, NULL, NULL, NULL),
+(106, 101220121, 22, NULL, NULL, NULL, NULL),
+(107, 101220121, 23, NULL, NULL, NULL, NULL),
+(108, 101220121, 24, NULL, NULL, NULL, NULL),
+(109, 101220121, 19, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -158,14 +164,10 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`id`, `Student_id`, `Student_NAME`, `STUDENT_EMAIL`, `COURSE`, `SUPERVISOR`, `YEAR_OF_STUDY`, `COMPANY_NAME`, `WEBSITE`, `Email`, `Job_Title`, `Position`, `Date_End`, `Completion_date`) VALUES
-(1, '101223648', 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', NULL, NULL, '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', '0000-00-00', '2022-05-24'),
-(2, '101223648', 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', NULL, NULL, '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', '0000-00-00', '2022-05-24'),
-(3, '101223648', 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', NULL, NULL, '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', '0000-00-00', '2022-05-24'),
-(4, '101223648', 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', NULL, NULL, '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', '0000-00-00', '2022-05-24'),
-(5, '101223648', 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', NULL, NULL, '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', '0000-00-00', '2022-05-24'),
-(6, '101223648', 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', NULL, NULL, '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', '0000-00-00', '2022-05-24'),
-(7, '101220016', 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, 'jim', '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', '0000-00-00', '2022-05-24'),
-(8, '101220611', 'Ashfaque Ali', '101220611@students.swinburne.edu.my', 'Bachelors of information technology', NULL, NULL, '3', 'ZombieCorp', 'www.brains.com', 'zombie@g.com', 'Seating man near the table', '0000-00-00', '2022-05-24');
+(9, '101220016', 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', 'jim', '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', 'anything', NULL, '2022-05-24'),
+(10, '101220121', 'James Konroe', '101220121@students.swinburne.edu.my', 'Bachelors of Engineering', NULL, '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', 'anything', NULL, '2022-05-25'),
+(11, '101220121', 'James Konroe', '101220121@students.swinburne.edu.my', 'Bachelors of Engineering', NULL, '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', 'anything', NULL, '2022-05-25'),
+(12, '101220121', 'James Konroe', '101220121@students.swinburne.edu.my', 'Bachelors of Engineering', NULL, '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', 'anything', NULL, '2022-05-25');
 
 -- --------------------------------------------------------
 
@@ -223,7 +225,9 @@ INSERT INTO `jobs` (`Job_ID`, `Job_Title`, `Location`, `Qualification`, `Categor
 (21, 'Intern for observer', 'kualalampur', 'second year student', ' car industry ', 'anything', '121', 2010312, '2022-05-11', '2022-05-12', NULL),
 (22, 'yadayad', 'dasdsad', 'dasd', 'asdasdas', 'asdas', '123', 1202202, '2022-05-10', '2022-08-10', NULL),
 (23, 'New trial', 'kuching', 'you are unqualified', 'Car Industry', 'janiter', 'none', 1202202, '2022-05-13', '2022-08-13', NULL),
-(24, 'The last trial', 'This is over', 'I am done', 'Telecom Industry', 'i dont care', 'Please work', 1202202, '2022-05-13', '2022-11-13', 'Thanks for playing');
+(24, 'The last trial', 'This is over', 'I am done', 'Telecom Industry', 'i dont care', 'Please work', 1202202, '2022-05-13', '2022-11-13', 'Thanks for playing'),
+(25, 'SuperVisor', 'kuala lampur', 'third year', 'Car Industry', 'secretary', '122', 2010312, '2022-05-25', '2022-09-25', 'Tire company'),
+(26, 'SuperVisor', 'kuala lampur', 'third year', 'Car Industry', 'secretary', '122', 2010312, '2022-05-25', '2022-09-25', 'Tire company');
 
 -- --------------------------------------------------------
 
@@ -275,6 +279,7 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`STUDENT_ID`, `NAME`, `STUDENT_EMAIL`, `COURSE`, `ENROLL`, `SUPERVISOR`, `GENDER`, `CURRENT_RESIDENCE`, `CONTACT_NO`, `YEAR_OF_STUDY`, `PASSWORD`, `CV`, `USERNAME`) VALUES
 (101220016, 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', 'Completed', 'jim', 'Male', '567 kuchching road', '0172564896', '3', '1234', 'profile101220016.pdf', 'Eric'),
+(101220121, 'James Konroe', '101220121@students.swinburne.edu.my', 'Bachelors of Engineering', 'Ended', NULL, 'Male', 'Kuching sarawak', '0178574882', '3', '1234', 'profile101220121.pdf', 'shag'),
 (101220213, 'Andrew Michael', '101220213@students.swinburne.edu.my', 'Bachelors of Commerce', 'Ended', 'ali', 'Male', 'TA165, genting highlands', '0172564897', '3', '12345', 'profile101220213.pdf', 'ErgoProxy'),
 (101220516, 'AaL', '101220516@students.swinburne.edu.my', 'Bachelors of Commerce', 'Confirmed', NULL, 'Male', '43 street, london', '0176395488', '2', '12345', 'profile101220516.pdf', 'aas'),
 (101220611, 'Ashfaque Ali', '101220611@students.swinburne.edu.my', 'Bachelors of information technology', 'Completed', NULL, 'Male', 'dhaka bangladesh', '123456789', '3', '1234', 'profile101220611.pdf', 'shag'),
@@ -337,7 +342,14 @@ INSERT INTO `student_review_table` (`FeedID`, `STUDENT_ID`, `user_name`, `rating
 (10, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'asdasd', '2022-05-18', NULL),
 (11, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sdfsdfasd', '2022-05-24', NULL),
 (12, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sdfsdfasd', '2022-05-24', NULL),
-(13, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sdfsdfasd', '2022-05-24', NULL);
+(13, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sdfsdfasd', '2022-05-24', NULL),
+(42, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sadasd', '2022-05-24', NULL),
+(43, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sadasd', '2022-05-24', NULL),
+(44, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sadasd', '2022-05-24', NULL),
+(45, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'asdasdasd', '2022-05-24', NULL),
+(46, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'asdasdasd', '2022-05-24', NULL),
+(47, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'asdasdasd', '2022-05-24', 21),
+(48, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'asdasd', '2022-05-25', 21);
 
 -- --------------------------------------------------------
 
@@ -346,7 +358,7 @@ INSERT INTO `student_review_table` (`FeedID`, `STUDENT_ID`, `user_name`, `rating
 --
 DROP TABLE IF EXISTS `confirmed_details`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `confirmed_details`  AS SELECT `a`.`Job_ID` AS `Job_ID`, `j`.`REGIS_NO` AS `REGIS_NO`, `s`.`STUDENT_ID` AS `STUDENT_ID`, `s`.`NAME` AS `NAME`, `s`.`STUDENT_EMAIL` AS `STUDENT_EMAIL`, `s`.`COURSE` AS `COURSE`, `s`.`YEAR_OF_STUDY` AS `YEAR_OF_STUDY`, `s`.`CV` AS `CV` FROM (((`student` `s` join `applicants` `a` on(`s`.`STUDENT_ID` = `a`.`STUDENT_ID`)) join `jobs` `j` on(`a`.`Job_ID` = `j`.`Job_ID`)) join `industry` `i` on(`j`.`REGIS_NO` = `i`.`REGIS_NO`)) WHERE `s`.`ENROLL` = 'confirmed''confirmed'  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `confirmed_details`  AS SELECT `a`.`Job_ID` AS `Job_ID`, `j`.`REGIS_NO` AS `REGIS_NO`, `s`.`STUDENT_ID` AS `STUDENT_ID`, `s`.`NAME` AS `NAME`, `s`.`STUDENT_EMAIL` AS `STUDENT_EMAIL`, `s`.`COURSE` AS `COURSE`, `s`.`YEAR_OF_STUDY` AS `YEAR_OF_STUDY`, `s`.`CV` AS `CV` FROM (((`student` `s` join `applicants` `a` on(`s`.`STUDENT_ID` = `a`.`STUDENT_ID`)) join `jobs` `j` on(`a`.`Job_ID` = `j`.`Job_ID`)) join `industry` `i` on(`j`.`REGIS_NO` = `i`.`REGIS_NO`)) WHERE `s`.`ENROLL` = 'confirmed\'confirmed''confirmed\'confirmed'  ;
 
 -- --------------------------------------------------------
 
@@ -364,7 +376,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `seetowork`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `seetowork`  AS SELECT `student`.`STUDENT_ID` AS `STUDENT_ID`, `student`.`NAME` AS `NAME`, `student`.`STUDENT_EMAIL` AS `STUDENT_EMAIL`, `student`.`COURSE` AS `COURSE`, `student`.`ENROLL` AS `ENROLL`, `student`.`SUPERVISOR` AS `SUPERVISOR`, `student`.`GENDER` AS `GENDER`, `student`.`CURRENT_RESIDENCE` AS `CURRENT_RESIDENCE`, `student`.`CONTACT_NO` AS `CONTACT_NO`, `student`.`YEAR_OF_STUDY` AS `YEAR_OF_STUDY`, `student`.`PASSWORD` AS `PASSWORD`, `student`.`CV` AS `CV`, `student`.`USERNAME` AS `USERNAME` FROM `student` WHERE 11  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `seetowork`  AS SELECT `student`.`STUDENT_ID` AS `STUDENT_ID`, `student`.`NAME` AS `NAME`, `student`.`STUDENT_EMAIL` AS `STUDENT_EMAIL`, `student`.`COURSE` AS `COURSE`, `student`.`ENROLL` AS `ENROLL`, `student`.`SUPERVISOR` AS `SUPERVISOR`, `student`.`GENDER` AS `GENDER`, `student`.`CURRENT_RESIDENCE` AS `CURRENT_RESIDENCE`, `student`.`CONTACT_NO` AS `CONTACT_NO`, `student`.`YEAR_OF_STUDY` AS `YEAR_OF_STUDY`, `student`.`PASSWORD` AS `PASSWORD`, `student`.`CV` AS `CV`, `student`.`USERNAME` AS `USERNAME` FROM `student` WHERE 1111  ;
 
 -- --------------------------------------------------------
 
@@ -373,7 +385,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `students_nonappliedjobs`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`trial for more options`@`%` SQL SECURITY DEFINER VIEW `students_nonappliedjobs`  AS SELECT `a`.`NAME` AS `NAME`, `a`.`STUDENT_ID` AS `STUDENT_ID`, `j`.`REGIS_NO` AS `REGIS_NO`, `j`.`Job_ID` AS `Job_ID`, `j`.`Job_Title` AS `Job_Title` FROM ((`student` `a` join `applicants` `o` on(`a`.`STUDENT_ID` = `o`.`STUDENT_ID`)) join `jobs` `j` on(`o`.`Job_ID` = `j`.`Job_ID`)) WHERE `a`.`STUDENT_ID` <> 101223648101223648101223648101223648101223648101223648101223648101223648  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`trial for more options`@`%` SQL SECURITY DEFINER VIEW `students_nonappliedjobs`  AS SELECT `a`.`NAME` AS `NAME`, `a`.`STUDENT_ID` AS `STUDENT_ID`, `j`.`REGIS_NO` AS `REGIS_NO`, `j`.`Job_ID` AS `Job_ID`, `j`.`Job_Title` AS `Job_Title` FROM ((`student` `a` join `applicants` `o` on(`a`.`STUDENT_ID` = `o`.`STUDENT_ID`)) join `jobs` `j` on(`o`.`Job_ID` = `j`.`Job_ID`)) WHERE `a`.`STUDENT_ID` <> 101223648101223648101223648101223648101223648101223648101223648101223648101223648101223648101223648101223648101223648101223648101223648101223648  ;
 
 -- --------------------------------------------------------
 
@@ -449,7 +461,7 @@ ALTER TABLE `student_review_table`
 -- AUTO_INCREMENT for table `applicants`
 --
 ALTER TABLE `applicants`
-  MODIFY `appID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `appID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `email`
@@ -461,19 +473,19 @@ ALTER TABLE `email`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `student_review_table`
 --
 ALTER TABLE `student_review_table`
-  MODIFY `FeedID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `FeedID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Constraints for dumped tables
