@@ -44,38 +44,11 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                     }   
 
 
-                                 if(isset($_GET['search'])){
-
-                                 $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
-                                        from student
-                                        INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
-                                        WHERE applicants.Job_ID =$Jid and applicants.confirmation is null";
-                                $result = $conn->query($sql);
-
-                                $sql2 = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
-                                        from student
-                                        INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
-                                        WHERE applicants.Job_ID =$Jid and applicants.confirmation is not null";
+                                $sql2 = "SELECT s.STUDENT_ID, s.NAME, s.STUDENT_EMAIL, s.COURSE, s.GENDER, s.YEAR_OF_STUDY
+                                        from student s
+                                        INNER join applicants a ON s.STUDENT_ID = a.STUDENT_ID
+                                        WHERE a.Job_ID = '$Jid' and (a.Status ='Confirmed' or a.Status = 'Ending' or a.Status ='Ended' or a.Status = 'Completed')";
                                 $listing = $conn ->query($sql2);
-
-
-
-                                  
-                                if(isset($_POST['Apply'])) {
-
-                                    $f_ID = $_POST['Apply'];  // approve
-                            
-
-                                     $apply = " UPDATE applicants
-                                                SET confirmation='YES'
-                                                WHERE Job_iD=$Jid AND STUDENT_ID = $f_ID;";       // updating confirmation status
-   
-                                     mysqli_query($conn, $apply);    //Excecute query
-
-                                    header("Location: in_applicants.php?data=$Jid");
-    
-                                  }
-
 
 
                         ?>
@@ -97,8 +70,8 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                         class="fas fa-project-diagram me-2"></i>Posted Job listing</a>                   
                 <a href="Jobs.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Post a Job</a>
-                <a href="industry_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Dashboard</a>
+                 <a href="industry_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Dashboard</a>        
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
@@ -135,54 +108,6 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                     </ul>
                 </div>
             </nav>
-
-            <div class="container-fluid px-4">
-                <div class="row my-5">
-                    <h3 class="fs-4 mb-3">List of Applied Students</h3>
-                    <div class="col">
-
-
-
-                     <!--fething data module-->
-                        <div class="card">
-                            <div class="card-body">
-
-                            <form method="POST">
-                                <table id="datatableid" class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Student ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Student Email</th>
-                                    <th scope="col">Course</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Year of Study</th>
-                                    <th scope="col">CV</th>
-                                    <th scope="col">Approval</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                             <?php while( $row = $result->fetch_object() ): ?>
-                                <tr>
-                                    <td><?php echo $row->STUDENT_ID?></td>
-                                    <td><?php echo $row->NAME?></td>
-                                    <td><?php echo $row->STUDENT_EMAIL?></td>
-                                    <td><?php echo $row->COURSE?></td>
-                                    <td><?php echo $row->GENDER?></td>
-                                    <td><?php echo $row->YEAR_OF_STUDY?></td>
-                                    <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
-                                    <td><button type="submit" name = "Apply" class="btn btn-success editbtn" value ='<?php echo $job = $row->STUDENT_ID?>'>Approve</button></td>
-                              </tr>
-                              <?php endwhile; ?>
-                          </tbody>
-                        </table>
-                        </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 
 
             <div class="container-fluid px-4">
@@ -228,8 +153,11 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                         </div>
                     </div>
                 </div>
+                <a href ='in_joblist.php' style='color: white;'><button type='button' class='btn btn-secondary'> Back </button></a>
             </div>
-  <a href="in_joblist.php"> Back </a>                      
+                                
+                                         
+                                                
 
         </div>   
     </div>

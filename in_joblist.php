@@ -71,11 +71,9 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
             <div class="list-group list-group-flush my-3">
             
                   <a href="in_joblist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-project-diagram me-2"></i>Posted Job listing</a>                   
+                        class="fas fa-project-diagram me-2"></i>Dashboard</a>                   
                 <a href="Jobs.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Post a Job</a>
-                <a href="industry_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Dashboard</a>
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
@@ -120,7 +118,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
 
         <!--fething data module-->
-        <p>Please Click on the Job Titles to check the Interns list</p>
+        <p>Please Click on the buttons to check the Interns list</p>
                     <div class="card">
                         <div class="card-body">
 
@@ -135,7 +133,10 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <th scope="col">Position</th>
                                  <th scope="col">Date Posted</th>
                                  <th scope="col">Offer End Date</th>
-                                 <th scope="col">Requirements</th>
+                                 <th scope="col">Job Details</th>
+                                 <th scope="col">Edit</th>
+                                 <th scope="col">Applications</th>
+                                 <th scope="col">Confirmed</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -149,7 +150,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
                                 ?>
                                     
-                                 <td> <?php echo "<a href ='in_applicants.php?data=$Jid'>$row->Job_Title</a>"?></td>
+                                 <td> <?php echo $row->Job_Title?></td>
                                  <td><?php echo $row->Location?></td>
                                  
                                  <td><?php echo $row->Category?></td>
@@ -157,8 +158,19 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <td><?php echo $row->Position?></td>
                                  <td><?php echo $sdate?></td>
                                  <td><?php echo $edate?></td>
-                                 
+                          
                                  <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
+                                 <td>
+                                 <button type="button" class="btn btn-success editbtn"> EDIT </button>
+                                 </td>
+                                  <td>
+                                         <?php echo "<a href ='in_applicants.php?data=$Jid' style='color: white;'><button type='button' class='btn btn-success'> Applied </button></a>"?>
+                                 </td>
+                                 
+                                  <td>
+                                         <?php echo "<a href ='industry_confirmed.php?data=$Jid' style='color: white;'><button type='button' class='btn btn-secondary'> Interning </button></a>"?>
+                                 </td>
+                                 
                               </tr>
                               <?php endwhile; ?>
                           </tbody>

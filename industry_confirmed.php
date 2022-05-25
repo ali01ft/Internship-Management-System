@@ -44,9 +44,11 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                     }   
 
 
-                                 $sql = "SELECT * FROM `confirmed_details` WHERE Job_ID ='$Jid' and REGIS_NO = '$id'";
-                                 $result = $conn->query($sql);
-
+                                $sql2 = "SELECT s.STUDENT_ID, s.NAME, s.STUDENT_EMAIL, s.COURSE, s.GENDER, s.YEAR_OF_STUDY
+                                        from student s
+                                        INNER join applicants a ON s.STUDENT_ID = a.STUDENT_ID
+                                        WHERE a.Job_ID = '$Jid' and (a.Status ='Confirmed' or a.Status = 'Ending' or a.Status ='Ended' or a.Status = 'Completed')";
+                                $listing = $conn ->query($sql2);
 
 
                         ?>
@@ -64,12 +66,10 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                     class="fas fa-address-book me-1"></i>Swinburne</div>
             <div class="list-group list-group-flush my-3">
             
-                  <a href="in_joblist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Posted Job listing</a>                   
+                  <a href="in_joblist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-project-diagram me-2"></i>Dashboard</a>                   
                 <a href="Jobs.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Post a Job</a>
-                <a href="industry_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-project-diagram me-2"></i>Dashboard</a>
+                        class="fas fa-paperclip me-2"></i>Post a Job</a>       
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
@@ -83,7 +83,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Students That are Confirmed for the Jobs</h2>
+                    <h2 class="fs-2 m-0">Students That Applied for the Jobs</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -107,9 +107,10 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                 </div>
             </nav>
 
+
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">List of Applied Students</h3>
+                    <h3 class="fs-4 mb-3">List of Accepted Students</h3>
                     <div class="col">
 
 
@@ -119,26 +120,28 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                             <div class="card-body">
 
                             <form method="POST">
-                                <table id="datatableid" class="table table-bordered">
+                                <table id="datatableid1" class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Student ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Student Email</th>
-                                    <th scope="col">Course</th>
-                                    <th scope="col">Year of Study</th>
-                                    <th scope="col">CV</th>
+                                <th scope="col">Student ID</th>
+                                 <th scope="col">Name</th>
+                                 <th scope="col">Student Email</th>
+                                 <th scope="col">Course</th>
+                                 <th scope="col">Gender</th>
+                                 <th scope="col">Year of Study</th>
+                                 <th scope="col">CV</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                             <?php while( $row = $result->fetch_object() ): ?>
+                             <?php while( $row = $listing->fetch_object() ): ?>
                                 <tr>
-                                    <td><?php echo $row->STUDENT_ID?></td>
-                                    <td><?php echo $row->NAME?></td>
-                                    <td><?php echo $row->STUDENT_EMAIL?></td>
-                                    <td><?php echo $row->COURSE?></td>
-                                    <td><?php echo $row->YEAR_OF_STUDY?></td>
-                                    <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
+                                 <td><?php echo $row->STUDENT_ID?></td>
+                                 <td><?php echo $row->NAME?></td>
+                                 <td><?php echo $row->STUDENT_EMAIL?></td>
+                                 <td><?php echo $row->COURSE?></td>
+                                 <td><?php echo $row->GENDER?></td>
+                                 <td><?php echo $row->YEAR_OF_STUDY?></td>
+                                 <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
                               </tr>
                               <?php endwhile; ?>
                           </tbody>
@@ -148,10 +151,12 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                         </div>
                     </div>
                 </div>
+                <a href ='in_joblist.php' style='color: white;'><button type='button' class='btn btn-secondary'> Back </button></a>
+                <button  style="float: right; margin-right: 10px;" class="btn btn-danger" name="download-button" id="download-button">Download Table</button>
             </div>
-
-
-  <a href="industry_dashboard.php"> Back </a>                      
+                                
+                                         
+                                                
 
         </div>   
     </div>
@@ -260,14 +265,63 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                             </script>
 
 
+                    <!--DOwnload data table-->
+
+                                                 <script>function htmlToCSV(html, filename) {
+                                    var data = [];
+                                    var rows = document.querySelectorAll("table tr");
+                                            
+                                    for (var i = 0; i < rows.length; i++) {
+                                        var row = [], cols = rows[i].querySelectorAll("td, th");
+                                                
+                                        for (var j = 0; j < cols.length; j++) {
+
+                                                row.push(cols[j].innerText);
+                                        }
+                                                
+                                        data.push(row.join(","));       
+                                    }
+
+                                    downloadCSVFile(data.join("\n"), filename);
+                                    }
+                            </script>
+
+
+
+                             <script>
+                                    function downloadCSVFile(csv, filename) {
+                                    var csv_file, download_link;
+
+                                    csv_file = new Blob([csv], {type: "text/csv"});
+
+                                    download_link = document.createElement("a");
+
+                                    download_link.download = filename;
+
+                                    download_link.href = window.URL.createObjectURL(csv_file);
+
+                                    download_link.style.display = "none";
+
+                                    document.body.appendChild(download_link);
+
+                                    download_link.click();
+                            }</script>
+
+                             <script>document.getElementById("download-button").addEventListener("click", function () {
+                                    var html = document.querySelector("table").outerHTML;
+                                    htmlToCSV(html, "Internlist.csv");
+                                });
+                            </script>
+
+
+
 
 
 
 </html>
 
-<?php
-} 
-else {
+<?php 
+}else {
    header("Location:  industry_login.php");
 }
  ?>

@@ -283,7 +283,7 @@ if(isset($_POST["submit"])){
                             <option value="Oil Industry" onclick="addFields()">Oil Industry</option>
                         </select>
                         <div id="container3"></div>
-                         <!-- <input type="text" name="Category" id="Category" value="<?php// if(isset($_POST["Category"])) echo $_POST["Category"]; ?>">-->
+              
                         <br>
                         <br>
 

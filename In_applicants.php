@@ -43,14 +43,6 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                         $Jid = "";
                                     }   
 
-
-                                 if(isset($_GET['search'])){
-                                    $searchKey = $_GET['search'];
-                                    $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
-                                    from student
-                                    INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
-                                    student.COURSE LIKE '%$searchKey%'";
-                                 }else
                                  $sql = "SELECT student.STUDENT_ID,student.NAME, student.STUDENT_EMAIL, student.COURSE, student.GENDER, student.YEAR_OF_STUDY
                                         from student
                                         INNER join applicants ON student.STUDENT_ID = applicants.STUDENT_ID
@@ -99,11 +91,9 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
             <div class="list-group list-group-flush my-3">
             
                   <a href="in_joblist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-project-diagram me-2"></i>Posted Job listing</a>                   
+                        class="fas fa-project-diagram me-2"></i>Dashboard</a>                   
                 <a href="Jobs.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Post a Job</a>
-                 <a href="industry_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Dashboard</a>        
+                        class="fas fa-paperclip me-2"></i>Post a Job</a>      
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
@@ -233,8 +223,11 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                         </div>
                     </div>
                 </div>
+                <a href ='in_joblist.php' style='color: white;'><button type='button' class='btn btn-secondary'> Back </button></a>
             </div>
-  <a href="in_joblist.php"> Back </a>                      
+                                
+                                         
+                                                
 
         </div>   
     </div>

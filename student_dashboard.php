@@ -182,7 +182,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                 </div>
             </div>
 
-                <?php include 'staff_completelist.php'; ?>
+               
             <!--table for industry approved list-->
            <div class="container-fluid px-4">
                 <div class="row my-5">
