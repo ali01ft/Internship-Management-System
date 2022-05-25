@@ -29,11 +29,11 @@ $_SESSION['entry'] = 1;
                                     if($app_run){
                                         foreach ($app_run as $x) {
 
-                                            print_r($x);
+                                           
                                             $app = $x['appID'];
                                             $stat = $x['ENROLL'];
                                             $jobstate = $x['Status'];
-                                            print_r($jobstate);
+                                            
                                         }
                                     }
                                     else{
@@ -101,7 +101,7 @@ echo "<body>";
                    echo "<h2 class='fs-2 m-0'>Student Dashboard</h2>";
                 echo "</div>";
 
-                echo "<button class='navbar-toggler' type='button' data-bs-toggle='collapse';
+                echo "<button class='navbar-toggler' type='button' data-bs-toggle='collapse'
                     data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent'
                     aria-expanded='false' aria-label='Toggle navigation'>";
                echo  "<span class='navbar-toggler-icon'></span>";
@@ -142,6 +142,10 @@ echo "<body>";
 
                                 <!-- Content wrapper -->
             <div class="container-fluid px-4">
+                <?php 
+
+                if ($jobstate == "Confirmed") {
+                  echo'  
                   <div class="row my-5">
 
                          <div class="col">
@@ -151,10 +155,62 @@ echo "<body>";
                                 </div>
                                 <br>
                             </div> 
-                        </div>
+                    </div>
+                    ';
+                }
+                 elseif ($jobstate == "Ending" ){
+
+                    echo'  
+                  <div class="row my-5">
+
+                         <div class="col">
+                            <h3 class="fs-4 mb-3">Internship Status </h3>
+                              <div class="progress" style="height:50px; font-size:1em;">
+                                  <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated " role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" >80% | Awaiting staff completion </div>
+                                </div>
+                                <br>
+                            </div> 
+                    </div>
+                    ';
+
+
+                 }
+                   
+                
+
+                ?>
+                                           
+                                          
+
+
+
 
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">List of Company waiting for Email</h3>
+                        <div class="col">
+                                                <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                                     <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                                      </symbol>
+                                                     </svg>
+
+
+                                   
+                                                      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                                 <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                                  </symbol>
+                                                 </svg>
+
+                                                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                                                  <div>
+                                                    Use this module to email any companies that you have not decided to enroll for.
+
+                                                  </div>
+                                                </div>
+                                          
+
 
                        <!-- Fetching data module  -->
                                 <div class="card">
@@ -176,7 +232,7 @@ echo "<body>";
                                                     <?php
                                                     if($query_run)
                                                     {
-                                                        var_dump($query_run);
+                                                        
                                                         foreach($query_run as $row)
                                                         {
 
@@ -207,18 +263,76 @@ echo "<body>";
                                     </form>
                                     </div>
                                 </div>
+                             </div>   
 
                         <!--If the application status is confirmed then a button will appear, if the button is already pressed before a message will appear-->
                        
                             <?php if ($jobstate == "Confirmed") {
                                 
 
-                                echo "<p>Please Press the button only if you are done with your internship</p>";
-                                    echo "<form method='POST'>";
-                                       echo  "<button type='submit' name='Ending' value='Ending'> Completed </button>";
-                                    echo "</form>";
-                             }elseif ($jobstate == "Ending" ){
-                                echo "<p>Please Wait for admin confirmation</p>";
+                                echo '
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                     <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                      </symbol>
+                                     </svg>
+
+
+                                    <div class="row my-5">
+                                            <div class="col">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                                 <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                                  </symbol>
+                                                 </svg>
+
+                                                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                                                  <div>
+                                                    Please press the button only if you are done with your Internship! 
+
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        </div>        
+
+
+
+                                    <form method="POST">
+                                       <button type="submit" class="btn btn-danger" name="Ending" value="Ending"> Complete Internship </button>
+                                    </form>
+                                    ';
+                             }elseif ($jobstate == "Ending" )
+
+                             {
+                                echo'
+                                <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                     <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                      </symbol>
+                                     </svg>
+
+
+                                    <div class="row my-5">
+                                            <div class="col">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                                 <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                                  </symbol>
+                                                 </svg>
+
+                                                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                                                  <div>
+                                                    Please wait for the staff to confirm your completion! 
+
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        </div>        
+
+                                        ';
                             }?>
 
     
@@ -298,8 +412,7 @@ echo "<body>";
 
 
 <?php
-                echo     "<a href='in_joblist.php'> Back </a>";
-
+                
                    
               
         echo "</div>";
