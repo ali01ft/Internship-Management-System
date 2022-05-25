@@ -197,10 +197,10 @@
                                                     <th scope="col">Student Email</th>
                                                     <th scope="col">Course</th>
                                                     <th scope="col"> Supervisor </th>
-                                                    <th scope="col"> Year Of Study </th>
+                                              
                                                    
                                                     <th scope="col"> Company Name </th>
-                                                    <th scope="col"> Company Website </th>
+                                              
                                                     <th scope="col"> Company Email </th>
                                                      <th scope="col"> Job Title</th>
                                                     <th scope="col">Position </th>
@@ -225,11 +225,11 @@
                                                     <td> <?php echo $row['STUDENT_EMAIL']; ?> </td>
                                                     <td> <?php echo $row['COURSE']; ?> </td>
                                                     <td> <?php echo $row['SUPERVISOR']; ?> </td>
-                                                    <td> <?php echo $row['YEAR_OF_STUDY']; ?> </td>
+                
                                                     
                                                     <td> <?php echo $row['COMPANY_NAME']; ?> </td>
                                                     
-                                                    <td> <?php echo $row['WEBSITE']; ?> </td>
+                                                  
                                                     <td> <?php echo $row['Email']; ?> </td>
                                                     <td> <?php echo $row['Job_Title']; ?> </td>
                                                     <td> <?php echo $row['Position']; ?> </td>

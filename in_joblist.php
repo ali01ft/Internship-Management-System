@@ -135,7 +135,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <th scope="col">Offer End Date</th>
                                  <th scope="col">Job Details</th>
                                  <th scope="col">Edit</th>
-                                 <th scope="col">Applications</th>
+                                 <th scope="col">View Applicants</th>
                                  <th scope="col">Confirmed</th>
                               </tr>
                             </thead>
@@ -164,11 +164,11 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <button type="button" class="btn btn-success editbtn"> EDIT </button>
                                  </td>
                                   <td>
-                                         <?php echo "<a href ='in_applicants.php?data=$Jid' style='color: white;'><button type='button' class='btn btn-success'> Applied </button></a>"?>
+                                         <?php echo "<a href ='in_applicants.php?data=$Jid' style='color: white;'><div class='text-center'><button style = 'margin-'type='button' class='btn btn-success'> View </button></div></a>"?>
                                  </td>
                                  
                                   <td>
-                                         <?php echo "<a href ='industry_confirmed.php?data=$Jid' style='color: white;'><button type='button' class='btn btn-secondary'> Interning </button></a>"?>
+                                         <?php echo "<a href ='industry_confirmed.php?data=$Jid' style='color: white;'><div class='text-center'><button type='button' class='btn btn-secondary'> Interning </button></div></a>"?>
                                  </td>
                                  
                               </tr>
