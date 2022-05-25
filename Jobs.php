@@ -151,7 +151,14 @@ if(isset($_POST["submit"])){
 
                 mysqli_stmt_prepare($stmt,$create);
                 mysqli_stmt_bind_param($stmt, "ssssssssss",$JobTile, $Location, $Qualification, $Category, $Position, $Vacancy, $id, $date, $newDate, $Extra);
-                mysqli_stmt_execute($stmt);
+               $u = mysqli_stmt_execute($stmt);
+
+               if ($u) {
+                   $finalmsg = "<span>Job Has been Posted</span>";
+               }
+               else{
+                 $finalmsg = "<span>Job Posting has failed</span>";
+               }
 
               }
 
@@ -274,15 +281,18 @@ if(isset($_POST["submit"])){
 
                         <label for="Category">Category<br><span class="error"> <?php echo $msgErr;?></span></label>
 
-                        <select name="Category" id="Category">
+                        <select name="Category" id="Category" onclick="addFields()">
                             <option value="" selected>---</option>
-                            <option value="Car Industry" onclick="addFields()">Car Industry</option>
-                            <option value="Telecom Industry" onclick="addFields()">Telecom Industry</option>
-                            <option value="ICT Industry" onclick="addFields()">ICT Industry</option>
-                            <option value="Food Industry" onclick="addFields()">Food Industry</option>
-                            <option value="Oil Industry" onclick="addFields()">Oil Industry</option>
+                            <option value="Car Industry" >Car Industry</option>
+                            <option value="Telecom Industry" >Telecom Industry</option>
+                            <option value="ICT Industry" >ICT Industry</option>
+                            <option value="Food Industry" >Food Industry</option>
+                            <option value="Oil Industry">Oil Industry</option>
                         </select>
-                        <div id="container3"></div>
+
+                        <br>
+                        <label for="Extra">Extra Description</label>
+                        <input type="text" name="Extra" id="Extra">
               
                         <br>
                         <br>
@@ -317,6 +327,7 @@ if(isset($_POST["submit"])){
                   		
                   		</form>
                      </div>
+                     <span> <?php echo $finalmsg;?> </span>
                 </div>
 
             </div>
@@ -339,31 +350,6 @@ if(isset($_POST["submit"])){
     </script>
 
 
-        <script>
-        function addFields(){
-            // Generate a dynamic number of inputs
-            var number = document.getElementById("Category").value;
-            // Get the element where the inputs will be added to
-            var container = document.getElementById("container3");
-            // Remove every children it had before
-            while (container.hasChildNodes()) {
-                container.removeChild(container.lastChild);
-            }
-                //create gap
-                container.appendChild(document.createElement("br"));
-                // Append a node with a random text
-                container.appendChild(document.createTextNode("Extra Description: "));
-                // Create an <input> element, set its type and name attributes
-                var input = document.createElement("input");
-                input.type = "text";
-                input.name = "Extra";
-                input.id ="Extra";
-                container.appendChild(input);
-                // Append a line break 
-                container.appendChild(document.createElement("br"));
-            
-        }
-        </script>
    
   
 <?php

@@ -103,7 +103,7 @@
 
 
 
-                      //        header("Location:staff_approval.php");
+                             header("Location:staff_approval.php");
                                               
                                     }else{
 
@@ -134,7 +134,7 @@
                                             $t =   mysqli_query($connection, $apply2);    //Excecute query
 
                                                 
-                                           // header("Location:staff_approval.php");
+                                           header("Location:staff_approval.php");
                                                         
                                                           
                                                     }

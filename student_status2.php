@@ -69,6 +69,7 @@ $_SESSION['entry'] = 1;
                                     else{
                                         echo "not done";
                                     }
+                                    header("Location: student_dashboard.php");
                                 }
 
 
