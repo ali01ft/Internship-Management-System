@@ -153,12 +153,6 @@ if(isset($_POST["submit"])){
                 mysqli_stmt_bind_param($stmt, "ssssssssss",$JobTile, $Location, $Qualification, $Category, $Position, $Vacancy, $id, $date, $newDate, $Extra);
                $u = mysqli_stmt_execute($stmt);
 
-               if ($u) {
-                   $finalmsg = "<span>Job Has been Posted</span>";
-               }
-               else{
-                 $finalmsg = "<span>Job Posting has failed</span>";
-               }
 
               }
 
@@ -166,7 +160,7 @@ if(isset($_POST["submit"])){
               mysqli_close($conn);
 
               }
-               // header("Location: Jobs.php");
+                header("Location: Jobs.php?msg=1");
 
               }
 
@@ -327,7 +321,9 @@ if(isset($_POST["submit"])){
                   		
                   		</form>
                      </div>
-                     <span> <?php echo $finalmsg;?> </span>
+
+
+
                 </div>
 
             </div>

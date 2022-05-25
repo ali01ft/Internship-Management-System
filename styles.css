@@ -37,6 +37,8 @@
   );
 }
 
+#example {display:none;} /* initially hide it by default */
+
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -15rem;

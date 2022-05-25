@@ -361,17 +361,20 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 
          }
 
-    elseif($status == "Confirmed"){
+        elseif($status == "Confirmed"){
 
-            include 'student_status2.php';
+                include 'student_status2.php';
 
-         }
+             }
 
-    else{
-        if ($status == "Ended") {
-            include 'student_feedback.php';
-        }
-    }
+            elseif($status == "Ended") {
+                    include 'student_feedback.php';
+                }
+                 else{
+                    if($status == "Completed") {
+                    include 'student_status3.php';
+                }
+            }
 }else {
    header("Location: login_access.php");
 }

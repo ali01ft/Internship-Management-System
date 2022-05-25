@@ -42,7 +42,7 @@
 
 
 
-                                $fdetails = "SELECT a.appID, a.Status, s.STUDENT_ID, s.NAME, s.STUDENT_EMAIL, s.COURSE, s.SUPERVISOR, s.YEAR_OF_STUDY, i.COMPANY_NAME, i.WEBSITE, i.Email, j.Job_Title, j.Position from student s inner join applicants a on s.STUDENT_ID = a.STUDENT_ID inner join jobs j on a.Job_ID = j.Job_ID inner join industry i on j.REGIS_NO = i.REGIS_NO 
+                                $fdetails = "SELECT a.appID, a.Status, s.STUDENT_ID, s.NAME, s.STUDENT_EMAIL, s.COURSE, s.SUPERVISOR, s.YEAR_OF_STUDY, i.COMPANY_NAME, i.WEBSITE, i.Email, j.Job_Title, j.Position, a.Date_Applied from student s inner join applicants a on s.STUDENT_ID = a.STUDENT_ID inner join jobs j on a.Job_ID = j.Job_ID inner join industry i on j.REGIS_NO = i.REGIS_NO 
                                     where a.STUDENT_ID = '$stu_info2' and a.Status = 'Ended' and a.appID = '$fID'";
 
 
@@ -65,6 +65,7 @@
                                             $companyemail = $x['Email'];
                                             $jobtitle = $x['Job_Title'];
                                             $jobposition = $x['Position'];
+                                            $dateApplied = $x['Date_Applied'];
                                             $completedate = $endDate;
                                         }
                                     }

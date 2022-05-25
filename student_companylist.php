@@ -37,35 +37,19 @@
                                 //
                                  $conn = new mysqli('localhost', 'root', '', 'ims');
 
-
-
-                                    if(isset($_GET['data'])){
-
-                                        $Jid =  $_GET['data'];
-                                            
-
-                                         //find all the job available which the student didnt apply 
-                                        $sql = "SELECT industry.COMPANY_NAME,jobs.Job_ID, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position, jobs.REGIS_NO, jobs.Date_Posted, jobs.Date_End, jobs.Extra_Details FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO where Job_ID NOT IN (select Job_ID from applicants WHERE STUDENT_ID = $id) AND jobs.REGIS_NO = '$Jid';";
-                                         $result = $conn->query($sql);
-                
-                                        }else{
-
-                                             //find all the job available which the student didnt apply 
-                                             $sql = "SELECT industry.COMPANY_NAME,jobs.Job_ID, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position, jobs.REGIS_NO, jobs.Date_Posted, jobs.Date_End, jobs.Extra_Details FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO where Job_ID NOT IN (select Job_ID from applicants WHERE STUDENT_ID = $id);";
-                                                 $result = $conn->query($sql);
-                                            }
+                                 //find all the job available which the student didnt apply 
+                                 $sql = "SELECT industry.COMPANY_NAME,jobs.Job_ID, jobs.Job_Title, jobs.Location, jobs.Qualification, jobs.Category, jobs.Position, jobs.REGIS_NO, jobs.Date_Posted, jobs.Date_End, jobs.Extra_Details FROM JOBS INNER JOIN industry ON jobs.REGIS_NO = industry.REGIS_NO where Job_ID NOT IN (select Job_ID from applicants WHERE STUDENT_ID = $id);";
+                                     $result = $conn->query($sql);
 
 
 
                                 //the way the student will be able to apply for jobs  
                                 if(isset($_POST['Apply'])) {
 
-                                     $appDate = date("Y-m-d");
-
                                      $f_ID = $_POST['Apply'];  // Job ID
                                      $id = $_SESSION['user_id'];   //Student ID
 
-                                     $apply = "INSERT INTO applicants (STUDENT_ID, Job_ID, Date_Applied) VALUES ('$id', '$f_ID', '$appDate');";       // add friend from user's side
+                                     $apply = "INSERT INTO applicants (STUDENT_ID, Job_ID) VALUES ('$id', '$f_ID');";       // add friend from user's side
     
                                      mysqli_query($conn, $apply);    //Excecute query
 
@@ -87,9 +71,9 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-address-book me-1"></i>Swinburne</div>
             <div class="list-group list-group-flush my-3">
-                <a href="student_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                <a href="student_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Internship listing</a>
-                  <a href="student_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                  <a href="student_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-project-diagram me-2"></i>Company listing</a>                   
                 <a href="student_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Student Dashboard</a>
@@ -104,7 +88,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Student Intership Listing</h2>
+                    <h2 class="fs-2 m-0">Company List</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -128,67 +112,74 @@
                 </div>
             </nav>
 
-            <!--Sector for the list table-->
-           <div class="container-fluid px-4">
-                <div class="row my-5">
-                    <h3 class="fs-4 mb-3">List of jobs</h3>
-                    <div class="col">
+                                          <!-- Fetching data module  -->
+                                <div class="card">
+                                    <div class="card-body">
 
-                    <!--fething data module-->
-                    <div class="card">
-                        <div class="card-body">
+                                     <?php
+                                                $connection = mysqli_connect("localhost","root","");
+                                                $db = mysqli_select_db($connection, 'ims');
 
-                        <form method="POST">
-                            <table id="datatableid" class="table table-bordered">
-                             <thead>
-                                <tr>
-                                 <th scope="col">Company Name</th>
-                                 <th scope="col">Job Title</th>
-                                 <th scope="col">Location</th>
-                                 <th scope="col">Qualification</th>
-                                 <th scope="col">Category</th>
-                                 <th scope="col">More Details</th>
-                                 <th scope="col">Position</th>
-                                 <th scope="col">Date Posted</th>
-                                 <th scope="col">Offer End Date</th>
-                                 <th scope="col">More Details</th>
-                                 <th scope="col">Apply</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <?php while( $row = $result->fetch_object() ): 
-                            
+                                                $query = "SELECT * FROM industry";
+                                                $query_run = mysqli_query($connection, $query);
+                                      ?>
+                                        <table id="datatableid" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Companay Name</th>
+                                                    <th scope="col">Company Address</th>
+                                                    <th scope="col">Website</th>
+                                                    <th scope="col"> Contact </th>
+                                                    <th scope="col"> Email </th>
+                                                    <th scope="col"> View Jobs </th>
 
-                                $sdate = date("d-m-Y", strtotime($row -> Date_Posted)); //starting date changing format
-                                $edate = date("d-m-Y", strtotime($row -> Date_End));  //end date changing format
 
-                                
-                                ?>
-                              <tr>
-                                 <td><?php echo $row->COMPANY_NAME?></td>
-                                 <td><?php echo $row->Job_Title ?></td>
-                                 <td><?php echo $row->Location ?></td>
-                                 <td><?php echo $row->Qualification ?></td>
-                                 <td><?php echo $row->Category ?></td>
-                                 <td><?php echo $row->Extra_Details ?></td>
-                                 <td><?php echo $row->Position ?></td>
-                                 <td><?php echo $sdate?></td>
-                                 <td><?php echo $edate?></td>
-                                 <td><?php echo "<a href='jobs/profile".$row ->REGIS_NO.".pdf' download>Download</a>"?></td> <!--company document-->
-                                 <td><button type="submit" class="btn btn-success editbtn" name = "Apply" value = '<?php echo $job = $row->Job_ID?>'>Apply</button></td>
-                              </tr>
-                              <?php endwhile; ?>
-                            </tbody>
-                            </table>
-                        </form>
+                                                   
+                                                   
+                                                </tr>
+                                            </thead>
+                                  
+                                            <tbody>
+                                                    <?php
+                                                    if($query_run)
+                                                    {
+                                                        foreach($query_run as $row)
+                                                        {
+
+                                                            $rid = $row['REGIS_NO'];
+                                                         
+
+                                                    ?>
+                                                <tr>
+                                                    <td> <?php echo $row['COMPANY_NAME']; ?> </td>
+                                                    <td> <?php echo $row['COMPANY_ADDRESS']; ?> </td>
+                                                    <td> <?php echo $row['WEBSITE']; ?> </td>
+                                                    <td> <?php echo $row['CONTACT_NO']; ?> </td>
+                                                    <td> <?php echo $row['Email']; ?> </td>
+                                                    <td>
+                                                      <?php echo "<a href ='student_internshiplisting.php?data=$rid' style='color: white;'><div class='text-center'><button type='button' class='btn btn-secondary'> View </button></div></a>"?>
+                                                    </td>
+                                                  
+                                                </tr>
+                                                 <?php           
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    echo "No Record Found";
+                                                }
+                                                 ?>
+                                            </tbody>
+                                   
+                                        </table>
+                                    </div>
+                                </div>
 
                     </div>
                 </div>
 
             </div>
         </div>
-    </div>
-<!-- /#page-content-wrapper -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
