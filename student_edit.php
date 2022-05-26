@@ -79,10 +79,6 @@ $userID = $_SESSION['user_id'];
                 
 
 ?>
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 
 
 <!DOCTYPE html>
@@ -169,7 +165,6 @@ $userID = $_SESSION['user_id'];
             $NAME=$row['NAME'];
             $STUDENT_EMAIL=$row['STUDENT_EMAIL'];
             $COURSE=$row['COURSE'];
-            $ENROLL=$row['ENROLL'];
             $GENDER=$row['GENDER'];
             $CURRENT_RESIDENCE=$row['CURRENT_RESIDENCE'];
             $CONTACT_NO=$row['CONTACT_NO'];
@@ -293,9 +288,9 @@ $userID = $_SESSION['user_id'];
 </html>
 
 <?php 
-else {
-   header("Location:staff_login.php");
-}
+//else {
+  // header("Location:staff_login.php");
+//}
 ?>
 
 
