@@ -52,6 +52,8 @@
 
                                         foreach ($fdata as $x) {
 
+
+
                                         
 
                                             $studentid = $x['STUDENT_ID'];
@@ -66,7 +68,8 @@
                                             $jobtitle = $x['Job_Title'];
                                             $jobposition = $x['Position'];
                                             $dateApplied = $x['Date_Applied'];
-                                            print_r();
+                            
+                                          
                                             $completedate = $endDate;
                                         }
                                     }
@@ -78,11 +81,11 @@
 
                                 $stmt = mysqli_stmt_init($connection); //initialize connection to statement
 
-                                $run = "INSERT INTO history (Student_id, Student_NAME, STUDENT_EMAIL, COURSE, SUPERVISOR, YEAR_OF_STUDY, COMPANY_NAME, WEBSITE, Email, Job_Title, Position, Completion_date) 
-                                VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?,?)";
+                                $run = "INSERT INTO history (Student_id, Student_NAME, STUDENT_EMAIL, COURSE, SUPERVISOR, YEAR_OF_STUDY, COMPANY_NAME, WEBSITE, Email, Job_Title, Position, Date_Applied, Completion_date) 
+                                VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?,?,?)";
 
                                 mysqli_stmt_prepare($stmt, $run);
-                                mysqli_stmt_bind_param($stmt, 'ssssssssssss',  $studentid, $studentname, $studentemail, $studentcourse, $studentvisor, $studentyos, $companyname, $companywebsite, $companyemail, $jobtitle, $jobposition, $completedate);
+                                mysqli_stmt_bind_param($stmt, 'sssssssssssss',  $studentid, $studentname, $studentemail, $studentcourse, $studentvisor, $studentyos, $companyname, $companywebsite, $companyemail, $jobtitle, $jobposition, $dateApplied, $completedate);
                                 $insert = mysqli_stmt_execute($stmt);
 
 

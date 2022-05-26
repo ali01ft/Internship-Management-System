@@ -17,7 +17,7 @@
 
 
                                 // This is the code which brings out pending list for approval
-                                    $query = "SELECT ir.user_name, j.REGIS_NO, j.Job_Title, s.STUDENT_ID, s.NAME, ir.rating_question1, ir.rating_question2, ir.user_rating,ir.user_review,ir.datetime  from student s , industry_review_table ir, jobs j";
+                                    $query = "SELECT ir.user_name, j.REGIS_NO, j.Job_Title, s.STUDENT_ID, s.NAME, ir.rating_question1, ir.rating_question2, ir.user_rating,ir.user_review,ir.datetime  from student s inner join industry_review_table ir on s.STUDENT_ID = ir.STUDENT_ID inner join jobs j on ir.Job_ID = j.Job_ID";
                                     $query_run = mysqli_query($connection, $query);
 
                                                                       
@@ -56,9 +56,9 @@
                 <a href="staff_infographics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-chart-line me-2"></i>Analytics</a>
                 <a href="staff_student_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Student Feedback list</a>
-                <a href="staff_industry_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-paperclip me-2"></i>Industry Feedback list</a>
+                        class="fas fa-paperclip me-2"></i>Student Feedback </a>
+                <a href="staff_industry_feedback.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-paperclip me-2"></i>Industry Feedback </a>
                 <a href="staff_history.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Internship History</a> 
                 <a href="staff_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
@@ -72,7 +72,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Student Waiting List</h2>
+                    <h2 class="fs-2 m-0">Industry Feedback List</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -97,7 +97,6 @@
                 <!-- Content wrapper -->
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Student Feedback</h3>
 
                        <!-- Fetching data module  -->
                                 <div class="card">
@@ -106,15 +105,18 @@
                                         <table id="datatableid" class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">STUDENT ID</th>
+                                                    <th scope="col">Company ID</th>
                                                     <th scope="col">Company Name</th>
                                                     <th scope="col">Job Title</th>
-                                                    <th scope="col">Did they Enjoy?</th>
-                                                    <th scope="col">Will they Recommend</th>
+                                                    <th scope="col">Student ID</th>
+                                                    <th scope="col">Student Name</th>
+                                                    <th scope="col">Satisfied?</th>
+                                                    <th scope="col">Student upto Standard?</th>
                                                     <th scope="col">Rating Of Job </th>
                                                     <th scope="col">Review </th>
+                                                    <th scope="col">Date Submitted </th>
 
-                                                    <th scope="col">Completion Date </th>
+                                                 
                                                 </tr>
                                             </thead>
                                   
@@ -128,11 +130,13 @@
                                                     ?>
                                                 <tr>
                                                     
-                                                    <td> <?php echo $row['STUDENT_ID']; ?></td>
-                                                    <td> <?php echo $row['COMPANY_NAME']; ?></td>
+                                                    <td> <?php echo $row['REGIS_NO']; ?></td>
+                                                    <td> <?php echo $row['user_name']; ?></td>
                                                     <td> <?php echo $row['Job_Title']; ?></td>
-                                                    <td> <?php echo $row['rating_question1']; ?></td>
-                                                    <td> <?php echo $row['rating_question2'];?> </td>
+                                                    <td> <?php echo $row['STUDENT_ID']; ?></td>
+                                                    <td> <?php echo $row['NAME'];?> </td>
+                                                    <td> <?php echo $row['rating_question1'];?></td>
+                                                    <td> <?php echo $row['rating_question2'];?></td>
                                                     <td> <?php echo $row['user_rating'];?></td>
                                                     <td> <?php echo $row['user_review'];?></td>
                                                      <td> <?php echo $row['datetime'];?></td>

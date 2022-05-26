@@ -42,7 +42,7 @@
                         class="fas fa-chart-line me-2"></i>Analytics</a>
                 <a href="staff_student_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Student Feedback list</a>
-                <a href="staff_industry_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="staff_industry_feedback.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Industry Feedback list</a>
                 <a href="staff_history.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Internship History</a> 
@@ -83,65 +83,64 @@
             </nav>
 
             <div class="container-fluid px-4">
+                <!--Setting the alert to dissappear-->
+
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Current available listings</h3>
+                    <h3 class="fs-4 mb-3">Define your search</h3>
                     <div class="col">
-                         <?php 
+                                    
 
-                                 $conn = new mysqli('localhost', 'root', '', 'ims');
-                                 if(isset($_GET['search'])){
-                                    $searchKey = $_GET['search'];
-                                    $sql = "SELECT * FROM JOBS WHERE Location LIKE '%$searchKey%'";
-                                 }else
-                                 $sql = "SELECT * FROM JOBS";
-                                 $result = $conn->query($sql);
-                               ?>
+                          <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                                 <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                                  </symbol>
+                                                 </svg>
 
-                               <form action="" method="GET"> 
-                                 <div class="col-md-6">
-                                    <input type="text" name="search" class='form-control' placeholder="Search By Location" value=<?php echo @$_GET['search']; ?> > 
-                                 </div>
-                                 <div class="col-md-6 text-left">
-                                  <button class="btn btn-light">Search</button>
-                                    <button onclick="myFunction()" class="btn btn-light">Refresh </button>
-                                    <script>
-                                    function myFunction() {
-                                        location.reload();
-                                    }
-                                    </script>
-                                 </div>
-                               </form>
+                                                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                                                  <div>
+                                                  Note: This will just show the List of Jobs posted in this Application, only companies can modify this
 
-                               <br> 
-                               <br>
+                                                  </div>
+                                            </div>
+
+                                            <?php
+                                                $connection = mysqli_connect("localhost", "root", "", "ims"); 
+
+                                                $query = "SELECT * from jobs";
+                                                $result = mysqli_query($connection, $query);
+                                            ?>
+                        
+                                 <!-- Fetching data module  -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <table id="datatableid" class="table table-bordered">
+                                             <div class="row">
+                                                  <tr>
+                                                     <th>Job ID</th>
+                                                     <th>Job Title</th>
+                                                     <th>Location</th>
+                                                     <th>Qualification</th>
+                                                     <th>Category</th>
+                                                     <th>Position</th>
+                                           
+                                                  </tr>
+                                                  <?php while( $row = $result->fetch_object() ): ?>
+                                                  <tr>
+                                                     <td><?php echo $row->Job_ID ?></td>
+                                                     <td><?php echo $row->Job_Title ?></td>
+                                                     <td><?php echo $row->Location ?></td>
+                                                     <td><?php echo $row->Qualification ?></td>
+                                                     <td><?php echo $row->Category ?></td>
+                                                     <td><?php echo $row->Position ?></td>
+                                                  </tr>
+                                                  <?php endwhile; ?>
+                                            </div>
+                                    </table>
+
+
+                                </div>
                             </div>
-
-                          <table class="table bg-white rounded shadow-sm  table-hover">
-                            <div class="row">
-                              <tr>
-                                 <th>Job ID</th>
-                                 <th>Job Title</th>
-                                 <th>Location</th>
-                                 <th>Qualification</th>
-                                 <th>Category</th>
-                                 <th>Position</th>
-                                 <th>Apply</th>
-                              </tr>
-                              <?php while( $row = $result->fetch_object() ): ?>
-                              <tr>
-                                 <td><?php echo $row->Job_ID ?></td>
-                                 <td><?php echo $row->Job_Title ?></td>
-                                 <td><?php echo $row->Location ?></td>
-                                 <td><?php echo $row->Qualification ?></td>
-                                 <td><?php echo $row->Category ?></td>
-                                 <td><?php echo $row->Position ?></td>
-                              </tr>
-                              <?php endwhile; ?>
-                            </table>
-
-
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -159,12 +158,158 @@
         };
     </script>
 </body>
+                             <!-- Script links for functions and datatable -->
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+                            <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+                            <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
+                            <script>
+                                $(document).ready(function () {
+
+                                    $('.viewbtn').on('click', function () {
+                                        $('#viewmodal').modal('show');
+                                        $.ajax({ //create an ajax request to display.php
+                                            type: "GET",
+                                            url: "display.php",
+                                            dataType: "html", //expect html to be returned                
+                                            success: function (response) {
+                                                $("#responsecontainer").html(response);
+                                                //alert(response);
+                                            }
+                                        });
+                                    });
+
+                                });
+                            </script>
+
+                             <!-- Table controller  -->
+                        <script>
+                                $(document).ready(function () {
+
+                                    $('#datatableid').DataTable({
+                                        "pagingType": "full_numbers",
+                                        "lengthMenu": [
+                                            [10, 25, 50, -1],
+                                            [10, 25, 50, "All"]
+                                        ],
+                                        responsive: true,
+                                        language: {
+                                            search: "_INPUT_",
+                                            searchPlaceholder: "Search Your Data",
+                                        }
+                                    });
+
+                                });
+                            </script>
+
+                            <!-- Function to display delete popup -->
+                              <script>
+                                $(document).ready(function () {
+
+                                    $('.deletebtn').on('click', function () {
+
+                                        $('#deletemodal').modal('show');
+
+                                        $tr = $(this).closest('tr');
+
+                                        var data = $tr.children("td").map(function () {
+                                            return $(this).text();
+                                        }).get();
+
+                                        console.log(data);
+
+                                        $('#delete_id').val(data[0]);
+
+                                    });
+                                });
+                            </script>
+
+                            <!-- Function to display edit popup -->
+                            <script>
+                                $(document).ready(function () {
+
+                                    $('.editbtn').on('click', function () {
+
+                                        $('#editmodal').modal('show');
+
+                                        $tr = $(this).closest('tr');
+
+                                        var data =$tr.children("td").map(function () {
+                                            return $(this).text();
+                                        }).get();
+
+                                        console.log(data);
+                                    
+                                        $('#update_id').val(data[0]);
+                                        $('#cname').val(data[1]);
+                                        $('#address').val(data[2]);
+                                        $('#website').val(data[3]);
+                                        $('#contact').val(data[4]);
+                                        $('#email').val(data[5]);
+                                    });
+                                });
+                            </script>
+
+
+                             <script>function htmlToCSV(html, filename) {
+                                    var data = [];
+                                    var rows = document.querySelectorAll("table tr");
+                                            
+                                    for (var i = 0; i < rows.length; i++) {
+                                        var row = [], cols = rows[i].querySelectorAll("td, th");
+                                                
+                                        for (var j = 0; j < cols.length; j++) {
+
+                                                row.push(cols[j].innerText);
+                                        }
+                                                
+                                        data.push(row.join(","));       
+                                    }
+
+                                    downloadCSVFile(data.join("\n"), filename);
+                                    }
+                            </script>
+
+
+
+                             <script>
+                                    function downloadCSVFile(csv, filename) {
+                                    var csv_file, download_link;
+
+                                    csv_file = new Blob([csv], {type: "text/csv"});
+
+                                    download_link = document.createElement("a");
+
+                                    download_link.download = filename;
+
+                                    download_link.href = window.URL.createObjectURL(csv_file);
+
+                                    download_link.style.display = "none";
+
+                                    document.body.appendChild(download_link);
+
+                                    download_link.click();
+                            }</script>
+
+                             <script>document.getElementById("download-button").addEventListener("click", function () {
+                                    var html = document.querySelector("table").outerHTML;
+                                    htmlToCSV(html, "CompanyList.csv");
+                                });
+                            </script>
+
+
+
+
 
 </html>
 
 <?php 
 }else {
-   header("Location:  staff_login.php");
+   header("Location:staff_login.php");
 }
  ?>
+
 
