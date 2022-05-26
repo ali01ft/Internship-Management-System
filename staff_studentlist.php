@@ -295,13 +295,13 @@
                                                     <td> <?php echo $row['ENROLL']; ?> </td>
                                                    <td><?php echo "<a href='uploads/profile".$row['STUDENT_ID']."' download>Download</a>"?></td>
                                                     <td>
-                                                        <button type="button" class="btn btn-success editbtn"> EDIT </button>
+                                                        <div class="text-center"><button type="button" class="btn btn-success editbtn"> EDIT </button></div>
                                                     </td>
                                                     <td>
-                                                        <button type="button" class="btn btn-success assignbtn "> Assign </button>
+                                                        <div class="text-center"><button type="button" class="btn btn-success assignbtn "> Assign </button></div>
                                                     </td>
                                                     <td>
-                                                        <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
+                                                        <div class="text-center"><button type="button" class="btn btn-danger deletebtn"> DELETE </button></div>
                                                     </td>
                                                 </tr>
                                                  <?php           
