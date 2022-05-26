@@ -261,7 +261,7 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
                                                 echo "<b> CV: </b>";    
                                             echo "</td>";
                                             echo "<td>";
-                                                echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>";
+                                                echo "<a href='uploads/profile".$row ['STUDENT_ID'].".pdf' download>Download</a>";
                                             echo "</td>";
                                         echo "</tr>";
                                         
