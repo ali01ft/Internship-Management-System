@@ -8,6 +8,7 @@ function test_input($data) {
 }
 
 $StudentID = $uname = $Course = $ContactNo = $Cresidence = $email = $pname = $pwd = $Enrolled = $Supervisor = $yof = $cv = NULl;
+$Gender = "";
 
 // define variable and set to empty VALUES
 $msgErr = $emailErr = $pnameErr = $pwdErr = $StudentErr = $cpwdErr = $pwdErr = $cpwdErr = $CourseErr = $GenderErr = $CresErr = $Contact_noErr = $cvErr = $yofErr = $unameErr = "";

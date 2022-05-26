@@ -41,8 +41,10 @@
                         class="fas fa-project-diagram me-2"></i>Student Approval</a>                   
                 <a href="staff_infographics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-chart-line me-2"></i>Analytics</a>
-                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Feedback list</a>
+                <a href="staff_student_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-paperclip me-2"></i>Student Feedback list</a>
+                <a href="staff_industry_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-paperclip me-2"></i>Industry Feedback list</a>
                 <a href="staff_history.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Internship History</a> 
                 <a href="staff_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
@@ -318,8 +320,9 @@
                                     </div>
                                 </div>
 
-
-
+                                <br>
+                                <br>
+ <button class="btn btn-danger" name="download-button" id="download-button">Download Table</button>
                     
 
                     </div>
@@ -533,6 +536,12 @@
 
                                     download_link.click();
                             }</script>
+
+                             <script>document.getElementById("download-button").addEventListener("click", function () {
+                                    var html = document.querySelector("table").outerHTML;
+                                    htmlToCSV(html, "StudentList.csv");
+                                });
+                            </script>
 
 
 

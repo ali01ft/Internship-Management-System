@@ -122,6 +122,8 @@ if (isset($_POST['submit'])){
 
 }
 
+ header("Location:student_dashboard.php");
+
 
 }
 

@@ -171,7 +171,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <td><?php echo $sdate?></td>
                                  <td><?php echo $edate?></td>
                           
-                                 <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
+                                 <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download><div class='text-center'><button type='button' class='btn btn-primary'>Download</button></div></a>"?></td>
                                  <td>
                                  <button type="button" class="btn btn-success editbtn"> EDIT </button>
                                  </td>

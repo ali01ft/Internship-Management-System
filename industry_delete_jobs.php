@@ -29,12 +29,12 @@ if(isset($_POST['deletedata']))
                     if($query_run)
                     {
                         echo '<script> alert("Data Deleted"); </script>';
-                        header("Location:staff_companylist.php");
+                        header("Location:in_joblist.php");
                     }
                     else
                     {
                         echo '<script> alert("Data Not Deleted"); </script>';
-                        header("Location:staff_companylist.php");
+                        header("Location:in_joblist.php");
                     }
                 }
 }

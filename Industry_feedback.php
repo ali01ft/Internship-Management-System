@@ -29,40 +29,6 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
 <body>
 
-
-       <?php 
-                                //A query which summons all the list
-                                 $conn = new mysqli('localhost', 'root', '', 'ims');
-                           
-                                 $sql = "SELECT * FROM `jobs` WHERE REGIS_NO = $id";
-                                $result = $conn->query($sql);
-                                
-
-                                //dont want to mess up code so i am just keeping it here
-                                if(isset($_POST['Apply'])) {
-
-                                    $f_ID = $_POST['Apply'];  // approve
-                                   
-
-
-                                     $apply = " UPDATE applicants
-                                                SET confirmation='YES'
-                                                WHERE Job_iD=1 AND STUDENT_ID = $f_ID;";      
-   
-                                     mysqli_query($conn, $apply);    //Excecute query
-
-                                    header("Location: in_applicants.php");
-    
-                                  }
-
-                        ?>
-
-
-
-
-
-
-
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="bg-white" id="sidebar-wrapper">
@@ -89,7 +55,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">All Jobs Posted</h2>
+                    <h2 class="fs-2 m-0">Industry feedback</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -129,7 +95,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                     
                                         <div class="modal-header">
                                             <h5 class="modal-title">Feedback</h5>
-                                            <h4 style="color: black;"><?php echo $_SESSION['company_id']; ?></h4>
+                                            <h4 style="color: black;"><?php echo $_SESSION['user_full_name']; ?></h4>
                                         </div>
                                              
                                             
@@ -145,9 +111,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                                 <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
                                             </h4>
                                                 <input type="hidden" id="star1" name="star1" value="asdas">
-                                            <div class="form-group">
-                                                <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
-                                            </div>
+
 
                                              
                                             <div class="form-group">
@@ -270,6 +234,124 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                     });
                                 });
                             </script>
+                            <script>
+    
+        var rating_data = 0;
+
+    $('#add_review').click(function(){
+
+        $('#review_modal').modal('show');
+
+    });
+
+    $(document).on('mouseenter', '.submit_star', function(){
+
+        var rating = $(this).data('rating');
+
+        reset_background();
+
+        for(var count = 1; count <= rating; count++)
+        {
+
+            $('#submit_star_'+count).addClass('text-warning');
+
+        }
+
+    });
+
+    function reset_background()
+    {
+        for(var count = 1; count <= 5; count++)
+        {
+
+            $('#submit_star_'+count).addClass('star-light');
+
+            $('#submit_star_'+count).removeClass('text-warning');
+
+        }
+    }
+
+    $(document).on('mouseleave', '.submit_star', function(){
+
+        reset_background();
+
+        for(var count = 1; count <= rating_data; count++)
+        {
+
+            $('#submit_star_'+count).removeClass('star-light');
+
+            $('#submit_star_'+count).addClass('text-warning');
+        }
+
+    });
+
+    $(document).on('click', '.submit_star', function(){
+
+        rating_data = $(this).data('rating');
+
+
+        document.getElementById("star1").value = rating_data;
+
+
+
+    });
+
+  $('#save_review').click(function(){
+
+      var user_name = $('#user_name').val();
+       
+
+        var user_review = $('#user_review').val();
+       
+
+     
+       var user_rating2 = document.getElementsByName('question2');
+
+        if(user_name == '' || user_review == '' || rating_data =='')
+        {
+            alert("Please Fill all Field");
+            return false;
+        }
+        else
+        {
+            $.ajax({
+               url:"submit_rating.php",
+                type:"POST",
+                data:{rating_data:rating_data},
+                success:function(data)
+                {
+                    $('#review_modal').modal('hide');
+
+                    load_rating_data();
+
+                    alert(data);
+                }
+            });
+        }
+
+ });
+    const setStep = step => {
+    document.querySelectorAll(".step-content").forEach(element => element.style.display = "none");
+    document.querySelector("[data-step='" + step + "']").style.display = "block";
+    document.querySelectorAll(".steps .step").forEach((element, index) => {
+        index < step-1 ? element.classList.add("complete") : element.classList.remove("complete");
+        index == step-1 ? element.classList.add("current") : element.classList.remove("current");
+    });
+};
+document.querySelectorAll("[data-set-step]").forEach(element => {
+    element.onclick = event => {
+        event.preventDefault();
+        setStep(parseInt(element.dataset.setStep));
+    };
+});
+<?php if (!empty($_POST)): ?>
+setStep(4);
+<?php endif; ?>
+
+   
+
+</script>
+
 
 
 

@@ -11,6 +11,8 @@ if(isset($_POST['deletedata']))
     $checkrows = mysqli_query($connection, $nodelete);
     $count = mysqli_num_rows($checkrows);
 
+    $jid - $count['Job_ID'];
+
     if ($count > 0) {
 
 
@@ -18,6 +20,9 @@ if(isset($_POST['deletedata']))
 
             }
             else{
+
+                    $query = "DELETE FROM applicants WHERE jobs ='$jid'";
+                    $query_run = mysqli_query($connection, $query);
 
                     $query = "DELETE FROM jobs WHERE REGIS_NO ='$id'";
                     $query_run = mysqli_query($connection, $query);

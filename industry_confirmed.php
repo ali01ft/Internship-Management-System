@@ -44,7 +44,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                     }   
 
 
-                                $sql2 = "SELECT s.STUDENT_ID, s.NAME, s.STUDENT_EMAIL, s.COURSE, s.GENDER, s.YEAR_OF_STUDY, a.Status
+                                $sql2 = "SELECT s.STUDENT_ID, s.NAME, s.STUDENT_EMAIL, s.COURSE, s.GENDER, s.YEAR_OF_STUDY, a.Status, a.appID
                                         from student s
                                         INNER join applicants a ON s.STUDENT_ID = a.STUDENT_ID
                                         WHERE a.Job_ID = '$Jid' and (a.Status ='Confirmed' or a.Status = 'Ending' or a.Status ='Ended' or a.Status = 'Completed')";
@@ -140,6 +140,12 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                              <?php while( $row = $listing->fetch_object() ): 
 
                                     $condition = $row ->Status;
+                                    $sid = $row->STUDENT_ID;
+                                    print_r($sid);
+                                    $aid = $row->appID;
+                                    $_SESSION['app'] = $aid;
+
+
 
                                 ?>
                                 <tr>
@@ -153,7 +159,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <td><?php 
 
                                     if ($condition == 'Ended' or $condition == 'Completed') {
-                                        echo "<a href ='industry_feedback.php' style='color: white;'><button type='button' class='btn btn-secondary'><div class='text-center'> Give</div> </button></a>";
+                                        echo "<a href ='industry_feedback.php?data=$sid' style='color: white;'><button type='button' class='btn btn-secondary'><div class='text-center'> Give</div> </button></a>";
                                     }
 
                                 ?></td>

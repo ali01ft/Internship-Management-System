@@ -17,7 +17,7 @@
 
 
                                 // This is the code which brings out pending list for approval
-                                    $query = "SELECT sr.STUDENT_ID, i.COMPANY_NAME, j.Job_Title, sr.rating_question1, sr.rating_question2, sr.user_rating, sr.user_review, sr.datetime FROM `student_review_table` sr inner join jobs j on sr.Job_ID = j.Job_ID inner join industry i on j.REGIS_NO = i.REGIS_NO";
+                                    $query = "SELECT ir.user_name, j.REGIS_NO, j.Job_Title, s.STUDENT_ID, s.NAME, ir.rating_question1, ir.rating_question2, ir.user_rating,ir.user_review,ir.datetime  from student s , industry_review_table ir, jobs j";
                                     $query_run = mysqli_query($connection, $query);
 
                                                                       
@@ -57,7 +57,7 @@
                         class="fas fa-chart-line me-2"></i>Analytics</a>
                 <a href="staff_student_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Student Feedback list</a>
-                <a href="staff_industry_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="staff_industry_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-paperclip me-2"></i>Industry Feedback list</a>
                 <a href="staff_history.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Internship History</a> 
