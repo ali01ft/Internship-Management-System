@@ -105,12 +105,18 @@
                                 <i class="fas fa-user me-2"></i><?=$_SESSION['user_full_name']?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="student_profile.php">Profile</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </nav>
+
+   <!-- Content wrapper -->
+            <div class="container-fluid px-4">
+                <div class="row my-5">
+            <div class="col">
+                <h3 class="fs-4 mb-3">List of Companies</h3>
 
                                           <!-- Fetching data module  -->
                                 <div class="card">
