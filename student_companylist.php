@@ -112,6 +112,12 @@
                 </div>
             </nav>
 
+   <!-- Content wrapper -->
+            <div class="container-fluid px-4">
+                <div class="row my-5">
+            <div class="col">
+                <h3 class="fs-4 mb-3">List of Companies</h3>
+
                                           <!-- Fetching data module  -->
                                 <div class="card">
                                     <div class="card-body">
