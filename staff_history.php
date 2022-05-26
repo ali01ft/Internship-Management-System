@@ -43,7 +43,7 @@
                         class="fas fa-chart-line me-2"></i>Analytics</a>
                 <a href="staff_student_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Student Feedback list</a>
-                <a href="staff_industry_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="staff_industry_feedback.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Industry Feedback list</a>
 
                 <a href="staff_history.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
@@ -206,7 +206,7 @@
                                                     <th scope="col"> Company Email </th>
                                                      <th scope="col"> Job Title</th>
                                                     <th scope="col">Position </th>
-                                                    <th scope="col"> Date End</th>
+                                                    <th scope="col"> Date Applied </th>
                                                     <th scope="col"> Completion Date</th>
                                                     <th scope="col"> Report</th>
                                                 </tr>
@@ -235,7 +235,7 @@
                                                     <td> <?php echo $row['Email']; ?> </td>
                                                     <td> <?php echo $row['Job_Title']; ?> </td>
                                                     <td> <?php echo $row['Position']; ?> </td>
-                                                    <td> <?php echo $row['Date_End']; ?> </td>
+                                                    <td> <?php echo $row['Date_Applied']; ?> </td>
                                                     <td> <?php echo $row['Completion_date']; ?> </td>
                                                     <td>  </td>
                                                   
