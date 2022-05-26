@@ -44,7 +44,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                     }   
 
 
-                                $sql2 = "SELECT s.STUDENT_ID, s.NAME, s.STUDENT_EMAIL, s.COURSE, s.GENDER, s.YEAR_OF_STUDY
+                                $sql2 = "SELECT s.STUDENT_ID, s.NAME, s.STUDENT_EMAIL, s.COURSE, s.GENDER, s.YEAR_OF_STUDY, a.Status
                                         from student s
                                         INNER join applicants a ON s.STUDENT_ID = a.STUDENT_ID
                                         WHERE a.Job_ID = '$Jid' and (a.Status ='Confirmed' or a.Status = 'Ending' or a.Status ='Ended' or a.Status = 'Completed')";
@@ -130,10 +130,18 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <th scope="col">Gender</th>
                                  <th scope="col">Year of Study</th>
                                  <th scope="col">CV</th>
+                                 <th scope="col">Feedback</th>
+
+
+
                                 </tr>
                                 </thead>
                                 <tbody>
-                             <?php while( $row = $listing->fetch_object() ): ?>
+                             <?php while( $row = $listing->fetch_object() ): 
+
+                                    $condition = $row ->Status;
+
+                                ?>
                                 <tr>
                                  <td><?php echo $row->STUDENT_ID?></td>
                                  <td><?php echo $row->NAME?></td>
@@ -142,6 +150,13 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <td><?php echo $row->GENDER?></td>
                                  <td><?php echo $row->YEAR_OF_STUDY?></td>
                                  <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
+                                 <td><?php 
+
+                                    if ($condition == 'Ended' or $condition == 'Completed') {
+                                        echo "<a href ='industry_feedback.php' style='color: white;'><button type='button' class='btn btn-secondary'><div class='text-center'> Give</div> </button></a>";
+                                    }
+
+                                ?></td>
                               </tr>
                               <?php endwhile; ?>
                           </tbody>

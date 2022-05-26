@@ -14,7 +14,7 @@ if(isset($_POST['deletedata']))
     if ($count > 0) {
 
 
-                header("Location: staff_companylist.php?msg=1");
+                header("Location: in_joblist.php?msg=1");
 
             }
             else{

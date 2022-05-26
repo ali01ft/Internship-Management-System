@@ -4,6 +4,10 @@
   session_start();
 
   if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
+
+    $msg = "";
+
+
 ?>
 
 
@@ -81,6 +85,28 @@
             </nav>
                 <!-- Content wrapper -->
             <div class="container-fluid px-4">
+
+                 <!--Setting the alert to dissappear-->
+                <div>  
+                     
+                                <script>
+                                    var fade_out = function() {
+                                            $("#mydiv").fadeOut();
+                                            }
+
+                                            setTimeout(fade_out, 5000);
+                                </script>
+
+                                <?php
+                                    if ($_GET['msg'] = '1') {
+
+                                        echo '<div id="mydiv">Cannot delete company, it has students applied</div>';
+
+                                        unset($_GET['msg']);
+                                    }
+                                 ?>
+                       </div>
+                       <!--end alert-->
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">Define your search</h3>
                     <div class="col">
@@ -173,8 +199,6 @@
                                         </div>
                                     </div>
 
-
-                       
                           
                         
                                  <!-- Fetching data module  -->
