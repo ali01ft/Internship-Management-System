@@ -25,8 +25,16 @@
 ?>
 
 <h1 style="color: green;"> <?php echo "$cid" ?> </h1>
-<p style="text-align: center;">This is content</p>
-<p>this is working</p>	
+<p style="text-align: center;">Company Report</p>
+<p>this Company has complied with swinburne guidelines and has provided our students with working experience.</p>
+
+<table>
+	<tr></tr>
+	<tr></tr>	
+	<tr></tr>		
+
+</table>	
+
 
 <?php
 
