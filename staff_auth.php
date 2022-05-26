@@ -40,7 +40,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 					$_SESSION['user_id'] = $user_id;
 					$_SESSION['user_email'] = $user_email;
 					$_SESSION['user_full_name'] = $user_full_name;
-					$_SESSION['whatever'] = "";
 					header("Location: staff_internshiplisting.php");
 
 				}else {

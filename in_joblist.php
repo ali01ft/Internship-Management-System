@@ -111,28 +111,6 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                 </div>
             </nav>
 
-                    <!--Setting the alert to dissappear-->
-                    <div class="container-fluid px-4"> 
-                     
-                                <script>
-                                    var fade_out = function() {
-                                            $("#mydiv").fadeOut();
-                                            }
-
-                                            setTimeout(fade_out, 5000);
-                                </script>
-
-                                <?php
-                                    if ($_GET['msg'] = '1') {
-
-                                        echo '<div id="mydiv">Cannot delete company, it has students applied</div>';
-
-                                        unset($_GET['msg']);
-                                    }
-                                 ?>
-                       </div>
-                       <!--end alert-->
-
             <div class="container-fluid px-4">
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3">List Of Jobs posted</h3>
