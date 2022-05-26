@@ -79,6 +79,46 @@ $userID = $_SESSION['user_id'];
                 
 
 ?>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+           
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value=""></div>
+                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
+                    <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div>
+                    <div class="col-md-12"><label class="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
+                    <div class="col-md-12"><label class="labels">Postcode</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
+                    <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
+                    <div class="col-md-12"><label class="labels">Area</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
+                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
+                    <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
+                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 
 
 <!DOCTYPE html>
@@ -152,7 +192,7 @@ $userID = $_SESSION['user_id'];
                 <!-- Content wrapper -->
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Define your search</h3>
+                    
                     <div class="col">
                         <h2 style="text-align: center;color: #black;">Edit Information</h2>
     <?php
@@ -176,64 +216,64 @@ $userID = $_SESSION['user_id'];
         }
 
     ?>
-
-    <div class="profile_info" style="text-align: center;">
-        <span style="color: white;">Welcome,</span> 
-        <h4 style="color: white;"><?php echo $_SESSION['user_id']; ?></h4>
-    </div><br><br>
-    
-    <div class="form1">
-        <form action="" method="post" enctype="multipart/form-data">
-
-
-        <label><h4><b>NAME Name: </b></h4></label>
-        <input class="form-control" type="text" name="NAME" value="<?php echo $NAME; ?>">
-
-        <label><h4><b>STUDENT_EMAIL Name</b></h4></label>
-        <input class="form-control" type="text" name="STUDENT_EMAIL" value="<?php echo $STUDENT_EMAIL; ?>">
-
-        <label><h4><b>COURSE</b></h4></label>
-        <input class="form-control" type="text" name="COURSE" value="<?php echo $COURSE; ?>">
-
-        <label><h4><b>ENROLL</b></h4></label>
-        <input class="form-control" type="text" name="ENROLL" value="<?php echo $ENROLL; ?>">
-
-        <label><h4><b>GENDER</b></h4></label>
-        <input class="form-control" type="text" name="GENDER" value="<?php echo $GENDER; ?>">
-
-        <label><h4><b>CURRENT_RESIDENCE No</b></h4></label>
-        <input class="form-control" type="text" name="CURRENT_RESIDENCE" value="<?php echo $CURRENT_RESIDENCE; ?>">
-
-        <label><h4><b>CONTACT_NO</b></h4></label>
-        <input class="form-control" type="text" name="CONTACT_NO" value="<?php echo $CONTACT_NO; ?>">
-
-        <label><h4><b>YEAR_OF_STUDY</b></h4></label>
-        <input class="form-control" type="text" name="YEAR_OF_STUDY" value="<?php echo $YEAR_OF_STUDY; ?>">
-
-        <label><h4><b>PASSWORD</b></h4></label>
-        <input class="form-control" type="text" name="PASSWORD" value="<?php echo $PASSWORD; ?>">
-
-        
-        <label><h4><b>USERNAME</b></h4></label>
-        <input class="form-control" type="text" name="USERNAME" value="<?php echo $USERNAME; ?>">
-
-        
+    <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+           
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <div class="profile_info" style="text-align: center;">
+                    <span style="color: black;">Welcome,</span> 
+                    <h4 style="color: black;"><?php echo $_SESSION['user_id']; ?></h4>
+                </div><br><br>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="col-md-6"><label class="labels">Name</label><input class="form-control" type="text" name="NAME" value="<?php echo $NAME; ?>"></div>
                     
-                        
-        <label>New CV: <input type="file" name="file" value = "<?php if(isset($_POST["file"])) echo $_POST["file"]; ?>">
-        </label>
-            <input type="reset" value="Clear" name="clear_button">
+                
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Student Email</label><input class="form-control" type="text" name="STUDENT_EMAIL" value="<?php echo $STUDENT_EMAIL; ?>"></div>
+                    <div class="col-md-12"><label class="labels">Course</label><input class="form-control" type="text" name="COURSE" value="<?php echo $COURSE; ?>"></div>
+                    <div class="col-md-12"><label class="labels">Enroll</label><input class="form-control" type="text" name="ENROLL" value="<?php echo $ENROLL; ?>"></div>
+                    <div class="col-md-12"><label class="labels">Gender</label><input class="form-control" type="text" name="GENDER" value="<?php echo $GENDER; ?>"></div>
+                    <div class="col-md-12"><label class="labels">Adress</label><input class="form-control" type="text" name="CURRENT_RESIDENCE" value="<?php echo $CURRENT_RESIDENCE; ?>"></div>
+                    <div class="col-md-12"><label class="labels">Contact No</label><input class="form-control" type="text" name="CONTACT_NO" value="<?php echo $CONTACT_NO; ?>"></div>
+                    <div class="col-md-12"><label class="labels">Year Of Study</label><input class="form-control" type="text" name="YEAR_OF_STUDY" value="<?php echo $YEAR_OF_STUDY; ?>">
+                    </div>
+                    <div class="col-md-12"><label class="labels">Password</label><input class="form-control" type="text" name="PASSWORD" value="<?php echo $PASSWORD; ?>"></div>
+                     </div>
+                <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Username</label><input class="form-control" type="text" name="USERNAME" value="<?php echo $USERNAME; ?>"></div>
+                    <label>New CV: <input type="file" name="file" value = "<?php if(isset($_POST["file"])) echo $_POST["file"]; ?>">
+                   </label><input type="reset" value="Clear" name="clear_button">
 
-                    
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="submit">Save Profile</button></div>
+                </form>
 
-                               
-
-                 
-        <br>
-        <div style="padding-left: 100px;">
-            <button class="btn btn-default" type="submit" name="submit">save</button></div>
-    </form>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                
+            </div>
+        </div>
+    </div>
 </div>
+</div>
+</div>
+
+    
+    
+       
+        
+
+        
+                    
+
         <?php 
 
         if(isset($_POST['submit']))
