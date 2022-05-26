@@ -66,7 +66,7 @@
                                             $jobtitle = $x['Job_Title'];
                                             $jobposition = $x['Position'];
                                             $dateApplied = $x['Date_Applied'];
-                                            print_r();
+                                          
                                             $completedate = $endDate;
                                         }
                                     }
