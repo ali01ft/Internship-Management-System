@@ -99,23 +99,17 @@ $userID = $_SESSION['user_id'];
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
-        <div class="bg-white" id="sidebar-wrapper">
+          <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-address-book me-1"></i>Swinburne</div>
             <div class="list-group list-group-flush my-3">
-                <a href="staff_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="student_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Internship listing</a>
-                <a href="staff_studentlist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Student listing</a>
-                  <a href="staff_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Company listing</a>
-                        <a href="staff_approval.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Student Approval</a>                   
-                <a href="staff_infographics.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-chart-line me-2"></i>Analytics</a>
-                <a href="staff_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Feedback list</a>
-                <a href="staff_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                  <a href="student_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Company listing</a>                   
+                <a href="student_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-paperclip me-2"></i>Student Dashboard</a>
+                <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
         </div>
@@ -143,7 +137,8 @@ $userID = $_SESSION['user_id'];
                                 <i class="fas fa-user me-2"></i><?=$_SESSION['user_full_name']?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a href="student_profile.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                                class="fas fa-paperclip me-2"></i>Profile</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -175,6 +170,11 @@ $userID = $_SESSION['user_id'];
         }
 
     ?>
+    
+    <div class="card">
+    <div class="card-body">
+    <div class="card mb-3">
+    <div class="card-body">
     <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
@@ -205,10 +205,11 @@ $userID = $_SESSION['user_id'];
                     <div class="row mt-3">
                     <div class="col-md-6"><label class="labels">Username</label><input class="form-control" type="text" name="USERNAME" value="<?php echo $USERNAME; ?>"></div>
                     <label>New CV: <input type="file" name="file" value = "<?php if(isset($_POST["file"])) echo $_POST["file"]; ?>">
-                   </label><input type="reset" value="Clear" name="clear_button">
+                   
+                  <div class="mt-5 text-center"> <button class="btn btn-info" type="Clear" name="clear_button">Clear</button></div>
+                    </div>
 
-                </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="submit">Save Profile</button></div>
+                <div class="mt-5 text-center"><button class="btn btn-info" type="submit" name="submit">Save Profile</button></div>
                 </form>
 
             </div>
