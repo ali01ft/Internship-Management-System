@@ -40,12 +40,16 @@ $idustryID = $_SESSION['company_id'];
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-address-book me-1"></i>Swinburne</div>
             <div class="list-group list-group-flush my-3">
-                <a href="student_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Internship listing</a>
-                  <a href="student_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Company listing</a>                   
-                <a href="student_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Student Dashboard</a>
+            
+                  <a href="in_joblist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Posted Job listing</a>                   
+                <a href="Jobs.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-paperclip me-2"></i>Post a Job</a>
+
+        <a href="industry_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Dashboard</a>
+
+
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
@@ -88,7 +92,7 @@ $idustryID = $_SESSION['company_id'];
                 <div class="row my-5">
                     
                     <div class="col">
-                        <h2 style="text-align: center;color: #black;">Edit Information</h2>
+                        
 			    <?php
 					
 					$sql = "SELECT * FROM industry WHERE REGIS_NO='$_SESSION[company_id]'";
@@ -115,10 +119,12 @@ $idustryID = $_SESSION['company_id'];
     <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
-           
+         
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
+            <h2 style="text-align: center;color: #black;">Edit Information</h2>
+            <hr>  
                 
                 
                 <form action="" method="post" enctype="multipart/form-data">
