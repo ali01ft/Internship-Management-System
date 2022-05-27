@@ -56,9 +56,9 @@
                 <a href="staff_infographics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-chart-line me-2"></i>Analytics</a>
                 <a href="staff_student_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-paperclip me-2"></i>Student Feedback list</a>
+                        class="fas fa-paperclip me-2"></i>Student Feedback </a>
                 <a href="staff_industry_feedback.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Industry Feedback list</a>
+                        class="fas fa-paperclip me-2"></i>Industry Feedback </a>
                 <a href="staff_history.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Internship History</a> 
                 <a href="staff_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
@@ -72,7 +72,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Student Waiting List</h2>
+                    <h2 class="fs-2 m-0">Student Feedback database</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -97,7 +97,7 @@
                 <!-- Content wrapper -->
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Student Feedback</h3>
+                    <h3 class="fs-4 mb-3">Student Feedback list</h3>
 
                        <!-- Fetching data module  -->
                                 <div class="card">
