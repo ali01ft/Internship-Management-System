@@ -107,6 +107,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="student_profile.php">Profile</a></li>
                             </ul>
+
                         </li>
                     </ul>
                 </div>

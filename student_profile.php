@@ -39,7 +39,7 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
-    <title>IMS</title>
+    <title>Student Profile</title>
 </head>
 
 
@@ -47,7 +47,7 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
-               <div class="bg-white" id="sidebar-wrapper">
+            <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-address-book me-1"></i>Swinburne</div>
             <div class="list-group list-group-flush my-3">
@@ -85,9 +85,9 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
                                 <i class="fas fa-user me-2"></i><?=$_SESSION['user_full_name']?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a href="student_profile.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                                class="fas fa-paperclip me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="student_profile.php">Profile</a></li>
                             </ul>
+
                         </li>
                     </ul>
                 </div>
@@ -108,6 +108,7 @@ $q=mysqli_query($conn,"SELECT * FROM student where STUDENT_ID = $userID");
 
                     <h4 style="text-align: center;"><?php echo $_SESSION['user_id']; ?></h4>
                 <div class="card-body">
+                <hr>
                     
                   <div class="row">
                     <div class="col-sm-3">

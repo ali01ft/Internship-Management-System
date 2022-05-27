@@ -76,8 +76,9 @@ $idustryID = $_SESSION['company_id'];
                                 <i class="fas fa-user me-2"></i><?=$_SESSION['user_full_name']?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="industry_profile.php">Profile</a></li>
                             </ul>
+
                         </li>
                     </ul>
                 </div>

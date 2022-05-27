@@ -137,9 +137,9 @@ $userID = $_SESSION['user_id'];
                                 <i class="fas fa-user me-2"></i><?=$_SESSION['user_full_name']?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a href="student_profile.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                                class="fas fa-paperclip me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="student_profile.php">Profile</a></li>
                             </ul>
+
                         </li>
                     </ul>
                 </div>

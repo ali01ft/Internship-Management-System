@@ -111,6 +111,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="industry_profile.php">Profile</a></li>
                             </ul>
+
                         </li>
                     </ul>
                 </div>
