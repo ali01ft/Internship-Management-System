@@ -212,9 +212,11 @@ $userID = $_SESSION['user_id'];
                     </div>
 
                 <div class="mt-5 text-center"><button class="btn btn-info" type="submit" name="submit">Save Profile</button></div>
+                <div class="mt-5 text-center"><a href="student_profile.php"><button class="btn btn-info"> BACK</button></a></div>
                 </form>
 
             </div>
+
         </div>
         <div class="col-md-4">
             <div class="p-3 py-5">

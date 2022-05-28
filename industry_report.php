@@ -8,22 +8,38 @@
 			use Dompdf\Dompdf;
 
 
+
+
+
 			if(isset($_GET['data'])){
 			// instantiate and use the dompdf class
 			$pdf = new Dompdf();
 
-			//Using html contents here
-			//using output buffer
-			ob_start();
+             $pdf->set_option('isRemoteEnabled', TRUE);
 
-			 if(isset($_GET['data'])){
+
+      //$dompdf = new Dompdf(array('enable_remote' => true));
+
+
+             if(isset($_GET['data'])){
 
                $cid = $_GET['data'];
-               var_dump($cid);
+            
 
              } 
 
-             
+               $connection = mysqli_connect("localhost","root","");
+               $db = mysqli_select_db($connection, 'ims');
+
+                $query = "SELECT s.NAME, s.COURSE, s.STUDENT_ID, j.Job_Title, j.Job_ID, a.Date_Applied, i.COMPANY_NAME from student s inner join applicants a on s.STUDENT_ID = a.STUDENT_ID inner join jobs j on a.Job_ID = j.Job_ID inner join industry i on j.REGIS_NO = i.REGIS_NO
+                  where a.Status = 'Ended' or a.Status = 'Completed' and j.REGIS_NO = '$cid'";
+                $query_run = mysqli_query($connection, $query);
+                $x = mysqli_fetch_assoc($query_run);
+                $cname = $x['COMPANY_NAME'];
+
+			//Using html contents here
+			//using output buffer
+			ob_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,47 +65,41 @@ tr:nth-child(even) {
 <body>
 
 
-
-<h1 style="color: green;"> <?php echo "Commpan name $cid" ?> </h1>
+<h1 style="color: green; text-align: center;"> <?php echo "$cname" ?> </h1>
 <h2 style="text-align: center;">Company Report</h2>
 <p>This Company has complied with swinburne guidelines and has provided our students with working experience. Below are the students this company employed for internships</p>
 
 <table>
+  <thead>
   <tr>
     <th>Student</th>
+    <th>Course</th>
+    <th>Student ID</th>
     <th>Job ID</th>
-    <th>Position</th>
+    <th>Job Title</th>
+    <th>Date Applied</th>
+
   </tr>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-  </tr>
-  <tr>
-    <td>Ernst Handel</td>
-    <td>Roland Mendel</td>
-    <td>Austria</td>
-  </tr>
-  <tr>
-    <td>Island Trading</td>
-    <td>Helen Bennett</td>
-    <td>UK</td>
-  </tr>
-  <tr>
-    <td>Laughing Bacchus Winecellars</td>
-    <td>Yoshi Tannamuri</td>
-    <td>Canada</td>
-  </tr>
-  <tr>
-    <td>Magazzini Alimentari Riuniti</td>
-    <td>Giovanni Rovelli</td>
-    <td>Italy</td>
-  </tr>
+</thead>
+<tbody>
+      <?php
+                       foreach($query_run as $row)
+                               {
+      ?>
+      <tr>
+        <td><?php echo $row['NAME']; ?> </td>
+        <td><?php echo $row['COURSE']; ?> </td>
+        <td><?php echo $row['STUDENT_ID']; ?> </td>
+        <td><?php echo $row['Job_ID']; ?> </td>
+        <td><?php echo $row['Job_Title']; ?> </td>
+        <td><?php echo $row['Date_Applied']; ?> </td>
+      </tr>
+    <?php
+      }
+    ?>
+</tbody>
+
+
 </table>
 
 </body>

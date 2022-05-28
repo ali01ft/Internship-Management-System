@@ -59,6 +59,50 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                         ?>
 
 
+        <?php
+
+            if (isset($_POST['updatedata'])) {
+
+
+                         function test_input($data) {
+                          $data = trim($data);
+                          $data = stripslashes($data);
+                          $data = htmlspecialchars($data);
+                          return $data;
+                        }
+
+                        $id = $_POST['update_id'];
+                        
+                        $Job_Title = test_input($_POST['title']);
+                         $location = test_input($_POST['location']);
+
+                        $Category = test_input($_POST['category']);
+
+                        $detail = test_input($_POST['detail']);
+
+                        $position = test_input($_POST['position']);
+                 
+
+                        $query = "UPDATE jobs SET Job_Title='$Job_Title', Location='$location', Category='$Category', Extra_Details='$detail', Position=' $position' WHERE Job_iD='$id'";
+
+                      
+                        $query_run = mysqli_query($conn, $query);
+
+                        if($query_run)
+                        {
+                            echo '<script> alert("Data Updated"); </script>';
+
+                            header("Location:in_joblist.php");
+                        }
+                        else
+                        {
+                            echo '<script> alert("Data Not Updated"); </script>';
+                        }
+    }
+?>
+   
+
+
 
 
 
@@ -132,7 +176,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                                     </button>
                                                 </div>
 
-                                                <form action="industry_edit_job" method="POST">
+                                                <form action="in_joblist.php" method="POST">
 
                                                     <div class="modal-body">
 
@@ -151,8 +195,15 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                                         </div>
                                                          <div class="form-group">
                                                             <label>Category</label>
-                                                            <input type="text" name="category" id="category" class="form-control"
-                                                                placeholder="Enter Email">
+                                                            <select class="form-select" name="category" id="category">
+
+                                                                <option value="Car Industry" >Car Industry</option>
+                                                                <option value="Telecom Industry" >Telecom Industry</option>
+                                                                <option value="ICT Industry" >ICT Industry</option>
+                                                                <option value="Food Industry" >Food Industry</option>
+                                                                <option value="Oil Industry">Oil Industry</option>
+                                                            </select>
+
                                                         </div>
                                                         <div class="form-group">
                                                             <label>More Category Details</label>

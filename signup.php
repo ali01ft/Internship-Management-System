@@ -8,7 +8,6 @@ function test_input($data) {
 }
 
 $StudentID = $uname = $Course = $ContactNo = $Cresidence = $email = $pname = $pwd = $Enrolled = $Supervisor = $yof = $cv = NULl;
-$Gender = "";
 
 // define variable and set to empty VALUES
 $msgErr = $emailErr = $pnameErr = $pwdErr = $StudentErr = $cpwdErr = $pwdErr = $cpwdErr = $CourseErr = $GenderErr = $CresErr = $Contact_noErr = $cvErr = $yofErr = $unameErr = "";
@@ -376,9 +375,9 @@ if(isset($_POST["register_button"])){
 
             <p>Gender:
               <br>
-               <input type="radio" id="Gender" name="Gender" value="Male">
+               <input type="radio" id="Gender" name="Gender" value="Male" placeholder="Male">
                <label for="Male">Male</label>
-               <input type="radio" id="Female" name="Gender" value="Female">
+               <input type="radio" id="Female" name="Gender" value="Female" placeholder="Female">
                <label for="Female">Female</label><br>
            
             

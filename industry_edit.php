@@ -143,6 +143,7 @@ $idustryID = $_SESSION['company_id'];
                    
 
                 <div class="mt-5 text-center"><button class="btn btn-info" type="submit" name="submit">Save Profile</button></div>
+                <div class="mt-5 text-center"><a href="industry_profile.php"><button class="btn btn-info"> BACK</button></a></div>
                 </form>
 
             </div>

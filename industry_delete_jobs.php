@@ -19,11 +19,11 @@ if(isset($_POST['deletedata']))
             }
             else{
 
-                    $query = "DELETE FROM jobs WHERE REGIS_NO ='$id'";
+                    $query = "DELETE FROM jobs WHERE Job_ID ='$id'";
                     $query_run = mysqli_query($connection, $query);
 
 
-                    $query = "DELETE FROM student WHERE REGIS_NO ='$id'";
+                    $query = "DELETE FROM student WHERE Job_ID ='$id'";
                     $query_run = mysqli_query($connection, $query);
 
                     if($query_run)

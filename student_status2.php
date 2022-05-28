@@ -12,8 +12,9 @@ $_SESSION['entry'] = 1;
                                  $sql = "SELECT j.Job_ID, i.COMPANY_NAME, i.CONTACT_NO, i.WEBSITE, i.Email from applicants a
                                         inner join jobs j on a.Job_ID = j.Job_ID
                                         inner join industry i on j.REGIS_NO = i.REGIS_NO
-                                    where a.Status = 'pending' and a.STUDENT_ID = '$id'";
+                                    where a.confirmation = 'YES' and a.STUDENT_ID = '$id'";
                                     $query_run = mysqli_query($conn, $sql);
+                                    var_dump($query_run);
 
 
 

@@ -168,7 +168,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                                     <td><?php echo $row->Qualification?></td>
                                     <td><?php echo $row->Category?></td>
                                     <td><?php echo $row->Position?></td>
-                                    <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
+                                    <td><?php echo "<div class = 'text-center'><button class='btn btn-primary editbtn'><a href='jobs/profile".$row -> REGIS_NO.".pdf' style='color:white;' download>Download</a></button></div>"?></td>
                                 </tr>
                                 <?php endwhile; ?>
                             </tbody>
@@ -233,7 +233,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
                                  <td><?php echo $row->Job_Title?></td>
                                  <td><?php echo $row->WEBSITE?></td>
                                  <td><?php echo $row->email?></td>
-                                 <td><?php echo "<a href='jobs/profile".$row -> REGIS_NO.".pdf' download>Download</a>"?></td>
+                                 <td><?php echo "<div class = 'text-center'><button class='btn btn-primary editbtn'><a href='jobs/profile".$row -> REGIS_NO.".pdf' style='color:white;' download>Download</a></button></div>"?></td>
                                  <td><button type="submit" class="btn btn-success editbtn" name = "Enroll" value ='<?php echo $job = $row->appID?>'>Enroll</button></td>
                                 </tr>
                                 <?php endwhile; ?>

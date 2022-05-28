@@ -42,7 +42,7 @@
 
 
 
-                                $fdetails = "SELECT a.appID, a.Status, s.STUDENT_ID, s.NAME, s.STUDENT_EMAIL, s.COURSE, s.SUPERVISOR, s.YEAR_OF_STUDY, i.COMPANY_NAME, i.WEBSITE, i.Email, j.Job_Title, j.Position, a.Date_Applied from student s inner join applicants a on s.STUDENT_ID = a.STUDENT_ID inner join jobs j on a.Job_ID = j.Job_ID inner join industry i on j.REGIS_NO = i.REGIS_NO 
+                                $fdetails = "SELECT a.appID, a.Status, s.STUDENT_ID, s.NAME, s.STUDENT_EMAIL, s.COURSE, s.SUPERVISOR, s.YEAR_OF_STUDY, i.COMPANY_NAME, i.WEBSITE, i.Email,j.Job_ID,j.REGIS_NO, j.Job_Title, j.Position, a.Date_Applied from student s inner join applicants a on s.STUDENT_ID = a.STUDENT_ID inner join jobs j on a.Job_ID = j.Job_ID inner join industry i on j.REGIS_NO = i.REGIS_NO 
                                     where a.STUDENT_ID = '$stu_info2' and a.Status = 'Ended' and a.appID = '$fID'";
 
 
@@ -68,6 +68,10 @@
                                             $jobtitle = $x['Job_Title'];
                                             $jobposition = $x['Position'];
                                             $dateApplied = $x['Date_Applied'];
+                                            $jobid = $x['Job_ID'];
+                                            
+                                            $cregis = $x['REGIS_NO'];
+                                           
                             
                                           
                                             $completedate = $endDate;
@@ -81,11 +85,11 @@
 
                                 $stmt = mysqli_stmt_init($connection); //initialize connection to statement
 
-                                $run = "INSERT INTO history (Student_id, Student_NAME, STUDENT_EMAIL, COURSE, SUPERVISOR, YEAR_OF_STUDY, COMPANY_NAME, WEBSITE, Email, Job_Title, Position, Date_Applied, Completion_date) 
-                                VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?,?,?)";
+                                $run = "INSERT INTO history (Student_id, Student_NAME, STUDENT_EMAIL, COURSE, SUPERVISOR, YEAR_OF_STUDY, COMPANY_NAME, WEBSITE, Email, Job_Title, Position, Date_Applied, Completion_date, Job_ID, REGIS_NO) 
+                                VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?)";
 
                                 mysqli_stmt_prepare($stmt, $run);
-                                mysqli_stmt_bind_param($stmt, 'sssssssssssss',  $studentid, $studentname, $studentemail, $studentcourse, $studentvisor, $studentyos, $companyname, $companywebsite, $companyemail, $jobtitle, $jobposition, $dateApplied, $completedate);
+                                mysqli_stmt_bind_param($stmt, 'sssssssssssssss',  $studentid, $studentname, $studentemail, $studentcourse, $studentvisor, $studentyos, $companyname, $companywebsite, $companyemail, $jobtitle, $jobposition, $dateApplied, $completedate, $jobid, $cregis);
                                 $insert = mysqli_stmt_execute($stmt);
 
 
