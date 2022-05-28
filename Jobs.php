@@ -181,6 +181,7 @@ if(isset($_POST["submit"])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>IMS</title>
 </head>
 
@@ -239,88 +240,106 @@ if(isset($_POST["submit"])){
              <!-- Content wrapper -->
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h4 class="fs-5 mb-3">Please Provide a document with extra details such as Description of the job, Qualifications that are required, details of the employer, information about salary, posible duration and any other extra info you want the interns to know</h4>
                     <div class="col">
+                                          <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                                 <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                                  </symbol>
+                                                 </svg>
 
+                                                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                                                  <div>
+                                                    Please Provide a document with extra details such as Description of the job, Qualifications that are required, details of the employer, information about salary, posible duration and any other extra info you want the interns to know
+
+                                                  </div>
+                                                </div>
               
+    
+                        <div class="form-group" style=" width:80% ;">
+                          <!-- Forms -->
+                          	<form class="p-5 rounded shadow" action = "Jobs.php" method = "POST" enctype="multipart/form-data" onsubmit="myFunction()">
+                              <div class="mb-3">
+                                <label class="form-label" for="JobTitle">Job Title<br>
+                                  <span class="error"> <?php echo $msgErr;?></span><br></label>
+                                  <input type="text" class="form-control" name="JobTitle" id="JobTitle" value="<?php if(isset($_POST["JobTitle"])) echo $_POST["JobTitle"]; ?>">
+                                <br>
 
+                                <label class="form-label" for="Location">Location<br>
+                                  <span class="error"> <?php echo $msgErr;?></span><br></label>
+                                  <input type="text" class="form-control" name="Location" id="Location">
+                                <br>
+
+
+                                <label class="form-label" for="Qualifications">Qualifications<br>
+                                  <span class="error"> <?php echo $msgErr;?></span><br></label>
+                                  <input type="text" class="form-control" name="Qualifications" id="Qualifications" value="<?php if(isset($_POST["Qualifications"])) echo $_POST["Qualifications"]; ?>">
+                                <br>
+
+
+
+                                <label class="form-label" for="Position">Position<br>
+                                  <span class="error"> <?php echo $msgErr;?></span><br></label>
+                                  <input type="text" class="form-control" name="Position" id="Position" value="<?php if(isset($_POST["Position"])) echo $_POST["Position"]; ?>">
+                                <br>
+
+
+                                <label class="form-label" for="Vacancy">Vacancy<br>
+                                  <span class="error"> <?php echo $msgErr;?></span></label>
+                                  <input type="text" class="form-control" name="Vacancy" id="Vacancy" value="<?php if(isset($_POST["Vacancy"])) echo $_POST["Vacancy"]; ?>">
+                                <br>
+                                <br>
+
+
+                                <label class="form-label" for="Category">Category<br>
+                                <span class="error"> <?php echo $msgErr;?></span></label>
+
+                                <select class="form-select" name="Category" id="Category" onclick="addFields()">
+                                    <option value="" selected>---</option>
+                                    <option value="Car Industry" >Car Industry</option>
+                                    <option value="Telecom Industry" >Telecom Industry</option>
+                                    <option value="ICT Industry" >ICT Industry</option>
+                                    <option value="Food Industry" >Food Industry</option>
+                                    <option value="Oil Industry">Oil Industry</option>
+                                </select>
+
+                                <br>
+                                <label class="form-label" for="Extra">Extra Description</label>
+                                <input type="text" class="form-control" name="Extra" id="Extra">
                       
+                                <br>
+                                <br>
 
-                  <!-- Forms -->
-                  	<form class="p-5 rounded shadow" action = "Jobs.php" method = "POST" enctype="multipart/form-data" >
-                        <label for="JobTitle">Job Title<br><span class="error"> <?php echo $msgErr;?></span><br></label>
-                          <input type="text" name="JobTitle" id="JobTitle" value="<?php if(isset($_POST["JobTitle"])) echo $_POST["JobTitle"]; ?>">
-                        <br>
-
-                        <label for="Location">Location<br><span class="error"> <?php echo $msgErr;?></span><br></label>
-                          <input type="text" name="Location" id="Location">
-                        <br>
-
-
-                        <label for="Qualifications">Qualifications<br><span class="error"> <?php echo $msgErr;?></span><br></label>
-                          <input type="text" name="Qualifications" id="Qualifications" value="<?php if(isset($_POST["Qualifications"])) echo $_POST["Qualifications"]; ?>">
-                        <br>
-
-
-
-                        <label for="Position">Position<br><span class="error"> <?php echo $msgErr;?></span><br></label>
-                          <input type="text" name="Position" id="Position" value="<?php if(isset($_POST["Position"])) echo $_POST["Position"]; ?>">
-                        <br>
+                                <label for="Duration">Duration For this offer (Months)</label>
+                                <select class="1-11 form-select" name="Duration" id="Duration">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                </select>
+                                <br>
+                                <br>
 
 
-                        <label for="Vacancy">Vacancy<br><span class="error"> <?php echo $msgErr;?></span></label>
-                          <input type="text" name="Vacancy" id="Vacancy" value="<?php if(isset($_POST["Vacancy"])) echo $_POST["Vacancy"]; ?>">
-                        <br>
-                        <br>
+                          		<label for ="file">Insert Your Criteria:<br><span class="error"> <?php echo $msgErr;?></span></label>
+                                <br>
+                                <input type="file" class="form-control" name="file" value = "<?php if(isset($_POST["file"])) echo $_POST["file"]; ?>">
+                                <br>
+                                <br>
+                          		  <input type="submit" value="submit" name="submit">
+                          			<input type="reset" value="Clear" name="clear_button">
 
-
-                        <label for="Category">Category<br><span class="error"> <?php echo $msgErr;?></span></label>
-
-                        <select name="Category" id="Category" onclick="addFields()">
-                            <option value="" selected>---</option>
-                            <option value="Car Industry" >Car Industry</option>
-                            <option value="Telecom Industry" >Telecom Industry</option>
-                            <option value="ICT Industry" >ICT Industry</option>
-                            <option value="Food Industry" >Food Industry</option>
-                            <option value="Oil Industry">Oil Industry</option>
-                        </select>
-
-                        <br>
-                        <label for="Extra">Extra Description</label>
-                        <input type="text" name="Extra" id="Extra">
-              
-                        <br>
-                        <br>
-
-                        <label for="Duration">Duration For this offer</label>
-                        <select class="1-11" name="Duration" id="Duration">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                            <option>11</option>
-                        </select><span> months</span>
-                        <br>
-                        <br>
-
-
-                  		<label for ="file">Insert Your Criteria:<br><span class="error"> <?php echo $msgErr;?></span></label>
-                        <br>
-                        <input type="file" name="file" value = "<?php if(isset($_POST["file"])) echo $_POST["file"]; ?>">
-                        <br>
-                        <br>
-                  		  <input type="submit" value="submit" name="submit">
-                  			<input type="reset" value="Clear" name="clear_button">
-
-                  	
-                  		
-                  		</form>
+                          	
+                          		</div>
+                          		</form>
+                            </div>
                      </div>
 
 
@@ -331,6 +350,11 @@ if(isset($_POST["submit"])){
         </div>
     </div>	
 
+<script>
+function myFunction() {
+  alert("Job succesfully posted");
+}
+</script>
 
 
 

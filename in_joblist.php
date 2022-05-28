@@ -21,6 +21,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+    
     <title>IMS</title>
 </head>
 
@@ -71,7 +72,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
             <div class="list-group list-group-flush my-3">
             
                   <a href="in_joblist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-project-diagram me-2"></i>Dashboard</a>                   
+                        class="fas fa-project-diagram me-2"></i>Posted Job listing</a>                   
                 <a href="Jobs.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Post a Job</a>
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
@@ -117,8 +118,125 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                     <div class="col">
 
 
+
+
+                                    <!-- Hidden edit module that will pop up -->
+                                    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel"> Edit Company Data </h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <form action="industry_edit_job" method="POST">
+
+                                                    <div class="modal-body">
+
+                                                        <input type="hidden" name="update_id" id="update_id">
+
+                                                        <div class="form-group">
+                                                            <label>Job Title</label>
+                                                            <input type="text" name="title" id="title" class="form-control"
+                                                                placeholder="Enter Last Name">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Location</label>
+                                                            <input type="text" name="location" id="location" class="form-control"
+                                                                placeholder="Enter company name">
+                                                        </div>
+                                                         <div class="form-group">
+                                                            <label>Category</label>
+                                                            <input type="text" name="category" id="category" class="form-control"
+                                                                placeholder="Enter Email">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>More Category Details</label>
+                                                            <input type="text" name="detail" id="detail" class="form-control"
+                                                                placeholder="Enter website link">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Position</label>
+                                                            <input type="text" name="position" id="position" class="form-control"
+                                                                placeholder="Enter Phone Number">
+                                                        </div>
+                                                       
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+                                           <!-- Hidden delete module that will pop up  -->
+                                    <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel"> Delete Company data </h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <form action="industry_delete_jobs.php" method="POST">
+
+                                                    <div class="modal-body">
+
+                                                        <input type="hidden" name="delete_id" id="delete_id">
+
+                                                        <h4> Do you want to Delete this Data ??</h4>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> NO </button>
+                                                        <button type="submit" name="deletedata" class="btn btn-primary"> YES </button>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!--fething data module-->
-          <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
                                                  <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
                                                     <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                                   </symbol>
@@ -138,6 +256,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                             <table id="datatableid" class="table table-bordered">
                              <thead>
                                 <tr>
+                                 <th scope="col">Job ID</th>
                                  <th scope="col">Job Title</th>
                                  <th scope="col">Location</th>
                                  <th scope="col">Category</th>
@@ -147,6 +266,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <th scope="col">Offer End Date</th>
                                  <th scope="col">Job Details</th>
                                  <th scope="col">Edit</th>
+                                 <th scope="col">Delete</th>
                                  <th scope="col">View Applicants</th>
                                  <th scope="col">Confirmed</th>
                               </tr>
@@ -161,7 +281,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                 $edate = date("d-m-Y", strtotime($row -> Date_End));  //end date changing format
 
                                 ?>
-                                    
+                                 <td> <?php echo $row->Job_ID?></td>   
                                  <td> <?php echo $row->Job_Title?></td>
                                  <td><?php echo $row->Location?></td>
                                  
@@ -175,6 +295,9 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <td>
                                  <button type="button" class="btn btn-success editbtn"> EDIT </button>
                                  </td>
+                                 <td>
+                                    <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
+                                </td>
                                   <td>
                                          <?php echo "<a href ='in_applicants.php?data=$Jid' style='color: white;'><div class='text-center'><button style = 'margin-'type='button' class='btn btn-success'> View </button></div></a>"?>
                                  </td>
@@ -212,6 +335,10 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
             el.classList.toggle("toggled");
         };
     </script>
+
+
+
+
 </body>
                              <!-- Script links for functions and datatable -->
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -283,7 +410,31 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                             </script>
 
 
+                              <!-- Function to display edit popup -->
+                            <script>
+                                $(document).ready(function () {
 
+                                    $('.editbtn').on('click', function () {
+
+                                        $('#editmodal').modal('show');
+
+                                        $tr = $(this).closest('tr');
+
+                                        var data =$tr.children("td").map(function () {
+                                            return $(this).text();
+                                        }).get();
+
+                                        console.log(data);
+                                    
+                                        $('#update_id').val(data[0]);
+                                        $('#title').val(data[1]);
+                                        $('#location').val(data[2]);
+                                        $('#category').val(data[3]);
+                                        $('#detail').val(data[4]);
+                                        $('#position').val(data[5]);
+                                    });
+                                });
+                            </script>
 
 
 </html>
