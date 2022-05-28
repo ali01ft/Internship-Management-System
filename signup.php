@@ -312,80 +312,107 @@ if(isset($_POST["register_button"])){
   
 
 <!-- Forms -->
-  <form class="p-5 rounded shadow" action = "signup.php" method = "POST" enctype="multipart/form-data" >
-    <h1 class="text-center pb-5 display-4">Swinburne IMS Student Sign up</h1>
-      <p>Student ID: <input type="text" name="Student_ID" value = "<?php if(isset($_POST["Student_ID"])) echo $_POST["Student_ID"]; ?>">
-      <span class="error"> <?php echo $StudentErr;?></span></p>
+<div class="form-group">
+  
+      <form class="p-5 rounded shadow" action = "signup.php" method = "POST" enctype="multipart/form-data" >
+        <div class="mb-3">
+          <h1 class="text-center pb-5 display-4">Swinburne IMS Student Sign up</h1>
+            <label class="form-label">Student ID:</label>
+            <span class="error"> <?php echo $StudentErr;?></span>
+            <input type="text"  class="form-control" name="Student_ID" value = "<?php if(isset($_POST["Student_ID"])) echo $_POST["Student_ID"]; ?>">
+            
 
-      <p>Email address: <input type="text" name="email" value = "<?php if(isset($_POST["email"])) echo $_POST["email"]; ?>">
-      <span class="error"> <?php echo $emailErr;?></span></p>
+            <label class="form-label">Email address: </label>
+            <span class="error"> <?php echo $emailErr;?></span>
+            <input type="text"  class="form-control" name="email" value = "<?php if(isset($_POST["email"])) echo $_POST["email"]; ?>">
+            
 
-      <p>Password: <input type="password" name="pwd">
-      <span class="error"> <?php echo $pwdErr;?></span> </p>
+             <label class="form-label">Password: </label>
+             <span class="error"> <?php echo $pwdErr;?></span> 
+            <input type="password" class="form-control" name="pwd">
+            
 
-      <p>Confirm password: <input type="password" name="cpwd">
-      <span class="error"> <?php echo $cpwdErr;?></span> </p>
+             <label class="form-label">Confirm password: </label>
+             <span class="error"> <?php echo $cpwdErr;?></span> 
+            <input type="password"  class="form-control" name="cpwd">
+            
 
-      <p>Username: <input type="text" name="uname" value = "<?php if(isset($_POST["uname"])) echo $_POST["uname"]; ?>">
-      <span class="error"> <?php echo $unameErr;?></span> </p>
+             <label class="form-label">Username: </label>
+             <span class="error"> <?php echo $unameErr;?></span> 
+            <input type="text"  class="form-control" name="uname" value = "<?php if(isset($_POST["uname"])) echo $_POST["uname"]; ?>">
+            
 
-      <p>Name: <input type="text" name="pname" value = "<?php if(isset($_POST["pname"])) echo $_POST["pname"]; ?>">
-      <span class="error"> <?php echo $pnameErr;?></span> </p>
+             <label class="form-label">Name: </label>
+             <span class="error"> <?php echo $pnameErr;?></span> 
+            <input type="text"  class="form-control" name="pname" value = "<?php if(isset($_POST["pname"])) echo $_POST["pname"]; ?>">
+            
 
-      <p> 
-          <label for="Course">Choose a course:</label>
-          <select name="Course" id="Course">
-            <option value="" selected="selected">---</option>
-            <option value="Bachelors of information technology">Bachelors Of Information Technology</option>
-            <option value="Bachelors of Commerce">Bachelors of Commerce</option>
-            <option value="Bachelors of Engineering">Bachelors of Engineering</option>
-            <option value="Bachelors of Marketing">Bachelors of Marketing</option>
-          </select>
-          <br>
-      <span class="error"> <?php echo $CourseErr;?></span> </p>
+            <p> 
+                <label for="Course class="form-label"">Choose a course:</label>
+                <span class="error"> <?php echo $CourseErr;?></span>
+                <select class="form-select" name="Course" id="Course">
+                  <option value="" selected="selected">---</option>
+                  <option value="Bachelors of information technology">Bachelors Of Information Technology</option>
+                  <option value="Bachelors of Commerce">Bachelors of Commerce</option>
+                  <option value="Bachelors of Engineering">Bachelors of Engineering</option>
+                  <option value="Bachelors of Marketing">Bachelors of Marketing</option>
+                </select>
+                
+             </p>
 
-    
-    <p> 
-          <label for="yof">Year of Study:</label>
-          <select name="yof" id="yof">
-            <option value="" selected="selected">---</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-          <br>
-      <span class="error"> <?php echo $yofErr;?></span> </p>
-     
+          
+          <p> 
+                <label for="yof" class="form-label">Year of Study:</label>
+                 <span class="error"> <?php echo $yofErr;?></span> </p>
+                <select class="form-select" name="yof" id="yof">
+                  <option value="" selected="selected">---</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+                <br>
+           
+           
 
-      <p>Gender:
-        <br>
-         <input type="radio" id="Gender" name="Gender" value="Male">
-         <label for="Male">Male</label>
-         <input type="radio" id="Female" name="Gender" value="Female">
-         <label for="Female">Female</label><br>
-     
-      
-        <span class="error"> <?php echo $GenderErr;?></span> </p>
+            <p>Gender:
+              <br>
+               <input type="radio" id="Gender" name="Gender" value="Male">
+               <label for="Male">Male</label>
+               <input type="radio" id="Female" name="Gender" value="Female">
+               <label for="Female">Female</label><br>
+           
+            
+              <span class="error"> <?php echo $GenderErr;?></span> </p>
 
-      <p>Current Residence: <input type="text" name="Cresidence" value = "<?php if(isset($_POST["Cresidence"])) echo $_POST["Cresidence"]; ?>">
-      <span class="error"> <?php echo $CresErr;?></span> </p>
+            <label class="form-label">Current Residence: </label>
+            <span class="error"> <?php echo $CresErr;?></span> 
+            <input type="text" class="form-control" name="Cresidence" value = "<?php if(isset($_POST["Cresidence"])) echo $_POST["Cresidence"]; ?>">
+            
 
-      <p>Contact Number: <input type="text" name="Contact_no" value = "<?php if(isset($_POST["Contact_no"])) echo $_POST["Contact_no"]; ?>">
-      <span class="error"> <?php echo $Contact_noErr;?></span> </p>
+            <label class="form-label"> Contact Number:</label> 
+            <span class="error"> <?php echo $Contact_noErr;?></span> 
+            <input type="text" class="form-control" name="Contact_no" value = "<?php if(isset($_POST["Contact_no"])) echo $_POST["Contact_no"]; ?>">
+            
 
-      <p>Insert Your CV: <input type="file" name="file" value = "<?php if(isset($_POST["file"])) echo $_POST["file"]; ?>">
-      <span class="error"> <?php echo $cvErr;?></span> </p>
-      
+            <label class="form-label"> Insert Your CV: </label>
+            <span class="error"> <?php echo $cvErr;?></span> 
+            <input type="file" class="form-control" name="file" value = "<?php if(isset($_POST["file"])) echo $_POST["file"]; ?>">
+            
+            <br>
+            <br>
 
-      <input type="submit" value="Register" name="register_button">
-      <input type="reset" value="Clear" name="clear_button">
+            <input type="submit" value="Register" name="register_button">
+            <input type="reset" value="Clear" name="clear_button">
 
-      <span class="error"> <?php echo $msgErr;?></span>
-      <br>
-      <br>
-      <p><a href="student_login.php">Login</a> </p>
-    </form>
-  </div>
+            <span class="error"> <?php echo $msgErr;?></span>
+            <br>
+            <br>
+            <p> Have an account ? <a href="student_login.php"> Login</a> </p>
+          </div>
+          </form>
+      </div>
+    </div>
+  
 
 <!-- Footer -->
 

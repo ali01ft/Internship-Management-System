@@ -216,35 +216,57 @@ if(isset($_POST["register_button"])){
 <body>
     <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
 <!-- Forms -->
+<div class="form-group">
 	<form class="p-5 rounded shadow" action = "Industry_signup.php" method = "POST" >
+    <div class="mb-3">
       <h1 class="text-center pb-5 display-4">Swinburne IMS Industry Sign up</h1>
-			<p>Company Registration Number: <input type="text" name="regis_no" value = "<?php if(isset($_POST["regis_no"])) echo $_POST["regis_no"]; ?>">
-      <span class="error"> <?php echo $regis_noErr;?></span></p>
 
-			<p>Email address: <input type="text" name="email" value = "<?php if(isset($_POST["email"])) echo $_POST["email"]; ?>">
-      <span class="error"> <?php echo $emailErr;?></span></p>
+			<label class="form-label">Company Registration Number: </label>
+      <span class="error"> <?php echo $regis_noErr;?></span>
+      <input type="text" class="form-control" name="regis_no" value = "<?php if(isset($_POST["regis_no"])) echo $_POST["regis_no"]; ?>">
+      
 
-			<p>Password: <input type="password" name="pwd">
-			<span class="error"> <?php echo $pwdErr;?></span> </p>
-
-			<p>Confirm password: <input type="password" name="cpwd">
-			<span class="error"> <?php echo $cpwdErr;?></span> </p>
-
-      <p>Username: <input type="text" name="uname" value = "<?php if(isset($_POST["uname"])) echo $_POST["uname"]; ?>">
-      <span class="error"> <?php echo $unameErr;?></span> </p>
-
-			<p>Company Name: <input type="text" name="pname" value = "<?php if(isset($_POST["pname"])) echo $_POST["pname"]; ?>">
-			<span class="error"> <?php echo $pnameErr;?></span> </p>
+			<label class="form-label">Email address: </label>
+       <span class="error"> <?php echo $emailErr;?></span>
+      <input type="text" class="form-control" name="email" value = "<?php if(isset($_POST["email"])) echo $_POST["email"]; ?>">
      
-			<p>Company Address: <input type="text" name="Cresidence" value = "<?php if(isset($_POST["Cresidence"])) echo $_POST["Cresidence"]; ?>">
-			<span class="error"> <?php echo $CresErr;?></span> </p>
 
-			<p>Contact Number: <input type="text" name="Contact_no" value = "<?php if(isset($_POST["Contact_no"])) echo $_POST["Contact_no"]; ?>">
-			<span class="error"> <?php echo $Contact_noErr;?></span> </p>
-
-			<p>Your Website Link: <input type="text" name="web" value = "<?php if(isset($_POST["web"])) echo $_POST["web"]; ?>">
-			<span class="error"> <?php echo $webErr;?></span> </p>
+			<label class="form-label">Password: </label>
+      <span class="error"> <?php echo $pwdErr;?></span> 
+      <input type="password" class="form-control" name="pwd">
 			
+
+			<label class="form-label">Confirm password: </label>
+      <span class="error"> <?php echo $cpwdErr;?></span> 
+      <input type="password" class="form-control" name="cpwd">
+			
+
+      <label class="form-label">Username: </label>
+      <span class="error"> <?php echo $unameErr;?></span> 
+      <input type="text" class="form-control" name="uname" value = "<?php if(isset($_POST["uname"])) echo $_POST["uname"]; ?>">
+      
+
+			<label class="form-label">Company Name: </label>
+      <span class="error"> <?php echo $pnameErr;?></span> 
+      <input type="text" class="form-control" name="pname" value = "<?php if(isset($_POST["pname"])) echo $_POST["pname"]; ?>">
+			
+     
+			<label class="form-label">Company Address: </label>
+      <span class="error"> <?php echo $CresErr;?></span> 
+      <input type="text" class="form-control" name="Cresidence" value = "<?php if(isset($_POST["Cresidence"])) echo $_POST["Cresidence"]; ?>">
+			
+
+			<label class="form-label">Contact Number: </label>
+      <span class="error"> <?php echo $Contact_noErr;?></span> 
+      <input type="text" class="form-control" name="Contact_no" value = "<?php if(isset($_POST["Contact_no"])) echo $_POST["Contact_no"]; ?>">
+			
+
+			<label class="form-label">Your Website Link: </label>
+      <span class="error"> <?php echo $webErr;?></span> 
+      <input type="text" class="form-control" name="web" value = "<?php if(isset($_POST["web"])) echo $_POST["web"]; ?>">
+			
+			<br>
+       <br>
 
 			<input type="submit" value="Register" name="register_button">
 			<input type="reset" value="Clear" name="clear_button">
@@ -253,9 +275,11 @@ if(isset($_POST["register_button"])){
 	     
        <br>
        <br>
-			<p><a href="industry_login.php">Login</a> </p>
+			<p>Already have an account ? <a href="industry_login.php">Login</a> </p>
+    </div>
 		</form>
 	</div>
+</div>
 
 <!-- Footer -->
 
