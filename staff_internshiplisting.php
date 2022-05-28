@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="styles.css" />
     <title>IMS</title>
 </head>
@@ -83,10 +84,10 @@
             </nav>
 
             <div class="container-fluid px-4">
-                <!--Setting the alert to dissappear-->
+                
 
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Define your search</h3>
+                    <h3 class="fs-4 mb-3">List of internships posted by companies</h3>
                     <div class="col">
                                     
 
@@ -104,38 +105,58 @@
                                                   </div>
                                             </div>
 
-                                            <?php
-                                                $connection = mysqli_connect("localhost", "root", "", "ims"); 
-
-                                                $query = "SELECT * from jobs";
-                                                $result = mysqli_query($connection, $query);
-                                            ?>
+                                          
                         
                                  <!-- Fetching data module  -->
                                 <div class="card">
                                     <div class="card-body">
                                         <table id="datatableid" class="table table-bordered">
-                                             <div class="row">
+                                            <thead>
                                                   <tr>
-                                                     <th>Job ID</th>
-                                                     <th>Job Title</th>
-                                                     <th>Location</th>
-                                                     <th>Qualification</th>
-                                                     <th>Category</th>
-                                                     <th>Position</th>
+                                                     <th scope="col">Job ID</th>
+                                                     <th scope="col">Job Title</th>
+                                                     <th scope="col">Location</th>
+                                                     <th scope="col">Qualification</th>
+                                                     <th scope="col">Category</th>
+                                                     <th scope="col">Position</th>
                                            
                                                   </tr>
-                                                  <?php while( $row = $result->fetch_object() ): ?>
+                                            </thead>
+                                            <tbody>  
+                                                
+                                            
+                                                   <?php
+                                                   $connection = mysqli_connect("localhost", "root", "", "ims"); 
+
+                                                $query = "SELECT * from jobs";
+                                                $query_run = mysqli_query($connection, $query);
+                                                    if($query_run)
+                                                    {
+                                                        foreach($query_run as $row)
+                                                        {
+
+                                                            $jid = $row['Job_ID'];
+                                                         
+
+                                                    ?>
+                                                    
                                                   <tr>
-                                                     <td><?php echo $row->Job_ID ?></td>
-                                                     <td><?php echo $row->Job_Title ?></td>
-                                                     <td><?php echo $row->Location ?></td>
-                                                     <td><?php echo $row->Qualification ?></td>
-                                                     <td><?php echo $row->Category ?></td>
-                                                     <td><?php echo $row->Position ?></td>
+                                                     <td><?php echo $row['Job_ID']; ?></td>
+                                                     <td><?php echo $row['Job_Title']; ?></td>
+                                                     <td><?php echo $row['Location']; ?></td>
+                                                     <td><?php echo $row['Qualification']; ?></td>
+                                                     <td><?php echo $row['Category']; ?></td>
+                                                     <td><?php echo $row['Position']; ?></td>
                                                   </tr>
-                                                  <?php endwhile; ?>
-                                            </div>
+                                                   <?php           
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    echo "No Record Found";
+                                                }
+                                                 ?>
+                                            </tbody>   
                                     </table>
 
 
