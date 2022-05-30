@@ -18,7 +18,7 @@ $conn = new mysqli('localhost', 'root', '', 'ims');
                                     if($app_run2){
                                         foreach ($app_run2 as $x) {
 
-                                           var_dump($x);
+                                           
                                             $app = $x['appID'];
                                             $stat = $x['ENROLL'];
                                             $jobstate = $x['Status'];

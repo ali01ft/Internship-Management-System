@@ -2,7 +2,7 @@
   session_start();
 
   $id = $_SESSION['user_id'];
-  print_r($_SESSION['entry']);
+  
 
     if(isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) { 
 
@@ -39,7 +39,7 @@
                                  $conn = new mysqli('localhost', 'root', '', 'ims');
 
                                   $jid = $_SESSION['job_email'];
-                                    print_r($jid);
+                                    
   
 
 
@@ -134,7 +134,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Students That Applied for the Jobs</h2>
+                    <h2 class="fs-2 m-0">Email rejection </h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -171,24 +171,26 @@
             <p>Company Name: <span><?php echo "$cname" ?></span></p>
             <p>Company Email Address: <span><?php echo "$cweb" ?></span></p>
             <div>
-               <input name="subject" type="text" placeholder="Subject">
+               <input name="subject" type="text" placeholder="Subject" class="form-control">
             </div>
             <div>
-                <textarea name="message" placeholder="Message" rows="20"></textarea>
+                <textarea name="message"  class="form-control" placeholder="Message" rows="20"></textarea>
             </div>
+            <br>
+            <br>
             <div>
                 <input type="submit" name="send" value="submit" />
             </div>
             <output id='msgs'></output>
         </form>
 
-
+        <a href="student_dashboard.php"> Back </a>    
                     </div>
                 </div>
             </div>
 
 
-  <a href="in_joblist.php"> Back </a>                      
+                    
 
         </div>   
     </div>

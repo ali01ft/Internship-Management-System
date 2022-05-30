@@ -14,8 +14,7 @@ $_SESSION['entry'] = 1;
                                         inner join industry i on j.REGIS_NO = i.REGIS_NO
                                     where a.confirmation = 'YES' and a.STUDENT_ID = '$id'";
                                     $query_run = mysqli_query($conn, $sql);
-                                    var_dump($query_run);
-
+                                    
 
 
 
