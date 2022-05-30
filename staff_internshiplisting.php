@@ -87,7 +87,11 @@
                 
 
                 <div class="row my-5">
+<<<<<<< Updated upstream
                     <h3 class="fs-4 mb-3">List of internships posted by companies</h3>
+=======
+                    
+>>>>>>> Stashed changes
                     <div class="col">
                                     
 

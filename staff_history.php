@@ -85,7 +85,7 @@
                 <!-- Content wrapper -->
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Define your search</h3>
+                    
                     <div class="col">
                                     
                                     <!-- Hidden delete module that will pop up  -->
