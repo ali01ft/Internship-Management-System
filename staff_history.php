@@ -42,9 +42,9 @@
                 <a href="staff_infographics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-chart-line me-2"></i>Analytics</a>
                 <a href="staff_student_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Student Feedback</a>
+                        class="fas fa-paperclip me-2"></i>Student Feedback list</a>
                 <a href="staff_industry_feedback.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Industry Feedback</a>
+                        class="fas fa-paperclip me-2"></i>Industry Feedback list</a>
 
                 <a href="staff_history.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-project-diagram me-2"></i>Internship History</a> 
@@ -59,7 +59,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Company listings</h2>
+                    <h2 class="fs-2 m-0">Internship History</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -85,7 +85,7 @@
                 <!-- Content wrapper -->
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    
+                    <h3 class="fs-4 mb-3">List Of Past Students </h3>
                     <div class="col">
                                     
                                     <!-- Hidden delete module that will pop up  -->
@@ -218,7 +218,7 @@
                                                     {
                                                         foreach($query_run as $row)
                                                         {
-                                                         $rid = $row['id']; 
+                                                         
 
                                                     ?>
                                                 <tr>
@@ -237,8 +237,7 @@
                                                     <td> <?php echo $row['Position']; ?> </td>
                                                     <td> <?php echo $row['Date_Applied']; ?> </td>
                                                     <td> <?php echo $row['Completion_date']; ?> </td>
-
-                                                    <td> <?php echo "<a href ='student_report.php?data=$rid' style='color: white;'><button type='button' class='btn btn-primary'> REPORT </button></a>"?> </td>
+                                                    <td>  </td>
                                                   
                                                 </tr>
                                                  <?php           
