@@ -234,7 +234,7 @@
                     <?php
                     $connection = mysqli_connect("localhost","root","");
                     $db = mysqli_select_db($connection, 'ims');
-                    $queryalert = "SELECT * FROM student inner join applicants on student.STUDENT_ID = applicants.STUDENT_ID where student.ENROLL = 'pending' or applicants.Status = 'Ending'" ;
+                    $queryalert = "SELECT * FROM student where student.ENROLL = 'pending'" ;
                     $queryalert_run = mysqli_query($connection, $queryalert);
 
                      
@@ -279,7 +279,7 @@
                         }              
 
                     ?>
-                    <h3 class="fs-4 mb-3">Define your search</h3>
+                    <h3 class="fs-4 mb-3">List of Students</h3>
                     <div class="col">
                         
                            <!-- Fetching data module  -->

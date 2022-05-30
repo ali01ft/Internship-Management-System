@@ -310,7 +310,7 @@
                     <div class="col-lg-2 col-md-2">
                           <div class="card bg-danger text-white mb-4">
                                 <div class="card-body">
-                                    Number of students accepted by company
+                                    Number of successfull applications to companies
                                     <?php 
                                     $connection = mysqli_connect("localhost","root","");
                                     $db = mysqli_select_db($connection, 'ims');
