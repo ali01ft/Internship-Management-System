@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="styles.css" />
     <title>IMS</title>
 </head>
@@ -41,9 +42,9 @@
                 <a href="staff_infographics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-chart-line me-2"></i>Analytics</a>
                 <a href="staff_student_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Student Feedback list</a>
+                        class="fas fa-paperclip me-2"></i>Student Feedback </a>
                 <a href="staff_industry_feedback.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Industry Feedback list</a>
+                        class="fas fa-paperclip me-2"></i>Industry Feedback </a>
                 <a href="staff_history.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-project-diagram me-2"></i>Internship History</a> 
                 <a href="staff_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
@@ -86,7 +87,7 @@
                 <!--Setting the alert to dissappear-->
 
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Define your search</h3>
+                    <h3 class="fs-4 mb-3">List of Jobs posted</h3>
                     <div class="col">
                                     
 
@@ -115,7 +116,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <table id="datatableid" class="table table-bordered">
-                                             <div class="row">
+                                             <thead>
                                                   <tr>
                                                      <th>Job ID</th>
                                                      <th>Job Title</th>
@@ -125,6 +126,8 @@
                                                      <th>Position</th>
                                            
                                                   </tr>
+                                                </thead>
+                                                <tbody>  
                                                   <?php while( $row = $result->fetch_object() ): ?>
                                                   <tr>
                                                      <td><?php echo $row->Job_ID ?></td>
@@ -135,8 +138,9 @@
                                                      <td><?php echo $row->Position ?></td>
                                                   </tr>
                                                   <?php endwhile; ?>
-                                            </div>
+                                            </tbody>
                                     </table>
+
 
 
                                 </div>
