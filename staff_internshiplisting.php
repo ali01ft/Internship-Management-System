@@ -107,7 +107,7 @@
 
                                           
                         
-                                 <!-- Fetching data module  -->
+                                 <!-- Fetching data modules  -->
                                 <div class="card">
                                     <div class="card-body">
                                         <table id="datatableid" class="table table-bordered">
