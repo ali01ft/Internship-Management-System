@@ -7,6 +7,8 @@ if(isset($_POST['deletedata']))
     $id = $_POST['delete_id'];
 
 
+    $query = "DELETE FROM student_review_table WHERE STUDENT_ID = '$id'";
+    $query_run = mysqli_query($connection, $query);
 
     $query = "DELETE FROM applicants WHERE STUDENT_ID ='$id'";
     $query_run = mysqli_query($connection, $query);

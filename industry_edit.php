@@ -42,12 +42,9 @@ $idustryID = $_SESSION['company_id'];
             <div class="list-group list-group-flush my-3">
             
                   <a href="in_joblist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Posted Job listing</a>                   
+                        class="fas fa-project-diagram me-2"></i>Dashboard</a>                   
                 <a href="Jobs.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Post a Job</a>
-
-        <a href="industry_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Dashboard</a>
 
 
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
@@ -143,7 +140,7 @@ $idustryID = $_SESSION['company_id'];
                    
 
                 <div class="mt-5 text-center"><button class="btn btn-info" type="submit" name="submit">Save Profile</button></div>
-                <div class="mt-5 text-center"><a href="industry_profile.php"><button class="btn btn-info"> BACK</button></a></div>
+                <div class="mt-5 text-center"><button class="btn btn-info" ><a href="industry_profile.php"> BACK</a></button></div>
                 </form>
 
             </div>
