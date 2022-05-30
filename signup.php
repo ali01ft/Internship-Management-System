@@ -34,13 +34,13 @@ if(isset($_POST["register_button"])){
         $StudentErr = "<span style='color:red;'>Student ID is required.</span>";
         $success = 0;
       }
-      else {
-        $StudentID = test_input($_POST["Student_ID"]);
-        if (!preg_match("/^101\d{6}$/",$StudentID)) {    // check if it matches pattern
-          $StudentErr = "<span style='color:red;'>Only numbers are allowed, use swinburne student ID.</span>";
-          $success = 0;
-        }
-      }
+     // else {
+      //  $StudentID = test_input($_POST["Student_ID"]);
+      //  if (!preg_match("/^101\d{6}$/",$StudentID)) {    // check if it matches pattern
+      //    $StudentErr = "<span style='color:red;'>Only numbers are allowed, use swinburne student ID.</span>";
+      //    $success = 0;
+      //  }
+    //  }
 
   // Email validation process
       if (empty($_POST["email"])) {
