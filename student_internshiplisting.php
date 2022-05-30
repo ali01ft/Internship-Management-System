@@ -191,7 +191,7 @@
                                  <td><?php echo $row->Position ?></td>
                                  <td><?php echo $sdate?></td>
                                  <td><?php echo $edate?></td>
-                                 <td><?php echo "<a href='jobs/profile".$row ->REGIS_NO.".pdf' download>Download</a>"?></td> <!--company document-->
+                                 <td><?php echo "<a href='jobs/profile".$row ->REGIS_NO.".pdf' download><div class='text-center'><button type='button' class='btn btn-primary'>Download</button></div></a>"?></td>
                                  <td><button type="submit" class="btn btn-success editbtn" name = "Apply" value = '<?php echo $job = $row->Job_ID?>'>Apply</button></td>
                               </tr>
                               <?php endwhile; ?>

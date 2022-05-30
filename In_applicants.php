@@ -166,7 +166,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                     <td><?php echo $row->COURSE?></td>
                                     <td><?php echo $row->GENDER?></td>
                                     <td><?php echo $row->YEAR_OF_STUDY?></td>
-                                    <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
+                                    <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download><div class='text-center'><button type='button' class='btn btn-primary'>Download</button></div></a>"?></td>
                                     <td><button type="submit" name = "Apply" class="btn btn-success editbtn" value ='<?php echo $job = $row->STUDENT_ID?>'>Approve</button></td>
                               </tr>
                               <?php endwhile; ?>

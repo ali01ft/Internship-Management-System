@@ -218,6 +218,8 @@
                                                     {
                                                         foreach($query_run as $row)
                                                         {
+
+                                                             $rid = $row['id']; 
                                                          
 
                                                     ?>
@@ -237,7 +239,7 @@
                                                     <td> <?php echo $row['Position']; ?> </td>
                                                     <td> <?php echo $row['Date_Applied']; ?> </td>
                                                     <td> <?php echo $row['Completion_date']; ?> </td>
-                                                    <td>  </td>
+                                                    <td> <?php echo "<a href ='student_report.php?data=$rid' style='color: white;'><button type='button' class='btn btn-primary'> REPORT </button></a>"?> </td>
                                                   
                                                 </tr>
                                                  <?php           

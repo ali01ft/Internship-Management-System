@@ -234,7 +234,7 @@
                     <?php
                     $connection = mysqli_connect("localhost","root","");
                     $db = mysqli_select_db($connection, 'ims');
-                    $queryalert = "SELECT * FROM student where ENROLL = 'pending' OR ENROLL = 'Ending'";
+                    $queryalert = "SELECT * FROM student inner join applicants on student.STUDENT_ID = applicants.STUDENT_ID where student.ENROLL = 'pending' or applicants.Status = 'Ending'" ;
                     $queryalert_run = mysqli_query($connection, $queryalert);
 
                      
