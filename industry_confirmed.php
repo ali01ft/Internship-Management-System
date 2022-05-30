@@ -142,7 +142,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
                                     $condition = $row ->Status;
                                     $sid = $row->STUDENT_ID;
-                                    print_r($sid);
+                                   
                                     $aid = $row->appID;
                                     $_SESSION['app'] = $aid;
 
@@ -156,7 +156,7 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
                                  <td><?php echo $row->COURSE?></td>
                                  <td><?php echo $row->GENDER?></td>
                                  <td><?php echo $row->YEAR_OF_STUDY?></td>
-                                 <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download>Download</a>"?></td>
+                                 <td><?php echo "<a href='uploads/profile".$row -> STUDENT_ID.".pdf' download><div class='text-center'><button type='button' class='btn btn-primary'>Download</button></div></a>"?></td>
                                  <td><?php 
 
                                     if ($condition == 'Ended' or $condition == 'Completed') {

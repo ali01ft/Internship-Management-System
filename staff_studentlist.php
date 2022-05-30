@@ -327,7 +327,7 @@
                                                     <td> <?php echo $row['GENDER']; ?> </td>
                                                     <td> <?php echo $row['YEAR_OF_STUDY']; ?> </td>
                                                     <td> <?php echo $row['ENROLL']; ?> </td>
-                                                   <td><?php echo "<a href='uploads/profile".$row['STUDENT_ID']."' download>Download</a>"?></td>
+                                                   <td><?php echo "<a href='uploads/profile".$row['STUDENT_ID']."' download><div class='text-center'><button type='button' class='btn btn-primary'>Download</button></div></a>"?></td>
                                                     <td>
                                                         <button type="button" class="btn btn-success editbtn"> EDIT </button>
                                                     </td>
