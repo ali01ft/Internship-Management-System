@@ -96,8 +96,9 @@
             </nav>
                 <!-- Content wrapper -->
             <div class="container-fluid px-4">
+                 <h3 class="fs-4 mb-3">List of Industry feedback</h3>
                 <div class="row my-5">
-
+                        
                        <!-- Fetching data module  -->
                                 <div class="card">
                                     <div class="card-body">
