@@ -89,9 +89,31 @@ echo "<body>";
 
                                 <!-- Content wrapper -->
                                            
-                                          
+                <div class="container-fluid px-4">   
+                    <div class="row my-5">
+
+                         <div class="col">
+                            <h3 class="fs-4 mb-3">Internship Status </h3>
+                            <div class="progress" style="height:50px; font-size:1em;">
+                                  <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated " role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >100% | Internship Completed! </div>
+                                </div>
+                                <br>
+                                  <br>
+                                    <br>
+                                <div class="jumbotron text-center">
+                                  <h1 class="display-3">Thank You! <?php echo $ufn; ?> </h1>
+                                  <p class="lead"><strong>Please check your email</strong> for further instructions. Our staff will email you a copy of your report in a few working days!</p>
+                                  <hr>
+                                  <p>
+                                    Having trouble? <a href="https://www.swinburne.edu.my">Contact us</a>
+                                  </p>
+                                
+                                </div>
 
 
+                                </div>
+                            </div>
+                        </div>
 
 
    
