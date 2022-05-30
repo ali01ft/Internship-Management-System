@@ -52,7 +52,7 @@ if(isset($_SESSION['company_id']))
             <div class="list-group list-group-flush my-3">
             
                   <a href="in_joblist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Posted Job listing</a>                   
+                        class="fas fa-project-diagram me-2"></i>Dashboard</a>                   
                 <a href="Jobs.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Post a Job</a>
 

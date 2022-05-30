@@ -45,7 +45,7 @@
                         class="fas fa-project-diagram me-2"></i>Student Approval</a>                  
                 <a href="staff_infographics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-chart-line me-2"></i>Analytics</a>
-                <a href="staff_student_feedbacklist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="staff_student_feedback.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Student Feedback</a>
                 <a href="staff_industry_feedback.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-paperclip me-2"></i>Industry Feedback</a>
@@ -91,7 +91,7 @@
                  <!--Setting the alert to dissappear-->
 
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">Define your search</h3>
+                    <h3 class="fs-4 mb-3">List of Companies</h3>
                     <div class="col">
                                     
                                     <!-- Hidden delete module that will pop up  -->
