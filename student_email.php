@@ -114,13 +114,12 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-address-book me-1"></i>Swinburne</div>
             <div class="list-group list-group-flush my-3">
-            
-                  <a href="in_joblist.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-project-diagram me-2"></i>Posted Job listing</a>                   
-                <a href="Jobs.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Post a Job</a>
-                <a href="industry_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Dashboard</a>
+                <a href="student_internshiplisting.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Internship listing</a>
+                  <a href="student_companylist.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-project-diagram me-2"></i>Company listing</a>                   
+                <a href="student_dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-paperclip me-2"></i>Student Dashboard</a>        
                 <a href="student_logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
             </div>
