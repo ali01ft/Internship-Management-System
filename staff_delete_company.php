@@ -11,13 +11,10 @@ if(isset($_POST['deletedata']))
     $nodelete = "SELECT * FROM applicants a inner join jobs j on a.Job_ID = j.Job_ID WHERE j.REGIS_NO = '$id' and Status is not null";
     $checkrows = mysqli_query($connection, $nodelete);
     $count = mysqli_num_rows($checkrows);
-    var_dump($count);
 
 
-    $jid = $count['Job_ID'];
-    print_r($jid);
 
-    if ($count > 0) {
+            if ($count > 0) {
 
 
                 header("Location: staff_companylist.php?msg=1");
@@ -32,18 +29,18 @@ if(isset($_POST['deletedata']))
                     $query_run = mysqli_query($connection, $query);
 
 
-                    $query = "DELETE FROM student WHERE REGIS_NO ='$id'";
+                    $query = "DELETE FROM industry WHERE REGIS_NO ='$id'";
                     $query_run = mysqli_query($connection, $query);
 
                     if($query_run)
                     {
                         echo '<script> alert("Data Deleted"); </script>';
-                     //   header("Location:staff_companylist.php");
+                       header("Location:staff_companylist.php");
                     }
                     else
                     {
                         echo '<script> alert("Data Not Deleted"); </script>';
-                      //  header("Location:staff_companylist.php");
+                       header("Location:staff_companylist.php");
                     }
                 }
 }
