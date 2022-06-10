@@ -82,12 +82,12 @@ if (isset($_SESSION['company_id']) && isset($_SESSION['user_email'])) {
 
             <div class="container-fluid px-4">
                 <div class="row my-5">
-                    <h3 class="fs-4 mb-3">List of Jobs</h3>
+                    <h3 class="fs-4 mb-3">Feedback form</h3>
                     <div class="col">
 
 
         <!--fething data module-->
-        <p>Please Click on the Job Titles to check the list of interns already working</p>
+        <p>Please provide feedback to the student</p>
                     <div class="card">
                         <div class="card-body">
 
