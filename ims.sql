@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2022 at 11:51 AM
+-- Generation Time: Jun 09, 2022 at 01:12 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.11
 
@@ -64,57 +64,41 @@ CREATE TABLE `applicants` (
 --
 
 INSERT INTO `applicants` (`appID`, `STUDENT_ID`, `Job_ID`, `confirmation`, `Proof`, `Status`, `Date_Applied`) VALUES
-(89, 101220213, 20, 'YES', NULL, NULL, NULL),
-(91, 101220611, 19, 'YES', NULL, 'Completed', NULL),
-(92, 101220668, 21, 'YES', NULL, NULL, NULL),
-(93, 101220668, 20, 'YES', '93_101220668_2022-05-10.pdf', 'Confirmed', NULL),
-(94, 101220668, 19, 'YES', NULL, NULL, NULL),
-(95, 101220699, 21, 'YES', NULL, NULL, NULL),
-(96, 101220699, 20, 'YES', '96_101220699_2022-05-10.pdf', 'Confirmed', NULL),
-(97, 101220699, 19, 'YES', NULL, NULL, NULL),
-(98, 101220016, 21, 'YES', NULL, 'Ended', NULL),
-(99, 101220016, 20, 'YES', NULL, NULL, NULL),
-(100, 101220016, 22, 'YES', NULL, NULL, NULL),
-(101, 101220016, 23, 'YES', NULL, NULL, NULL),
-(102, 101220016, 24, 'YES', NULL, NULL, NULL),
-(103, 101220016, 19, 'YES', '103_101220016_2022-05-18.pdf', 'Completed', NULL),
-(104, 101220121, 21, 'YES', '104_101220121_2022-05-25.pdf', 'Ended', '2022-05-10'),
-(105, 101220121, 20, 'YES', NULL, NULL, NULL),
-(106, 101220121, 22, 'YES', NULL, NULL, NULL),
-(107, 101220121, 23, 'YES', NULL, NULL, NULL),
-(108, 101220121, 24, 'YES', NULL, NULL, NULL),
-(109, 101220121, 19, 'YES', NULL, NULL, NULL),
-(110, 101222777, 21, 'YES', '110_101222777_2022-05-25.pdf', 'Completed', NULL),
-(111, 101222777, 25, 'YES', NULL, 'Confirmed', NULL),
-(112, 101222777, 26, NULL, NULL, NULL, NULL),
-(113, 101222777, 20, 'YES', NULL, NULL, NULL),
-(114, 101222777, 22, 'YES', NULL, NULL, NULL),
-(115, 101222777, 23, 'YES', NULL, NULL, NULL),
-(116, 101222777, 24, 'YES', NULL, NULL, NULL),
-(117, 101222777, 19, NULL, NULL, NULL, NULL),
-(125, 101320666, 21, NULL, NULL, NULL, '2022-05-26'),
-(126, 101320666, 20, 'YES', NULL, NULL, '2022-05-26'),
-(127, 101320666, 24, 'YES', '127_101320666_2022-05-26.pdf', 'Completed', '2022-05-26'),
-(128, 101320666, 19, NULL, NULL, NULL, '2022-05-26'),
-(129, 101220699, 25, NULL, NULL, 'Completed', '2022-05-26'),
-(130, 101220699, 26, NULL, NULL, NULL, '2022-05-26'),
-(131, 101220017, 21, NULL, NULL, NULL, '2022-05-26'),
-(132, 101220017, 25, NULL, NULL, NULL, '2022-05-26'),
-(133, 101220017, 26, NULL, NULL, NULL, '2022-05-26'),
-(134, 101220017, 27, NULL, NULL, NULL, '2022-05-26'),
-(135, 101220017, 20, 'YES', '135_101220017_2022-05-28.pdf', 'Confirmed', '2022-05-26'),
-(136, 101220017, 22, 'YES', NULL, NULL, '2022-05-26'),
-(137, 101220017, 23, 'YES', NULL, NULL, '2022-05-26'),
-(138, 101220017, 24, 'YES', NULL, NULL, '2022-05-26'),
-(139, 101220017, 28, 'YES', NULL, NULL, '2022-05-26'),
-(140, 101220017, 19, NULL, NULL, NULL, '2022-05-26'),
-(141, 101220111, 21, NULL, NULL, NULL, '2022-05-26'),
-(142, 101220111, 25, NULL, NULL, NULL, '2022-05-26'),
-(143, 101220111, 23, 'YES', '143_101220111_2022-05-26.pdf', 'Completed', '2022-05-26'),
-(144, 101220111, 24, 'YES', NULL, NULL, '2022-05-26'),
-(145, 101220111, 26, NULL, NULL, NULL, '2022-05-26'),
-(146, 101220222, 21, NULL, NULL, NULL, '2022-05-26'),
-(147, 101220222, 25, NULL, NULL, NULL, '2022-05-26');
+(148, 10122000, 5, 'YES', '148_10122000_2022-05-30.pdf', 'Completed', '2022-05-30'),
+(149, 10122000, 6, NULL, NULL, NULL, '2022-05-30'),
+(150, 10122000, 3, 'YES', NULL, NULL, '2022-05-30'),
+(151, 10122000, 4, 'YES', NULL, NULL, '2022-05-30'),
+(152, 10122000, 1, NULL, NULL, NULL, '2022-05-30'),
+(153, 10122000, 2, NULL, NULL, NULL, '2022-05-30'),
+(154, 10133697, 5, NULL, NULL, NULL, '2022-05-30'),
+(155, 10133697, 6, NULL, NULL, NULL, '2022-05-30'),
+(156, 10133697, 3, 'YES', '156_10133697_2022-05-30.pdf', 'Confirmed', '2022-05-30'),
+(157, 10133697, 4, 'NO', NULL, NULL, '2022-05-30'),
+(158, 10133697, 1, NULL, NULL, NULL, '2022-05-30'),
+(159, 10133697, 2, NULL, NULL, NULL, '2022-05-30'),
+(160, 10169887, 5, 'YES', NULL, NULL, '2022-05-30'),
+(161, 10169887, 6, NULL, NULL, NULL, '2022-05-30'),
+(162, 10169887, 3, 'YES', '162_10169887_2022-05-30.pdf', 'Completed', '2022-05-30'),
+(163, 10169887, 4, 'YES', NULL, NULL, '2022-05-30'),
+(164, 10169887, 1, NULL, NULL, NULL, '2022-05-30'),
+(165, 10169887, 2, NULL, NULL, NULL, '2022-05-30'),
+(166, 101220618, 5, NULL, NULL, NULL, '2022-05-30'),
+(167, 101220618, 6, NULL, NULL, NULL, '2022-05-30'),
+(169, 101220618, 1, NULL, NULL, NULL, '2022-05-30'),
+(170, 101220618, 2, NULL, NULL, NULL, '2022-05-30'),
+(171, 101220888, 5, 'NO', NULL, NULL, '2022-05-30'),
+(172, 101220888, 6, NULL, NULL, NULL, '2022-05-30'),
+(173, 101220888, 3, 'NO', NULL, NULL, '2022-05-30'),
+(174, 101220888, 4, NULL, NULL, NULL, '2022-05-30'),
+(175, 101220888, 1, NULL, NULL, NULL, '2022-05-30'),
+(176, 101220888, 2, NULL, NULL, NULL, '2022-05-30'),
+(177, 101224455, 5, NULL, NULL, NULL, '2022-05-30'),
+(178, 101224455, 1, NULL, NULL, NULL, '2022-05-30'),
+(179, 101224455, 6, NULL, NULL, NULL, '2022-05-30'),
+(180, 101224455, 3, 'YES', '180_101224455_2022-05-30.pdf', 'Completed', '2022-05-30'),
+(181, 101224455, 4, 'YES', NULL, NULL, '2022-05-30'),
+(186, 101220618, 3, 'YES', '186_101220618_2022-05-30.pdf', 'Completed', '2022-05-30'),
+(187, 101220618, 8, NULL, NULL, NULL, '2022-06-04');
 
 -- --------------------------------------------------------
 
@@ -195,9 +179,10 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`id`, `Student_id`, `Student_NAME`, `STUDENT_EMAIL`, `COURSE`, `SUPERVISOR`, `YEAR_OF_STUDY`, `COMPANY_NAME`, `WEBSITE`, `Email`, `Job_Title`, `Position`, `Date_Applied`, `Completion_date`, `Job_ID`, `REGIS_NO`) VALUES
-(9, '101220016', 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', 'jim', '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', 'anything', NULL, '2022-05-24', NULL, NULL),
-(10, '101220121', 'James Konroe', '101220121@students.swinburne.edu.my', 'Bachelors of Engineering', NULL, '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', 'anything', NULL, '2022-05-25', 21, '2010312'),
-(22, '101220016', 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', 'jim', '3', 'Mircosoft', 'www.mircosoft.com', 'MS@outlook.com', 'Intern for observer', 'anything', NULL, '2022-05-28', 21, '2010312');
+(23, '10122000', 'Aaina chowdhury', '10122000@students.swinburne.edu.my', 'Bachelors of Commerce', NULL, '2', 'Mircosoft ', 'www.mircosoft.com', 'MS@outlook.com', 'Looking for Data Analyst ', 'Assistant', '2022-05-30', '2022-05-30', 5, '2010312'),
+(24, '10169887', 'Jessica Chong', '10169887@students.swinburne.edu.my', 'Bachelors of Engineering', NULL, '3', 'Samsung', 'www.samsung.com', 'Samsung@sm.com', 'Looking for Someone who Can troubleshoot Php ', 'Assistant', '2022-05-30', '2022-05-30', 3, '1202202'),
+(25, '101224455', 'Mohammad Arsalan Hossain', '101224455@students.swinburne.edu.my', 'Bachelors of Commerce', 'Dwayne Johnson', '2', 'Samsung', 'www.samsung.com', 'Samsung@sm.com', 'Looking for Someone who Can troubleshoot Php ', 'Assistant', '2022-05-30', '2022-05-30', 3, '1202202'),
+(28, '101220618', 'Ashfaque Ali Shagor', '101220618@students.swinburne.edu.my', 'Bachelors of Information Technology', 'Eric', '3', 'Samsung', 'www.samsung.com', 'Samsung@sm.com', 'Looking for Someone who Can troubleshoot Php ', 'Assistant', '2022-05-30', '2022-05-30', 3, '1202202');
 
 -- --------------------------------------------------------
 
@@ -222,8 +207,8 @@ CREATE TABLE `industry` (
 
 INSERT INTO `industry` (`REGIS_NO`, `COMPANY_NAME`, `COMPANY_ADDRESS`, `CONTACT_NO`, `WEBSITE`, `Password`, `USERNAME`, `Email`) VALUES
 (1202202, 'Samsung', '123 Korea town Malaysia', '0134423556', 'www.samsung.com', '12345', 'Samsung', 'Samsung@sm.com'),
-(2010312, 'Mircosoft', '124 America town Malaysia', ' 013442123', 'www.mircosoft.com', '12345', 'MS', 'MS@outlook.com'),
-(2010312123, 'ZombieCorp', '123 Korea town China', '123123123', 'www.brains.com', '1234', '', 'zombie@g.com');
+(2010312, 'Mircosoft  new', '124 America town Malaysia', ' 013442123', 'www.mircosoft.com', '12345', 'MS', 'MS@outlook.com'),
+(7894521, 'Total Oil', 'kuching sarawak', '0122231577', 'www.totaloil.com', '1234', 'ttol', 'toil@tt.com');
 
 -- --------------------------------------------------------
 
@@ -248,19 +233,10 @@ CREATE TABLE `industry_review_table` (
 --
 
 INSERT INTO `industry_review_table` (`FeedID`, `user_name`, `rating_question1`, `rating_question2`, `user_rating`, `user_review`, `datetime`, `STUDENT_ID`, `Job_ID`) VALUES
-(1, 'asddsada', 'Yes', 'Yes', 5, 'asdasdasd', '2022-05-26', NULL, NULL),
-(2, 'sdasda', 'Yes', 'Yes', 5, 'dasda', '2022-05-26', NULL, NULL),
-(3, 'sdasda', 'Yes', 'Yes', 5, 'asdasdas', '2022-05-26', NULL, NULL),
-(4, 'asdasd', 'Yes', 'Yes', 5, 'asdsa', '2022-05-26', NULL, NULL),
-(5, 'dasdas', 'Yes', 'Yes', 5, 'sdasd', '2022-05-26', NULL, NULL),
-(6, NULL, 'Yes', 'Yes', 5, 'ASdas', '2022-05-26', NULL, NULL),
-(7, 'Samsung', 'Yes', 'Yes', 5, 'ASdas', '2022-05-26', '101320666', 24),
-(8, 'Samsung', 'Yes', 'Yes', 5, 'ASdas', '2022-05-26', '101320666', 24),
-(9, 'Samsung', 'Yes', 'Yes', 5, 'ASdas', '2022-05-26', '101320666', 24),
-(10, 'Samsung', 'Yes', 'Yes', 5, 'ASdas', '2022-05-26', '101320666', 24),
-(11, 'Samsung', 'Yes', 'Yes', 5, 'ASdas', '2022-05-26', '101320666', 24),
-(12, 'Samsung', 'Yes', 'Yes', 5, 'ASdas', '2022-05-26', '101320666', 24),
-(13, 'Samsung', 'Yes', 'Yes', 4, 'aksdhas', '2022-05-26', '101220111', 23);
+(14, 'Samsung', 'Yes', 'Yes', 5, 'as', '2022-05-30', '101224455', 3),
+(15, 'Mircosoft ', 'Yes', 'Yes', 5, 'asdasda', '2022-05-30', '101226858', 5),
+(16, 'Mircosoft ', 'Yes', 'Yes', 5, 'asda', '2022-05-30', '101226858', 5),
+(17, 'Samsung', 'Yes', 'Yes', 5, 'he was good', '2022-05-30', '101220618', 3);
 
 -- --------------------------------------------------------
 
@@ -287,16 +263,14 @@ CREATE TABLE `jobs` (
 --
 
 INSERT INTO `jobs` (`Job_ID`, `Job_Title`, `Location`, `Qualification`, `Category`, `Position`, `Vacancy`, `REGIS_NO`, `Date_Posted`, `Date_End`, `Extra_Details`) VALUES
-(19, 'Seating man near the table', 'kuching', 'O levels', 'Industry ', 'entry level', '222', 2010312123, '2022-05-10', '2022-05-24', NULL),
-(20, 'Web developement intern needed', 'kuching', 'first year completed', 'Car Industry', ' youtube', '111', 1202202, '2022-05-10', '2023-05-02', 'noithing was here'),
-(21, 'Intern for observer', 'kualalampur', 'second year student', ' car industry ', 'anything', '121', 2010312, '2022-05-11', '2022-05-12', NULL),
-(22, 'yadayad', 'dasdsad', 'dasd', '', ' asdas', '123', 1202202, '2022-05-10', '2022-08-10', 'i am here'),
-(23, 'New trial', 'kuching', 'you are unqualified', 'Car Industry', 'janiter', 'none', 1202202, '2022-05-13', '2022-08-13', NULL),
-(24, 'The last trial', 'This is over', 'I am done', 'Telecom Industry', 'i dont care', 'Please work', 1202202, '2022-05-13', '2022-11-13', 'Thanks for playing'),
-(25, 'SuperVisor', 'kuala lampur', 'third year', 'Car Industry', 'secretary', '122', 2010312, '2022-05-25', '2022-09-25', 'Tire company'),
-(26, 'SuperVisor', 'kuala lampur', 'third year', 'Car Industry', 'secretary', '122', 2010312, '2022-05-25', '2022-09-25', 'Tire company'),
-(27, 'asdas', 'asdas', 'asdas', 'Car Industry', 'asdasda', 'dasdasd', 2010312, '2022-05-25', '2023-03-25', 'dasdas'),
-(28, 'Work for canada', 'canada', 'Any', 'Telecom Industry', 'sweeper', '122', 1202202, '2022-05-26', '2022-10-26', 'Tower build');
+(1, 'Internship For data entry ', 'Kuching', '3rd Year', 'Oil Industry', 'Supervisor', '122', 7894521, '2022-05-30', '2022-08-30', 'car oil'),
+(2, 'Internship for database management', 'Miri', 'Third Year', 'Oil Industry', 'Assistant', '123', 7894521, '2022-05-30', '2022-09-30', 'car oil'),
+(3, 'Looking for Someone who Can troubleshoot Php ', 'kuching sarawak', 'third year', 'ICT Industry', 'Assistant', '123', 1202202, '2022-05-30', '2022-09-30', 'data infrastucture'),
+(4, 'Secretary for Coffee Man', 'los angelos', 'second year', 'Food Industry', ' supervisor', '123', 1202202, '2022-05-30', '2022-09-30', 'Cafe'),
+(5, 'Looking for Data Analyst ', 'Kuching', 'third year', 'ICT Industry', 'Assistant', '123', 2010312, '2022-05-30', '2022-06-30', 'software'),
+(6, 'Software Developer', 'canada', 'third year', 'ICT Industry', 'Supervisor', '123', 2010312, '2022-05-30', '2022-10-30', 'software'),
+(7, 'Internship For data entry ', 'Kuching', 'Third Year', 'Food Industry', 'Assistant', '123', 1202202, '2022-05-30', '2022-08-30', 'Cafe'),
+(8, 'Secretary for Juice Man', 'canada', 'Third Year', 'ICT Industry', 'Supervisor', '122', 2010312, '2022-05-30', '2022-10-30', 'software');
 
 -- --------------------------------------------------------
 
@@ -347,20 +321,12 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`STUDENT_ID`, `NAME`, `STUDENT_EMAIL`, `COURSE`, `ENROLL`, `SUPERVISOR`, `GENDER`, `CURRENT_RESIDENCE`, `CONTACT_NO`, `YEAR_OF_STUDY`, `PASSWORD`, `CV`, `USERNAME`) VALUES
-(101220016, 'Eric Kau', '101220016@students.swinburne.edu.my', 'Bachelors of Commerce', 'Ended', 'jim', 'Male', '567 kuchching road', '0172564896', '3', '1234', 'profile101220016.pdf', 'Eric'),
-(101220017, 'Ishraq GG', '101220017@students.swinburne.edu.my', 'Bachelors of information technology', 'Confirmed', NULL, 'Male', 'seneca, ottowa, canada', '475744756', '3', '1234', '', 'icooo'),
-(101220111, 'Alioo', '101220111@students.swinburne.edu.my', 'Bachelors of Commerce', 'Completed', NULL, 'Male', '422, Kuala lampur, hotlink', '1145452', '3', '1234', 'profile101220111.pdf', 'asd'),
-(101220121, 'James Konroe', '101220121@students.swinburne.edu.my', 'Bachelors of Engineering', 'Ended', 'Asasda', 'Male', 'Kuching sarawak', '0178574882', '3', '1234', 'profile101220121.pdf', 'shag'),
-(101220213, 'Andrew Michael', '101220213@students.swinburne.edu.my', 'Bachelors of Commerce', 'Ended', 'ali', 'Male', 'TA165, genting highlands', '0172564897', '3', '12345', 'profile101220213.pdf', 'ErgoProxy'),
-(101220222, 'asdasd', '101220222@students.swinburne.edu.my', 'Bachelors of Commerce', 'Ended', NULL, 'Male', 'ljhijgjkjhfvjkfkjhgf', '1242828', '3', '1234', 'profile101220222.pdf', 'asds'),
-(101220516, 'AaL', '101220516@students.swinburne.edu.my', 'Bachelors of Commerce', 'Ending', NULL, 'Male', '43 street, london', '0176395488', '2', '12345', 'profile101220516.pdf', 'aas'),
-(101220611, 'Ashfaque Ali', '101220611@students.swinburne.edu.my', 'Bachelors of information technology', 'Completed', NULL, 'Male', 'dhaka bangladesh', '123456789', '3', '1234', 'profile101220611.pdf', 'shag'),
-(101220668, 'Asfaque Ali', '101220668@students.swinburne.edu.my', 'Bachelors of Commerce', 'Confirmed', 'arsalan', 'Male', 'dhaka bangladesh', '01752658745', '3', '1234', 'profile101220668.pdf', 'shag'),
-(101220699, 'Eric Mohammad', '101220699@students.swinburne.edu.my', 'Bachelors of Commerce', 'Completed', NULL, 'Male', '433 kenny hill kuching ', '1454175', '3', '1234', 'profile101220699.pdf', 'shag'),
-(101221111, 'Scapegoat', '101221111@students.swinburne.edu.my', 'Bachelors of somehting', '', 'anyu', 'male', 'whatever', '5165156165', '3', '1234', NULL, 'asdas'),
-(101222777, 'Jessy Bond', '101222777@student.swinburne.edu.my', 'Bachelors of information technology', 'Confirmed', NULL, 'Female', '422, Kuala lampur, hotlink', '1425416851', '3', '1234', 'profile101222777.pdf', 'ash'),
-(101223648, 'Araslan Hossain', '101223648@students.swinburne.edu.my', 'Bachelors of Intformation Technology ', NULL, NULL, 'Male ', '432, lorong kenny hill 5, kuching, sarawak, malaysia', '01774587524', '3', '123456789', NULL, 'arasln'),
-(101320666, 'Ali ishraq', '101320666@students.swinburne.edu.my', 'Bachelors of information technology', 'Completed', NULL, 'Male', 'canada', '124785245', '3', '1234', 'profile101320666.pdf', 'ash');
+(10122000, 'Aaina chowdhury', '10122000@students.swinburne.edu.my', 'Bachelors of Commerce', 'Completed', 'Mark', 'Female', '455, lorong jamal, kuala lampur, malaysia', '8594744', '2', '1234', 'profile10122000.pdf', 'ralp'),
+(10133697, 'Eric Kau', '10133697@students.swinburne.edu.my', 'Bachelors of Engineering', 'Confirmed', 'MIko', 'Male', '788, miri, sarawak Malaysia', '589347', '2', '1234', 'profile10133697.pdf', 'erc'),
+(10169887, 'Jessica Chong', '10169887@students.swinburne.edu.my', 'Bachelors of Engineering', 'Completed', 'Andrew', 'Female', '455, kuching, sarawak', '5893247', '3', '1234', 'profile10169887.pdf', 'Jessia'),
+(101220618, 'Ashfaque Ali Shagor', '101220618@students.swinburne.edu.my', 'Bachelors of Information Technology', 'Completed', 'Eric', 'Male', 'ta, 169 , gulshan 1, dhaka bangladesh', '1023548652', '3', '1234', 'profile101220618.pdf', 'ali'),
+(101220888, 'Rosa Parks', '101220888@students.swinburne.edu.my', 'Bachelors of Marketing', NULL, 'Jason', 'Male', '477, kuala lampur Sarawak', '85964744', '2', '1234', 'profile101220888.pdf', 'rose'),
+(101224455, 'Mohammad Arsalan Hossain', '101224455@students.swinburne.edu.my', 'Bachelors of Commerce', 'Completed', 'Dwayne Johnson', 'Male', '124, kuching, sarawak, malaysia', '12456998788', '2', '1234', 'profile101224455.pdf', 'astd');
 
 -- --------------------------------------------------------
 
@@ -413,24 +379,10 @@ CREATE TABLE `student_review_table` (
 --
 
 INSERT INTO `student_review_table` (`FeedID`, `STUDENT_ID`, `user_name`, `rating_question1`, `rating_question2`, `user_rating`, `user_review`, `datetime`, `Job_ID`) VALUES
-(10, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'asdasd', '2022-05-18', NULL),
-(11, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sdfsdfasd', '2022-05-24', NULL),
-(12, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sdfsdfasd', '2022-05-24', NULL),
-(13, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sdfsdfasd', '2022-05-24', NULL),
-(42, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sadasd', '2022-05-24', NULL),
-(43, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sadasd', '2022-05-24', NULL),
-(44, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'sadasd', '2022-05-24', NULL),
-(45, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'asdasdasd', '2022-05-24', NULL),
-(46, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'asdasdasd', '2022-05-24', NULL),
-(47, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'asdasdasd', '2022-05-24', 21),
-(48, 101220016, 'Eric Kau', 'Yes', 'Yes', 5, 'asdasd', '2022-05-25', 21),
-(49, 101222777, 'Jessy Bond', 'Yes', 'Yes', 5, 'Aksisjdasd;\'', '2022-05-25', 21),
-(50, 101320666, 'Ali ishraq', 'Yes', 'Yes', 5, 'axsfasdas', '2022-05-26', 24),
-(51, 101220699, 'Eric Mohammad', 'Yes', 'Yes', 5, 'kdjbkjasnaslknd', '2022-05-26', NULL),
-(52, 101220699, 'Eric Mohammad', 'Yes', 'Yes', 5, 'kdjbkjasnaslknd', '2022-05-26', 25),
-(53, 101220699, 'Eric Mohammad', 'Yes', 'Yes', 5, 'kdjbkjasnaslknd', '2022-05-26', NULL),
-(54, 101220699, 'Eric Mohammad', 'Yes', 'Yes', 5, 'asdasd', '2022-05-26', 25),
-(55, 101220111, 'Alioo', 'Yes', 'Yes', 5, 'it was nice', '2022-05-26', 23);
+(56, 10122000, 'Aaina chowdhury', 'Yes', 'Yes', 5, 'ASsad', '2022-05-30', 5),
+(57, 10169887, 'Jessica Chong', 'Yes', 'Yes', 5, 'The company was very friendly', '2022-05-30', 3),
+(58, 101224455, 'Mohammad Arsalan Hossain', 'Yes', 'Yes', 5, 'asda', '2022-05-30', 3),
+(61, 101220618, 'Ashfaque Ali Shagor', 'Yes', 'Yes', 5, 'It was good', '2022-05-30', 3);
 
 -- --------------------------------------------------------
 
@@ -548,7 +500,7 @@ ALTER TABLE `student_review_table`
 -- AUTO_INCREMENT for table `applicants`
 --
 ALTER TABLE `applicants`
-  MODIFY `appID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `appID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 
 --
 -- AUTO_INCREMENT for table `email`
@@ -560,25 +512,25 @@ ALTER TABLE `email`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `industry_review_table`
 --
 ALTER TABLE `industry_review_table`
-  MODIFY `FeedID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `FeedID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `Job_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `student_review_table`
 --
 ALTER TABLE `student_review_table`
-  MODIFY `FeedID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `FeedID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- Constraints for dumped tables
